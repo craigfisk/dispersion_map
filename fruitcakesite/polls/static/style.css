@@ -1,0 +1,13 @@
+background-color: yellow;
+
+.titlebar { background-color: green; color:red; font-style: italic; }
+
+dl>li {list-style-type: none; }
+
+.composerwork { margin-left: 30px; }
+.playerlist { margin-left: 60px; }
+.personinfo { margin-left: 0px; font-weight: bold;  background-color: #ecc1ec;}
+.linklist { margin-left: 30px;  font-weight: normal;  background-color: #ecc1ec;}
+.recording { background-color: #e6e6e6; margin-left: 60px; font-size: smaller;}
+#eed5fb
+.track { background-color: #eed5fb; margin-left: 10px; font-style: italic;}

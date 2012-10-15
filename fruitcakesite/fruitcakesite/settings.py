@@ -1,6 +1,6 @@
 # Django settings for fruitcakesite project.
 
-DEBUG = True
+DEBUG = False #True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -61,6 +61,8 @@ STATIC_ROOT = ''
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
+
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
