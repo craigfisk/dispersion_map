@@ -1,9 +1,0 @@
-CSS files in this directory are copied from
- $VIRTUAL_ENV/lib/python2.7/site-packages/django/contrib/admin/static/admin/css
-
-The corresponding locally copied template files are at
- $VIRTUAL_ENV/fruitcakesite/voting/templates/admin
-
-
-The ones that have been changed are:
-- none 

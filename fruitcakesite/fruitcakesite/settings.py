@@ -1,6 +1,6 @@
 # Django settings for fruitcakesite project.
 
-DEBUG = False #True
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
