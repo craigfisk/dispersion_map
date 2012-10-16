@@ -25,17 +25,17 @@ class UserProfile(models.Model):
         pass
 
 
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            UserProfile.objects.create(user=instance)
-
     class Meta:
         db_table = u'myaccount_userprofile'
         ordering = ['country', 'stateprovince', 'city']
 
     def __unicode__(self):
         return self.username
-
-    post_save.connect(create_user_profile, sender=User)
     """
+    
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+post_save.connect(create_user_profile, sender=User)
 
