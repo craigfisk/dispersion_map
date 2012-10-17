@@ -1,10 +1,11 @@
+p { font-family:Arial; }
+h3, h1 { color:red; }
+li { font-family: Arial; }
 
-h3 
-{ 
-color:red; 
-}
 
-dl>li {list-style-type: none; }
+/* just keeping the following for reference: */
+
+dl>li {list-style-type: none; font-family: Arial; }
 
 .composerwork { margin-left: 30px; }
 .playerlist { margin-left: 60px; }

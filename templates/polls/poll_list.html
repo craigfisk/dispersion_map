@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Justfruitcake poll page</title>
+{% endblock %}
+
+{% block body %}
+    <header>
+        <h1>Just Fruitcake Poll Page</h1>
+    </header>
+
+    <section>
+        <P>Here are the polls:</P>
+    </section>
+
+
+{% if latest_poll_list %}
+
+<P>polls/poll_list.html</P>
+
+    <ul>
+    {% for poll in latest_poll_list %}
+        <li><a href="/polls/{{ poll.id }}/">{{ poll.question }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+
+{% endif %}
+
+{% endblock %}
+
