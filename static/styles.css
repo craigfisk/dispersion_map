@@ -1,12 +1,18 @@
-p { font-family:Arial; }
-h3, h1 { color:red; }
-li { font-family: Arial; }
+/* HTML5 reference:  http://html5doctor.com/  */
 
+
+/* p { font-family:Arial; }
+*/
+h3, h1 { color:red; }
+/*
+ * li { font-family: Arial; }
+*/
 
 /* just keeping the following for reference: */
-
+/*
 dl>li {list-style-type: none; font-family: Arial; }
-
+*/
+/*
 .composerwork { margin-left: 30px; }
 .playerlist { margin-left: 60px; }
 .personinfo { margin-left: 0px; font-weight: bold;  background-color: #ecc1ec;}
@@ -14,3 +20,58 @@ dl>li {list-style-type: none; font-family: Arial; }
 .recording { background-color: #e6e6e6; margin-left: 60px; font-size: smaller;}
 #eed5fb
 .track { background-color: #eed5fb; margin-left: 10px; font-style: italic;}
+*/
+
+/* 
+ * Following section from:
+ * http://net.tutsplus.com/tutorials/html-css-techniques/html-5-and-css-3-the-techniques-youll-soon-be-using/
+ * 2009 -- with a few tweaks by CF
+*/
+
+/* Makeshift CSS Reset */
+{
+    margin: 0;
+    padding: 0;
+}
+/* Tell the browser to render HTML 5 elements as block */
+header, section, footer, aside, nav, article {
+    display: block;
+}
+body {
+    margin: 30 auto;
+/*    width: 940px; */
+    font: 13px/22px Helvetica, Arial, sans-serif;
+    background: #f0f0f0;
+}
+h2 {
+    font-size: 28px;
+    line-height: 44px;
+    padding: 22px 0;
+}
+h3 {
+    font-size: 18px;
+    line-height: 22px;
+    padding: 11px 0;
+}
+p {
+    padding-bottom: 22px;
+}
+
+
+#logout {
+    display: block;
+    text-align:right;
+    width: 100%;
+    margin-right: 20px;
+    color: orange;
+    font-family: Arial;
+    font-size: 14px;
+    text-decoration: none;
+}
+/*
+a:link {color:#FF0000;}      
+a:visited {color:#00FF00;}  
+a:hover {color:#FF00FF;}  
+a:active {color:#0000FF;} 
+*/
+
