@@ -41,7 +41,7 @@ body {
     margin: 30 auto;
 /*    width: 940px; */
     font: 13px/22px Helvetica, Arial, sans-serif;
-    background: #f0f0f0;
+    background: #fafaef; /* #f0f0f0; */
 }
 h2 {
     font-size: 28px;
