@@ -26,7 +26,7 @@ class UserProfile(models.Model):
 
 
     class Meta:
-        db_table = u'myaccount_userprofile'
+        db_table = u'accounts_userprofile'
         ordering = ['country', 'stateprovince', 'city']
 
     def __unicode__(self):

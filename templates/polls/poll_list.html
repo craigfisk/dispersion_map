@@ -1,24 +1,27 @@
-{% extends "base.html" %}
+{% extends "polls/polls.html" %}
 
-{% block head %}
-<title>Justfruitcake polls</title>
+{% comment %}
+    --- Main page of the polls app
+{% endcomment %}
+
+{% block title %}
+<title>Polls</title>
 {% endblock %}
 
-{% block body %}
-    <header>
-        <h1>Justfruitcake polls</h1>
-    </header>
+{% block content %}
     <section>
-        {% if latest_poll_list %}
-          <P>Here are the polls:</P>
-            <ul>
-            {% for poll in latest_poll_list %}
-                <li><a href="/polls/{{ poll.id }}/">{{ poll.question }}</a></li>
-            {% endfor %}
-            </ul>
-        {% else %}
-            <p>No polls are available.</p>
-        {% endif %}
+        <h3>Welcome, {{ user.username }}</h3>
     </section>
+    {% if latest_poll_list %}
+    Here are the currently available polls:
+        <ul>
+        {% for poll in latest_poll_list %}
+            <li><a href="/polls/{{ poll.id }}/">{{ poll.question }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+    
 {% endblock %}
 

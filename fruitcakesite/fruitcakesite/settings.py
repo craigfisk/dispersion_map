@@ -141,11 +141,11 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'polls',
-    'myaccount',
+    'accounts',
 )
 
 # See https://docs.djangoproject.com/en/1.4/topics/auth/#storing-additional-information-about-users
-AUTH_PROFILE_MODULE = 'myaccount.UserProfile'
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

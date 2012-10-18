@@ -58,7 +58,7 @@ p {
 }
 
 
-#logout {
+#logout, #login {
     display: block;
     text-align:right;
     width: 100%;

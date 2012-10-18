@@ -1,10 +1,9 @@
 from django.contrib.auth import logout
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
-from django.contrib.auth.decorators import login_required
+#from django.contrib.auth.decorators import login_required
 
-@login_required
-def main_page(request):
+def home_page(request):
     return render_to_response('index.html')
 
 def logout_page(request):

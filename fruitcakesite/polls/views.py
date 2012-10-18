@@ -3,7 +3,14 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from polls.models import Poll, Choice
+from django.contrib.auth.decorators import login_required
 
+@login_required
+def polls_main_page(request):
+    """
+    If user authenticated, redirect to main page, else to login page.
+    """
+    return render_to_response('polls/poll_list.html')
 
 def vote(request, poll_id):
     p = get_object_or_404(Poll, pk=poll_id)
