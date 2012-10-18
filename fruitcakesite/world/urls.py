@@ -1,9 +1,13 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import DetailView, ListView, TemplateView
-from polls.models import Poll
-from django.contrib.auth.decorators import login_required
+from world.models import *
+#from django.contrib.auth.decorators import login_required
 
 urlpatterns = patterns('',
+    """
+    url(r'^$', 'main'),
+    url(r'^world/(\d+)$', 'world'),
+    url(r'^history/(\d+)$', 'history'),
     url(r'^$',
         login_required(ListView.as_view(
             queryset=Poll.objects.order_by('-pub_date')[:5],
@@ -13,7 +17,6 @@ urlpatterns = patterns('',
             )
             # default is polls/poll_list.html
         )),
-    """
     url(r'^(?P<pk>\d+)/$',
         login_required(DetailView.as_view(
             model=Poll,
@@ -27,5 +30,5 @@ urlpatterns = patterns('',
             # Goes to polls/poll_detail.html by default, as a DetailView
         name='poll_results'),
     url(r'^(?P<poll_id>\d+)/vote/$', 'polls.views.vote'),
-    """
+    """"
 )
