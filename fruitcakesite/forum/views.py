@@ -14,12 +14,11 @@ from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL
 
 from forum.models import *
 
-"""
 class ProfileForm(ModelForm):
     class Meta:
         model = UserProfile
         exclude = ["posts", "user"]
-"""
+
 def mk_paginator(request, items, num_items):
     """Create and return a paginator."""
     paginator = Paginator(items, num_items)
@@ -53,9 +52,18 @@ def thread(request, pk):
                                                            forum_pk=t.forum.pk))
 ##, media_url=MEDIA_URL))
 
+class UserProfile(models.Model):
+    avatar = models.ImageField("Profile Pic", upload_to="images/", blank=True, null=True)
+    posts = models.IntegerField(default=0)
+    user = models.ForeignKey(User, unique=True)
+
+    def __unicode__(self):
+        return unicode(self.user)
+
 
 """
 @login_required
+"""
 def profile(request, pk):
     profile = UserProfile.objects.get(user=pk)
     img = None
@@ -76,6 +84,7 @@ def profile(request, pk):
         img = "/media/" + profile.avatar.name
     return render_to_response("forum/profile.html", add_csrf(request, pf=pf, img=img))
 
+"""
 @login_required
 """
 def post(request, ptype, pk):
