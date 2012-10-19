@@ -83,10 +83,12 @@ def profile(request, pk):
     if profile.avatar:
         img = "/media/" + profile.avatar.name
     return render_to_response("forum/profile.html", add_csrf(request, pf=pf, img=img))
+# remove '/' from front of /media/ in "img" line above ??
 
 """
 @login_required
 """
+
 def post(request, ptype, pk):
     action = reverse("forum.views.%s" % ptype, args=[pk])
     if ptype == "new_thread":
@@ -98,14 +100,16 @@ def post(request, ptype, pk):
 
     return render_to_response("forum/post.html", add_csrf(request, subject=subject, action=action,
                                                           title=title))
-"""
+
 def increment_post_counter(request):
     profile = request.user.userprofile_set.all()[0]
     profile.posts += 1
     profile.save()
 
+"""
 @login_required
 """
+
 def new_thread(request, pk):
     p = request.POST
     if p["subject"] and p["body"]:
@@ -130,3 +134,4 @@ def add_csrf(request, **kwargs):
     d = dict(user=request.user, **kwargs)
     d.update(csrf(request))
     return d
+
