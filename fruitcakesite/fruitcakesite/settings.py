@@ -26,12 +26,13 @@ DATABASES = {
 #   smtp server name: zazen.picocosmos.net port: 587
 #   connection security: STARTTLS, authentication: Normal password, username: craigfisk@justfruitcake.com
 #
-DEFAULT_CHARSET = 'utf-8'
+#See https://docs.djangoproject.com/en/1.4/topics/email/
+#FILE_CHARSET = 'utf-8' #default is utf-8
 EMAIL_HOST = 'zazen.picocosmos.net'
-EMAIL_POST = 587
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'craigfisk@justfruitcake.com'
-EMAIL_HOST_PASSWORD = 'Fr00t[*]C8ke'
+EMAIL_HOST_PASSWORD = 'Sp8rky=4242'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
