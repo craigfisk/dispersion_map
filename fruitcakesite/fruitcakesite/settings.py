@@ -20,6 +20,19 @@ DATABASES = {
     }
 }
 
+#email settings for craigfisk@justfruitcake.com on Thunderbird:
+#   imap server name: mail.justfruitcake.com port: 993 username: craigfisk@justfruitcake.com
+#   connection security: SSL/TLS, authentication: normal password
+#   smtp server name: zazen.picocosmos.net port: 587
+#   connection security: STARTTLS, authentication: Normal password, username: craigfisk@justfruitcake.com
+#
+DEFAULT_CHARSET = 'utf-8'
+EMAIL_HOST = 'zazen.picocosmos.net'
+EMAIL_POST = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'craigfisk@justfruitcake.com'
+EMAIL_HOST_PASSWORD = 'Fr00t[*]C8ke'
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -59,13 +72,13 @@ SITE_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__f
 MEDIA_ROOT = os.path.join(SITE_ROOT, 'media')
 #MEDIA_ROOT = "/home/fisk/virt/justfruitcake/media/"
 
+
+##See: https://docs.djangoproject.com/en/1.4/topics/forms/media/#paths-in-media-definitions
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
-#'/media/'
-
-##MEDIA_URL = 'media/'
+MEDIA_URL = 'media/'
+##MEDIA_URL = ''
 
 ##
 LOGIN_URL = '/login/'
@@ -81,6 +94,8 @@ STATIC_ROOT = ''
 STATIC_URL = '/static/'
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
+
+ACCOUNT_ACTIVATION_DAYS = 1
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -146,6 +161,7 @@ INSTALLED_APPS = (
 ##    'polls',
 ##    'accounts',
 ##    'world',
+    'registration',
     'forum',
 )
 

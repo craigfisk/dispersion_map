@@ -48,9 +48,8 @@ def thread(request, pk):
     posts = mk_paginator(request, posts, 15)
     title = Thread.objects.get(pk=pk).title
     t = Thread.objects.get(pk=pk)
-    return render_to_response("forum/thread.html", add_csrf(request, posts=posts, pk=pk, title=t.title,
-                                                           forum_pk=t.forum.pk))
-##, media_url=MEDIA_URL))
+    return render_to_response("forum/thread.html", add_csrf(request, posts=posts, pk=pk, title=title, media_url=MEDIA_URL))
+# forum_pk=t.forum.pk
 
 class UserProfile(models.Model):
     avatar = models.ImageField("Profile Pic", upload_to="images/", blank=True, null=True)

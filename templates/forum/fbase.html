@@ -50,14 +50,9 @@
                 <h3><a href="{% url forum.views.main %}">ForumApp</a></h3>
 
                 {% if user.is_staff %} <a href="{% url admin:index %}">Admin</a> {% endif %}
-
                 {% if user.is_authenticated %}
                     <a href="{% url forum.views.profile user.pk %}">Edit profile</a>{% endif %}
                 
-                {% comment %}
-                ??    <a href="{% url forum.views.save_profile user.pk %}">Save profile</a>
-                {% endcomment %}
-
                 {% if not user.is_authenticated %}<a href="/accounts/login/?next=/forum/">login</a> | <a
                     href="/accounts/register/">register</a>{% endif %}
 
