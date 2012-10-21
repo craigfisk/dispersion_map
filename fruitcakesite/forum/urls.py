@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import *
 from forum.models import *
-from forum.views import main
+from forum.views import *
+#main, forum, thread, post, reply, profile, new_thread, add_csrf
 
 urlpatterns = patterns('forum.views',
     (r"^forum/(\d+)/$", "forum"),
