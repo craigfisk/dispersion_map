@@ -82,7 +82,7 @@ def profile(request, pk):
         pf = ProfileForm(instance=profile)
 
     if profile.avatar:
-        img = "/media/" + profile.avatar.name
+        img = "media/" + profile.avatar.name
     return render_to_response("forum/profile.html", add_csrf(request, pf=pf, img=img))
 # remove '/' from front of /media/ in "img" line above ??
 
