@@ -49,8 +49,7 @@ def thread(request, pk):
     title = Thread.objects.get(pk=pk).title
     t = Thread.objects.get(pk=pk)
     return render_to_response("forum/thread.html", add_csrf(request, posts=posts, pk=pk, title=t.title,
-        forum_pk=t.forum.pk))
-    #media_url=MEDIA_URL))
+        forum_pk=t.forum.pk, media_url=MEDIA_URL))
     # forum_pk=t.forum.pk
 
 class UserProfile(models.Model):
