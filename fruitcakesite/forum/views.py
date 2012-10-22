@@ -53,7 +53,10 @@ def thread(request, pk):
     # forum_pk=t.forum.pk
 
 class UserProfile(models.Model):
-    avatar = models.ImageField("Profile Pic", upload_to="images/", blank=True, null=True)
+    # was upload_to="images/" in Django by Example but ReadTheDocs "How do I use image and file fields" says MEDIA_ROOT
+    # See http://readthedocs.org/docs/django/en/latest/faq/usage.html#how-do-i-use-image-and-file-fields
+    # Also in forum/models.py
+    avatar = models.ImageField("Profile Pic", upload_to='images', blank=True, null=True)
     posts = models.IntegerField(default=0)
     user = models.ForeignKey(User, unique=True)
 
@@ -81,7 +84,7 @@ def profile(request, pk):
         pf = ProfileForm(instance=profile)
 
     if profile.avatar:
-        img = "media/" + profile.avatar.name
+        img = MEDIA_URL + profile.avatar.name
     return render_to_response("forum/profile.html", add_csrf(request, pf=pf, img=img))
 # remove '/' from front of /media/ in "img" line above ??
 

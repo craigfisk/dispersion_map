@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.contrib import admin
 from django.db.models.signals import post_save
 
-
 class Forum(models.Model):
     title = models.CharField(max_length=60)
 
@@ -64,7 +63,10 @@ class Post(models.Model):
 
 
 class UserProfile(models.Model):
-    avatar = models.ImageField("Profile Pic", upload_to="images/", blank=True, null=True)
+    # was upload_to="images/" in Django by Example but ReadTheDocs "How do I use image and file fields" says MEDIA_ROOT
+    # See http://readthedocs.org/docs/django/en/latest/faq/usage.html#how-do-i-use-image-and-file-fields
+    # See also forum/views.py
+    avatar = models.ImageField("Profile Pic", upload_to='images', blank=True, null=True)
     posts = models.IntegerField(default=0)
     user = models.ForeignKey(User, unique=True)
 

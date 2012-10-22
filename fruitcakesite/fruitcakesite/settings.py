@@ -64,21 +64,18 @@ SITE_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__f
 #     ..justfruitcake
 # respectively
 
-##
-##SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
-
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 ##MEDIA_ROOT = ''
-MEDIA_ROOT = os.path.join(SITE_ROOT, 'media')
-#MEDIA_ROOT = "/home/fisk/virt/justfruitcake/media/"
-
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static/media/')
+#MEDIA_ROOT = "/home/fisk/virt/justfruitcake/fruitcakesite/static/media/"
+#images/whatever.JPG is then what is saved in database in forum_userprofile and joined to MEDIA_URL (below) for display
 
 ##See: https://docs.djangoproject.com/en/1.4/topics/forms/media/#paths-in-media-definitions
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = 'media/'
+MEDIA_URL = '/static/media/'
 #MEDIA_URL = ''
 
 ##
@@ -103,7 +100,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/fisk/virt/justfruitcake/static',
+    '/home/fisk/virt/justfruitcake/fruitcakesite/static',
 )
 
 # List of finder classes that know how to find static files in
@@ -145,7 +142,7 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 ##    '/home/fisk/virt/justfruitcake/fruitcakesite/fruitcakesite/templates',
 ##    '/home/fisk/virt/justfruitcake/fruitcakesite/polls/templates',
-    os.path.join(SITE_ROOT, 'templates'),
+    os.path.join(PROJECT_ROOT, 'templates'),
 )
 
 INSTALLED_APPS = (
