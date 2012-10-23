@@ -77,9 +77,14 @@ def profile(request, pk):
             pf.save()
             # resize and save image under same filename
             imfn = pjoin(MEDIA_ROOT, profile.avatar.name)
-            im = PImage.open(imfn)
-            im.thumbnail((160,160), PImage.ANTIALIAS)
-            im.save(imfn, "JPEG")
+            #CF20121023 adding try/except framework, per PIL-handbook p. 3
+            try:
+                im = PImage.open(imfn)
+                # 160, 160 --> 120,120 CF20121023:
+                im.thumbnail((120,120), PImage.ANTIALIAS)
+                im.save(imfn, "JPEG")
+            except IOError:
+                print "Cannot create thumbnail for ", imfn
     else:
         pf = ProfileForm(instance=profile)
 
