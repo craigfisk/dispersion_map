@@ -8,26 +8,19 @@ html5 template
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-
-        <!-- what does this do? //-->
-        <!-- <meta http-equiv="refresh" content="2"> //-->
-
         {% block head %}{% endblock %}
 
         {% comment %}
         Are these html5? --
         {% endcomment %}
-        
-        <link rel="stylesheet" type="text/css" href="/static/fruitcakestyles.css" />
 
+        <link rel="stylesheet" type="text/css" href="/static/styles.css" />
         <link rel="shortcut icon" href="/static/favicon.ico"> 
 
    </head>
    <body>
-        {% comment %}
         <nav id="logout"><a href="/logout/">Sign out</a>
         </nav>
-        {% endcomment %}
 
         {% block body %}{% endblock %}
 
@@ -56,6 +49,7 @@ html5 template
 */
             });
         </script>
+
 
     </body>
 </html>

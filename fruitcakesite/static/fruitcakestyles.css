@@ -1,0 +1,93 @@
+/* Cut out from forum/fbase.html */
+
+* {
+    color: #555;
+    font-size: 0.95em;
+}
+
+#menu a {
+    text-decoration: none;
+    background: #eee;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-right: 2px solid #fff;
+    padding-right: 3px;
+    padding-left: 3px;
+    color: #777;
+    font-size: 0.9em;
+}
+
+a:hover {
+    background: #eeebeb;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    color: #555;
+}
+
+#container { margin: auto; width: 800px; border: 0px solid; }
+
+p { font-size: 1.1em; }
+h3 { margin-right: 30px; display: inline; }
+
+
+/* --------------- from styles.css ------------ */
+
+/* HTML5 reference:  http://html5doctor.com/  */
+
+/* p { font-family:Arial; }
+*/
+h3, h1 { color:red; }
+#titlebar { border-bottom: 1px solid #ccc;
+font-size: 2.0em; color:red; font-family: Arial, Helvetica, sansserif;
+margin: auto; width: 800px; border: 0px solid;
+padding-bottom: 20px;
+}
+#footer { padding-top: 20px; }
+
+/*
+{
+    margin: 0;
+    padding: 0;
+}
+*/
+/* Tell the browser to render HTML 5 elements as block */
+/*
+ header, section, footer, aside, nav, article {
+    display: block;
+}
+body {
+    margin: 30 auto;
+*/
+/*    width: 940px; */
+/*    
+    font: 13px/22px Helvetica, Arial, sans-serif;
+    background: #fafaef; 
+*/
+/*
+}
+h2 {
+    font-size: 28px;
+    line-height: 44px;
+    padding: 22px 0;
+}
+h3 {
+    font-size: 18px;
+    line-height: 22px;
+    padding: 11px 0;
+}
+p {
+    padding-bottom: 22px;
+}
+
+
+#logout, #login {
+    display: block;
+    text-align:right;
+    width: 100%;
+    margin-right: 20px;
+    color: orange;
+    font-family: Arial;
+    font-size: 14px;
+    text-decoration: none;
+}
+*/

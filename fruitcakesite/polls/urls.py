@@ -13,7 +13,6 @@ urlpatterns = patterns('',
             )
             # default is polls/poll_list.html
         )),
-    """
     url(r'^(?P<pk>\d+)/$',
         login_required(DetailView.as_view(
             model=Poll,
@@ -27,5 +26,4 @@ urlpatterns = patterns('',
             # Goes to polls/poll_detail.html by default, as a DetailView
         name='poll_results'),
     url(r'^(?P<poll_id>\d+)/vote/$', 'polls.views.vote'),
-    """
 )

@@ -1,0 +1,32 @@
+/* Cut out from forum/fbase.html */
+
+* {
+    color: #555;
+    font-size: 0.95em;
+}
+
+#menu a {
+    text-decoration: none;
+    background: #eee;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-right: 2px solid #fff;
+    padding-right: 3px;
+    padding-left: 3px;
+    color: #777;
+    font-size: 0.9em;
+}
+
+a:hover {
+    background: #eeebeb;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    color: #555;
+}
+
+#container { margin: auto; width: 800px; border: 0px solid; }
+
+p { font-size: 1.1em; }
+h3 { margin-right: 30px; display: inline; }
+
+

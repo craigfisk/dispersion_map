@@ -9,7 +9,6 @@ urlpatterns = patterns('forum.views',
     (r"^post/(new_thread|reply)/(\d+)/$", "post"),
     (r"^reply/(\d+)/$", "reply"),
     (r"^profile/(\d+)/$", "profile"),
-#    (r"^save_profile/(\d+)/$", "save_profile"),
     (r"^new_thread/(\d+)/$", "new_thread"),
     (r"", "main"),
 )
