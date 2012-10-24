@@ -1,4 +1,4 @@
-{% extends "forum/base.html" %}
+{% extends "forum/forum_base.html" %}
 
 {# {% block sidebar %} <style type="text/css"> </style> {% endblock %} #}
 {% block pagetitle %}Final title{% endblock pagetitle%}
@@ -12,12 +12,12 @@
 
      {% comment %}
      Added on model of thread.html to end seeing breadcrumbish orientation better
-   {% endcomment %}
-       {% comment %}
+     {% endcomment %}
+     {% comment %}
      <div id="back">
          <a href="{% url forum/ %}">&lt;&lt; back to list of forums</a>
      </div>
-   {% endcomment %}
+     {% endcomment %}
 
       <div id="list">
         <table border="0" cellpadding="4" width="100%">
