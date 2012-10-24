@@ -1,0 +1,49 @@
+{% extends "forum/fbase.html" %}
+
+{# THIS FILE APPEARS TO NOT BE CALLED ANYWHERE #}
+
+{% block sidebar %} form.html<style type="text/css"> </style> {% endblock %}
+
+{% block forum-content %}
+
+    <style type="text/css">
+        /* mods to static/fbasestyles.css ---------------------*/
+        /* overrides .main by removing width: 700px */
+        .main { margin-left: 25px; margin-top: 30px; }
+        
+        /* overrides .float by removing float: right; */
+        .button { background: #999; color: white; padding: 6px; text-decoration: none; }
+
+        /* overrides .ttitle by setting width from 700 to 600 */ 
+        .ttitle {
+            color: red; font-style: bold; font-size: 1.6em; border-bottom: 1px solid #ccc; margin-bottom: 9px;
+            padding-left: 10px; width: 600px;
+            }
+       
+        /* added ---------------------------------------------- */
+        #reply { margin-top: 10px; width: 500px; }
+        #rtitle {
+            background: #eee; font-size: 1.3em; padding: 3px; margin-top: 40px; 
+            padding-left: 20px; margin-bottom: -10px; }
+        td { border-bottom: 1px solid #ccc; }
+        div#list { border: 1px solid #a6cccc; width: 600px; background: #f6f6f6; }
+        #body { width: 500px; height: 250px; }
+        #submit { float: right; }
+    </style>
+
+    <div class="main">
+
+        <div id="reply">
+        <div id="rtitle">{{ title }}</div><br />
+        <form action="{{ action }}" method="POST">
+            {% csrf_token %}
+            Subject: <input type="text" name="subject" size="60"
+                value="{{ subject }}" /><br />
+            <textarea name="body" id="body"></textarea><br />
+            <input type="submit" value="Submit" id="submit" />
+        </form>
+        </div>
+
+    </div>
+
+{% endblock forum-content %}

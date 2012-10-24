@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Justfruitcake poll results</title>
+{% endblock %}
+
+{% block body %}
+    <header>
+        <h1>Justfruitcake poll results</h1>
+        <P>{{ poll.question }}</P>
+    </header>
+    <section>
+        <ul>
+            {% for choice in poll.choice_set.all %}
+            <li>{{ choice.choice }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/polls/{{ poll.id }}/">Vote again?</a>
+    </section>
+{% endblock %}
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ForumApp - {% block title %}base{% endblock %}</title>
+    <!-- <meta http-equiv="refresh" content="2">  -->
+    <link rel="stylesheet" href="/static/fbasestyles.css" type="text/css" media="screen" charset="utf-8" />
+
+</head>
+
+<body>
+    <div id="sidebar">Default sidebar{% block sidebar %} - base filler{% endblock %} </div>
+    <div id="container">
+        <div id="menu">
+            {% block nav-global %}
+
+                <!-- MENU -->
+                <h3><a href="{% url forum.views.main %}">ForumApp</a></h3>
+
+                {% if user.is_staff %} <a href="{% url admin:index %}">Admin</a> {% endif %}
+                {% if user.is_authenticated %}
+                    <a href="{% url forum.views.profile user.pk %}">Edit profile</a> {% endif %}
+
+                {% if not user.is_authenticated %}<a href="/accounts/login/?next=/forum/">login</a> | <a
+                    href="/accounts/register/">register</a>{% endif %}
+
+                {% if user.is_authenticated %}<a href="/accounts/logout/?next=/forum/">logout</a>
+                    {% endif %}
+
+            {% endblock %}
+        </div>
+
+        <div id="content">
+            {% block forum-content %}{% endblock %}
+        </div>
+    </div>
+
+</body>
+</html>
+

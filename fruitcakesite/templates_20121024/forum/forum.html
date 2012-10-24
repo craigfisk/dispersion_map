@@ -1,11 +1,10 @@
-{% extends "forum/fbase.html" %}
+{% extends "forum/forum_base.html" %}
 
-{% block title %}Forum{% endblock %} 
-
-{% block sidebar %} forum.html {% endblock %} 
-
+{% block sidebar %} <style type="text/css"> </style> {% endblock %} 
+{# {% block pagetitle %}Final title{% endblock pagetitle%} #}
 
 {% block forum-content %}
+
 
     <div class="main">
 
@@ -71,4 +70,4 @@
 
     </div>
 
-{% endblock %}
+{% endblock forum-content %}

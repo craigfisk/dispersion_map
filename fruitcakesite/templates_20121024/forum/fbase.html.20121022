@@ -6,11 +6,11 @@
     <title>{% block title %}ForumApp{% endblock %}</title>
     <!-- <meta http-equiv="refresh" content="2">  -->
     <link rel="stylesheet" href="/static/styles.css" type="text/css" media="screen" charset="utf-8" />
-    {% comment %}
+
     <style type="text/css">
         * {
             color: #555;
-            font-size: 1.0em;
+            font-size: 0.95em;
         }
 
         #menu a {
@@ -22,7 +22,7 @@
             padding-right: 3px;
             padding-left: 3px;
             color: #777;
-            font-size: 1.0m;
+            font-size: 0.9em;
         }
 
         a:hover {
@@ -34,10 +34,10 @@
 
         #container { margin: auto; width: 800px; border: 0px solid; }
 
-        p { font-size: 1.0em; }
+        p { font-size: 1.1em; }
         h3 { margin-right: 30px; display: inline; }
     </style>
-    {% endcomment %}
+
 </head>
 
 <body>
@@ -63,9 +63,7 @@
         </div>
 
         <div id="content">
-           {% block top-content %}{% endblock %}
-           {% block forum-content %}{% endblock %}
-
+            {% block content %}{% endblock %}
         </div>
     </div>
 

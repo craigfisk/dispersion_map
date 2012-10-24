@@ -1,0 +1,26 @@
+{% extends "base_home.html" %}
+{% comment %}
+Home page
+{% endcomment %}
+
+{% block head %}
+    <title>Justfruitcake home page</title>
+{% endblock %}
+
+{% block body %}
+    <header>
+        <h1>Justfruitcake!</h1>
+    </header>
+    <section>
+        <P>Justfruitcake! is <i>virtual</i> fruitcake... that you can, um,  <U>email</u> to your friends!</P>
+    </section>
+    <section>
+        <form method="post" id="fruitcake_signup" action="" onsubmit="">
+            {% csrf_token %}
+            <input name="submit" type="submit" value="JOIN FOR FREE!" />
+        </form>
+        <br />Already signed up? <a href="/polls/">Sign in</a>
+
+    </section>
+{% endblock %}
+

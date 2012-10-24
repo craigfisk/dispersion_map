@@ -1,0 +1,14 @@
+{% extends "base.html" %} 
+
+{% block pagetitle %}Intermediate{% endblock pagetitle %}
+
+{% block header %}Middle title{% endblock header %}
+
+{% block footer %}
+<P style="color:red;">Thanks for visiting</P>
+{% endblock footer %}
+
+
+
+
+
