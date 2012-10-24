@@ -1,27 +1,14 @@
-{% comment %}
-    html5 template
-{% endcomment %}
-
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
     <head>
-   
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" /> 
         <!-- what would the following do? //-->
         <!-- <meta http-equiv="refresh" content="2"> //-->
-
         <link rel="stylesheet" type="text/css" href="/static/fruitcakestyles.css" />
         <link rel="shortcut icon" href="/static/favicon.ico" /> 
-
-        {% block local-style %}{% endblock local-style %}
-
-        <title>{% block title %}Original title is here{% endblock title %}</title>
-
-   </head>
-  
+        <title>{% block pagetitle %}Original{% endblock pagetitle %}</title>
+    </head>
     <body>
-        
         <div id="sidebar">
             {% block sidebar %}
             <nav id="logout">
@@ -29,20 +16,16 @@
             </nav>
             {% endblock sidebar %}
         </div>
-
     {% block top-content %}Top-content{% endblock top-content %}
     {% block forum-content %}Forum-content{% endblock forum-content %}
     {% block footer-content %}Footer-content{% endblock footer-content %}
     {% block script-content %}
-
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript">
             google.load("jquery", "1");
         </script>
-
         <script type="text/javascript" language="javascript">
             $(document).ready(function() {
-                    
 // NOTE: LEAVING THIS AS A SIMPLE DEMO        
 /*
                  alert($().jquery);       
@@ -56,9 +39,7 @@
 */
             });
         </script>
-
     {% endblock script-content %}
-
     </body>
 </html>
 

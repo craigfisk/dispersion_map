@@ -31,9 +31,6 @@ def mk_paginator(request, items, num_items):
         items = paginator.page(paginator.num_pages)
     return items
 
-def ba(request):
-    return render_to_response("ba.html")
-
 def main(request):
     """Main listing."""
     forums = Forum.objects.all()

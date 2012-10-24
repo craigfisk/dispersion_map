@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "foobar.html" %}
 
 {% block pagetitle %}Final title{% endblock pagetitle%}
 

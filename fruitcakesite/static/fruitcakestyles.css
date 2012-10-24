@@ -1,3 +1,20 @@
+/* Cut out from forum/forum.html */
+
+
+.pagination { margin-top: 20px; margin-left: -20px; }
+.main { margin-left: 25px; margin-top: 30px; width: 700px; }
+.title { font-size: 1.4em; margin-top: 0px; padding-left: 4px; }
+.last { border: 0px; }
+.title a { text-decoration: none; }
+.button { background: #999; color: white; padding: 4px; text-decoration: none; }
+.buttont { background: #999; color: white; padding: 2px; text-decoration: none; }
+
+td { border-bottom: 1px solid #ccc; }
+#list { border: 1px solid #ccc; width: 700px; }
+#new_topic { float: right; }
+
+
+
 /* Cut out from forum/fbase.html */
 
 * {

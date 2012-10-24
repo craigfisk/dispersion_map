@@ -11,5 +11,4 @@ urlpatterns = patterns('forum.views',
     (r"^profile/(\d+)/$", "profile"),
     (r"^new_thread/(\d+)/$", "new_thread"),
     (r"", "main"),
-    (r"^ba/$", "ba"), 
 )
