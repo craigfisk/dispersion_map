@@ -1,16 +1,21 @@
 {% extends "base.html" %} 
 
 
-{% block body %}
+    {% block sidebar %}
+    {{ block.super }}
+        <P>Give the gift of fruitcake</P>
+    {% endblock sidebar %}
+
+
+    {% block top-content %}
 
     <header>
         <div id="titlebar">Justfruitcake</div>
     </header>
 
-    <div id="sidebar"> {% block sidebar %}This is the default sidebar {% endblock %} </div>
     <div id="container">
 
-        <section>
+    <section>
 
         <div id="menu">
             {% block nav-global %}
@@ -31,20 +36,23 @@
             {% endblock %}
         </div>
 
-        </section>
+    </section>
 
-        <div id="content">
-            {% block content %}{% endblock %}
-        </div>
+    {% endblock top-content %}
 
+    {% block forum-content %}
+        Forum content goes here.
+    {% endblock forum-content %}
 
+    {{ content.super }}
+
+    {% block footer-content %}
     <footer id="footer">
         <span>&copy; 2012, Picocosmos Corporation</span>
     </footer>
+    {% endblock footer-content %}
 
 
 
-
-{% endblock %}
 
 

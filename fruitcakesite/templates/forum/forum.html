@@ -1,8 +1,9 @@
-{% extends "forum/fbase.html" %}
+{% extends "base.html" %}
 
-{% block sidebar %} <style type="text/css"> </style> {% endblock %}
+{% block title %}Final title{% endblock %}
 
-{% block content %}
+{% comment %}
+{% block local-style %}
     <style type="text/css">
         .pagination { margin-top: 20px; margin-left: -20px; }
         .main { margin-left: 25px; margin-top: 30px; width: 700px; }
@@ -16,7 +17,13 @@
         #list { border: 1px solid #ccc; width: 700px; }
         #new_topic { float: right; }
     </style>
+{% endblock local-style %}
+{% endcomment %}
 
+{# {% block sidebar %} <style type="text/css"> </style> {% endblock %} #}
+
+
+{% block forum-content %}
     <div class="main">
 
       <a id="new_topic" class="buttont" href=
@@ -81,4 +88,4 @@
 
     </div>
 
-{% endblock %}
+{% endblock forum-content %}
