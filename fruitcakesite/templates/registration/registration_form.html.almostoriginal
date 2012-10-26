@@ -1,9 +1,11 @@
 {% extends "forum/fbase.html" %}
 
-{% block title %} registration {% endblock %}
+{% block sidebar %} registration_form.html{% endblock %}
 
-{% block sidebar %} - registration form{% endblock %}
-
+{%
+<html>
+    <head>
+        <title>Register</title>
         <style type="text/css">
             th {
                 text-align: right;
@@ -11,8 +13,8 @@
             }
         </style>
 
-{% block forum-content %}
-
+    </head>
+    <body>
         <h2>Register</h2>
         <form action="/accounts/register/" method="POST">{% csrf_token %}
             <table>
@@ -22,6 +24,5 @@
             <input style="margin-left: 320px;" type="submit" value="Submit" />
         </p>
         </form>
-
-{% endblock %}
-
+    </body>
+</html>

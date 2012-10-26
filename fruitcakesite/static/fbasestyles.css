@@ -5,6 +5,7 @@
 * {
     color: #555; 
     font-size: 0.95em;
+    font-family: Arial, Helvetica, sansserif;
 }
 
 #menu a {
@@ -31,7 +32,7 @@ a:hover {
 p { font-size: 1.1em; }
 h3 { margin-right: 30px; display: inline; }
 
-#sidebar { color: red; }
+#sidebar { font-size: 1.4em; color: red; margin-bottom: 20px; border-bottom: 1px solid #ccc;}
 
 .frog { color: green; font-size: 1.3em; }
 
