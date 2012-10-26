@@ -96,7 +96,7 @@ STATIC_ROOT = ''
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
-ADMIN_MEDIA_PREFIX = '/static/admin/'
+#ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 ACCOUNT_ACTIVATION_DAYS = 1
 
