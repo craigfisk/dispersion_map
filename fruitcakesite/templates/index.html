@@ -1,18 +1,17 @@
-{% extends "base_home.html" %}
+{% extends "forum/fbase.html" %}
 {% comment %}
 Home page
 {% endcomment %}
 
-{% block head %}
-    <title>Justfruitcake home page</title>
-{% endblock %}
+{% block title %} - home page{% endblock %}
 
 {% block body %}
     <header>
         <h1>Justfruitcake!</h1>
     </header>
     <section>
-        <P>Justfruitcake! is <i>virtual</i> fruitcake... that you can, um,  <U>email</u> to your friends!</P>
+        <P><u>Justfruitcake!</u> is <i>virtual</i> fruitcake... that you can, um,  send to your friends, and then they
+        can send to friends, and then ...!</P>
     </section>
     <section>
         <form method="post" id="fruitcake_signup" action="" onsubmit="">

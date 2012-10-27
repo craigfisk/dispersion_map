@@ -4,7 +4,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-#    url(r'^$', home_page),
+    url(r'^$', home_page),
 ##    url(r'^$', main),
     url(r'^login/$', 'django.contrib.auth.views.login'),
     url(r'^logout/$', logout_page),
