@@ -2,7 +2,7 @@
 
 {% block title %}Forum{% endblock %} 
 
-{% block sidebar %} forum.html {% endblock %} 
+{% block sidebar %} - forum {% endblock %} 
 
 
 {% block forum-content %}
@@ -36,7 +36,7 @@
             {% for thread in threads.object_list %}
             <tr>
                 <td {% if forloop.last %}class="last"{% endif %}>
-                <div class="title"> <a href="{% url forum.views.thread thread.pk %}">{{ thread.title }}</a>
+                <div class="title"><a href="{% url forum.views.thread thread.pk %}">{{ thread.title }}</a>
                     </div></td>
                 <td {% if forloop.last %}class="last"{% endif %}>{{ thread.num_replies }}</td>
                 <td {% if forloop.last %}class="last"{% endif %}>
