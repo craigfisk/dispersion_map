@@ -5,21 +5,17 @@ Home page
 
 {% block title %} - home page{% endblock %}
 
-{% block body %}
-    <header>
-        <h1>Justfruitcake!</h1>
-    </header>
-    <section>
-        <P><u>Justfruitcake!</u> is <i>virtual</i> fruitcake... that you can, um,  send to your friends, and then they
-        can send to friends, and then ...!</P>
-    </section>
-    <section>
-        <form method="post" id="fruitcake_signup" action="" onsubmit="">
+{% block sidebar %} - home page{% endblock %}
+
+{% block forum-content %}
+   <div class='title'>
+       <P><b><span style="color:red;">Justfruitcake</b></span> is <i>virtual</i> fruitcake... that you can send to your friends, and then they, um, can send to their friends, and then ...!</P>
+        <form method="post" id="fruitcake_signup" action="/accounts/register/" onsubmit="">
             {% csrf_token %}
             <input name="submit" type="submit" value="JOIN FOR FREE!" />
         </form>
-        <br />Already signed up? <a href="/polls/">Sign in</a>
+        <br />Already signed up? <a href="/accounts/login/?next=/forum/"><u>Sign in</u></a>
 
-    </section>
+    </div>
 {% endblock %}
 

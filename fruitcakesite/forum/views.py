@@ -31,17 +31,20 @@ def mk_paginator(request, items, num_items):
         items = paginator.page(paginator.num_pages)
     return items
 
+@login_required
 def main(request):
     """Main listing."""
     forums = Forum.objects.all()
     return render_to_response("forum/list.html", dict(forums=forums, user=request.user))
 
+@login_required
 def forum(request, pk):
     """Listing of threads in a forum."""
     threads = Thread.objects.filter(forum=pk).order_by("-created")
     threads = mk_paginator(request, threads, 20)
     return render_to_response("forum/forum.html", add_csrf(request, threads=threads, pk=pk))
 
+@login_required
 def thread(request, pk):
     """Listing of posts in a thread."""
     posts = Post.objects.filter(thread=pk).order_by("created")
@@ -64,9 +67,7 @@ class UserProfile(models.Model):
         return unicode(self.user)
 
 
-"""
 @login_required
-"""
 def profile(request, pk):
     profile = UserProfile.objects.get(user=pk)
     img = None
@@ -93,10 +94,7 @@ def profile(request, pk):
     return render_to_response("forum/profile.html", add_csrf(request, pf=pf, img=img))
 # remove '/' from front of /media/ in "img" line above ??
 
-"""
 @login_required
-"""
-
 def post(request, ptype, pk):
     action = reverse("forum.views.%s" % ptype, args=[pk])
     if ptype == "new_thread":
@@ -114,10 +112,7 @@ def increment_post_counter(request):
     profile.posts += 1
     profile.save()
 
-"""
 @login_required
-"""
-
 def new_thread(request, pk):
     p = request.POST
     if p["subject"] and p["body"]:
@@ -126,10 +121,8 @@ def new_thread(request, pk):
         Post.objects.create(thread=thread, title=p["subject"], body=p["body"], creator=request.user)
         increment_post_counter(request)
     return HttpResponseRedirect(reverse("forum.views.forum", args=[pk]))
-"""
 
 @login_required
-"""
 def reply(request, pk):
     p = request.POST
     if p["body"]:

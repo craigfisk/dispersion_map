@@ -98,6 +98,7 @@ STATIC_URL = '/static/'
 
 #ADMIN_MEDIA_PREFIX = '/static/admin/'
 
+#for django-registration
 ACCOUNT_ACTIVATION_DAYS = 1
 
 # Additional locations of static files
@@ -164,6 +165,7 @@ INSTALLED_APPS = (
 #    'polls',
 ##    'accounts',
 ##    'world',
+#django-registration, see readthedocs
     'registration',
     'forum',
 )
