@@ -1,0 +1,29 @@
+
+
+01 refresh
+02 redo
+04 squiggle
+07 map-marker [locate]
+08 chat (empty)
+09 chat (full)
+18 envelope [send]
+24 gift [send]
+27 planet [locate]
+28 star [favorite]
+29 heart [favorite]
+42 photos [selection]
+48 fork and knife
+53 house [home]
+68 paperclip [note]
+73 radar [locate]
+80 shopping cart [pay / select]
+83 calendar [delay]
+86 camera [upload]
+103 map [locate]
+111 user [profile]
+112 group [send]
+168 upload photo 2 [upload]
+179 notepad [note]
+187 pencil [note]
+183 genie-lamp [magic]
+192 credit-card [pay]
