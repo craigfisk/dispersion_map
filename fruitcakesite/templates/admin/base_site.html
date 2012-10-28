@@ -1,13 +1,13 @@
 {% extends "admin/base.html" %}
-{# {% extends "admin/fbase.html" %} #}
+{# {% extends "admin/base.html" %} #}
 
 {% load i18n %}
 
-{% block title %} {{ title }} | {% trans 'login' %}{% endblock %}
-
-{% block sidebar %} - login
+{% block sidebar %}{% endblock %}
 {# <h1 id="site-name"> - {% trans 'login' %} </h1> #}
-{% endblock %}
+
+
+{% block title %} {{ title }} | {% trans 'login' %}{% endblock %}
 
 {% block branding %}
 {# <h1 id="site-name">{% trans 'login' %}</h1> #}
