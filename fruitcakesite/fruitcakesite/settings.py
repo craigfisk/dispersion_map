@@ -1,5 +1,4 @@
 # Django settings for fruitcakesite project.
-# gratuitous change
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
