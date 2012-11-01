@@ -8,10 +8,11 @@ server {
 	error_log /var/log/nginx/error.log;
 
     location / {
-#        include     uwsgi_params;
+        include     /etc/nginx/uwsgi_params;
+        uwsgi_pass unix:///tmp/uwsgi.sock;  
+        # remember to change to a cluster if > 1 uwsgi app
+#        include uwsgi_params
 #        uwsgi_pass  127.0.0.1:9001;
-        uwsgi_pass unix:///tmp/uwsgi.sock;
-        include uwsgi_params
 
         allow 70.102.23.162;
         allow 67.168.194.54;

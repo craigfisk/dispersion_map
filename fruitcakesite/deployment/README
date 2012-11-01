@@ -1,0 +1,3 @@
+nginx.conf is the only config file being used here.
+It is symlinked to /etc/nginx/sites-enabled/  Note the final "/"!!
+The others are leftover from attempting to get Emperor mode running.
