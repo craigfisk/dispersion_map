@@ -1,3 +1,7 @@
-nginx.conf is the only config file being used here.
-It is symlinked to /etc/nginx/sites-enabled/  Note the final "/"!!
-The others are leftover from attempting to get Emperor mode running.
+nginx.conf and django.ini are the only config files being used here.
+
+nginx.conf is symlinked to /etc/nginx/sites-enabled/  Note the final "/"!!
+
+django.ini is the uwsgi control file.
+
+The other files are leftover from attempting to get Emperor mode running.

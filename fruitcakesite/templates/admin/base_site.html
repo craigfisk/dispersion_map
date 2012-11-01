@@ -1,17 +1,10 @@
 {% extends "admin/base.html" %}
-{# {% extends "admin/base.html" %} #}
-
 {% load i18n %}
 
-{% block sidebar %}{% endblock %}
-{# <h1 id="site-name"> - {% trans 'login' %} </h1> #}
-
-
-{% block title %} {{ title }} | {% trans 'login' %}{% endblock %}
+{% block title %}{{ title }} | {% trans 'Django site admin' %}{% endblock %}
 
 {% block branding %}
-{# <h1 id="site-name">{% trans 'login' %}</h1> #}
+<h1 id="site-name">{% trans 'Justfruitcake administration' %}</h1>
 {% endblock %}
-
 
 {% block nav-global %}{% endblock %}
