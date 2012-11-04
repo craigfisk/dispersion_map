@@ -18,6 +18,9 @@ DATABASES = {
         'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+#-------------------------------------------------
+#  CF20121103 Note: default settings for the followng are in 
+#  django/conf/global_settings.py
 
 #email settings for craigfisk@justfruitcake.com on Thunderbird:
 #   imap server name: mail.justfruitcake.com port: 993 username: craigfisk@justfruitcake.com
@@ -27,17 +30,21 @@ DATABASES = {
 #
 #See https://docs.djangoproject.com/en/1.4/topics/email/
 #FILE_CHARSET = 'utf-8' #default is utf-8
-EMAIL_HOST = 'mail.picocosmos.net'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_HOST = 'mail.justfruitcake.com' #default: localhst
+EMAIL_PORT = 25  #587 default: 25
+EMAIL_USE_TLS = False #True default: False
 EMAIL_HOST_USER = 'craigfisk@justfruitcake.com'
 EMAIL_HOST_PASSWORD = 'Sp8rky=4242'
+DEFAULT_FROM_EMAIL = 'support@justfruitcake.com' #dfault: webmaster@localhost
 #default:
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
-#writes to console
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
-
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
+#NOTE: switch to following IF DEBUGGING LOCALLY -- writes to console
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+SERVER_EMAL = 'support@justfruitcake.com' #default: root@localhost
+FILE_UPLOAD_MAX_MEMORY_SIZE = 16777216 #16MB, 2^24; default 2621440 (2.5 MB)
+FILE_UPLOAD_TEMP_DIR = None #default: Note, so Django uses Linux default /tmp
+FILE_UPLOAD_PERMISSIONS = None #default: None; numeric mode which to set newly upload files, as used with os.chmod, see docs.python.org/lib/os-file-dir.html
+#------------------------------
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
