@@ -27,7 +27,7 @@ DATABASES = {
 #
 #See https://docs.djangoproject.com/en/1.4/topics/email/
 #FILE_CHARSET = 'utf-8' #default is utf-8
-EMAIL_HOST = 'zazen.picocosmos.net'
+EMAIL_HOST = 'mail.picocosmos.net'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'craigfisk@justfruitcake.com'
