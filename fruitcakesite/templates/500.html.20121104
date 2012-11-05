@@ -1,0 +1,11 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+           <title>Page unavailable</title>
+    </head>
+    <body>
+       <h1>500 Sorry, page unavailable!</h1>
+       <p>The requested page is unavailable due to a server error.</p>
+       <p>The developers have been notified, so check back later.</p>
+    </body>
+</html>

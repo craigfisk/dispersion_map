@@ -1,11 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="en">
-    <head>
-           <title>Page unavailable</title>
-    </head>
-    <body>
-       <h1>500 Sorry, page unavailable!</h1>
-       <p>The requested page is unavailable due to a server error.</p>
-       <p>The developers have been notified, so check back later.</p>
-    </body>
-</html>
+{% comment %}
+{% extends "base.html" %}
+{% endcomment %}
+
+{% block title %}500 Sorry, page unavailable{% endblock %}
+
+{% block content %}
+
+
+<H3>500 Sorry, page unavailable due to a server error!</H3>
+<p>{{ request_path }} was not found. The developers have been notified.<p>
+
+{% endblock %}
+
