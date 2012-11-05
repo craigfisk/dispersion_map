@@ -1,9 +1,9 @@
 Your activation key: {{ activation_key }}
 
-Please use this link to activate your account:
+Please click this link to activate your sign-in:
 
 http://www.justfruitcake.com:8000/accounts/activate/{{ activation_key }}/
 
-After activation you can login to the site:
+After activation, click below to sign in:
 
-http://www.justfruitcake.com:8000/accounts/login/
+http://www.justfruitcake.com:8000/accounts/login/?next=/forum/

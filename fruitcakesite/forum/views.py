@@ -79,6 +79,12 @@ def profile(request, pk):
             # resize and save image under same filename
             imfn = pjoin(MEDIA_ROOT, profile.avatar.name)
             #CF20121023 adding try/except framework, per PIL-handbook p. 3
+            """
+            im = PImage.open(imfn)
+            # 160, 160 --> 120,120 CF20121023:
+            im.thumbnail((120,120), PImage.ANTIALIAS)
+            im.save(imfn, "JPEG")
+            """
             try:
                 im = PImage.open(imfn)
                 # 160, 160 --> 120,120 CF20121023:
@@ -86,6 +92,7 @@ def profile(request, pk):
                 im.save(imfn, "JPEG")
             except IOError:
                 print "Cannot create thumbnail for ", imfn
+            
     else:
         pf = ProfileForm(instance=profile)
 
@@ -104,8 +111,7 @@ def post(request, ptype, pk):
         title = "Reply"
         subject = "Re: " + Thread.objects.get(pk=pk).title
 
-    return render_to_response("forum/post.html", add_csrf(request, subject=subject, action=action,
-                                                          title=title))
+    return render_to_response("forum/post.html", add_csrf(request, subject=subject, action=action, title=title))
 
 def increment_post_counter(request):
     profile = request.user.userprofile_set.all()[0]

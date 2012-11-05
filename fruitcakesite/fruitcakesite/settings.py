@@ -1,5 +1,14 @@
 # Django settings for fruitcakesite project.
-DEBUG = True
+
+# Check if deployed (server name is 'zazen')  or else assume localhost
+import socket
+if socket.gethostname == 'zazen':
+    DEBUG = False
+else:
+    DEBUG = True
+
+DEBUG = False
+
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
