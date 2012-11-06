@@ -114,7 +114,9 @@ def post(request, ptype, pk):
     return render_to_response("forum/post.html", add_csrf(request, subject=subject, action=action, title=title))
 
 def increment_post_counter(request):
-    profile = request.user.userprofile_set.all()[0]
+    #CF20121105 changed to match user.userprofile structure
+#    profile = request.user.userprofile_set.all()[0]
+    profile = request.user.userprofile
     profile.posts += 1
     profile.save()
 
