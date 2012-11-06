@@ -58,10 +58,12 @@ class Post(models.Model):
     short.allow_tags = True
 
     def profile_data(self):
-        p = self.creator.userprofile_set.all()[0]
-#        p = self.creator.userprofile()
-        return p.posts, p.avatar
-
+        #CF20121105 modified following
+#        p = self.creator.userprofile_set.all()[0]
+#        return p.posts, p.avatar
+        posts = self.creator.post_set.count()
+        avatar = self.creator.userprofile.avatar
+        return posts, avatar
 
 class UserProfile(models.Model):
     # was upload_to="images/" in Django by Example but ReadTheDocs "How do I use image and file fields" says MEDIA_ROOT
