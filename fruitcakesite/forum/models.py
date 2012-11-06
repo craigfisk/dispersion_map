@@ -59,6 +59,7 @@ class Post(models.Model):
 
     def profile_data(self):
         p = self.creator.userprofile_set.all()[0]
+#        p = self.creator.userprofile()
         return p.posts, p.avatar
 
 
@@ -68,11 +69,13 @@ class UserProfile(models.Model):
     # See also forum/views.py
     avatar = models.ImageField("Profile Pic", upload_to='images', blank=True, null=True)
     posts = models.IntegerField(default=0)
-    user = models.ForeignKey(User, unique=True)
+####    user = models.ForeignKey(User, unique=True)
+    user = models.OneToOneField(User)
 
     def __unicode__(self):
         return unicode(self.user)
 
+ 
 
 ### Admin
 
@@ -90,12 +93,21 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ["title", "creator"]
     list_display = ["title", "thread", "creator", "created"]
 
-
+####CF20121105 replacing following function (and UserProfile.user def above) on model of 1.4 django docs
+# see https://docs.djangoproject.com/en/1.4/topics/auth/#storing-additional-information-about-users
+# instead of the Django by Example code --> mostly motivated by getting user.get_profile.avatar access
+# in userinfo block in templates.
+"""
 def create_user_profile(sender, **kwargs):
-    """When creating a new user, make a profile for him."""
+    #When creating a new user, make a profile for him.
     u = kwargs["instance"]
     if not UserProfile.objects.filter(user=u):
         UserProfile(user=u).save()
+"""
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
 
 post_save.connect(create_user_profile, sender=User)
 

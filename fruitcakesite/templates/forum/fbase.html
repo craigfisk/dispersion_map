@@ -10,7 +10,29 @@
 </head>
 
 <body>
-    <div id="sidebar">Justfruitcake{% block sidebar %} - website{% endblock %} </div>
+    <div id="sidebar">Justfruitcake
+        {% block sidebar %} - website{% endblock %} 
+    </div>
+
+    <div id="userinfo"><table width="100%"><tr>
+        {% block signin %} 
+            <td valign="top">
+            {% if user.username %} 
+            <P>Hi <i>{{ user.username }}</i>!</P>
+            {% else %}
+            {% comment %} <p>Hi anonymous!</P>{% endcomment %}
+            {% endif %}
+            </td><td align="right">
+            {% if user.get_profile.avatar %}
+            <img src="/static/media/{{ user.get_profile.avatar }}">
+            {% else %}
+            No photo! Please click &quot;Edit profile&quot; to upload a picture of yourself.
+            {% endif %}
+            </td>
+        {% endblock %}
+        </tr></table>
+    </div>
+
     <div id="container">
         <div id="menu">
             {% block nav-global %}

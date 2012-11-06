@@ -186,7 +186,8 @@ INSTALLED_APPS = (
 )
 
 # See https://docs.djangoproject.com/en/1.4/topics/auth/#storing-additional-information-about-users
-##AUTH_PROFILE_MODULE = 'accounts.UserProfile'
+AUTH_PROFILE_MODULE = 'forum.UserProfile'
+##'accounts.UserProfile'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
