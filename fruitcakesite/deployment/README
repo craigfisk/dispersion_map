@@ -1,8 +1,10 @@
-nginx.conf and fruitcake_vassal.ini (<-- django.ini) are the only config files being used here.
+Justfruitcake config files for nginx and uwsgi Emperor mode (app = a vassal).
 
-nginx.conf is symlinked to /etc/nginx/sites-enabled/  Note the final "/"!!
+1) fruitcake_nginx.conf is symlinked to /etc/nginx/sites-enabled/www.justfruitcake.com
 
-fruitcake-vassal.ini is the uwsgi control file.  Note carefully how it is symlinked:
-    sudo ln -sfn /home/fisk/virt/justfruitcake/fruitcakesite/deployment/fruitcake_vassal.ini /etc/uwsgi/vassal/
+2) fruitcake-vassal.ini is the uwsgi control file.  It is symlinked to /etc/uwsgi/vassals/
+     Note carefully how it is symlinked:
+        sudo ln -sfn /home/fisk/virt/justfruitcake/fruitcakesite/deployment/fruitcake_vassal.ini /etc/uwsgi/vassals/
 
+-------------------------------------------------------------------------
 The other files are leftover from attempting to get Emperor mode running.
