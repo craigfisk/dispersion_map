@@ -9,6 +9,9 @@ else:
 
 TEMPLATE_DEBUG = DEBUG
 
+WIDTH_AVATAR = 120
+WIDTH_FRUITCAKE = 192
+
 ADMINS = (
     ('Craig Fisk', 'craigfisk@justfruitcake.com'),
 )

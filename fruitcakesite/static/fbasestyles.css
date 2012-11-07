@@ -64,7 +64,7 @@ h3 { margin-right: 30px; display: inline; }
 #list { border: 1px solid #a6cccc; width: 700px; background: #f6f6f6; }
 .post { margin: 8px; padding: 8px; border: 1px solid #ccc; margin-bottom: 14px; background: white; }
 .ppic { float: right; }
-.userinfo { width: 692px; height: 120px; margin: 25px; padding-left: 8px; padding-right: -16px; margin-bottom: 0px; background: white;  border: 1px solid #ccc; }
+.userinfo { width: 692px; height: 170px; margin: 25px; padding-left: 8px; padding-right: -16px; margin-bottom: 0px; background: white;  border: 1px solid #ccc; }
 
 .avatar { float: right; margin-right: 0px; margin-bottom: 5px;}
 
