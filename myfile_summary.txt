@@ -1,0 +1,5 @@
+881f18fafafa6fd64123b223aa221bf7d97771ea Started building myfruitcake.models, views, urls, templates.  Currently stuck on Database error at /forum/ current transaction is aborted. commands ignored until end of transaction block. templates/forum/fbase.html line 48 which is if user.get_profile.avatar.  Need to dig into this on Eclipse.
+c3050745b084c863a80736e82b2a59a1e2d0cdbd Figured out scaling avatars on upload to a constant width, by simply doing the calculation and using image.resize instead of image.thumbnail
+3aea17c307efb0794f6e041f48c1ab75b3af9807 Changed the userinfo / signin block on forum/fbase.html so that it just says "hi" if anonymous and asks to put in a photo if there is none. Also, tweaked fbasestyles.css to make the userinfo a class and the avatar another class, one div inside the other, on the model of the block of posts.
+cdfdf5fbc3a04e68998e9490d27b42a7ed46923f Figured out nginx config to rewrite non-port-8000 requests to port 8000, added a few columns to list_displays for admin section of forum/models
+75c8fe164d1555865115bbd29c78f0816eb1bb19 Not sure I added anything here
