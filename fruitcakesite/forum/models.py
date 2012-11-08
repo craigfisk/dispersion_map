@@ -85,13 +85,13 @@ class UserProfile(models.Model):
 ### Admin
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ["user", "posts", "avatar"]
+    list_display = ["user"]
 
 class ForumAdmin(admin.ModelAdmin):
     pass
 
 class ThreadAdmin(admin.ModelAdmin):
-    list_display = ["title", "forum", "creator", "created", "num_posts", "last_post"]
+    list_display = ["title", "forum", "creator", "created"]
     list_filter = ["forum", "creator"]
 
 class PostAdmin(admin.ModelAdmin):
