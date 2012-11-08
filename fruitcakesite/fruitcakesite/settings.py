@@ -189,6 +189,8 @@ INSTALLED_APPS = (
 # See https://docs.djangoproject.com/en/1.4/topics/auth/#storing-additional-information-about-users
 AUTH_PROFILE_MODULE = 'forum.UserProfile'
 ##'accounts.UserProfile'
+WIDTH_AVATAR = 120
+WIDTH_FRUITCAKE = 192
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
