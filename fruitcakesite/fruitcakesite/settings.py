@@ -112,6 +112,7 @@ STATIC_ROOT = ''
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
+#CF20121107 ADMIN_MEDIA_PREFIX is removed in 1.4, see http://deathofagremmie.com/category/django/
 #ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 #for django-registration
@@ -149,8 +150,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    #CF20121107 next setting is new in 1.4, see http://deathofagremmie.com/category/django/
     # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'fruitcakesite.urls'
@@ -183,6 +185,7 @@ INSTALLED_APPS = (
 ##    'world',
 #django-registration, see readthedocs
     'registration',
+#    'myfruitcake',
     'forum',
 )
 

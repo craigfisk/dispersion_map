@@ -1,0 +1,17 @@
+<html><head><title></title></head><body>
+        <P>fruitcake_list.html</P>
+
+        {% if fruitcake_list %}
+        <P>Listing of your fruitcake:</P>
+
+        {% for item in fruitcake_list %}
+            <img src="{{ media_url }}{{ item.pic }}" />
+        {% endfor %}
+
+        {% else %}
+        So sorry, you do not have a list
+        {% endif %}
+
+
+    </body>
+</html>
