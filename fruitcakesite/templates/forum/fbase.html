@@ -34,23 +34,26 @@
             {% endblock %}
         </div>
 
-        
-        {% block signin %}
-        <div class="userinfo">
-            {% if user.username and user.get_profile.avatar %}
-                Hi, <i>{{ user.username }}</i>
-            {% elif user.username and not user.get_profile.avatar %}
-                Hi, <i>{{ user.username }}</i>. No photo! It would be nice if you would please click &quot;Edit profile&quot; and upload a picture of yourself.
-            {% else %}
-                Hi!
-            {% endif %}
-            <div class="avatar">
+
+        <div id="userinfo"><table width="100%"><tr>
+            {% block signin %} 
+                <td valign="top">
+                {% if user.username %} 
+                <P>Hi <i>{{ user.username }}</i>!</P>
+                {% else %}
+                {% comment %} <p>Hi anonymous!</P>{% endcomment %}
+                {% endif %}
+                </td><td align="right">
                 {% if user.get_profile.avatar %}
                 <img src="/static/media/{{ user.get_profile.avatar }}">
+                {% else %}
+                No photo! Please click &quot;Edit profile&quot; to upload a picture of yourself.
                 {% endif %}
-            </div>
+                </td>
+            {% endblock %}
+            </tr></table>
         </div>
-        {% endblock %}
+
 
 
         <div id="content">

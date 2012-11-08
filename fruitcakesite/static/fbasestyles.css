@@ -58,17 +58,16 @@ h3 { margin-right: 30px; display: inline; }
 .title a { text-decoration: none;}
 .button { background: #999; color: white; padding: 6px; text-decoration: none; float: right; }
 .date { padding-left: 5px; font-size: 0.8em; } 
+.ppic { float: right; }
 .clear { clear: both; }
 .last { border: 0px; }
 
+.post {
+    margin: 8px; padding: 8px; border: 1px solid #ccc; margin-bottom: 14px; background: white;
+    }
 #list { border: 1px solid #a6cccc; width: 700px; background: #f6f6f6; }
-.post { margin: 8px; padding: 8px; border: 1px solid #ccc; margin-bottom: 14px; background: white; }
-.ppic { float: right; }
-.userinfo { width: 692px; height: 120px; margin: 25px; padding-left: 8px; padding-right: -16px; margin-bottom: 0px; background: white;  border: 1px solid #ccc; }
-
-.avatar { float: right; margin-right: 0px; margin-bottom: 5px;}
-
 #back { margin: 5px; }
+
 
 .ttitle {
     font-style: bold; font-size: 1.0em; border-bottom: 1px solid #ccc; margin-bottom: 9px;
