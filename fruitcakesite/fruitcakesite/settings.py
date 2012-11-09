@@ -186,6 +186,7 @@ INSTALLED_APPS = (
     'forum',
 )
 
+
 # See https://docs.djangoproject.com/en/1.4/topics/auth/#storing-additional-information-about-users
 AUTH_PROFILE_MODULE = 'forum.UserProfile'
 ##'accounts.UserProfile'
