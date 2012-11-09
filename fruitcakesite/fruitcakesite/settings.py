@@ -149,7 +149,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     #CF20121107 next setting is new in 1.4, see http://deathofagremmie.com/category/django/
     # Uncomment the next line for simple clickjacking protection:
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+###    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'fruitcakesite.urls'
@@ -189,8 +189,8 @@ INSTALLED_APPS = (
 # See https://docs.djangoproject.com/en/1.4/topics/auth/#storing-additional-information-about-users
 AUTH_PROFILE_MODULE = 'forum.UserProfile'
 ##'accounts.UserProfile'
-WIDTH_AVATAR = 120
-WIDTH_FRUITCAKE = 192
+###WIDTH_AVATAR = 120
+###WIDTH_FRUITCAKE = 192
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

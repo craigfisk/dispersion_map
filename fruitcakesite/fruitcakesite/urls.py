@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^polls/', include('polls.urls')),
     url(r'forum/', include('forum.urls')),
-    url(r'myfruitcake/', include('myfruitcake.urls')),
+#    url(r'myfruitcake/', include('myfruitcake.urls')),
 ##    url(r'^world/', include('world.urls')),
     #CF20121104 change next line 'registration.urls' (deprecated) to 'registration.backends.default.urls'?
     #more info, see http://docs.b-list.org/django-registration/0.8/upgrade.html on how to rewrite for changes to the API
