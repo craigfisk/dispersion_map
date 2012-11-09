@@ -185,7 +185,7 @@ INSTALLED_APPS = (
 ##    'world',
 #django-registration, see readthedocs
     'registration',
-#    'myfruitcake',
+    'myfruitcake',
     'forum',
 )
 

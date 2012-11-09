@@ -1,22 +1,17 @@
 {% extends "forum/fbase.html" %}        
 
-{% block title %}Myfruitcake{% endblock %}
-
-{% block sidebar %} - myfruitcake{% endblock %}
-
 {% block forum-content %}
 <P>fruitcake_list.html</P>
 
         {% if fruitcake_list %}
         <P>Listing of your fruitcake:</P>
 
-        <div class="fruitcake_list">
         {% for item in fruitcake_list %}
             <img src="{{ MEDIA_URL }}{{ item.pic }}" />
         {% endfor %}
+
         {% else %}
-            So sorry, you do not have a fruitcake list
+        So sorry, you do not have a list
         {% endif %}
-        </div>
 
 {% endblock %}

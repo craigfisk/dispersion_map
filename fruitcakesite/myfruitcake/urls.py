@@ -6,5 +6,5 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('myfruitcake.views',
 #    url(r"", "main"),
     url(r'^$', FruitcakeListView.as_view(model=Fruitcake)),
-    url(r'^upload/$', 'upload_file'),
+#    url(r'^upload/$', 'upload_file'),
 )
