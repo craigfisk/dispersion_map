@@ -16,6 +16,7 @@ urlpatterns = patterns('',
 ##    url(r'^world/', include('world.urls')),
     #CF20121104 change next line 'registration.urls' (deprecated) to 'registration.backends.default.urls'?
     #more info, see http://docs.b-list.org/django-registration/0.8/upgrade.html on how to rewrite for changes to the API
-    url(r'^accounts/', include('registration.urls')),
+    # accounts -> registration:
+    url(r'^registration/', include('registration.urls')),
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'static'} ),
 )

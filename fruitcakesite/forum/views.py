@@ -10,7 +10,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL
+from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR
 
 from forum.models import *
 
@@ -88,7 +88,10 @@ def profile(request, pk):
             try:
                 im = PImage.open(imfn)
                 # 160, 160 --> 120,120 CF20121023:
-                im.thumbnail((120,120), PImage.ANTIALIAS)
+                ##im.thumbnail((120,120), PImage.ANTIALIAS)
+                wpercent = (WIDTH_AVATAR/float(im.size[0]))
+                hsize = int((float(im.size[1])*float(wpercent)))
+                im = im.resize((WIDTH_AVATAR, hsize), PImage.ANTIALIAS)
                 im.save(imfn, "JPEG")
             except IOError:
                 print "Cannot create thumbnail for ", imfn

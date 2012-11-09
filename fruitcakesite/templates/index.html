@@ -10,11 +10,11 @@ Home page
 {% block forum-content %}
    <div class='title'>
        <P><b><span style="color:red;">Justfruitcake</b></span> is <i>virtual</i> fruitcake... that you can send to your friends, and then they, um, can send to their friends, and then ...!</P>
-        <form method="post" id="fruitcake_signup" action="/accounts/register/" onsubmit="">
+        <form method="post" id="fruitcake_signup" action="/registration/register/" onsubmit="">
             {% csrf_token %}
             <input name="submit" type="submit" value="JOIN FOR FREE!" />
         </form>
-        <br />Already signed up? <a href="/accounts/login/?next=/forum/"><u>Sign in</u></a>
+        <br />Already signed up? <a href="/registration/login/?next=/forum/"><u>Sign in</u></a>
 
     </div>
 {% endblock %}

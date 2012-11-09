@@ -25,10 +25,10 @@
                 {% if user.is_authenticated %}
                     <a href="{% url forum.views.profile user.pk %}">Edit profile</a> {% endif %}
 
-                {% if not user.is_authenticated %}<a href="/accounts/login/?next=/forum/">login</a> | <a
-                    href="/accounts/register/">register</a>{% endif %}
+                {% if not user.is_authenticated %}<a href="/registration/login/?next=/forum/">login</a> | <a
+                    href="/registration/register/">register</a>{% endif %}
 
-                {% if user.is_authenticated %}<a href="/accounts/logout/?next=/forum/">logout</a>
+                {% if user.is_authenticated %}<a href="/registration/logout/?next=/forum/">logout</a>
                     {% endif %}
 
             {% endblock %}
@@ -37,20 +37,16 @@
         {% block signin %}
         <div class="userinfo">
             {% if user.username and user.get_profile.avatar %} 
-                Hi <i>{{ user.username }}</i>
+                Hi <i>{{ user.username }}</i>!
+                    <div class="avatar">
+                            <img src="/static/media/{{ user.get_profile.avatar }}">
+                    </div>
             {% elif user.username and not user.get_profile.avatar %}
-                Hi <i>anonymous!</i>. No photo?! It would be nice if you would please click &quot;Edit profile&quot; and upload a picture of yourself.
+                Hi <i>{{ user.username }}!</i>. No photo? It would be nice if you would please click the &quot;Edit profile&quot; button and upload a picture of yourself.
             {% else %}
-                Hi!
+                Hi, <i>anonymous</i>!
             {% endif %}
 
-            <div class="avatar">
-                {% if user.get_profile.avatar %}
-                    <img src="/static/media/{{ user.get_profile.avatar }}">
-                {% else %}
-                    No photo?! Please click &quot;Edit profile&quot; to upload a picture of yourself.
-                {% endif %}
-            </div>
         </div>
         {% endblock %}
 
