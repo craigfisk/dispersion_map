@@ -35,20 +35,57 @@
         </div>
 
         {% block signin %}
-        <div class="userinfo">
-            {% if user.username and user.get_profile.avatar %} 
-                Hi <i>{{ user.username }}</i>!
-                    <div class="avatar">
-                            <img src="/static/media/{{ user.get_profile.avatar }}">
-                    </div>
-            {% elif user.username and not user.get_profile.avatar %}
-                Hi <i>{{ user.username }}!</i>. No photo? It would be nice if you would please click the &quot;Edit profile&quot; button and upload a picture of yourself.
-            {% else %}
-                Hi, <i>anonymous</i>!
-            {% endif %}
+        <div id="container3">
+            <div id="container2">
+                <div id="container1">
+                    <div id="col1">
+                        <br /><h2>
+                        {% if user.username and user.get_profile.avatar %} 
+                            Hi <i>{{ user.username }}</i>!
+                        {% elif user.username and not user.get_profile.avatar %}
+                            Hi <i>{{ user.username }}!</i>.
+                        {% else %}
+                            Hi, <i>anonymous</i>!
+                        {% endif %}
+                    </h2><br />
+                        <P><b>Justfruitcake.com</b> is TOTALLY FREE (until it's not; and then it will be ridiculously inexpensive, plus maybe have some surprises!)</P>
 
+
+                    </div>
+                    <div id="col2">
+ 
+                        <h2>My shipments:</h2>
+                        <ul>
+                            <li>What I sent: 0</li>
+                            <li>Downstream forwards: 0</li>
+                            <li>Uploads by me: 0</li>
+                        </ul>
+                           
+                    </div>
+                    <div id="col3">
+
+                         <div id="avatarinfo">
+                            {% if user.username and user.get_profile.avatar %} 
+                                <div class="avatar">
+                                        <img src="/static/media/{{ user.get_profile.avatar }}">
+                                </div>
+                            {% elif user.username and not user.get_profile.avatar %}
+                                No photo? It would be nice if you would please click the &quot;Edit profile&quot; button and upload a picture of yourself.
+                            {% else %}
+                                
+                            {% endif %}
+                        </div>
+
+                        <h2>My forum posts:</h2>
+
+                    </div>
+                </div>
+            </div>
         </div>
+
         {% endblock %}
+
+
 
 
         <div id="content">

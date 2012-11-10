@@ -32,7 +32,6 @@ td { border-bottom: 1px solid #ccc; }
 /*            color: red; *//* #777; */
     font-size: 0.9em; 
 }
-
 a:hover {
     background: #eeebeb;
     border-top: 1px solid #aaa;
@@ -40,14 +39,17 @@ a:hover {
     color: #555; 
 }
 
-#container { margin: auto; width: 800px; border: 0px solid; }
+/* #container { margin: auto; width: 800px; border: 0px solid; } */
+#container { float:left; position:relative; margin: auto; width: 100%; border: 0px solid; }
+
 
 h3 { margin-right: 30px; display: inline; }
 
 #sidebar { font-size: 1.6em; color: red; margin-bottom: 20px; border-bottom: 1px solid #ccc;}
 
-#userinfo { margin-left: 25px; width: 700px; }
-
+/*
+ * #userinfo { margin-left: 25px; width: 700px; }
+*/
 /* font-size: 1.4em; */
 
 /* from thread.html */
@@ -65,13 +67,16 @@ h3 { margin-right: 30px; display: inline; }
 .post {
     margin: 8px; padding: 8px; border: 1px solid #ccc; margin-bottom: 14px; background: white;
     }
-.userinfo { width: 692px; height: 170px; margin: 25px; padding-left: 8px; padding-right: -16px; margin-bottom: 0px; background: white; border: 1px solid #ccc; }
-.avatar { float: right; margin-right: 0px; margin-bottom: 5px; }
+/* .userinfo was 692 width; expanding to match .fruitcake_list */
+/* .userinfo { width: 790px; height: 170px; margin: 25px; padding-left: 8px; padding-right: -16px; margin-bottom: 0px; background: white; border: 1px solid #ccc; } *//* .avatar { float: right; margin-right: 0px; margin-bottom: 5px; } */
 #list { border: 1px solid #a6cccc; width: 700px; background: #f6f6f6; }
 #back { margin: 5px; }
 
-.fruitcake_list { width: 692px; margin: 25px; padding-left: 8px; padding-right: -16px; margin-bottom: 0px; background: white; border: 1px solid #ccc; }
-
+/* 790px = 4 * 192 + (8, 2, 2, 2, 8) */
+/* 984px = 5 * 192 + (8, 2, 2, 2, 2, 8) */
+/*
+.fruitcake_list { width: 790px; margin: 25px; padding-left: 8px; padding-right: -16px; margin-bottom: 0px; background: pink; border: 1px solid #ccc; }
+*/
 
 .ttitle {
     font-style: bold; font-size: 1.0em; border-bottom: 1px solid #ccc; margin-bottom: 9px;
@@ -79,4 +84,52 @@ h3 { margin-right: 30px; display: inline; }
 }
 /* font-size: 1.3em; */
 
-
+/* -------------------------------
+ * 3-columns, self-balancing, no js or tables, in a container, from:
+ * http://matthewjamestaylor.com/blog/equal-height-columns-cross-browser-css-no-hacks
+*/
+#col1 h2 { margin: 0; padding: 0; width: 100%; float: left; border-bottom: #c0 0 solid 3px; }
+#avatarinfo { float: right; margin-right: 0px; margin-top: 5px; } 
+#container3 {
+    float:left;
+    width:100%; 
+    /* 790px; */
+/*    background:green; */
+    overflow:hidden;
+    position:relative;
+}
+#container2 {
+    float:left;
+    width:100%;
+/*    background:yellow; */
+    position:relative;
+    right:30%;
+}
+#container1 {
+    float:left;
+    width:100%;
+/*    background:red; */
+    position:relative;
+    right:40%;
+}
+#col1 {
+    float:left;
+    width:26%;
+    position:relative;
+    left:72%;
+    overflow:hidden;
+}
+#col2 {
+    float:left;
+    width:36%;
+    position:relative;
+    left:76%;
+    overflow:hidden;
+}
+#col3 {
+    float:left;
+    width:26%;
+    position:relative;
+    left:80%;
+/*    overflow:hidden; */
+}
