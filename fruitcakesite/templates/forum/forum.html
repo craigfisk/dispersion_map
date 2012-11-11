@@ -2,14 +2,14 @@
 
 {% block title %}Forum{% endblock %} 
 
-{% block sidebar %} - forum {% endblock %} 
+{% block sidebar %} - threads {% endblock %} 
 
 {% block forum-content %}
 
     <div class="main">
 
       <a id="new_topic" class="buttont" href=
-        "{% url forum.views.post 'new_thread' pk %}">Start New Topic</a>
+          "{% url forum.views.post 'new_thread' pk %}">start new forum</a>
         <br />
         <br />
 

@@ -1,6 +1,18 @@
-{% extends "base/base.html" %}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ForumApp - {% block title %}base{% endblock %}</title>
+    <!-- <meta http-equiv="refresh" content="2">  -->
+    <link rel="stylesheet" href="/static/fbasestyles.css" type="text/css" media="screen" charset="utf-8" />
 
-{% block sidebar %} - website{% endblock %} 
+</head>
+
+<body>
+    <div id="sidebar">Justfruitcake
+        {% block sidebar %} - website{% endblock %} 
+    </div>
 
     <div id="container">
         <div id="menu">
