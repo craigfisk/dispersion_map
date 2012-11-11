@@ -1,16 +1,16 @@
 {% extends "forum/fbase.html" %}
 
-{% block title %}Thread{% endblock %}
+{% block title %}{{ block.super }} Discussion{% endblock %}
 
-{% block sidebar %} - thread <style type="text/css"> </style> {% endblock %}
+{% block sidebar %} - discussion <style type="text/css"> </style> {% endblock %}
 
 {% block forum-content %}
 
     <div class="main">
 
-        <div class="ttitle">{{ title }}</div>
+        <div class="ttitle">Discussion: {{ title }}</div>
             <div id="back">
-                <a href="{% url forum.views.forum forum_pk %}">&lt;&lt; back to list of forums</a>
+                <a href="{% url forum.views.forum forum_pk %}">&lt;&lt; back to list of discussions</a>
             </div>
         <div id="list">
 

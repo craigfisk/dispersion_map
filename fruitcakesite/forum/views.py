@@ -42,7 +42,10 @@ def forum(request, pk):
     """Listing of threads in a forum."""
     threads = Thread.objects.filter(forum=pk).order_by("-created")
     threads = mk_paginator(request, threads, 20)
-    return render_to_response("forum/forum.html", add_csrf(request, threads=threads, pk=pk))
+    #CF20121111 added the bits here with title, on the model of what is done in thread(). Also added title=title in
+    # the render_to_response.
+    title = Forum.objects.get(pk=pk) 
+    return render_to_response("forum/forum.html", add_csrf(request, threads=threads, pk=pk, title=title))
 
 @login_required
 def thread(request, pk):

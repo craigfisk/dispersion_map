@@ -1,15 +1,19 @@
 {% extends "forum/fbase.html" %}
 
-{% block title %}Forum{% endblock %} 
+{% block title %}{{ block.super }} Discussions{% endblock %} 
 
-{% block sidebar %} - threads {% endblock %} 
+{% block sidebar %} - Discussions {% endblock %} 
 
 {% block forum-content %}
 
     <div class="main">
 
-      <a id="new_topic" class="buttont" href=
-          "{% url forum.views.post 'new_thread' pk %}">start new forum</a>
+      <div class="ttitle">Forum: {{ title }}</div>
+        <div id="back">
+            <a href="{% url forum.views.main %}">&lt;&lt; back to list of forums</a>
+        </div>
+
+      &nbsp;<a id="new_topic" class="buttont" href="{% url forum.views.post 'new_thread' pk %}">&gt;&gt; start new discussion</a>
         <br />
         <br />
 
@@ -25,8 +29,8 @@
       <div id="list">
         <table border="0" cellpadding="4" width="100%">
             <tr>
-                <td>Topics</td>
-                <td>Replies</td>
+                <td>Discussions</td>
+                <td>Posts</td>
                 <td>Last post</td>
                 <td></td>
             </tr>
