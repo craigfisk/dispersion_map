@@ -40,17 +40,27 @@ DATABASES = {
 #
 #See https://docs.djangoproject.com/en/1.4/topics/email/
 #FILE_CHARSET = 'utf-8' #default is utf-8
-EMAIL_HOST = 'mail.justfruitcake.com' #default: localhst
-EMAIL_PORT = 25  #587 default: 25
-EMAIL_USE_TLS = False #True default: False
-EMAIL_HOST_USER = 'craigfisk@justfruitcake.com'
+##EMAIL_HOST = 'mail.justfruitcake.com' #default: localhst
+##EMAIL_PORT = 25  #587 default: 25
+##EMAIL_USE_TLS = False #True default: False
+##EMAIL_HOST_USER = 'craigfisk@justfruitcake.com'
+##EMAIL_HOST_PASSWORD = 'Sp8rky=4242'
+##DEFAULT_FROM_EMAIL = 'support@justfruitcake.com' #dfault: webmaster@localhost
+
+EMAIL_HOST = 'mail.picocosmos.net'
+EMAIL_PORT = 587
+EMAIL_USER_TLS = True
+EMAIL_HOST_USER = 'craigfisk@picocosmos.net'
 EMAIL_HOST_PASSWORD = 'Sp8rky=4242'
-DEFAULT_FROM_EMAIL = 'support@justfruitcake.com' #dfault: webmaster@localhost
+DEFAULT_FROM_EMAIL = 'craigfisk@picocosmos.net'
+
 #default:
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
 #NOTE: switch to following IF DEBUGGING LOCALLY -- writes to console
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
-SERVER_EMAL = 'support@justfruitcake.com' #default: root@localhost
+##SERVER_EMAIL = 'support@justfruitcake.com' #default: root@localhost
+SERVER_EMAIL = 'craigfisk@picocosmos.net'
+
 FILE_UPLOAD_MAX_MEMORY_SIZE = 16777216 #16MB, 2^24; default 2621440 (2.5 MB)
 FILE_UPLOAD_TEMP_DIR = None #default: Note, so Django uses Linux default /tmp
 FILE_UPLOAD_PERMISSIONS = None #default: None; numeric mode which to set newly upload files, as used with os.chmod, see docs.python.org/lib/os-file-dir.html
@@ -193,8 +203,6 @@ INSTALLED_APPS = (
 # See https://docs.djangoproject.com/en/1.4/topics/auth/#storing-additional-information-about-users
 AUTH_PROFILE_MODULE = 'forum.UserProfile'
 ##'accounts.UserProfile'
-###WIDTH_AVATAR = 120
-###WIDTH_FRUITCAKE = 192
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
