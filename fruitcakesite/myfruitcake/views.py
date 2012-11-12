@@ -61,8 +61,8 @@ from django.forms import ModelForm
 
 class UploadFruitcakeForm(ModelForm):
     class Meta:
-        model = Fruitcake;
-
+        model = Fruitcake
+        exclude = ['shipments', 'uploads', 'source', 'thumbnail']
 """
 @login_required
 def upload_file(request):
@@ -93,7 +93,7 @@ def upload_file(request):
             # resize and save image under same filename
 ##            imfn = pjoin(MEDIA_ROOT, profile.avatar.name)
         form = UploadFruitcakeForm(request.POST, request.FILES)
-        if form.is_valid() and request.FILE['pic']:
+        if form.is_valid():
             imfn = pjoin(MEDIA_ROOT, request.FILES['pic'])
             #CF20121023 adding try/except framework, per PIL-handbook p. 3
             try:
@@ -106,13 +106,19 @@ def upload_file(request):
                 im.save(imfn, "JPEG")
             except IOError:
                 print "Cannot resize ", imfn
+            return HttpResponseRedirect('myfruitcake/success/')
         else:
-            print "Problem with file info: %s" % request.FILES['pic'] 
+            print "Form does not validate for: %s" % request.FILES['pic']
+            for error in form.errors:
+                print error
 
     else:
         form = UploadFruitcakeForm()
 
     return render_to_response('myfruitcake/upload.html', add_csrf(request, form=form)) 
+
+def success(request):
+    return HttpResponse("Success!")
 
 #        pf = ProfileForm(instance=profile)
 

@@ -4,7 +4,7 @@ from django.contrib import admin
 #from django.db.models.signals import post_save
 
 class Fruitcake(models.Model):
-    thumbnail = models.ImageField("Thumbnail Pic", upload_to='thumbnails', blank=False, null=False)
+    thumbnail = models.ImageField("Thumbnail Pic", upload_to='thumbnails', blank=True, null=True)
     pic = models.ImageField("Regular Pic", upload_to='pics', blank=False, null=False)
     popup = models.CharField(max_length=256, blank=True, null=True)
     source = models.URLField(max_length=200, blank=True, null=True)

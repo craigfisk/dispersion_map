@@ -9,4 +9,5 @@ urlpatterns = patterns('myfruitcake.views',
 #    url(r"", "main"),
     url(r'^$', login_required(FruitcakeListView.as_view(model=Fruitcake))),
     url(r'^upload/$', 'upload_file'),
+    url(r'^success/$', 'success'),
 )

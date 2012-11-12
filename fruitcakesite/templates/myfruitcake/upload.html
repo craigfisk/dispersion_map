@@ -26,5 +26,13 @@
 
     </form>
 
+    {% if form.errors %}
+    <ol>
+        {% for error in form.erros %}
+        <li><strong>{{ error|escape }}</strong></li>
+        {% endfor %}
+    </ol>
+    {% endif %}
+
 {% endblock forum-content %}
 
