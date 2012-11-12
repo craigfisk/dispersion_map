@@ -83,8 +83,6 @@ def upload_file(request):
 @login_required
 def upload_file(request):
 ##    profile = UserProfile.objects.get(user=pk)
-    pic = None
-    popup = ''
 
     if request.method == "POST":
 ##        pf = ProfileForm(request.POST, request.FILES, instance=profile)
@@ -94,6 +92,10 @@ def upload_file(request):
 ##            imfn = pjoin(MEDIA_ROOT, profile.avatar.name)
         form = UploadFruitcakeForm(request.POST, request.FILES)
         if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/myfruitcake/success/')
+
+            """
             imfn = pjoin(MEDIA_ROOT, request.FILES['pic'])
             #CF20121023 adding try/except framework, per PIL-handbook p. 3
             try:
@@ -111,6 +113,7 @@ def upload_file(request):
             print "Form does not validate for: %s" % request.FILES['pic']
             for error in form.errors:
                 print error
+        """
 
     else:
         form = UploadFruitcakeForm()
