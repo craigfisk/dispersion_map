@@ -1,24 +1,30 @@
-<html><head><title></title></head>
-    <body>
+{% extends "forum/fbase.html" %}
+ 
+{% block title %}Upload{% endblock %}
 
+{% block sidebar %} - upload<style type="text/css"> </style> {% endblock %}
+
+{% block forum-content %}
+<P>Fruitcake upload form:</P>
 
     <form enctype="multipart/form-data" action="" method="POST"> {% csrf_token %}
 
-        {% if form.file %} <p><img border="0" alt="Fruitcake pic" src="{{ form.file }}" /></p> 
-        
-        {% else %}Failed to find pic
+        {% if form %}
+        {% comment %}
+        <img border="0" alt="Fruitcake pic" src="{{ form.file }}" /> 
+        {% endcomment %}
+
+        {% else %}no form, sorry, must be a problem
         
         {% endif %}
 
-        <input type="text" value="title" />
+        Photo (jpg): <input type="file" name="fruitcake_pic" value="filename" id="id_fruitcake" />
 
-        <input type="text" value="file" />
+        Pop-up message: <input type="text" name="popup_text" value="Pick me!" id="id_popup" />
 
-        <input type="submit" value="Submit" id="submit" />
+        <input type="submit" value="Upload" id="submit" />
 
     </form>
 
-
-    </body>
-</html>
+{% endblock forum-content %}
 

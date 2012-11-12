@@ -4,6 +4,8 @@ from os.path import join as pjoin
 
 #CF20121107 todo: probably can cut some of these ...
 from django.contrib.auth.decorators import login_required
+#from django.utils.decorators import method_decorator
+
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.core.context_processors import csrf
@@ -25,12 +27,16 @@ def main(request):
 """
 
 def activity(request, pk):
-    """Listing of posts in a thread."""
+    #Listing of posts in a thread.
     shipments = Shipment.objects.all().order_by("dt")
     shipments = mk_paginator(request, shipments, 15)
     return render_to_response("myfruitcake/activity.html", add_csrf(request, shipments=shipments, media_url=MEDIA_URL))
 
 class FruitcakeListView(ListView):
+#    @method_decorator(login_required)
+#    def dispatch(self, *args, **kwargs):
+#        return super(FruitcakeListView, self).dispatch(*args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super(FruitcakeListView, self).get_context_data(**kwargs)
         return context
@@ -44,6 +50,7 @@ class UploadImageFileForm(forms.Form):
     title = forms.CharField(max_length=50)
     file = forms.FileField()
 
+@login_required
 def upload_file(request):
     if request.method == 'POST':
         form = UploadImageFileForm(request.POST, request.FILES)
@@ -53,11 +60,9 @@ def upload_file(request):
             return HttpResponseRedirect('/success/')
     else:
         form = UploadImageFileForm()
-    return render_to_response('upload.html', {'form': form})
+#    return render_to_response('myfruitcake/upload.html', {'form': form})
+    return render_to_response('myfruitcake/upload.html', add_csrf(request, form=form))
 
-    return render_to_response('Nothing to see yet')
-
-"""
 def make_fruitcake(request, pk):
     profile = UserProfile.objects.get(user=pk)
     img = None
@@ -88,5 +93,8 @@ def make_fruitcake(request, pk):
     return render_to_response("forum/profile.html", add_csrf(request, pf=pf, img=img))
 # remove '/' from front of /media/ in "img" line above ??
 
-"""
+def add_csrf(request, **kwargs):
+    d = dict(user=request.user, **kwargs)
+    d.update(csrf(request))
+    return d
 

@@ -105,7 +105,6 @@ def profile(request, pk):
     if profile.avatar:
         img = MEDIA_URL + profile.avatar.name
     return render_to_response("forum/profile.html", add_csrf(request, pf=pf, img=img))
-# remove '/' from front of /media/ in "img" line above ??
 
 @login_required
 def post(request, ptype, pk):
