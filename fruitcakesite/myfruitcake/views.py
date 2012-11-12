@@ -50,6 +50,19 @@ class FruitcakeListView(ListView):
     def get_queryset(self):
         return Fruitcake.objects.all()
 
+class MyFruitcakeListView(ListView):
+    template_name = 'myfruitcake_list.html'
+    context_object_name = 'myfruitcake_list'
+    def get_context_data(self, **kwargs):
+        context = super(MyFruitcakeListView, self).get_context_data(**kwargs)
+        context['user'] = self.request.user
+        return context
+
+    def get_queryset(self):
+        return Fruitcake.objects.all(user=self.request.user)
+
+
+
 from django import forms
 
 #class UploadImageFileForm(forms.Form):
@@ -92,7 +105,10 @@ def upload_file(request):
 ##            imfn = pjoin(MEDIA_ROOT, profile.avatar.name)
         form = UploadFruitcakeForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            pic = form.save(commit=False)
+            pic.uploader = request.user
+            pic.save()
+            #form.save()
             return HttpResponseRedirect('/myfruitcake/success/')
 
             """

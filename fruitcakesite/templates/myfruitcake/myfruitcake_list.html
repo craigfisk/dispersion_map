@@ -1,0 +1,16 @@
+{% block myfruitcakelist %}
+
+        {% if myfruitcake_list %}
+        <br />
+        <P>Listing of your fruitcake:</P>
+
+        <div class="fruitcake_list">
+        {% for item in fruitcake_list %}
+            <img src="{{ MEDIA_URL }}{{ item.pic }}" />
+        {% endfor %}
+        {% else %}
+            So sorry, you do not have a list of fruitcake you have uploaded.
+        {% endif %}
+        </div>
+
+{% endblock %}
