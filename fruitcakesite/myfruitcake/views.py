@@ -17,6 +17,7 @@ from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR, WIDTH_FR
 
 from myfruitcake.models import *
 from forum.models import UserProfile
+from forum.views import mk_paginator
 
 from django.views.generic import ListView
 
@@ -75,7 +76,7 @@ from django.forms import ModelForm
 class UploadFruitcakeForm(ModelForm):
     class Meta:
         model = Fruitcake
-        exclude = ['shipments', 'uploads', 'source', 'thumbnail']
+        exclude = ['uploader', 'shipments', 'uploads', 'source', 'thumbnail']
 """
 @login_required
 def upload_file(request):

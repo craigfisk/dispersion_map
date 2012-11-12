@@ -11,7 +11,8 @@ class Fruitcake(models.Model):
     #CF20121107: use quotes around Shipment and Upload in next 2 lines because classes not defined until below
     shipments = models.ManyToManyField('Shipment', related_name='shipments',verbose_name='shipments')
     uploads = models.ManyToManyField('Upload', related_name='uploads', verbose_name='uploads')
-    uploader = models.ForeignKey(User)
+    uploader = models.ForeignKey(User, default=1)
+    # 1 is fisk
 
     def __unicode__(self):
         return unicode(self.pic)
