@@ -6,6 +6,7 @@ from django.contrib import admin
 class Fruitcake(models.Model):
     thumbnail = models.ImageField("Thumbnail Pic", upload_to='thumbnails', blank=False, null=False)
     pic = models.ImageField("Regular Pic", upload_to='pics', blank=False, null=False)
+    popup = models.CharField(max_length=256, blank=True, null=True)
     source = models.URLField(max_length=200, blank=True, null=True)
     #CF20121107: use quotes around Shipment and Upload in next 2 lines because classes not defined until below
     shipments = models.ManyToManyField('Shipment', related_name='shipments',verbose_name='shipments')

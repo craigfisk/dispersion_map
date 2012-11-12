@@ -13,11 +13,17 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR
+from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR, WIDTH_FRUITCAKE
 
 from myfruitcake.models import *
+from forum.models import UserProfile
 
 from django.views.generic import ListView
+
+class ProfileForm(ModelForm):
+    class Meta:
+        model = UserProfile
+#        exclude = ["posts", "user"]
 
 """
 def main(request):
@@ -46,52 +52,73 @@ class FruitcakeListView(ListView):
 
 from django import forms
 
-class UploadImageFileForm(forms.Form):
-    title = forms.CharField(max_length=50)
-    file = forms.FileField()
+#class UploadImageFileForm(forms.Form):
+#    title = forms.CharField(max_length=50)
+#    file = forms.FileField()
 
+from django.db import models
+from django.forms import ModelForm
+
+class UploadFruitcakeForm(ModelForm):
+    class Meta:
+        model = Fruitcake;
+
+"""
 @login_required
 def upload_file(request):
     if request.method == 'POST':
-        form = UploadImageFileForm(request.POST, request.FILES)
+        form = UploadFruitcakeForm(request.POST, request.FILES)
         if form.is_valid():
             # do something to
             # handle_uploaded_file(request.FILES['file'])
             return HttpResponseRedirect('/success/')
     else:
-        form = UploadImageFileForm()
+        form = UploadFruitcakeForm()
 #    return render_to_response('myfruitcake/upload.html', {'form': form})
     return render_to_response('myfruitcake/upload.html', add_csrf(request, form=form))
+"""
 
-def make_fruitcake(request, pk):
-    profile = UserProfile.objects.get(user=pk)
-    img = None
+#def make_fruitcake(request, pk):
+
+@login_required
+def upload_file(request):
+##    profile = UserProfile.objects.get(user=pk)
+    pic = None
+    popup = ''
 
     if request.method == "POST":
-        pf = ProfileForm(request.POST, request.FILES, instance=profile)
-        if pf.is_valid():
-            pf.save()
+##        pf = ProfileForm(request.POST, request.FILES, instance=profile)
+##        if pf.is_valid():
+##            pf.save()
             # resize and save image under same filename
-            imfn = pjoin(MEDIA_ROOT, profile.avatar.name)
+##            imfn = pjoin(MEDIA_ROOT, profile.avatar.name)
+        form = UploadFruitcakeForm(request.POST, request.FILES)
+        if form.is_valid() and request.FILE['pic']:
+            imfn = pjoin(MEDIA_ROOT, request.FILES['pic'])
             #CF20121023 adding try/except framework, per PIL-handbook p. 3
             try:
                 im = PImage.open(imfn)
                 # 160, 160 --> 120,120 CF20121023:
                 ##im.thumbnail((120, 120), PImage.ANTIALIAS)
-                wpercent = (WIDTH_AVATAR/float(im.size[0]))
+                wpercent = (WIDTH_FRUITCAKE/float(im.size[0]))
                 hsize = int((float(im.size[1])*float(wpercent)))
-                im = im.resize((WIDTH_AVATAR, hsize), PImage.ANTIALIAS)
+                im = im.resize((WIDTH_FRUITCAKE, hsize), PImage.ANTIALIAS)
                 im.save(imfn, "JPEG")
             except IOError:
-                print "Cannot create thumbnail for ", imfn
-            
-    else:
-        pf = ProfileForm(instance=profile)
+                print "Cannot resize ", imfn
+        else:
+            print "Problem with file info: %s" % request.FILES['pic'] 
 
-    if profile.avatar:
-        img = MEDIA_URL + profile.avatar.name
-    return render_to_response("forum/profile.html", add_csrf(request, pf=pf, img=img))
-# remove '/' from front of /media/ in "img" line above ??
+    else:
+        form = UploadFruitcakeForm()
+
+    return render_to_response('myfruitcake/upload.html', add_csrf(request, form=form)) 
+
+#        pf = ProfileForm(instance=profile)
+
+##    if profile.avatar:
+##        img = MEDIA_URL + profile.avatar.name
+##    return render_to_response("forum/profile.html", add_csrf(request, pf=pf, img=img))
 
 def add_csrf(request, **kwargs):
     d = dict(user=request.user, **kwargs)
