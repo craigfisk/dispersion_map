@@ -68,6 +68,7 @@ class Shipment(models.Model):
     def __unicode__(self):
         return unicode(self.dt)
 
+
 ### Admin
 class FruitcakeAdmin(admin.ModelAdmin):
     list_display = ['thumbnail']
