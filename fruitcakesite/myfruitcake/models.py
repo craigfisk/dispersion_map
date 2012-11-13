@@ -39,6 +39,16 @@ class Fruitcake(models.Model):
         im = im.resize((WIDTH_FRUITCAKE, hsize), PImage.ANTIALIAS)
         im.save(imfn, "JPEG") 
 
+CHOICES = (
+        (None, "Like?"),
+        (True, "Like"),
+        (False, "Dislike")
+        )
+
+class Sentiment(models.Model):
+    dt = models.DateTimeField(auto_now_add=True)
+    like = models.NullBooleanField(choices = CHOICES, default=null)
+
 class Upload(models.Model):
     dt = models.DateTimeField(auto_now_add=True)
     fruitcake = models.ForeignKey(Fruitcake)
