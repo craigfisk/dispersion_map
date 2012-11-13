@@ -33,7 +33,6 @@ def mk_paginator(request, items, num_items):
 
 @login_required
 def main(request):
-    """Main listing."""
     forums = Forum.objects.all()
     return render_to_response("forum/contents.html", dict(forums=forums, user=request.user))
 

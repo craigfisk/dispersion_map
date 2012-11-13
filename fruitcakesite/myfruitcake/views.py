@@ -27,10 +27,11 @@ class ProfileForm(ModelForm):
 #        exclude = ["posts", "user"]
 
 """
+@login_required
 def main(request):
-    #Main listing for myfruitcake.
-    fruitcake = Fruitcake.objects.all()
-    return render_to_response("myfruitcake/list.html", dict(fruitcake=fruitcake, user=request.user))
+    return HttpResponseRedirect("/myfruitcake/")
+#    fruitcake = Fruitcake.objects.all()
+#    return render_to_response("myfruitcake/myfruitcake_list.html", dict(fruitcake=fruitcake, user=request.user))
 """
 
 def activity(request, pk):
@@ -50,8 +51,12 @@ class FruitcakeListView(ListView):
         return context
 
     def get_queryset(self):
-        return Fruitcake.objects.filter(uploader=self.request.user)
-        # or: popup__startswith='Pick me'
+        if self.request.user.id:
+            return Fruitcake.objects.filter(uploader=self.request.user)
+            # or: popup__startswith='Pick me'
+        else:
+            return Fruitcake.objects.all()
+
 
 class MyFruitcakeListView(ListView):
     template_name = 'myfruitcake_list.html'
