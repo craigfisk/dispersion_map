@@ -2,6 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
 #from django.db.models.signals import post_save
+from django.core.files import File
+from os.path import join as pjoin
+from tempfile import *
+from PIL import Image as PImage
+from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR, WIDTH_FRUITCAKE
 
 class Fruitcake(models.Model):
     thumbnail = models.ImageField("Thumbnail Pic", upload_to='thumbnails', blank=True, null=True)
@@ -11,8 +16,7 @@ class Fruitcake(models.Model):
     #CF20121107: use quotes around Shipment and Upload in next 2 lines because classes not defined until below
     shipments = models.ManyToManyField('Shipment', related_name='shipments',verbose_name='shipments')
     uploads = models.ManyToManyField('Upload', related_name='uploads', verbose_name='uploads')
-    uploader = models.ForeignKey(User, default=1)
-    # 1 is fisk
+    uploader = models.ForeignKey(User)
 
     def __unicode__(self):
         return unicode(self.pic)
@@ -24,6 +28,16 @@ class Fruitcake(models.Model):
         shipments = self.shipments.shipment_set.count()
         return uploads, shipments
     """
+    # Resize to standard width during save()
+    def save(self, *args, **kwargs):
+        super(Fruitcake, self).save(*args, **kwargs)
+        # self.pic.name <-- self.name; otherwise error: ImageFieldFile has no attribute 'startswith'
+        imfn = pjoin(MEDIA_ROOT, self.pic.name)
+        im = PImage.open(imfn)
+        wpercent = (WIDTH_FRUITCAKE/float(im.size[0]))
+        hsize = int((float(im.size[1])*float(wpercent)))
+        im = im.resize((WIDTH_FRUITCAKE, hsize), PImage.ANTIALIAS)
+        im.save(imfn, "JPEG") 
 
 class Upload(models.Model):
     dt = models.DateTimeField(auto_now_add=True)
