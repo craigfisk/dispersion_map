@@ -23,7 +23,7 @@
 
         <div class="fruitcake_list">
         {% for item in fruitcake_list %}
-            <img src="{{ MEDIA_URL }}{{ item.pic }}" />
+            <img src="{{ MEDIA_URL }}{{ item.pic }}" title="{{ item.popup }}" />
         {% endfor %}
         {% else %}
             So sorry, you do not have a fruitcake list
