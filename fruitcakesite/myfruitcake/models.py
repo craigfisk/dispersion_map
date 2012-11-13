@@ -45,9 +45,11 @@ CHOICES = (
         (False, "Dislike")
         )
 
-class Sentiment(models.Model):
+class Likes(models.Model):
     dt = models.DateTimeField(auto_now_add=True)
-    like = models.NullBooleanField(choices = CHOICES, default=null)
+    like = models.NullBooleanField(choices = CHOICES, default=None)
+    fruitcake = models.ManyToManyField(Fruitcake)
+    user = models.ManyToManyField(User)
 
 class Upload(models.Model):
     dt = models.DateTimeField(auto_now_add=True)
