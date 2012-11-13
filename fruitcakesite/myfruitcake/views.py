@@ -46,10 +46,12 @@ class FruitcakeListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(FruitcakeListView, self).get_context_data(**kwargs)
+        context['user'] = self.request.user
         return context
 
     def get_queryset(self):
-        return Fruitcake.objects.all()
+        return Fruitcake.objects.filter(uploader=self.request.user)
+        # or: popup__startswith='Pick me'
 
 class MyFruitcakeListView(ListView):
     template_name = 'myfruitcake_list.html'
@@ -60,7 +62,7 @@ class MyFruitcakeListView(ListView):
         return context
 
     def get_queryset(self):
-        return Fruitcake.objects.all(user=self.request.user)
+        return Fruitcake.objects.filter(user=self.request.user)
 
 
 
