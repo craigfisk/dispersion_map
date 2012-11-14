@@ -9,6 +9,7 @@ from PIL import Image as PImage
 from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR, WIDTH_FRUITCAKE
 
 class Fruitcake(models.Model):
+    dt = models.DateTimeField(auto_now_add=True)
     thumbnail = models.ImageField("Thumbnail Pic", upload_to='thumbnails', blank=True, null=True)
     pic = models.ImageField("Regular Pic", upload_to='pics', blank=False, null=False)
     popup = models.CharField(max_length=256, blank=True, null=True)

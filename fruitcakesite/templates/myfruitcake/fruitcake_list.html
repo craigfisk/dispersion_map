@@ -19,14 +19,25 @@
 
         {% if fruitcake_list %}
         <br />
-        <P>Listing of your fruitcake:</P>
+        <P class="main">Listing of your fruitcake:</P>
 
-        <div class="fruitcake_list">
-        {% for item in fruitcake_list %}
-            <img src="{{ MEDIA_URL }}{{ item.pic }}" title="{{ item.popup }}" />
-        {% endfor %}
+        <ul class="gallery tape">
+            {% for item in fruitcake_list %}
+                <li>
+                <figure>
+                    <img src="{{ MEDIA_URL }}{{ item.pic }}" title="{{ item.popup }}" />
+                    <figcaption>uploaded: {{ item.dt }}<br />by: {{ item.uploader.username }}</figcaption>
+                </figure>
+                </li>
+            {% endfor %}
+        </ul>
+
+        {% comment %}
+ <br />by: {{ item.uploader.username }}
+        {% endcomment %}
+
         {% else %}
-            So sorry, you do not have a fruitcake list
+            Sorry, you do not have a fruitcake list.
         {% endif %}
         </div>
 
