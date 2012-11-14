@@ -70,18 +70,14 @@ from fruitcakesite.settings import DEFAULT_FROM_EMAIL
 from django.core.mail import EmailMultiAlternatives, EmailMessage
 from django import forms
 
-
-class FruitcakeEmailForm(forms.Form):
-    class Meta:
-        model = EmailMessage 
-        #EmailMultiAlternatives
+#EmailMultiAlternatives
     # For fields in class EmailMessage, see
     # https://docs.djangoproject.com/en/dev/topics/email/#django.core.mail.EmailMessage
-    subject = 'Fruitcake for you'
-    body = 'Fill in here'
-    from_email = DEFAULT_FROM_EMAIL 
-    to = 'wcraigfisk@gmail.com'
-    
+#    subject = 'Fruitcake for you'
+#    body = 'Fill in here'
+#    from_email = DEFAULT_FROM_EMAIL 
+#    to = 'wcraigfisk@gmail.com'
+      
 """
 class FruitcakeEmailForm(forms.Form):
     subject = forms.CharField(max_length=100)
@@ -90,15 +86,35 @@ class FruitcakeEmailForm(forms.Form):
     cc_user = forms.BooleanField(required=True)
 """
 
+class FruitcakeEmailForm(forms.Form):
+    class Meta:
+        model = EmailMessage 
+
 from django.shortcuts import render
 
 def email_fruitcake(request, pk):
 
     if request.method == "POST":
-        email = EmailMessage('Fruitcake for you!', 'Happy holidays', DEFAULT_FROM_EMAIL, [request.POST['to']]) 
-        email.send(fail_silently=False)
-        return HttpResponseRedirect('/myfruitcake/')
-        
+        form = UploadFruitcakeForm(request.POST)
+
+        subject = "Fruitcake for you: %s" % (pk)
+        # Will do something with the pk in here to construct a url
+        body = 'Happy holidays!'
+        from_email = DEFAULT_FROM_EMAIL
+        to = [request.POST['to'] ]
+        #cc = request.user.email
+
+        if form.is_valid():
+           
+            email = EmailMessage(subject, body, from_email, to)
+            email.send(fail_silently=False)
+            
+            return HttpResponseRedirect('/myfruitcake/')
+
+        else:
+            return HttpResponse("There was a problem. %s, %s, %s" % (subject, from_email, to))
+
+
     else:
         form = FruitcakeEmailForm()
 
