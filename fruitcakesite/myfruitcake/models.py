@@ -18,6 +18,7 @@ class Fruitcake(models.Model):
     shipments = models.ManyToManyField('Shipment', related_name='shipments',verbose_name='shipments')
     uploads = models.ManyToManyField('Upload', related_name='uploads', verbose_name='uploads')
     uploader = models.ForeignKey(User)
+    likes = models.ManyToManyField('Like', related_name='likes', verbose_name='likes', blank=True, null=True)
 
     def __unicode__(self):
         return unicode(self.pic)
@@ -46,7 +47,7 @@ CHOICES = (
         (False, "Dislike")
         )
 
-class Likes(models.Model):
+class Like(models.Model):
     dt = models.DateTimeField(auto_now_add=True)
     like = models.NullBooleanField(choices = CHOICES, default=None)
     fruitcake = models.ManyToManyField(Fruitcake)

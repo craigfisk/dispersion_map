@@ -1,0 +1,32 @@
+{% extends "forum/fbase.html" %}
+ 
+{% block title %}Email{% endblock %}
+
+{% block sidebar %} - email<style type="text/css"> </style> {% endblock %}
+
+{% block forum-content %}
+<P>Fruitcake email form:</P>
+
+
+    {% if not form %}
+    <P>Sorry, no form</P>
+    {% endif %}
+
+    <form action="/email/" method="POST"> {% csrf_token %}
+        <P>To: <input type="text" name="to" value='' ></P>
+        <P>From: <input type="text" name="from_email" value="{{ form.from_email }}" ></P>
+        <P>Subject: <input type="text" name="subject" value="{{ form.subject }}" ></P>
+
+        <input type="submit" value="Submit" />
+    </form>
+
+    {% if form.errors %}
+    <ol>
+        {% for error in form.errors %}
+        <li><strong>{{ error|escape }}</strong></li>
+        {% endfor %}
+    </ol>
+    {% endif %}
+
+{% endblock forum-content %}
+

@@ -19,7 +19,7 @@ from myfruitcake.models import *
 from forum.models import UserProfile
 from forum.views import mk_paginator
 
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView, FormView
 
 class ProfileForm(ModelForm):
     class Meta:
@@ -56,6 +56,74 @@ class FruitcakeListView(ListView):
             # or: popup__startswith='Pick me'
         else:
             return Fruitcake.objects.all()
+"""
+class EmailTemplateView(FormView):
+    template_name = 'email_fruitcake.html'
+    def get_context_data(self, **kwargs):
+        context = super(EmailTemplateView, self).get_context_data(**kwargs)
+        context['user'] = self.request.user
+        return context
+
+    def 
+"""
+from fruitcakesite.settings import DEFAULT_FROM_EMAIL
+from django.core.mail import EmailMultiAlternatives, EmailMessage
+from django import forms
+
+
+class FruitcakeEmailForm(forms.Form):
+    class Meta:
+        model = EmailMessage 
+        #EmailMultiAlternatives
+    # For fields in class EmailMessage, see
+    # https://docs.djangoproject.com/en/dev/topics/email/#django.core.mail.EmailMessage
+    subject = 'Fruitcake for you'
+    body = 'Fill in here'
+    from_email = DEFAULT_FROM_EMAIL 
+    to = 'wcraigfisk@gmail.com'
+    
+"""
+class FruitcakeEmailForm(forms.Form):
+    subject = forms.CharField(max_length=100)
+    message = forms.CharField()
+    sender = forms.EmailField()
+    cc_user = forms.BooleanField(required=True)
+"""
+
+from django.shortcuts import render
+
+def email_fruitcake(request, pk):
+
+    if request.method == "POST":
+        email = EmailMessage('Fruitcake for you!', 'Happy holidays', DEFAULT_FROM_EMAIL, [request.POST['to']]) 
+        email.send(fail_silently=False)
+        return HttpResponseRedirect('/myfruitcake/')
+        
+    else:
+        form = FruitcakeEmailForm()
+
+    return render_to_response('myfruitcake/email.html', add_csrf(request, form=form)) 
+
+
+"""
+def email_fruitcake(request, pk):
+    # pk ?
+    if request.method == "POST":
+        form = FruitcakeEmailForm(request.POST)
+
+        if form.is_valid():
+           form.send()
+            return HttpResponseRedirect('/myfruitcake/')
+
+    else:
+        form = FruitcakeEmailForm()
+
+#    return render(request, 'myfruitcake/email.html', add_csrf(request, form=form)) 
+    return render_to_response('myfruitcake/email.html', add_csrf(request, form=form)) 
+    #return render_to_response('myfruitcake/email.html', add_csrf(request, form=form))
+
+#    return HttpResponse("Got this far -- fruitcake id: %s, request.user: %s, request.user.email: %s, DEFAULT_FROM_EMAIL:  %s, fruitcake_url: %s" % (pk, request.user, request.user.email, DEFAULT_FROM_EMAIL, fruitcake_url))
+"""
 
 """
 class MyFruitcakeListView(ListView):
@@ -81,6 +149,10 @@ class UploadFruitcakeForm(ModelForm):
         model = Fruitcake
         exclude = ['uploader', 'shipments', 'uploads', 'source', 'thumbnail']
 
+class LikeForm(ModelForm):
+    class Meta:
+        model = Like
+        exclude = ['dt', 'fruitcake', 'user'] 
 
 @login_required
 def upload_file(request):

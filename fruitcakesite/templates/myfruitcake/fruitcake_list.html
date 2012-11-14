@@ -19,14 +19,18 @@
 
         {% if fruitcake_list %}
         <br />
-        <P class="main">Listing of your fruitcake:</P>
+        <P class="main">Listing of fruitcake:</P>
 
         <ul class="gallery tape">
             {% for item in fruitcake_list %}
                 <li>
                 <figure>
+                    <a href="email/{{ item.id }}">
                     <img src="{{ MEDIA_URL }}{{ item.pic }}" title="{{ item.popup }}" />
-                    <figcaption>uploaded: {{ item.dt }}<br />by: {{ item.uploader.username }}</figcaption>
+                    </a>
+                    <figcaption>
+                    uploaded: {{ item.dt }}<br />by: {{ item.uploader.username }}
+                    </figcaption>
                 </figure>
                 </li>
             {% endfor %}
