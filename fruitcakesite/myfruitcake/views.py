@@ -89,35 +89,28 @@ class FruitcakeEmailForm(forms.Form):
 class FruitcakeEmailForm(forms.Form):
     class Meta:
         model = EmailMessage 
+    fc = forms.CharField(widget=forms.HiddenInput)
 
 from django.shortcuts import render
 
-def email_fruitcake(request, pk):
-
+def email_fruitcake(request, fc=0):
+    if fc: 
+        fruitcake = Fruitcake.objects.get(id=fc)
     if request.method == "POST":
-        form = UploadFruitcakeForm(request.POST)
-
-        subject = "Fruitcake for you: %s" % (pk)
-        # Will do something with the pk in here to construct a url
-        body = 'Happy holidays!'
-        from_email = DEFAULT_FROM_EMAIL
-        to = [request.POST['to'] ]
-        #cc = request.user.email
-
+        form = FruitcakeEmailForm(request.POST)
+        form.subject = "Fruitcake for you: %s" % (request.POST['fc'])
+        form.body = 'Happy holidays!'
+        form.from_email = DEFAULT_FROM_EMAIL
+        form.to = request.POST['to'] 
+        form.cc = request.user.email
         if form.is_valid():
-           
-            email = EmailMessage(subject, body, from_email, to)
+            email = EmailMessage(form.subject, form.body, form.from_email, form.to)
             email.send(fail_silently=False)
-            
             return HttpResponseRedirect('/myfruitcake/')
-
         else:
-            return HttpResponse("There was a problem. %s, %s, %s" % (subject, from_email, to))
-
-
+            return HttpResponse("There was a problem. %s, %s, %s" % (form.subject, form.from_email, form.to))
     else:
         form = FruitcakeEmailForm()
-
     return render_to_response('myfruitcake/email.html', add_csrf(request, form=form)) 
 
 

@@ -13,11 +13,10 @@
     {% endif %}
 
     <form action="/myfruitcake/email/" method="POST"> {% csrf_token %}
-        <P>To: <input type="text" name="to" value='' ></P>
-        {% comment %}
-        <P>From: <input type="text" name="from_email" value="{{ form.from_email }}" ></P>
-        <P>Subject: <input type="text" name="subject" value="{{ form.subject }}" ></P>
-        {% endcomment %}
+        <P>To: <input type="text" name="to" value="" /></P>
+        
+        <input type="hidden" name="fc_val" value="{{ form.fc }}" />
+        
         <input type="submit" value="Submit" />
     </form>
 
