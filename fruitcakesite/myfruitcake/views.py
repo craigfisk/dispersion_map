@@ -87,26 +87,23 @@ class FruitcakeEmailForm(forms.Form):
 """
 
 class FruitcakeEmailForm(forms.Form):
-    class Meta:
-        model = EmailMessage 
-    fc = forms.CharField(widget=forms.HiddenInput)
+    to = forms.CharField()
+#    model = EmailMessage
+#    exclude = ["cc", "bcc", "body", "connection", "attachments", "headers"]
+        # subject, to (list or tuple), from_email
+        # https://docs.djangoproject.com/en/dev/topics/email/
 
 from django.shortcuts import render
 
-def email_fruitcake(request, fc=0):
-    if fc: 
-        fruitcake = Fruitcake.objects.get(id=fc)
+def email_fruitcake(request, pk):
+    fruitcake = Fruitcake.objects.get(id=pk)
     if request.method == "POST":
         form = FruitcakeEmailForm(request.POST)
-        form.subject = "Fruitcake for you: %s" % (request.POST['fc'])
-        form.body = 'Happy holidays!'
-        form.from_email = DEFAULT_FROM_EMAIL
-        form.to = request.POST['to'] 
-        form.cc = request.user.email
         if form.is_valid():
-            email = EmailMessage(form.subject, form.body, form.from_email, form.to)
-            email.send(fail_silently=False)
-            return HttpResponseRedirect('/myfruitcake/')
+            return HttpResponse("Results: %s" % (form.subject))
+#            email = EmailMessage(form.subject, form.body, form.from_email, form.to)
+#            email.send(fail_silently=False)
+#            return HttpResponseRedirect('/myfruitcake/')
         else:
             return HttpResponse("There was a problem. %s, %s, %s" % (form.subject, form.from_email, form.to))
     else:

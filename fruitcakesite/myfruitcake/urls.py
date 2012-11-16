@@ -13,9 +13,7 @@ urlpatterns = patterns('myfruitcake.views',
     url(r'^$', FruitcakeListView.as_view(model=Fruitcake), name='fruitcakelistview'),
     url(r'^upload/$', 'upload_file'),
     url(r'^success/$', 'success'),
-    url(r'^email/$', 'email_fruitcake'),
-    url(r'^email/(?P<fc>\d+)/$', 'email_fruitcake'),
-#    url(r'^
+    url(r'^email/(\d+)/$', 'email_fruitcake'),
 
 #    url(r'^email/(\d+)/$', EmailTemplateView.as_view(model=Fruitcake), name='emailtemplateview'), 
 #    url(r'^myuploads/$', login_required(MyFruitcakeListView.as_view(model=Fruitcake)))

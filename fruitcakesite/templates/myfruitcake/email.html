@@ -12,13 +12,16 @@
     <P>Sorry, no form</P>
     {% endif %}
 
+    {% for field in form %}
+        <P>{{ field.label }}: {{ field.value }}</P>
+    {% endfor %}
+
+    {% comment %}
     <form action="/myfruitcake/email/" method="POST"> {% csrf_token %}
-        <P>To: <input type="text" name="to" value="" /></P>
-        
-        <input type="hidden" name="fc_val" value="{{ form.fc }}" />
-        
+        <P>To: <input type="text" name="to" value="" id="id_to" /></P>
         <input type="submit" value="Submit" />
     </form>
+    {% endcomment %}
 
     {% if form.errors %}
     <ol>
