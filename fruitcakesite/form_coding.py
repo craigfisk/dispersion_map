@@ -52,7 +52,7 @@ easy views + ModelForm (1):
 easy views + ModelForms (2):
 using defaults in ModelForms rather than setting values in view.
 
-def my_model_edit(request, template_name='myapp/my_model_form.html'):
+def my_model_tiny_edit(request, template_name='myapp/my_model_form.html'):
     form = MyModelForm(request.POST or None, instance=mymodel)
     if form.is_valid():
         mymodel.save()
