@@ -33,9 +33,9 @@ recommended ("easy views" 1):
 generally tradition is to use ModelForm:
 
     class MyModelForm(forms.Form):
-    class Meta:
-        model = MyModel
-        fields = ['name']
+        class Meta:
+            model = MyModel
+            fields = ['name']
 
 easy views + ModelForm (1):
 

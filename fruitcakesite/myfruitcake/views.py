@@ -87,28 +87,27 @@ class FruitcakeEmailForm(forms.Form):
 """
 
 class FruitcakeEmailForm(forms.Form):
-    to = forms.CharField()
-#    model = EmailMessage
-#    exclude = ["cc", "bcc", "body", "connection", "attachments", "headers"]
-        # subject, to (list or tuple), from_email
-        # https://docs.djangoproject.com/en/dev/topics/email/
+    class Meta:
+        model = EmailMessage
+        exclude = ["cc", "bcc", "body", "connection", "attachments", "headers"]
+
+    def __init__(self, *args, **kwargs):
+        super(FruitcakeEmailForm, self).__init__(*args, **kwargs)
+#        self.fields['fruitcake_id'] = None 
+
+    # keep: subject, to (list or tuple), from_email
+    # https://docs.djangoproject.com/en/dev/topics/email/
 
 from django.shortcuts import render
 
-def email_fruitcake(request, pk):
-    fruitcake = Fruitcake.objects.get(id=pk)
-    if request.method == "POST":
-        form = FruitcakeEmailForm(request.POST)
-        if form.is_valid():
-            return HttpResponse("Results: %s" % (form.subject))
-#            email = EmailMessage(form.subject, form.body, form.from_email, form.to)
-#            email.send(fail_silently=False)
-#            return HttpResponseRedirect('/myfruitcake/')
-        else:
-            return HttpResponse("There was a problem. %s, %s, %s" % (form.subject, form.from_email, form.to))
-    else:
-        form = FruitcakeEmailForm()
-    return render_to_response('myfruitcake/email.html', add_csrf(request, form=form)) 
+def email_fruitcake(request, pk, template_name='myfruitcake/email.html'):
+    fruitcake = get_object_or_404(Fruitcake, id=pk)
+    form = FruitcakeEmailForm(request.POST or None)
+    if form.is_valid():
+        form.fruitcake_id = pk
+#        fruitcake.save()
+        return redirect('myfruitcake/success.html')
+    return render(request, template_name, {'form':form}) 
 
 
 """
