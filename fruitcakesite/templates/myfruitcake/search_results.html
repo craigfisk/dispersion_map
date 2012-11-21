@@ -1,0 +1,17 @@
+{% extends 'forum/fbase.html' %}
+
+{% block forum-content %}
+
+{% if fruitcakes %}
+<P>Found {{ fruitcakes|length }} fruitcake{{ fruitcakes|pluralize }} matching the search for: &quot;{{ query }}&quot;</P>
+    <ul>
+        {% for fruitcake in fruitcakes %}
+        <li>{{ fruitcake.id}} {{ fruitcake.popup }} {{ fruitcake.pic }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <P>No matches.</P>
+{% endif %}
+
+{% endblock forum-content %}
+

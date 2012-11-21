@@ -15,11 +15,13 @@ urlpatterns = patterns('myfruitcake.views',
     url(r'^success/$', 'success'),
     url(r'^email/(?P<pk>\d+)/$', 'email_fruitcake'),
 #    url(r'^email/$', 'email_fruitcake'),
-
-
 #    url(r'^email/(\d+)/$', EmailTemplateView.as_view(model=Fruitcake), name='emailtemplateview'), 
 #    url(r'^myuploads/$', login_required(MyFruitcakeListView.as_view(model=Fruitcake)))
-)
+    url(r'^path/.*$', 'path'),
+    url(r'^meta/.*$', 'meta'),
+    url(r'^search-form/$', 'search_form'),
+    url(r'^search/$', 'search'),
+) 
 
 """
 myfruitcake/10 = stats on fruitcake 10
