@@ -85,6 +85,7 @@ class FruitcakeEmailForm(forms.Form):
     sender = forms.EmailField()
     cc_user = forms.BooleanField(required=True)
 """
+class MyForm(forms.Form):
 
 class FruitcakeEmailForm(forms.Form):
     class Meta:
@@ -101,8 +102,9 @@ class FruitcakeEmailForm(forms.Form):
 from django.shortcuts import render
 
 def email_fruitcake(request, pk, template_name='myfruitcake/email.html'):
-    fruitcake = get_object_or_404(Fruitcake, id=pk)
-    form = FruitcakeEmailForm(request.POST or None)
+#    fruitcake = get_object_or_404(Fruitcake, id=pk)
+#    form = FruitcakeEmailForm(request.POST or None)
+    form = MyForm(request.POST or None)
     if form.is_valid():
         form.fruitcake_id = pk
 #        fruitcake.save()
