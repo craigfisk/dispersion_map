@@ -1,5 +1,9 @@
 {% extends 'forum/fbase.html' %}
 
+{% block title %}Myfruitcake{% endblock %}
+
+{% block sidebar %} - search results{% endblock %}
+
 {% block forum-content %}
 
 {% if fruitcakes %}
@@ -9,8 +13,10 @@
         <li>{{ fruitcake.id}} {{ fruitcake.popup }} {{ fruitcake.pic }}</li>
         {% endfor %}
     </ul>
+{% comment %}    
 {% else %}
     <P>No matches.</P>
+{% endcomment %}
 {% endif %}
 
 {% endblock forum-content %}

@@ -2,8 +2,8 @@ from string import join
 from PIL import Image as PImage
 from os.path import join as pjoin
 
-#CF20121107 todo: probably can cut some of these ...
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 #from django.utils.decorators import method_decorator
 
 from django.http import HttpResponseRedirect, HttpResponse
@@ -17,7 +17,7 @@ from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR, WIDTH_FR
 
 from myfruitcake.models import *
 from forum.models import UserProfile
-from forum.views import mk_paginator
+from forum.views import mk_paginator, UserProfile, profile
 
 from django.views.generic import ListView, TemplateView, FormView
 
@@ -194,6 +194,7 @@ def add_csrf(request, **kwargs):
 #-------------------------------
 from django.http import HttpResponse
 
+@staff_member_required
 def path(request):
     s = "Hello world<br />"
     s+= " request.path: %s<br />" % (request.path)
@@ -202,6 +203,7 @@ def path(request):
     s+= " request.is_secure(): %s<br />" % (request.is_secure() )
     return HttpResponse(s)
 
+@staff_member_required
 def meta(request):
     values = request.META.items()
     values.sort()
@@ -213,20 +215,28 @@ def meta(request):
 from django.shortcuts import render_to_response
 #from myfruitcake.models import Fruitcake
 
+@staff_member_required
 def search_form(request):
-    return render_to_response('myfruitcake/search_form.html')
+    return render_to_response('myfruitcake/search_form.html', {'user': request.user} )
 
+@staff_member_required
 def search(request):
-    if 'q' in request.GET and request.GET['q']:
-        message = 'You searched for: %r<br />' % request.GET['q']
+    profile = UserProfile.objects.get(user=request.user)
+    errors = []
+    if 'q' in request.GET:
         q = request.GET['q']
-        fruitcakes = Fruitcake.objects.filter(popup__icontains=q)
-        if fruitcakes:
-            return render_to_response('myfruitcake/search_results.html', {'fruitcakes': fruitcakes, 'query':q})
+        if not q:
+            errors.append('Please enter a search term.')
+        elif len(q) > 20:
+            errors.append('Please enter at most 20 characters.')
         else:
-            message += 'No results.'
-    else:
-        message = 'You submitted an empty form.'
-    return HttpResponse(message)
+            fruitcakes = Fruitcake.objects.filter(popup__icontains=q)
+            if len(fruitcakes):
+                return render_to_response('myfruitcake/search_results.html', {'fruitcakes': fruitcakes, 'query':q,
+                    'user':request.user})
+            else:
+                errors.append('No results for that search.')
+
+    return render_to_response('myfruitcake/search_form.html', {'errors': errors, 'user': request.user} )
 
 
