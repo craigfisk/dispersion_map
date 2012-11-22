@@ -7,6 +7,8 @@ if socket.gethostname == 'zazen':
 else:
     DEBUG = True
 
+DEBUG=True
+
 TEMPLATE_DEBUG = DEBUG
 
 WIDTH_AVATAR = 120
