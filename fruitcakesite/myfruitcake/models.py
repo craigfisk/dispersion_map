@@ -66,6 +66,8 @@ class Shipment(models.Model):
     fruitcake = models.ForeignKey(Fruitcake)
     sender = models.ForeignKey(User, verbose_name='senders', related_name='senders')
     receiver = models.ManyToManyField(User, verbose_name='addressees', related_name='receivers')
+    message = models.CharField(max_length=256, blank=False, null=False)
+    text = models.TextField(max_length=4096, blank=True, null=True)
 
     def __unicode__(self):
         return unicode(self.dt)
