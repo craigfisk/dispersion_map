@@ -196,8 +196,7 @@ from django.http import HttpResponse
 
 @staff_member_required
 def path(request):
-    s = "Hello world<br />"
-    s+= " request.path: %s<br />" % (request.path)
+    s= " request.path: %s<br />" % (request.path)
     s+= " request.get_full_path(): %s<br />" % (request.get_full_path() )
     s+= " request.get_host(): %s<br />" % (request.get_host() )
     s+= " request.is_secure(): %s<br />" % (request.is_secure() )

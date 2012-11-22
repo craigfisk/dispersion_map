@@ -139,7 +139,7 @@ h3 { margin-right: 30px; display: inline; }
 	background: url(http://webdesignerwall.com/wp-content/uploads/2012/09/tape.png) no-repeat;
 */
 
-.footer { align: center; text-align: center; margin-top: 30px; padding-top: 50px; }
+.footer { align: center; text-align: center; margin-top: 5px; padding-top: 5px; }
 
 .ttitle {
     font-style: bold; font-size: 1.0em; border-bottom: 1px solid #ccc; margin-bottom: 9px;
