@@ -15,16 +15,18 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR, WIDTH_FRUITCAKE
 
-from myfruitcake.models import *
+from myfruitcake.models import Fruitcake, Shipment, Upload, Like
 from forum.models import UserProfile
 from forum.views import mk_paginator, UserProfile, profile
 
 from django.views.generic import ListView, TemplateView, FormView
 
-from django import forms
+#from django import forms
 
-from django.db import models
-from django.forms import ModelForm
+#from django.db import models
+
+from fruitcakesite.settings import DEFAULT_FROM_EMAIL
+from django.core.mail import EmailMessage, EmailMultiAlternatives
 
 
 class ProfileForm(ModelForm):
@@ -62,20 +64,6 @@ class FruitcakeListView(ListView):
             # or: popup__startswith='Pick me'
         else:
             return Fruitcake.objects.all()
-"""
-class EmailTemplateView(FormView):
-    template_name = 'email_fruitcake.html'
-    def get_context_data(self, **kwargs):
-        context = super(EmailTemplateView, self).get_context_data(**kwargs)
-        context['user'] = self.request.user
-        return context
-
-    def 
-"""
-from fruitcakesite.settings import DEFAULT_FROM_EMAIL
-from django.core.mail import EmailMessage
-from django import forms
-
 
 #EmailMultiAlternatives
     # For fields in class EmailMessage, see
@@ -85,53 +73,53 @@ from django import forms
 #    from_email = DEFAULT_FROM_EMAIL 
 #    to = ['wcraigfisk@gmail.com']
       
-"""
-class FruitcakeEmailForm(forms.Form):
-    subject = forms.CharField(max_length=100)
-    message = forms.CharField()
-    sender = forms.EmailField()
-    cc_user = forms.BooleanField(required=True)
-"""
-
+# https://docs.djangoproject.com/en/1.4/topics/forms/modelforms/      
 class FruitcakeEmailForm(ModelForm):
     class Meta:
         model = Shipment
-        exclude = ["text"]
-        
-#        exclude = ["cc", "bcc", "body", "connection", "attachments", "headers"]
-
-    """
+        exclude = ['text']
+    
+    # set up hidden form fields while keeping required fields, using rych's approach:
+    # http://stackoverflow.com/questions/6862250/change-a-django-form-field-to-a-hidden-field
     def __init__(self, *args, **kwargs):
+        from django.forms.widgets import HiddenInput
+        hide_condition = kwargs.pop('hide_condition', None)
         super(FruitcakeEmailForm, self).__init__(*args, **kwargs)
-#        self.fields['fruitcake_id'] = None 
-    """
-    # keep: subject, to (list or tuple), from_email
-    # https://docs.djangoproject.com/en/dev/topics/email/
+        if hide_condition:
+            self.fields['sender'].widget = HiddenInput()
+            self.fields['fruitcake'].widget = HiddenInput()
+            self.fields['message'].widget = HiddenInput()
+        
+#from django.shortcuts import render
 
-from django.shortcuts import render
 
 from django.core.mail import send_mail
 
 #def email_fruitcake(request, pk, template_name='myfruitcake/email.html'):
 def email_fruitcake(request, pk):
     if request.method == 'POST':
-        form = FruitcakeEmailForm(request.POST)
+        form = FruitcakeEmailForm(request.POST, hide_condition=True)
         if form.is_valid():
             cd = form.cleaned_data
-            form.save(commit=True)
+            #form.save(commit=False)  # save Shipment instance but wait for save_m2m(), or just:
+            shipment = form.save()
             #email construction goes here ...
-#            list = cd['receiver']
-#            for p in list:
-#                form.receiver = receiver
-#                form.save(commit=True)
-#            cd = form.cleaned_data
-#            form.send(fail_silently=False)
-            return HttpResponseRedirect('myfruitcake/success.html')
+            # https://docs.djangoproject.com/en/dev/topics/email/
+            subject, from_email = 'Fruitcake for you!', request.user.email
+            to = cd['receiver']
+            text_content = "You may follow your shipment %s of fruitcake %s." % (shipment.id, request.POST['fruitcake'])
+            html_content = "<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, request.POST['fruitcake'])
+            msg = EmailMultiAlternatives(subject, text_content, from_email, to)
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+
+            return HttpResponseRedirect('/myfruitcake/success/')
     else:
 #        form = FruitcakeEmailForm()
-        form = FruitcakeEmailForm(initial={'fruitcake': int(pk), 'sender': request.user.email, 'message': ('Follow your fruitcake shipmment at %s' % pk)  } )
+        form = FruitcakeEmailForm(initial={'fruitcake': int(pk), 'sender': request.user, 'message': 'Fruitcake for you!' }, hide_condition=True)
 
     return render_to_response('myfruitcake/email.html', add_csrf(request, form=form))
+
 
     """
 #    fruitcake = get_object_or_404(Fruitcake, id=pk)
@@ -145,26 +133,6 @@ def email_fruitcake(request, pk):
     """
 
 """
-def email_fruitcake(request, pk):
-    # pk ?
-    if request.method == "POST":
-        form = FruitcakeEmailForm(request.POST)
-
-        if form.is_valid():
-           form.send()
-            return HttpResponseRedirect('/myfruitcake/')
-
-    else:
-        form = FruitcakeEmailForm()
-
-#    return render(request, 'myfruitcake/email.html', add_csrf(request, form=form)) 
-    return render_to_response('myfruitcake/email.html', add_csrf(request, form=form)) 
-    #return render_to_response('myfruitcake/email.html', add_csrf(request, form=form))
-
-#    return HttpResponse("Got this far -- fruitcake id: %s, request.user: %s, request.user.email: %s, DEFAULT_FROM_EMAIL:  %s, fruitcake_url: %s" % (pk, request.user, request.user.email, DEFAULT_FROM_EMAIL, fruitcake_url))
-"""
-
-"""
 class MyFruitcakeListView(ListView):
     template_name = 'myfruitcake_list.html'
     context_object_name = 'myfruitcake_list'
@@ -176,8 +144,6 @@ class MyFruitcakeListView(ListView):
     def get_queryset(self):
         return Fruitcake.objects.filter(user=self.request.user)
 """
-
-
 
 class UploadFruitcakeForm(ModelForm):
     class Meta:
@@ -218,8 +184,6 @@ def add_csrf(request, **kwargs):
     d.update(csrf(request))
     return d
 
-#-------------------------------
-from django.http import HttpResponse
 
 @staff_member_required
 def path(request):
@@ -237,9 +201,6 @@ def meta(request):
     for k,v in values:
         html.append('<tr><td>%s</td></tr><tr><td>%s</td></tr>' % (k, v))
     return HttpResponse('<table>%s</table>' % '\n'.join(html))
-
-from django.shortcuts import render_to_response
-#from myfruitcake.models import Fruitcake
 
 @staff_member_required
 def search_form(request):

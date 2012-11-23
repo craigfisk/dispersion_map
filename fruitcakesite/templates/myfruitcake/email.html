@@ -15,23 +15,12 @@
     </ol>
     {% endif %}
 
-    {% comment %}
-    {% for field in form %}
-        <P>{{ field.label }}: {{ field.value }}</P>
-    {% endfor %}
-    {% endcomment %}
-
     <form action="" method="POST">{% csrf_token %}
         {% comment %}
         <P>To: <input type="text" name="to" value="" id="id_to" /></P>
         <input type="submit" value="Submit" />
         {% endcomment %}
         <table>
-            {% if form %}
-            <P>There is form data and it has a length of {{ form|length }}</P>
-            {% else %}
-            <P>No form data</P>
-            {% endif %}
             {{ form.as_table }}
         </table>
         <input type="submit" value="Submit">

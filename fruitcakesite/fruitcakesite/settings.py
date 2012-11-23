@@ -7,7 +7,7 @@ if socket.gethostname == 'zazen':
 else:
     DEBUG = True
 
-DEBUG=True
+#DEBUG=True
 
 TEMPLATE_DEBUG = DEBUG
 
