@@ -21,6 +21,12 @@ from forum.views import mk_paginator, UserProfile, profile
 
 from django.views.generic import ListView, TemplateView, FormView
 
+from django import forms
+
+from django.db import models
+from django.forms import ModelForm
+
+
 class ProfileForm(ModelForm):
     class Meta:
         model = UserProfile
@@ -67,8 +73,9 @@ class EmailTemplateView(FormView):
     def 
 """
 from fruitcakesite.settings import DEFAULT_FROM_EMAIL
-from django.core.mail import EmailMultiAlternatives, EmailMessage
+from django.core.mail import EmailMessage
 from django import forms
+
 
 #EmailMultiAlternatives
     # For fields in class EmailMessage, see
@@ -86,10 +93,12 @@ class FruitcakeEmailForm(forms.Form):
     cc_user = forms.BooleanField(required=True)
 """
 
-class FruitcakeEmailForm(forms.Form):
+class FruitcakeEmailForm(ModelForm):
     class Meta:
-        model = EmailMessage
-        exclude = ["cc", "bcc", "body", "connection", "attachments", "headers"]
+        model = Shipment
+        exclude = ["text"]
+        
+#        exclude = ["cc", "bcc", "body", "connection", "attachments", "headers"]
 
     """
     def __init__(self, *args, **kwargs):
@@ -108,12 +117,19 @@ def email_fruitcake(request, pk):
     if request.method == 'POST':
         form = FruitcakeEmailForm(request.POST)
         if form.is_valid():
+            cd = form.cleaned_data
+            form.save(commit=True)
+            #email construction goes here ...
+#            list = cd['receiver']
+#            for p in list:
+#                form.receiver = receiver
+#                form.save(commit=True)
 #            cd = form.cleaned_data
-            form.send(fail_silently=False)
+#            form.send(fail_silently=False)
             return HttpResponseRedirect('myfruitcake/success.html')
     else:
 #        form = FruitcakeEmailForm()
-        form = FruitcakeEmailForm(initial={'subject': 'Fruitcake for you', 'message': pk, 'from_email': 'support@justfruitcake.com', 'to': ['wcraigfisk@gmail.com'] } )
+        form = FruitcakeEmailForm(initial={'fruitcake': int(pk), 'sender': request.user.email, 'message': ('Follow your fruitcake shipmment at %s' % pk)  } )
 
     return render_to_response('myfruitcake/email.html', add_csrf(request, form=form))
 
@@ -162,10 +178,6 @@ class MyFruitcakeListView(ListView):
 """
 
 
-from django import forms
-
-from django.db import models
-from django.forms import ModelForm
 
 class UploadFruitcakeForm(ModelForm):
     class Meta:
