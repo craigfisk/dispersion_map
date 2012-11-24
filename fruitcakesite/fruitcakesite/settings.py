@@ -50,7 +50,7 @@ DATABASES = {
 ##DEFAULT_FROM_EMAIL = 'support@justfruitcake.com' #dfault: webmaster@localhost
 
 EMAIL_HOST = 'mail.picocosmos.net'
-EMAIL_PORT = 587
+EMAIL_PORT = 25
 EMAIL_USER_TLS = True
 EMAIL_HOST_USER = 'craigfisk@picocosmos.net'
 EMAIL_HOST_PASSWORD = 'Sp8rky=4242'
