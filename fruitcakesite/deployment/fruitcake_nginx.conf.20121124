@@ -1,5 +1,5 @@
 # nginx.conf
-## is for calomel tweaks CF20121124 per https://calomel.org/nginx.html
+
 upstream django {
     # connect to this socket
     server unix:///tmp/uwsgi.sock;    # for a file socket
@@ -28,11 +28,6 @@ server {
 
     charset utf-8;
 
-    ##
-    add_header Cache-Control public;
-    expires max;
-    limit_req zone=gulag burst=200 nodelay;
-
     allow 70.102.23.162;    # CMNW office
     allow 67.168.194.54;    # Craig home
     allow 75.93.45.221;     # picocosmos office
@@ -45,26 +40,13 @@ server {
  
     location = /robots.txt { log_not_found off; access_log off; }
     location = /favicon.ico {access_log off; log_not_found off; }
-   
-    ## to stop image and document hijacking
-#   location ~* (\.jpg|\.png|\.css)$ {
-#       if ($http_referer !~ ^(http://justfruitcake.com) ) {
-#           return 405;
-#       }
-#   }
-
-    ## System maintenance (service unavailable)
-#    if (-f $document_root/system_maintenance.html ) {
-#        error_page 503 /system_maintenance.html;
-#        return 503;
-#    }
- 
+    
     # django media
     location /media {
         alias /home/fisk/virt/justfruitcake/fruitcakesite/static/media;
     }
     location /static {
-        alias /home/fisk/virt/justfruitcake/fruitcakesite/static;
+         alias /home/fisk/virt/justfruitcake/fruitcakesite/static;
     }
   
     # send everything else to the Django server
