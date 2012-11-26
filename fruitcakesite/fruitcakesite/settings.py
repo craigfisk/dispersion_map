@@ -39,7 +39,8 @@ DATABASES = {
 #   connection security: SSL/TLS, authentication: normal password
 #   smtp server name: zazen.picocosmos.net port: 587
 #   connection security: STARTTLS, authentication: Normal password, username: craigfisk@justfruitcake.com
-#
+# The character set of email sent with django.core.mail is set to the value of your DEFAULT_CHARSET setting (utf-8)
+
 #See https://docs.djangoproject.com/en/1.4/topics/email/
 #FILE_CHARSET = 'utf-8' #default is utf-8
 ##EMAIL_HOST = 'mail.justfruitcake.com' #default: localhst
@@ -51,10 +52,11 @@ DATABASES = {
 
 EMAIL_HOST = 'mail.picocosmos.net'
 EMAIL_PORT = 25
-EMAIL_USER_TLS = True
+EMAIL_USER_TLS = False #True
+# next 2 are used to authenticate to the smtp server.
 EMAIL_HOST_USER = 'craigfisk@picocosmos.net'
 EMAIL_HOST_PASSWORD = 'Sp8rky=4242'
-DEFAULT_FROM_EMAIL = 'craigfisk@picocosmos.net'
+DEFAULT_FROM_EMAIL = 'craigfisk@picocosmos.net' #support@justfruitcake.com'
 
 #default:
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
@@ -62,6 +64,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
 ##SERVER_EMAIL = 'support@justfruitcake.com' #default: root@localhost
 SERVER_EMAIL = 'craigfisk@picocosmos.net'
+
 
 FILE_UPLOAD_MAX_MEMORY_SIZE = 16777216 #16MB, 2^24; default 2621440 (2.5 MB)
 FILE_UPLOAD_TEMP_DIR = None #default: Note, so Django uses Linux default /tmp
