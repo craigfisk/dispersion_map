@@ -105,14 +105,19 @@ def email_fruitcake(request, pk):
             shipment = form.save()
             #email construction goes here ...
             # https://docs.djangoproject.com/en/dev/topics/email/
-            subject, from_email = 'Fruitcake for you!', request.user.email
+            subject = 'Fruitcake for you!'
+
+            from_email = request.user.email
+            #state = request.user.__getstate__()
+            #from_email = state['email']
+            
             to = cd['receiver']
             text_content = "You may follow your shipment %s of fruitcake %s." % (shipment.id, request.POST['fruitcake'])
             html_content = "<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, request.POST['fruitcake'])
             msg = EmailMultiAlternatives(subject, text_content, from_email, to)
             msg.attach_alternative(html_content, "text/html")
             msg.send()
-
+            
             return HttpResponseRedirect('/myfruitcake/success/')
     else:
 #        form = FruitcakeEmailForm()
