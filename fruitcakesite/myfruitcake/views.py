@@ -94,6 +94,8 @@ class FruitcakeEmailForm(ModelForm):
 
 
 from django.core.mail import send_mail
+from django.core.mail import get_connection
+from django.template.loader import render_to_string
 
 #def email_fruitcake(request, pk, template_name='myfruitcake/email.html'):
 def email_fruitcake(request, pk):
@@ -101,22 +103,28 @@ def email_fruitcake(request, pk):
         form = FruitcakeEmailForm(request.POST, hide_condition=True)
         if form.is_valid():
             cd = form.cleaned_data
+        
             #form.save(commit=False)  # save Shipment instance but wait for save_m2m(), or just:
             shipment = form.save()
             #email construction goes here ...
             # https://docs.djangoproject.com/en/dev/topics/email/
             subject = 'Fruitcake for you!'
-
             from_email = request.user.email
+            # CF20121126 solution: http://stackoverflow.com/questions/7583801/send-mass-emails-with-emailmultialternatives
+            connection = get_connection()  #uses smtp server specified in settings.py
+            
             #state = request.user.__getstate__()
             #from_email = state['email']
-            
-            to = cd['receiver']
+            #to = cd['receiver']   #need to get this to be not a QuerySet type
+            to = ('shoujigui@gmail.com',)
             text_content = "You may follow your shipment %s of fruitcake %s." % (shipment.id, request.POST['fruitcake'])
-            html_content = "<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, request.POST['fruitcake'])
-            msg = EmailMultiAlternatives(subject, text_content, from_email, to)
+            #html_content = render_to_string("<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, request.POST['fruitcake']) ) 
+            html_content = "<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, request.POST['fruitcake'])  
+            msg = EmailMultiAlternatives(subject, text_content, from_email, to, connection=connection)
             msg.attach_alternative(html_content, "text/html")
             msg.send()
+            #msg = EmailMessage(subject, text_content, from_email, [to], headers={'Reply-To': 'support@justfruitcake.com'})
+            #msg.send(fail_silently=False)
             
             return HttpResponseRedirect('/myfruitcake/success/')
     else:
