@@ -65,7 +65,7 @@ class Shipment(models.Model):
     dt = models.DateTimeField(auto_now_add=True) 
     fruitcake = models.ForeignKey(Fruitcake)
     sender = models.ForeignKey(User, verbose_name='senders', related_name='senders')
-    receiver = models.ManyToManyField(User, verbose_name='addressees', related_name='receivers')
+    receiver = models.ManyToManyField(User, verbose_name='recipients', related_name='recipients')
     message = models.CharField(max_length=256, blank=False, null=False)
     text = models.TextField(blank=True, null=True)
 

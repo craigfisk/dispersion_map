@@ -21,7 +21,7 @@ from forum.views import mk_paginator, UserProfile, profile
 
 from django.views.generic import ListView, TemplateView, FormView
 
-#from django import forms
+from django import forms
 
 #from django.db import models
 
@@ -65,19 +65,26 @@ class FruitcakeListView(ListView):
         else:
             return Fruitcake.objects.all()
 
-#EmailMultiAlternatives
-    # For fields in class EmailMessage, see
-    # https://docs.djangoproject.com/en/dev/topics/email/#django.core.mail.EmailMessage
-#    subject = 'Fruitcake for you'
-#    body = 'Fill in here'
-#    from_email = DEFAULT_FROM_EMAIL 
-#    to = ['wcraigfisk@gmail.com']
-      
-# https://docs.djangoproject.com/en/1.4/topics/forms/modelforms/      
+     
+# https://docs.djangoproject.com/en/1.4/topics/forms/modelforms/   
+# --> should read the modelforms doc from time to time.  For example: 
+# "A subclass of ModelForm can accept an existing model instance as the keyword argument instance; if this is supplied,
+# save() will update that instance. If it's not supplied, save() will create a new instance of the specified model"
+# --> Especially, read the section "This save() method accepts an optional commit keyword argument, which  ..."
+"""
+from django.db import models
+
+class MyEmailField(models.EmailField):
+    def __init__(self, *args, **kwargs):
+        super(MyEmailField, self).__init__(*args, **kwargs)
+        self.attrs('is_hidden': False)
+"""
+
 class FruitcakeEmailForm(ModelForm):
     class Meta:
         model = Shipment
         exclude = ['text']
+#        widgets = {'receiver': forms.TextInput()}
     
     # set up hidden form fields while keeping required fields, using rych's approach:
     # http://stackoverflow.com/questions/6862250/change-a-django-form-field-to-a-hidden-field
@@ -85,17 +92,21 @@ class FruitcakeEmailForm(ModelForm):
         from django.forms.widgets import HiddenInput
         hide_condition = kwargs.pop('hide_condition', None)
         super(FruitcakeEmailForm, self).__init__(*args, **kwargs)
-        if hide_condition:
+        if hide_condition: # and self.field != 'receiver':
             self.fields['sender'].widget = HiddenInput()
             self.fields['fruitcake'].widget = HiddenInput()
             self.fields['message'].widget = HiddenInput()
-        
+#            self.fields['receiver'].widget = HiddenInput()
+#            self.fields['receiver'].is_hidden = False
+
+#    to = forms.EmailField(help_text='A valid email address, please.')
+
 #from django.shortcuts import render
 
 
-from django.core.mail import send_mail
+#from django.core.mail import send_mail
 from django.core.mail import get_connection
-from django.template.loader import render_to_string
+#from django.template.loader import render_to_string
 
 #def email_fruitcake(request, pk, template_name='myfruitcake/email.html'):
 def email_fruitcake(request, pk):

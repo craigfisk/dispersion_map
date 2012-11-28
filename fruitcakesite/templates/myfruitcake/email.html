@@ -8,6 +8,7 @@
 <P>Fruitcake email form:</P>
 
     {% if form.errors %}
+    Sorry, please fix the error:
     <ol>
         {% for error in form.errors %}
         <li><strong>{{ error|escape }}</strong></li>
