@@ -114,7 +114,8 @@ def email_fruitcake(request, pk):
         form = FruitcakeEmailForm(request.POST, hide_condition=True)
         if form.is_valid():
             cd = form.cleaned_data
-        
+            cd['receiver'] = ('shoujigui@gmail.com',)
+            cd['sender'] = 'support@justfruitcake.com'
             #form.save(commit=False)  # save Shipment instance but wait for save_m2m(), or just:
             shipment = form.save()
             #email construction goes here ...
@@ -140,7 +141,7 @@ def email_fruitcake(request, pk):
             return HttpResponseRedirect('/myfruitcake/success/')
     else:
 #        form = FruitcakeEmailForm()
-        form = FruitcakeEmailForm(initial={'fruitcake': int(pk), 'sender': request.user, 'message': 'Fruitcake for you!' }, hide_condition=True)
+        form = FruitcakeEmailForm(initial={'fruitcake': int(pk), 'receiver': ('shoujigui@gmail.com',), 'sender': request.user.email, 'message': 'Fruitcake for you!' }, hide_condition=True)
 
     return render_to_response('myfruitcake/email.html', add_csrf(request, form=form))
 
