@@ -62,7 +62,7 @@ class Upload(models.Model):
         return unicode(self.dt)
 
 class EmailContact(models.Model):
-    email = models.EmailField(max_length=255)
+    email = models.EmailField(max_length=256, blank=False, null=False)
 
     def __unicode__(self):
         return unicode(self.email)
@@ -70,8 +70,8 @@ class EmailContact(models.Model):
 class Shipment(models.Model):
     dt = models.DateTimeField(auto_now_add=True) 
     fruitcake = models.ForeignKey(Fruitcake)
-    sender = models.ForeignKey(EmailContact, verbose_name='senders', related_name='senders')
-    receiver = models.ManyToManyField(EmailContact, verbose_name='recipients', related_name='recipients')
+    sender = models.ForeignKey(User, verbose_name='senders', related_name='senders')
+    emailcontacts = models.ManyToManyField('EmailContact', related_name='emailcontacts',verbose_name='emailcontacts')
     message = models.CharField(max_length=256, blank=False, null=False)
     text = models.TextField(blank=True, null=True)
 
@@ -80,12 +80,30 @@ class Shipment(models.Model):
 
 
 ### Admin
+
 class FruitcakeAdmin(admin.ModelAdmin):
-    list_display = ['thumbnail']
+    list_display = ['popup']
+    search_fields = ['popup']
+
+admin.site.register(Fruitcake, FruitcakeAdmin)
 
 class UploadAdmin(admin.ModelAdmin):
     pass
 
+"""
+class EmailContactInline(admin.TabularInline):
+    model = EmailContact
+    extra = 3
+
+admin.site.register(EmailContact)
+"""
+
 class ShipmentAdmin(admin.ModelAdmin):
-    list_display = ['dt', 'fruitcake', 'sender', 'receiver']
+    list_display = ['dt', 'fruitcake', 'sender', 'message']
+    search_fields = ['message']
+#    inlines = [EmailContactInline]
+    list_filter = ['dt']
+    date_hierarchy = 'dt'
+
+admin.site.register(Shipment, ShipmentAdmin)
 

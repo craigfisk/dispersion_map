@@ -95,7 +95,7 @@ import re
 
 class MultiEmailField(forms.Field):
     def to_python(self, value):
-        # First, remove any whitespace from the string
+        # remove whitespace from the string
         pattern = re.compile('\s')
         value = pattern.sub('', value)
         # normalize to list of strings; return empty list if no input
@@ -305,5 +305,6 @@ def search(request):
                 errors.append('No results for that search.')
 
     return render_to_response('myfruitcake/search_form.html', {'errors': errors, 'user': request.user} )
+
 
 
