@@ -80,14 +80,42 @@ class MyEmailField(models.EmailField):
         self.attrs('is_hidden': False)
 """
 
-class FruitcakeEmailForm(ModelForm):
+class ShipmentForm(ModelForm):
     class Meta:
         model = Shipment
-        exclude = ['text']
-#        widgets = {'receiver': forms.TextInput()}
+        exclude = ('text',)
+
+    def __init__(self, *args, **kwargs):
+        super(ShipmentForm, self).__init__(*args, **kwargs)
+        self.fields['sender'].widget = forms.TextInput()
+        self.fields['receiver'].widget = forms.TextInput()
+        
+from django.core.validators import validate_email
+import re
+
+class MultiEmailField(forms.Field):
+    def to_python(self, value):
+        # First, remove any whitespace from the string
+        pattern = re.compile('\s')
+        value = pattern.sub('', value)
+        # normalize to list of strings; return empty list if no input
+        if not value:
+            return []
+        return value.split(',')
+    
+    def validate(self, value):
+        super(MultiEmailField, self).validate(value)
+        
+        for email in value:
+            validate_email(email)
+                     
+        
+class EmailContactForm(forms.Form):
+    email = MultiEmailField()
     
     # set up hidden form fields while keeping required fields, using rych's approach:
     # http://stackoverflow.com/questions/6862250/change-a-django-form-field-to-a-hidden-field
+    """
     def __init__(self, *args, **kwargs):
         from django.forms.widgets import HiddenInput
         hide_condition = kwargs.pop('hide_condition', None)
@@ -98,27 +126,43 @@ class FruitcakeEmailForm(ModelForm):
             self.fields['message'].widget = HiddenInput()
 #            self.fields['receiver'].widget = HiddenInput()
 #            self.fields['receiver'].is_hidden = False
-
+    """
 #    to = forms.EmailField(help_text='A valid email address, please.')
 
 #from django.shortcuts import render
-
-
 #from django.core.mail import send_mail
 from django.core.mail import get_connection
+from django.forms.models import inlineformset_factory
+from myfruitcake.models import EmailContact
+from django.template import RequestContext
+
 #from django.template.loader import render_to_string
 
-#def email_fruitcake(request, pk, template_name='myfruitcake/email.html'):
 def email_fruitcake(request, pk):
+    #fruitcake = Fruitcake.objects.get(fruitcake=pk)
+    #EmailContactFormset = inlineformset_factory(Shipment, EmailContact)
+    #formset = EmailContactFormset(instance=shipment)
+    #dict = {"form": form, "formset": formset, "instance": shipment}
+    #dict = {"form": form}
     if request.method == 'POST':
-        form = FruitcakeEmailForm(request.POST, hide_condition=True)
+        form = EmailContactForm(request.POST)
+        #formset = EmailContactFormset(request.POST, instance=shipment)
         if form.is_valid():
             cd = form.cleaned_data
-            cd['receiver'] = ('shoujigui@gmail.com',)
-            cd['sender'] = 'support@justfruitcake.com'
+            message = 'Fruitcake for you!'
+            for email in cd['email']:
+                e = EmailContact()
+                e.email = email
+                e.save()
+                s = Shipment(fruitcake_id=int(pk), sender=request.user, recipient=e, message=message)
+                s.save()
+                
+                        #shipment_mod = form.save()
+            #formset.save()
+            #id = shipment_mod.id
             #form.save(commit=False)  # save Shipment instance but wait for save_m2m(), or just:
-            shipment = form.save()
-            #email construction goes here ...
+            #shipment = form.save()
+            """
             # https://docs.djangoproject.com/en/dev/topics/email/
             subject = 'Fruitcake for you!'
             from_email = request.user.email
@@ -137,13 +181,24 @@ def email_fruitcake(request, pk):
             msg.send()
             #msg = EmailMessage(subject, text_content, from_email, [to], headers={'Reply-To': 'support@justfruitcake.com'})
             #msg.send(fail_silently=False)
-            
-            return HttpResponseRedirect('/myfruitcake/success/')
+            """
+            #return HttpResponseRedirect('/myfruitcake/success/')
+            #return HttpResponseRedirect("/myfruitcake/%(id)s/?err=success" % {"id":id})
+            return HttpResponse("check email list: %s" % cd['email'])
     else:
+        #return HttpResponseRedirect("/myfruitcake/%(id)s/?err=warning" % {"id":id})
+        form = EmailContactForm()
 #        form = FruitcakeEmailForm()
-        form = FruitcakeEmailForm(initial={'fruitcake': int(pk), 'receiver': ('shoujigui@gmail.com',), 'sender': request.user.email, 'message': 'Fruitcake for you!' }, hide_condition=True)
-
+#        form = FruitcakeEmailForm(initial={'fruitcake': int(pk), 'receiver': ['shoujigui@gmail.com'], 'sender': request.user, 'message': 'Fruitcake for you!' }, hide_condition=True)
+        #form = FruitcakeEmailForm(initial={'fruitcake': int(pk), 'sender': request.user, 'message': 'Fruitcake for you!' })
+        
     return render_to_response('myfruitcake/email.html', add_csrf(request, form=form))
+ 
+    #return render_to_response(
+ #                             "myfruitcake/email.html", 
+ #                             dict, 
+ #                             context_instance=RequestContext(request)
+ #                             )
 
 
     """
