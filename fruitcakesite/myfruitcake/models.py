@@ -67,11 +67,18 @@ class EmailContact(models.Model):
     def __unicode__(self):
         return unicode(self.email)
 
+"""
+class FauxShipment(models.Model):
+    dt = models.DateTimeField(auto_now_add=True)
+    message = models.CharField(max_length=256, blank=False, null=False)
+    emailcontacts = models.ManyToManyField('EmailContact', related_name='fauxemailcontacts',verbose_name='fauxemailcontacts', null=True)
+"""
+
 class Shipment(models.Model):
     dt = models.DateTimeField(auto_now_add=True) 
     fruitcake = models.ForeignKey(Fruitcake)
     sender = models.ForeignKey(User, verbose_name='senders', related_name='senders')
-    emailcontacts = models.ManyToManyField('EmailContact', related_name='emailcontacts',verbose_name='emailcontacts')
+    emailcontacts = models.ManyToManyField('EmailContact', related_name='emailcontacts',verbose_name='emailcontacts', null=True)
     message = models.CharField(max_length=256, blank=False, null=False)
     text = models.TextField(blank=True, null=True)
 

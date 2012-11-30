@@ -27,7 +27,7 @@ from django import forms
 
 from fruitcakesite.settings import DEFAULT_FROM_EMAIL
 from django.core.mail import EmailMessage, EmailMultiAlternatives
-
+from datetime import datetime
 
 class ProfileForm(ModelForm):
     class Meta:
@@ -111,6 +111,7 @@ class MultiEmailField(forms.Field):
                      
         
 class EmailContactForm(forms.Form):
+    # see class MultiEmailField above
     email = MultiEmailField()
     
     # set up hidden form fields while keeping required fields, using rych's approach:
@@ -138,67 +139,62 @@ from django.template import RequestContext
 
 #from django.template.loader import render_to_string
 
+testlist = ['shoujigui@gmail.com','friskyfrog@comcast.net','magee@cmnw.org']
+
+
 def email_fruitcake(request, pk):
-    #fruitcake = Fruitcake.objects.get(fruitcake=pk)
-    #EmailContactFormset = inlineformset_factory(Shipment, EmailContact)
-    #formset = EmailContactFormset(instance=shipment)
-    #dict = {"form": form, "formset": formset, "instance": shipment}
-    #dict = {"form": form}
+    """Create instance of Shipment and associated Addressees and send it as email. 
+    1) obtain the fruitcake id from passed in value of pk, the sender from request.user, fill in the message
+    (later we'll get it, too, from the form, adding to initial={'message': 'Fruitcake for you! etc.), and a list of 
+    email addressees from the form.  2) create an instance of Shipment with m2m create of email addresses using the
+    list, and then save all that,(see docs.djangoproject.com "Related Objects Reference") 3) email using
+    EmailMultiAlternatives.
+
+    """
     if request.method == 'POST':
         form = EmailContactForm(request.POST)
         #formset = EmailContactFormset(request.POST, instance=shipment)
         if form.is_valid():
-            cd = form.cleaned_data
-            message = 'Fruitcake for you!'
+            cd = form.cleaned_data # cd['email'] is list of email addresses to send to
+            subject = 'Fruitcake for you'
+            fruitcake = Fruitcake.objects.get(id=pk)
+            shipment = Shipment(dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=subject)
+            shipment_id = shipment.save()
             for email in cd['email']:
-                e = EmailContact()
-                e.email = email
-                e.save()
-                s = Shipment(fruitcake_id=int(pk), sender=request.user, recipient=e, message=message)
-                s.save()
-                
-                        #shipment_mod = form.save()
-            #formset.save()
-            #id = shipment_mod.id
+                emailcontact = shipment.emailcontacts.create(email=email)
+            #Note: add an "emailed successfully" column to shipment (T/F) to set at the try below?
+
             #form.save(commit=False)  # save Shipment instance but wait for save_m2m(), or just:
             #shipment = form.save()
-            """
+
+            # the emailing part
             # https://docs.djangoproject.com/en/dev/topics/email/
-            subject = 'Fruitcake for you!'
-            from_email = request.user.email
             # CF20121126 solution: http://stackoverflow.com/questions/7583801/send-mass-emails-with-emailmultialternatives
             connection = get_connection()  #uses smtp server specified in settings.py
             
-            #state = request.user.__getstate__()
-            #from_email = state['email']
-            #to = cd['receiver']   #need to get this to be not a QuerySet type
-            to = ('shoujigui@gmail.com',)
             text_content = "You may follow your shipment %s of fruitcake %s." % (shipment.id, request.POST['fruitcake'])
             #html_content = render_to_string("<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, request.POST['fruitcake']) ) 
             html_content = "<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, request.POST['fruitcake'])  
-            msg = EmailMultiAlternatives(subject, text_content, from_email, to, connection=connection)
+            msg = EmailMultiAlternatives(subject=subject, text_content=text_content, from_email=request.user.email,
+                    to=cd['email'].pop(), bcc=cd['email'], connection=connection)
             msg.attach_alternative(html_content, "text/html")
-            msg.send()
-            #msg = EmailMessage(subject, text_content, from_email, [to], headers={'Reply-To': 'support@justfruitcake.com'})
-            #msg.send(fail_silently=False)
-            """
-            #return HttpResponseRedirect('/myfruitcake/success/')
-            #return HttpResponseRedirect("/myfruitcake/%(id)s/?err=success" % {"id":id})
-            return HttpResponse("check email list: %s" % cd['email'])
+            try:
+                # If fail_silently=False, send_mail will raise an smtplib.SMTPException. See the smtplib docs for a list of
+                # possible exceptions, all of which are subclasses of SMTPException.
+                msg.send(fail_silently=False)
+            except Exception, e:
+                return HttpResponse(e)
+
+            return HttpResponseRedirect('/myfruitcake/success/')
+            #return HttpResponseRedirect("/myfruitcake/%(id)s/?err=success" % {"id":shipment_id})
+            #return HttpResponse("check email list: %s" % cd['email'])
+        else:
+            return HttpResponse('Failed on form.is_valid()')
     else:
-        #return HttpResponseRedirect("/myfruitcake/%(id)s/?err=warning" % {"id":id})
-        form = EmailContactForm()
-#        form = FruitcakeEmailForm()
-#        form = FruitcakeEmailForm(initial={'fruitcake': int(pk), 'receiver': ['shoujigui@gmail.com'], 'sender': request.user, 'message': 'Fruitcake for you!' }, hide_condition=True)
-        #form = FruitcakeEmailForm(initial={'fruitcake': int(pk), 'sender': request.user, 'message': 'Fruitcake for you!' })
+        form = EmailContactForm()    # initial={'message': 'Happy fruitcake!'}
         
     return render_to_response('myfruitcake/email.html', add_csrf(request, form=form))
  
-    #return render_to_response(
- #                             "myfruitcake/email.html", 
- #                             dict, 
- #                             context_instance=RequestContext(request)
- #                             )
 
 
     """
