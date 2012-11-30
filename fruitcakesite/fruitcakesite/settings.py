@@ -9,6 +9,20 @@ else:
 
 #DEBUG=True
 
+# Django will email ADMINS about broken links 404 with DEBUG = False + the following setting, 
+# but will ignore the IGNORABLE_404_URLS.
+# See https://docs.djangoproject.com/en/dev/howto/error-reporting/
+
+SEND_BROKEN_LINK_EMAILS = True
+import re
+IGNORABLE_404_URLS = (
+        re.compile(r'\.(php|cgi)$'),
+        re.compile(r'^/phpmyadmin/'),
+        re.compile(r'^/favicon\.ico$'),
+        re.compile(r'^/robots\.txt$'),
+        )
+
+
 TEMPLATE_DEBUG = DEBUG
 
 WIDTH_AVATAR = 120
