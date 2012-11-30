@@ -160,7 +160,7 @@ def email_fruitcake(request, pk):
             fruitcake = Fruitcake.objects.get(id=pk)
             #sender = User.objects.get(pk=request.user)
             shipment = Shipment(dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=subject)
-            shipment_id = shipment.save()
+            shipment.save()
             for email in cd['email']:
                 emailcontact = shipment.emailcontacts.create(email=email)
             #Note: add an "emailed successfully" column to shipment (T/F) to set at the try below?
@@ -173,10 +173,10 @@ def email_fruitcake(request, pk):
             # CF20121126 solution: http://stackoverflow.com/questions/7583801/send-mass-emails-with-emailmultialternatives
             connection = get_connection()  #uses smtp server specified in settings.py
             
-            text_content = "You may follow your shipment %s of fruitcake %s." % (shipment.id, request.POST['fruitcake'])
+            text_content = "You may follow your shipment %s of fruitcake %s." % (shipment.id, pk)
             #html_content = render_to_string("<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, request.POST['fruitcake']) ) 
-            html_content = "<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, request.POST['fruitcake'])  
-            msg = EmailMultiAlternatives(subject=subject, text_content=text_content, from_email=request.user.email,to=cd['email'].pop(), bcc=cd['email'], connection=connection)
+            html_content = "<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, pk)  
+            msg = EmailMultiAlternatives(subject, text_content, from_email=request.user.email,to=(cd['email'].pop(),), bcc=cd['email'], connection=connection)
             msg.attach_alternative(html_content, "text/html")
             try:
                 # If fail_silently=False, send_mail will raise an smtplib.SMTPException. See the smtplib docs for a list of
