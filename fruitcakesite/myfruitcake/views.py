@@ -158,6 +158,7 @@ def email_fruitcake(request, pk):
             cd = form.cleaned_data # cd['email'] is list of email addresses to send to
             subject = 'Fruitcake for you'
             fruitcake = Fruitcake.objects.get(id=pk)
+            #sender = User.objects.get(pk=request.user)
             shipment = Shipment(dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=subject)
             shipment_id = shipment.save()
             for email in cd['email']:
@@ -175,8 +176,7 @@ def email_fruitcake(request, pk):
             text_content = "You may follow your shipment %s of fruitcake %s." % (shipment.id, request.POST['fruitcake'])
             #html_content = render_to_string("<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, request.POST['fruitcake']) ) 
             html_content = "<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, request.POST['fruitcake'])  
-            msg = EmailMultiAlternatives(subject=subject, text_content=text_content, from_email=request.user.email,
-                    to=cd['email'].pop(), bcc=cd['email'], connection=connection)
+            msg = EmailMultiAlternatives(subject=subject, text_content=text_content, from_email=sender.email,to=cd['email'].pop(), bcc=cd['email'], connection=connection)
             msg.attach_alternative(html_content, "text/html")
             try:
                 # If fail_silently=False, send_mail will raise an smtplib.SMTPException. See the smtplib docs for a list of
