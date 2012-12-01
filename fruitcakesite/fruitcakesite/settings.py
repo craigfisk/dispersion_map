@@ -2,7 +2,7 @@
 
 # Check if deployed (server name is 'zazen')  or else assume localhost
 import socket
-if socket.gethostname == 'zazen':
+if socket.gethostname() == 'zazen':
     DEBUG = False
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
 else:
