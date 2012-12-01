@@ -4,10 +4,13 @@
 import socket
 if socket.gethostname == 'zazen':
     DEBUG = False
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
 else:
     DEBUG = True
-
-#DEBUG=True
+    #NOTE: switch to following IF DEBUGGING LOCALLY -- writes to console (or to file)
+    #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+    EMAIL_FILE_PATH = '/tmp/fruitcake_shipments'
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -50,6 +53,7 @@ DATABASES = {
 ##EMAIL_HOST_PASSWORD = 'Sp8rky=4242'
 ##DEFAULT_FROM_EMAIL = 'support@justfruitcake.com' #dfault: webmaster@localhost
 
+#See https://docs.djangoproject.com/en/1.4/topics/email/
 EMAIL_HOST = 'mail.picocosmos.net'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
@@ -57,14 +61,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'craigfisk@picocosmos.net'
 EMAIL_HOST_PASSWORD = 'Sp8rky=4242'
 DEFAULT_FROM_EMAIL = 'craigfisk@picocosmos.net' #support@justfruitcake.com'
-
-#default:
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
-#NOTE: switch to following IF DEBUGGING LOCALLY -- writes to console
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
-##SERVER_EMAIL = 'support@justfruitcake.com' #default: root@localhost
 SERVER_EMAIL = 'craigfisk@picocosmos.net'
-
+##SERVER_EMAIL = 'support@justfruitcake.com' #default: root@localhost
 
 FILE_UPLOAD_MAX_MEMORY_SIZE = 16777216 #16MB, 2^24; default 2621440 (2.5 MB)
 FILE_UPLOAD_TEMP_DIR = None #default: Note, so Django uses Linux default /tmp

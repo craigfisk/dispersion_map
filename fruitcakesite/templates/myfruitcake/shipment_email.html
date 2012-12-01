@@ -1,0 +1,24 @@
+{% extends "forum/fbase.html" %}
+ 
+{% block title %} {% endblock %}
+
+{% block sidebar %} {% endblock %}
+{% block nav-global %} {% endblock %}
+{% block signin %} {% endblock %}
+
+{% block forum-content %}
+
+<P>Special fruitcake email:</P>
+
+<table><tr>
+        <td width="60%">I am sending you this fruitcake on {{ shipment.dt }}.  You can see where it has been: <a
+                href="http://www.justfruitcake.com/shipment/{{ shipment.id }}">Fruitcake/{{ shipment.id }}</a>. On that
+            page, you can send it on to other people, if you like, and check back to see where it travels in the future.
+        </td>
+        <td><img src="http://www.justfruitcake.com/static/media/{{ fruitcake.pic }}" title="{{ fruitcake.popup }}" />
+        </td>
+      </tr>
+</table>
+
+{% endblock forum-content %}
+

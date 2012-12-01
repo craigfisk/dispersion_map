@@ -27,6 +27,9 @@ from django import forms
 
 from fruitcakesite.settings import DEFAULT_FROM_EMAIL
 from django.core.mail import EmailMessage, EmailMultiAlternatives
+from django.template.loader import get_template
+from django.template import Context
+
 from datetime import datetime
 
 class ProfileForm(ModelForm):
@@ -175,7 +178,10 @@ def email_fruitcake(request, pk):
             
             text_content = "You may follow your shipment %s of fruitcake %s." % (shipment.id, pk)
             #html_content = render_to_string("<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, request.POST['fruitcake']) ) 
-            html_content = "<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, pk)  
+            #html_content = "<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, pk)  
+            htmly = get_template('myfruitcake/shipment_email.html')
+            d = Context( {'fruitcake': fruitcake, 'shipment': shipment } )
+            html_content = htmly.render(d)
             msg = EmailMultiAlternatives(subject, text_content, from_email=request.user.email,to=(cd['email'].pop(),), bcc=cd['email'], connection=connection)
             msg.attach_alternative(html_content, "text/html")
             try:
@@ -193,7 +199,7 @@ def email_fruitcake(request, pk):
     else:
         form = EmailContactForm()    # initial={'message': 'Happy fruitcake!'}
         
-    return render_to_response('myfruitcake/email.html', add_csrf(request, form=form))
+    return render_to_response('myfruitcake/address_email.html', add_csrf(request, form=form))
  
 
 
