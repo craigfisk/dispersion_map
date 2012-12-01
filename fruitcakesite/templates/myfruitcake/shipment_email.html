@@ -1,24 +1,47 @@
 {% extends "forum/fbase.html" %}
  
-{% block title %} {% endblock %}
+{% block title %}{% endblock %}
 
-{% block sidebar %} {% endblock %}
-{% block nav-global %} {% endblock %}
-{% block signin %} {% endblock %}
+{% block sidebar %}{% endblock %}
+{% block nav-global %}{% endblock %}
+{% block signin %}{% endblock %}
 
 {% block forum-content %}
 
-<P>Special fruitcake email:</P>
+<P>Special fruitcake email {{ shipment.dt }}:</P>
 
-<table><tr>
-        <td width="60%">I am sending you this fruitcake on {{ shipment.dt }}.  You can see where it has been: <a
-                href="http://www.justfruitcake.com/shipment/{{ shipment.id }}">Fruitcake/{{ shipment.id }}</a>. On that
-            page, you can send it on to other people, if you like, and check back to see where it travels in the future.
+<table width="100%"><tr>
+        <td width="60%"><P>I am sending you this fruitcake from <a
+                href="http://www.justfruitcake.com">http://www.justfruitcake.com</a>.  
+            If you would like to see more about it, including 
+            where it has been, just go to its very own shipment information page at <a
+                href="http://www.justfruitcake.com/shipment/{{ shipment.id }}">http://www.justfruitcake.com/shipment/{{ shipment.id }}</a>.</P>
+            <P>While you are there, you can send it on to other people. If you
+            also create your own sign-on with username and password, you can bookmark the page and come back later to see
+            where it has travelled, send other fruitcake to other people, upload
+            fruitcake photos, or check out the Justfruitcake forum.</P>
+
+            <P>Happy fruitcake!</P>
         </td>
-        <td><img src="http://www.justfruitcake.com/static/media/{{ fruitcake.pic }}" title="{{ fruitcake.popup }}" />
+        <td width="40%" valign="top" align="right">
+
+        <ul class="gallery tape">
+                <li>
+                <figure>
+                    <!-- <a href="http://www.justfruitcake.com/shipment/{{ shipment.id }}"> //-->
+                        <img src="http://www.justfruitcake.com/static/media/{{ fruitcake.pic }}" title="{{ fruitcake.popup }}" />
+                        <!-- </a> //-->
+                    <figcaption>uploaded: {{ fruitcake.dt }}<br />by: {{ fruitcake.uploader.username }}</figcaption>
+                </figure>
+                </li>
+        </ul>
         </td>
       </tr>
 </table>
 
-{% endblock forum-content %}
+{% endblock %}
+
+{% comment %}
+{% block footer %}{% endblock %}
+{% endcomment %}
 

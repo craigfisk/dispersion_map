@@ -20,16 +20,15 @@
         <br />
         <P class="main">Listing of fruitcake:</P>
 
+        <div id="gallery_tape">
         <ul class="gallery tape">
             {% for item in fruitcake_list %}
                 <li>
                 <figure>
-                    <a href="email/{{ item.id }}">
-                    <img src="{{ MEDIA_URL }}{{ item.pic }}" title="{{ item.popup }}" />
-                    </a>
-                    <figcaption>
-                    uploaded: {{ item.dt }}<br />by: {{ item.uploader.username }}
-                    </figcaption>
+                    <!-- <a href="email/{{ item.id }}"> //-->
+                        <img src="{{ MEDIA_URL }}{{ item.pic }}" title="{{ item.popup }}" />
+                        <!-- </a> //-->
+                    <figcaption>uploaded: {{ item.dt }}<br />by: {{ item.uploader.username }}</figcaption>
                 </figure>
                 </li>
             {% endfor %}
