@@ -106,6 +106,7 @@ class MultiEmailField(forms.Field):
             return []
         return value.split(',')
     
+    # See https://docs.djangoproject.com/en/dev/ref/forms/validation/#form-field-default-cleaning
     def validate(self, value):
         super(MultiEmailField, self).validate(value)
         
@@ -171,9 +172,13 @@ def email_fruitcake(request, pk):
             #form.save(commit=False)  # save Shipment instance but wait for save_m2m(), or just:
             #shipment = form.save()
 
-            # the emailing part
+            # Notes: the emailing part --
             # https://docs.djangoproject.com/en/dev/topics/email/
             # CF20121126 solution: http://stackoverflow.com/questions/7583801/send-mass-emails-with-emailmultialternatives
+            # CF20121129 on 1) mail test env and 2) connection management, see "SMTP Backend" and "Sending multiple emails" 
+            # sections in https://docs.djangoproject.com/en/dev/topics/email/
+            # CF20121129 on using Celery to send emails in the background, see documentation pointed to in
+            # http://stackoverflow.com/questions/7626071/python-django-sending-emails-in-the-background
             connection = get_connection()  #uses smtp server specified in settings.py
             
             text_content = "You may follow your shipment %s of fruitcake %s." % (shipment.id, pk)
