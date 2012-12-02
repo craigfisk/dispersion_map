@@ -1,0 +1,39 @@
+{% extends "forum/fbase.html" %}        
+
+{% block title %}Shipment{% endblock %}
+
+{% block sidebar %} - shipment {{ shipment.id }}{% endblock %}
+
+{% block forum-content %}
+
+    {% if shipment %}
+    <P>Shipment #{{ shipment.id }} originated on {{ shipment.dt }}</P>
+
+        <div id="gallery_tape">
+        <ul class="gallery tape">
+            {% comment %}            {% for item in fruitcake_list %}
+            {% endcomment %}
+                <li>
+                <figure>
+                    {% comment %}                    <a href="email/{{ item.id }}">
+                    {% endcomment %}
+                        <img src="{{ MEDIA_URL }}{{ shipment.fruitcake.pic }}" title="{{ shipment.fruitcake.popup }}" />
+                    {% comment %}
+                    </a>
+                    {% endcomment %}
+                    <figcaption>uploaded: {{ shipment.fruitcake.dt }}<br />by: {{ shipment.fruitcake.uploader.username }}</figcaption>
+                </figure>
+                </li>
+                {% comment %}            {% endfor %}
+                {% endcomment %}
+        </ul>
+
+
+        {% else %}
+            Sorry, you do not have a fruitcake list.
+        {% endif %}
+        </div>
+
+
+
+{% endblock %}

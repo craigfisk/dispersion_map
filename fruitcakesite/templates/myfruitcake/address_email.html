@@ -17,10 +17,6 @@
     {% endif %}
 
     <form action="" method="POST">{% csrf_token %}
-        {% comment %}
-        <P>To: <input type="text" name="to" value="" id="id_to" /></P>
-        <input type="submit" value="Submit" />
-        {% endcomment %}
         <table>
             {{ form.as_table }}
         </table>

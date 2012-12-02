@@ -19,7 +19,7 @@ from myfruitcake.models import Fruitcake, Shipment, Upload, Like
 from forum.models import UserProfile
 from forum.views import mk_paginator, UserProfile, profile
 
-from django.views.generic import ListView, TemplateView, FormView
+from django.views.generic import ListView, DetailView, TemplateView, FormView
 
 from django import forms
 
@@ -68,6 +68,20 @@ class FruitcakeListView(ListView):
         else:
             return Fruitcake.objects.all()
 
+"""
+class ShipmentDetailView(DetailView):
+    context_object_name = 'shipment'
+    model = Shipment
+
+    def get_context_data(self, **kwargs):
+        context = super(ShipmentTemplateView, self).get_context_data(**kwargs)
+        context['user'] = self.request.user
+        return context
+
+    def get_queryset(self):
+        return Shipment.objects.get(pk=pk)
+
+"""
      
 # https://docs.djangoproject.com/en/1.4/topics/forms/modelforms/   
 # --> should read the modelforms doc from time to time.  For example: 
@@ -118,30 +132,13 @@ class EmailContactForm(forms.Form):
     # see class MultiEmailField above
     email = MultiEmailField()
     
-    # set up hidden form fields while keeping required fields, using rych's approach:
-    # http://stackoverflow.com/questions/6862250/change-a-django-form-field-to-a-hidden-field
-    """
-    def __init__(self, *args, **kwargs):
-        from django.forms.widgets import HiddenInput
-        hide_condition = kwargs.pop('hide_condition', None)
-        super(FruitcakeEmailForm, self).__init__(*args, **kwargs)
-        if hide_condition: # and self.field != 'receiver':
-            self.fields['sender'].widget = HiddenInput()
-            self.fields['fruitcake'].widget = HiddenInput()
-            self.fields['message'].widget = HiddenInput()
-#            self.fields['receiver'].widget = HiddenInput()
-#            self.fields['receiver'].is_hidden = False
-    """
 #    to = forms.EmailField(help_text='A valid email address, please.')
 
-#from django.shortcuts import render
-#from django.core.mail import send_mail
 from django.core.mail import get_connection
 from django.forms.models import inlineformset_factory
 from myfruitcake.models import EmailContact
 from django.template import RequestContext
 
-#from django.template.loader import render_to_string
 
 testlist = ['shoujigui@gmail.com','friskyfrog@comcast.net','magee@cmnw.org']
 
@@ -162,15 +159,17 @@ def email_fruitcake(request, pk):
             cd = form.cleaned_data # cd['email'] is list of email addresses to send to
             subject = 'Fruitcake for you'
             fruitcake = Fruitcake.objects.get(id=pk)
-            #sender = User.objects.get(pk=request.user)
             shipment = Shipment(dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=subject)
             shipment.save()
             for email in cd['email']:
-                emailcontact = shipment.emailcontacts.create(email=email)
-            #Note: add an "emailed successfully" column to shipment (T/F) to set at the try below?
+                ##emailcontact = shipment.emailcontacts.create(email=email)
+                # Using get_or_create, so we get only unique email addresses added to EmailContact
+                # See https://docs.djangoproject.com/en/dev/ref/models/querysets/#django.db.models.query.QuerySet.get_or_create
+                emailcontact, created = EmailContact.objects.get_or_create(email=email)
+                shipment.emailcontacts.add(emailcontact)
+                
 
-            #form.save(commit=False)  # save Shipment instance but wait for save_m2m(), or just:
-            #shipment = form.save()
+            #Note: add an "emailed successfully" column to shipment (T/F) to set at the try below?
 
             # Notes: the emailing part --
             # https://docs.djangoproject.com/en/dev/topics/email/
@@ -180,9 +179,7 @@ def email_fruitcake(request, pk):
             # CF20121129 on using Celery to send emails in the background, see documentation pointed to in
             # http://stackoverflow.com/questions/7626071/python-django-sending-emails-in-the-background
             connection = get_connection()  #uses smtp server specified in settings.py
-            
             text_content = "You may follow your shipment %s of fruitcake %s." % (shipment.id, pk)
-            #html_content = render_to_string("<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, request.POST['fruitcake']) ) 
             #html_content = "<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, pk)  
             htmly = get_template('myfruitcake/shipment_email.html')
             d = Context( {'fruitcake': fruitcake, 'shipment': shipment } )
@@ -200,37 +197,13 @@ def email_fruitcake(request, pk):
             #return HttpResponseRedirect("/myfruitcake/%(id)s/?err=success" % {"id":shipment_id})
             #return HttpResponse("check email list: %s" % cd['email'])
         else:
-            return HttpResponse('Failed on form.is_valid()')
+            return HttpResponse('Sorry, something invalid in your email addresses. Should be a comma-separated list of email addresses.')
+
     else:
         form = EmailContactForm()    # initial={'message': 'Happy fruitcake!'}
         
     return render_to_response('myfruitcake/address_email.html', add_csrf(request, form=form))
  
-
-
-    """
-#    fruitcake = get_object_or_404(Fruitcake, id=pk)
-#    form = FruitcakeEmailForm(request.POST or None)
-    form = MyForm(request.POST or None)
-    if form.is_valid():
-        form.fruitcake_id = pk
-#        fruitcake.save()
-        return redirect('myfruitcake/success.html')
-    return render(request, template_name, {'form':form}) 
-    """
-
-"""
-class MyFruitcakeListView(ListView):
-    template_name = 'myfruitcake_list.html'
-    context_object_name = 'myfruitcake_list'
-    def get_context_data(self, **kwargs):
-        context = super(MyFruitcakeListView, self).get_context_data(**kwargs)
-        context['user'] = self.request.user
-        return context
-
-    def get_queryset(self):
-        return Fruitcake.objects.filter(user=self.request.user)
-"""
 
 class UploadFruitcakeForm(ModelForm):
     class Meta:
@@ -254,10 +227,8 @@ def upload_file(request):
             # then add the request.user
             pic.uploader = request.user
             pic.save()
-            #form.save()
 #            return HttpResponseRedirect('/myfruitcake/success/')
             return HttpResponseRedirect('/myfruitcake/')
-
     else:
         form = UploadFruitcakeForm()
 
