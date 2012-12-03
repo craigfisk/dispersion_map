@@ -25,7 +25,7 @@
             {% for item in fruitcake_list %}
                 <li>
                 <figure>
-                    <a href="email/{{ item.id }}">
+                    <a href="{{ item.id }}/shipment/">
                         <img src="{{ MEDIA_URL }}{{ item.pic }}" title="{{ item.popup }}" />
                     </a>
                     <figcaption>uploaded: {{ item.dt }}<br />by: {{ item.uploader.username }}</figcaption>

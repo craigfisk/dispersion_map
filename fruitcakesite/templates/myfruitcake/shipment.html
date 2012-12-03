@@ -48,7 +48,7 @@
         <P>Travels:</P>
         <ul>
             {% for s in shipment.get_shipment_list %}
-            <li>origin: {{ s.origin }}, parent: {{ s.parent }}, id: {{ s.id }}, shipped: {{ s.dt }}, from: {{ s.sender.username }}, with message: {{ s.message }}</li>
+            <li>origin: {{ s.origin.id }}, parent: {{ s.parent.id }}, id: {{ s.id }}, shipped: {{ s.dt }}, from: {{ s.sender.username }}, with message: {{ s.message }}</li>
             {% endfor %}
         </ul>
 
