@@ -220,7 +220,7 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
     else:
         shipment=None
                 
-    return render_to_response('myfruitcake/address_email.html', add_csrf(request, form=form, fruitcake=fruitcake, shipment=shipment))
+    return render_to_response('myfruitcake/shipment.html', add_csrf(request, form=form, fruitcake=fruitcake, shipment=shipment))
 
 def regift_fruitcake(request, pk):
     """ Build new shipment based on a prior one.

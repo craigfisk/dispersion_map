@@ -1,40 +1,62 @@
-{% extends "forum/fbase.html" %}        
+{% extends "forum/fbase.html" %}
+ 
+{% block title %}Email{% endblock %}
 
-{% block title %}Shipment{% endblock %}
-
-{% block sidebar %} - shipment{% endblock %}
+{% block sidebar %} - email<style type="text/css"> </style> {% endblock %}
 
 {% block forum-content %}
 
-<P>Shipment page.</P>
-
-{% comment %}
-
-    {% if shipment %}
-        <br />
-        <P class="main">Listing of shipment:</P>
+{% if fruitcake %}
 
         <div id="gallery_tape">
         <ul class="gallery tape">
-            {% for item in fruitcake_list %}
                 <li>
                 <figure>
-                    <a href="email/{{ item.id }}">
-                        <img src="{{ MEDIA_URL }}{{ item.pic }}" title="{{ item.popup }}" />
+                    {% comment %}                    <a href="email/{{ item.id }}">
+                    {% endcomment %}
+                        <img src="{{ MEDIA_URL }}{{ fruitcake.pic }}" title="{{ fruitcake.popup }}" />
+                    {% comment %}
                     </a>
-                    <figcaption>uploaded: {{ item.dt }}<br />by: {{ item.uploader.username }}</figcaption>
+                    {% endcomment %}
+                    <figcaption>uploaded: {{ fruitcake.dt }}<br />by: {{ fruitcake.uploader.username }}</figcaption>
                 </figure>
                 </li>
+        </ul>
+        
+{% endif %}
+
+<P>Fruitcake email form:</P>
+
+{% if form.errors %}
+    Sorry, please fix the error:
+    <ol>
+        {% for error in form.errors %}
+        <li><strong>{{ error|escape }}</strong></li>
+        {% endfor %}
+    </ol>
+{% endif %}
+
+    <form action="" method="POST">{% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+
+{% if shipment %}
+
+        <P>Travels:</P>
+        <ul>
+            {% for s in shipment.get_shipment_list %}
+            <li>origin: {{ s.origin }}, parent: {{ s.parent }}, id: {{ s.id }}, shipped: {{ s.dt }}, from: {{ s.sender.username }}, with message: {{ s.message }}</li>
             {% endfor %}
         </ul>
 
-
         {% else %}
-            Sorry, you do not have a fruitcake list.
-        {% endif %}
-        </div>
+            Sorry, you do not have a shipment list.
 
-{% endcomment %}
+{% endif %}
 
 
-{% endblock %}
+{% endblock forum-content %}
+

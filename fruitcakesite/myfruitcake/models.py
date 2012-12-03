@@ -87,8 +87,8 @@ class Shipment(models.Model):
     def __unicode__(self):
         return unicode(self.id)
 
-    def get_shipment_list(self, origin):
-        shipment_list = Shipment.objects.filter(origin=origin).order_by('dt')
+    def get_shipment_list(self):
+        shipment_list = Shipment.objects.filter(origin=self.origin).order_by('-dt')
         return shipment_list
 
 
