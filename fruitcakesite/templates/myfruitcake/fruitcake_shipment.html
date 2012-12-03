@@ -1,0 +1,57 @@
+{% extends "forum/fbase.html" %}
+ 
+{% block title %}Email{% endblock %}
+
+{% block sidebar %} - email<style type="text/css"> </style> {% endblock %}
+
+{% block forum-content %}
+
+{% if fruitcake %}
+
+        <div id="gallery_tape">
+        <ul class="gallery tape">
+                <li>
+                <figure>
+                    <img src="{{ MEDIA_URL }}{{ fruitcake.pic }}" title="{{ fruitcake.popup }}" />
+                    <figcaption>uploaded: {{ fruitcake.dt }}<br />by: {{ fruitcake.uploader_username }}</figcaption>
+                </figure>
+                </li>
+        </ul>
+        
+{% endif %}
+
+<P>Fruitcake email form:</P>
+
+{% if form.errors %}
+    Sorry, please fix the error:
+    <ol>
+        {% for error in form.errors %}
+        <li><strong>{{ error|escape }}</strong></li>
+        {% endfor %}
+    </ol>
+{% endif %}
+
+    <form action="" method="POST">{% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+
+{% if shipment %}
+
+        <P>Travels:</P>
+        <ul>
+            {% for s in shipment.get_shipment_list %}
+            <li>origin: {{ s.origin_id }}, parent: {{ s.parent_id }}, id: {{ s.id }}, shipped: {{ s.dt }}, from: {{ s.sender_username }}, with message: {{ s.message }}</li>
+            {% endfor %}
+        </ul>
+
+        {% else %}
+            Sorry, you do not have a shipment list.
+
+{% endif %}
+
+
+{% endblock forum-content %}
+

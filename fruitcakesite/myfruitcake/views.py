@@ -189,9 +189,11 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             # http://stackoverflow.com/questions/7626071/python-django-sending-emails-in-the-background
             connection = get_connection()  #uses smtp server specified in settings.py
             text_content = "You may follow your shipment %s of fruitcake %s." % (this_shipment.id, fruitcake.id)
-            #html_content = "<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, pk)  
+
+            txty = get_template('myfruitcake/shipment_email.txt')
             htmly = get_template('myfruitcake/shipment_email.html')
             d = Context( {'fruitcake': fruitcake, 'shipment': this_shipment } )
+            text_content = txty.render(d)
             html_content = htmly.render(d)
             msg = EmailMultiAlternatives(subject, text_content, from_email=request.user.email,to=(cd['email'].pop(),), bcc=cd['email'], connection=connection)
             msg.attach_alternative(html_content, "text/html")
@@ -220,62 +222,7 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
     else:
         shipment=None
                 
-    return render_to_response('myfruitcake/shipment.html', add_csrf(request, form=form, fruitcake=fruitcake, shipment=shipment))
-
-def regift_fruitcake(request, pk):
-    """ Build new shipment based on a prior one.
-    May be possible to merge this with email_fruitcake.
-
-    """
-    if request.method == 'POST':
-        form = EmailContactForm(request.POST)
-        #formset = EmailContactFormset(request.POST, instance=shipment)
-        if form.is_valid():
-            cd = form.cleaned_data # cd['email'] is list of email addresses to send to
-            subject = 'Fruitcake for you'
-
-            # Start from shipment (pk) from request:
-            prior_shipment = Shipment.objects.get(id=pk)
-            fruitcake = Fruitcake.objects.get(id=prior_shipment.fruitcake_id)
-
-            # create new shipment:
-            this_shipment = Shipment(parent=prior_shipment.id, origin=prior_shipment.origin, dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=subject)
-            this_shipment.save()
-            for email in cd['email']:
-                ##emailcontact = shipment.emailcontacts.create(email=email)
-                # Using get_or_create, so we get only unique email addresses added to EmailContact
-                # See https://docs.djangoproject.com/en/dev/ref/models/querysets/#django.db.models.query.QuerySet.get_or_create
-                emailcontact, created = EmailContact.objects.get_or_create(email=email)
-                this_shipment.emailcontacts.add(emailcontact)
-
-            connection = get_connection()  #uses smtp server specified in settings.py
-            text_content = "You may follow your shipment %s of fruitcake %s." % (this_shipment.id, this_shipment.fruitcake_id)
-            #html_content = "<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, pk)  
-            htmly = get_template('myfruitcake/shipment_detail.html')
-            d = Context( {'fruitcake': fruitcake, 'shipment': this_shipment } )
-            html_content = htmly.render(d)
-            msg = EmailMultiAlternatives(subject, text_content, from_email=request.user.email,to=(cd['email'].pop(),), bcc=cd['email'], connection=connection)
-            msg.attach_alternative(html_content, "text/html")
-            try:
-                # If fail_silently=False, send_mail will raise an smtplib.SMTPException. See the smtplib docs for a list of
-                # possible exceptions, all of which are subclasses of SMTPException.
-                msg.send(fail_silently=False)
-            except Exception, e:
-                return HttpResponse(e)
-
-            #return HttpResponseRedirect('/myfruitcake/success/')
-            return HttpResponse("this_shipment.id: %s, this_shipment.parent: %s, this_shipment.origin: %s, prior_shipment.id: %s, prior_shipment.origin: %s" % (this_shipment.id, this_shipment.parent, this_shipment.origin, prior_shipment.id, prior_shipment.origin))
-            #return HttpResponseRedirect("/myfruitcake/%(id)s/?err=success" % {"id":shipment_id})
-            #return HttpResponse("check email list: %s" % cd['email'])
-        else:
-            return HttpResponse('Sorry, something invalid in your email addresses. Should be a comma-separated list of email addresses.')
-    else:
-        form = EmailContactForm()    # initial={'message': 'Happy fruitcake!'}
-
-    return render_to_response('myfruitcake/shipment_detail.html', {'form': form}, RequestContext(request))
-    #return render_to_response('myfruitcake/shipment_detail.html', csrf(request, form=form))
-    #return render_to_response('myfruitcake/shipment_detail.html', csrf(request))
-
+    return render_to_response('myfruitcake/fruitcake_shipment.html', add_csrf(request, form=form, fruitcake=fruitcake, shipment=shipment))
 
 class UploadFruitcakeForm(ModelForm):
     class Meta:
