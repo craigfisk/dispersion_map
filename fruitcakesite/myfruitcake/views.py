@@ -80,7 +80,8 @@ class ShipmentDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ShipmentDetailView, self).get_context_data(**kwargs)
         context['user'] = self.request.user
-        context['shipment_list'] = Shipment.objects.all().order_by('dt')
+        #context['shipment_list'] = Shipment.objects.all().order_by('dt')
+        #context['fruitcake'] = shipment.fruitcake
         return context
 
 #    def get_queryset(self):
@@ -144,7 +145,7 @@ from myfruitcake.models import EmailContact
 from django.template import RequestContext
 
 
-def email_fruitcake(request, pk):
+def email_fruitcake(request, fruitcake_id, shipment_id=None):
     """Create instance of Shipment and associated Addressees and send it as email. 
     1) obtain the fruitcake id from passed in value of pk, the sender from request.user, fill in the message
     (later we'll get it, too, from the form, adding to initial={'message': 'Fruitcake for you! etc.), and a list of 
@@ -159,18 +160,23 @@ def email_fruitcake(request, pk):
         if form.is_valid():
             cd = form.cleaned_data # cd['email'] is list of email addresses to send to
             subject = 'Fruitcake for you'
-            fruitcake = Fruitcake.objects.get(id=pk)
-            shipment = Shipment(dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=subject)
-            shipment.save()
-            shipment.origin = shipment
-            shipment.parent = shipment
-            shipment.save()
+            fruitcake = Fruitcake.objects.get(id=fruitcake_id)
+            if shipment_id:
+                prior_shipment = Shipment.objects.get(id=shipment_id)
+            this_shipment = Shipment(dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=subject)
+            this_shipment.save()
+            if shipment_id:
+                if not prior_shipment.origin:
+                    this_shipment.origin = prior_shipment
+                this_shipment.parent = prior_shipment
+
+            this_shipment.save()
             for email in cd['email']:
                 ##emailcontact = shipment.emailcontacts.create(email=email)
                 # Using get_or_create, so we get only unique email addresses added to EmailContact
                 # See https://docs.djangoproject.com/en/dev/ref/models/querysets/#django.db.models.query.QuerySet.get_or_create
                 emailcontact, created = EmailContact.objects.get_or_create(email=email)
-                shipment.emailcontacts.add(emailcontact)
+                this_shipment.emailcontacts.add(emailcontact)
                 
             #Note: add an "emailed successfully" column to shipment (T/F) to set at the try below?
 
@@ -182,10 +188,10 @@ def email_fruitcake(request, pk):
             # CF20121129 on using Celery to send emails in the background, see documentation pointed to in
             # http://stackoverflow.com/questions/7626071/python-django-sending-emails-in-the-background
             connection = get_connection()  #uses smtp server specified in settings.py
-            text_content = "You may follow your shipment %s of fruitcake %s." % (shipment.id, pk)
+            text_content = "You may follow your shipment %s of fruitcake %s." % (this_shipment.id, fruitcake.id)
             #html_content = "<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, pk)  
             htmly = get_template('myfruitcake/shipment_email.html')
-            d = Context( {'fruitcake': fruitcake, 'shipment': shipment } )
+            d = Context( {'fruitcake': fruitcake, 'shipment': this_shipment } )
             html_content = htmly.render(d)
             msg = EmailMultiAlternatives(subject, text_content, from_email=request.user.email,to=(cd['email'].pop(),), bcc=cd['email'], connection=connection)
             msg.attach_alternative(html_content, "text/html")
@@ -204,9 +210,17 @@ def email_fruitcake(request, pk):
 
     else:
         form = EmailContactForm()    # initial={'message': 'Happy fruitcake!'}
-        
-    return render_to_response('myfruitcake/address_email.html', add_csrf(request, form=form))
- 
+
+    if fruitcake_id:
+        fruitcake = Fruitcake.objects.get(id=fruitcake_id)
+    else:
+        fruitcake=None
+    if shipment_id:
+        shipment = Shipment.objects.get(id=shipment_id)
+    else:
+        shipment=None
+                
+    return render_to_response('myfruitcake/address_email.html', add_csrf(request, form=form, fruitcake=fruitcake, shipment=shipment))
 
 def regift_fruitcake(request, pk):
     """ Build new shipment based on a prior one.
@@ -222,7 +236,7 @@ def regift_fruitcake(request, pk):
 
             # Start from shipment (pk) from request:
             prior_shipment = Shipment.objects.get(id=pk)
-            fruitcake = Fruitcake.objects.get(id=shipment.fruitcake)
+            fruitcake = Fruitcake.objects.get(id=prior_shipment.fruitcake_id)
 
             # create new shipment:
             this_shipment = Shipment(parent=prior_shipment.id, origin=prior_shipment.origin, dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=subject)
@@ -233,12 +247,12 @@ def regift_fruitcake(request, pk):
                 # See https://docs.djangoproject.com/en/dev/ref/models/querysets/#django.db.models.query.QuerySet.get_or_create
                 emailcontact, created = EmailContact.objects.get_or_create(email=email)
                 this_shipment.emailcontacts.add(emailcontact)
-                
+
             connection = get_connection()  #uses smtp server specified in settings.py
-            text_content = "You may follow your shipment %s of fruitcake %s." % (shipment.id, pk)
+            text_content = "You may follow your shipment %s of fruitcake %s." % (this_shipment.id, this_shipment.fruitcake_id)
             #html_content = "<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, pk)  
             htmly = get_template('myfruitcake/shipment_detail.html')
-            d = Context( {'fruitcake': fruitcake, 'shipment': shipment } )
+            d = Context( {'fruitcake': fruitcake, 'shipment': this_shipment } )
             html_content = htmly.render(d)
             msg = EmailMultiAlternatives(subject, text_content, from_email=request.user.email,to=(cd['email'].pop(),), bcc=cd['email'], connection=connection)
             msg.attach_alternative(html_content, "text/html")
@@ -258,7 +272,8 @@ def regift_fruitcake(request, pk):
     else:
         form = EmailContactForm()    # initial={'message': 'Happy fruitcake!'}
 
-    return render_to_response('myfruitcake/shipment_detail.html', csrf(request, form=form))
+    return render_to_response('myfruitcake/shipment_detail.html', {'form': form}, RequestContext(request))
+    #return render_to_response('myfruitcake/shipment_detail.html', csrf(request, form=form))
     #return render_to_response('myfruitcake/shipment_detail.html', csrf(request))
 
 

@@ -5,16 +5,36 @@
 {% block sidebar %} - email<style type="text/css"> </style> {% endblock %}
 
 {% block forum-content %}
+
+{% if fruitcake %}
+
+        <div id="gallery_tape">
+        <ul class="gallery tape">
+                <li>
+                <figure>
+                    {% comment %}                    <a href="email/{{ item.id }}">
+                    {% endcomment %}
+                        <img src="{{ MEDIA_URL }}{{ fruitcake.pic }}" title="{{ fruitcake.popup }}" />
+                    {% comment %}
+                    </a>
+                    {% endcomment %}
+                    <figcaption>uploaded: {{ fruitcake.dt }}<br />by: {{ fruitcake.uploader.username }}</figcaption>
+                </figure>
+                </li>
+        </ul>
+        
+{% endif %}
+
 <P>Fruitcake email form:</P>
 
-    {% if form.errors %}
+{% if form.errors %}
     Sorry, please fix the error:
     <ol>
         {% for error in form.errors %}
         <li><strong>{{ error|escape }}</strong></li>
         {% endfor %}
     </ol>
-    {% endif %}
+{% endif %}
 
     <form action="" method="POST">{% csrf_token %}
         <table>
@@ -22,6 +42,21 @@
         </table>
         <input type="submit" value="Submit">
     </form>
+
+{% if shipment %}
+
+        <P>Travels:</P>
+        <ul>
+            {% for s in shipment.get_shipment_list %}
+            <li>origin: {{ s.origin }}, parent: {{ s.parent }}, id: {{ s.id }}, shipped: {{ s.dt }}, by {{ s.sender.username }}, with message: {{ s.message }}</li>
+            {% endfor %}
+        </ul>
+
+        {% else %}
+            Sorry, you do not have a shipment list.
+
+{% endif %}
+
 
 {% endblock forum-content %}
 
