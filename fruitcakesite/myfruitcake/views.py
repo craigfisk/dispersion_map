@@ -68,20 +68,24 @@ class FruitcakeListView(ListView):
         else:
             return Fruitcake.objects.all()
 
-"""
 class ShipmentDetailView(DetailView):
+    """Retrieve information about a shipment.
+    Includes information chain on parents. If parent is None, put the current shipment_id in as the parent. If
+    parent_id = shipment_id, we are at the originating shipment.
+    """
+    
     context_object_name = 'shipment'
     model = Shipment
 
     def get_context_data(self, **kwargs):
-        context = super(ShipmentTemplateView, self).get_context_data(**kwargs)
+        context = super(ShipmentDetailView, self).get_context_data(**kwargs)
         context['user'] = self.request.user
+        context['shipment_list'] = Shipment.objects.all().order_by('dt')
         return context
 
-    def get_queryset(self):
-        return Shipment.objects.get(pk=pk)
+#    def get_queryset(self):
+#        return Shipment.objects.filter(sender=self.request.user)
 
-"""
      
 # https://docs.djangoproject.com/en/1.4/topics/forms/modelforms/   
 # --> should read the modelforms doc from time to time.  For example: 
@@ -140,9 +144,6 @@ from myfruitcake.models import EmailContact
 from django.template import RequestContext
 
 
-testlist = ['shoujigui@gmail.com','friskyfrog@comcast.net','magee@cmnw.org']
-
-
 def email_fruitcake(request, pk):
     """Create instance of Shipment and associated Addressees and send it as email. 
     1) obtain the fruitcake id from passed in value of pk, the sender from request.user, fill in the message
@@ -161,6 +162,9 @@ def email_fruitcake(request, pk):
             fruitcake = Fruitcake.objects.get(id=pk)
             shipment = Shipment(dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=subject)
             shipment.save()
+            shipment.origin = shipment
+            shipment.parent = shipment
+            shipment.save()
             for email in cd['email']:
                 ##emailcontact = shipment.emailcontacts.create(email=email)
                 # Using get_or_create, so we get only unique email addresses added to EmailContact
@@ -168,7 +172,6 @@ def email_fruitcake(request, pk):
                 emailcontact, created = EmailContact.objects.get_or_create(email=email)
                 shipment.emailcontacts.add(emailcontact)
                 
-
             #Note: add an "emailed successfully" column to shipment (T/F) to set at the try below?
 
             # Notes: the emailing part --
@@ -204,6 +207,60 @@ def email_fruitcake(request, pk):
         
     return render_to_response('myfruitcake/address_email.html', add_csrf(request, form=form))
  
+
+def regift_fruitcake(request, pk):
+    """ Build new shipment based on a prior one.
+    May be possible to merge this with email_fruitcake.
+
+    """
+    if request.method == 'POST':
+        form = EmailContactForm(request.POST)
+        #formset = EmailContactFormset(request.POST, instance=shipment)
+        if form.is_valid():
+            cd = form.cleaned_data # cd['email'] is list of email addresses to send to
+            subject = 'Fruitcake for you'
+
+            # Start from shipment (pk) from request:
+            prior_shipment = Shipment.objects.get(id=pk)
+            fruitcake = Fruitcake.objects.get(id=shipment.fruitcake)
+
+            # create new shipment:
+            this_shipment = Shipment(parent=prior_shipment.id, origin=prior_shipment.origin, dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=subject)
+            this_shipment.save()
+            for email in cd['email']:
+                ##emailcontact = shipment.emailcontacts.create(email=email)
+                # Using get_or_create, so we get only unique email addresses added to EmailContact
+                # See https://docs.djangoproject.com/en/dev/ref/models/querysets/#django.db.models.query.QuerySet.get_or_create
+                emailcontact, created = EmailContact.objects.get_or_create(email=email)
+                this_shipment.emailcontacts.add(emailcontact)
+                
+            connection = get_connection()  #uses smtp server specified in settings.py
+            text_content = "You may follow your shipment %s of fruitcake %s." % (shipment.id, pk)
+            #html_content = "<P>You may <b>follow</b> your shipment %s of fruitcake %s.</P>" % (shipment.id, pk)  
+            htmly = get_template('myfruitcake/shipment_detail.html')
+            d = Context( {'fruitcake': fruitcake, 'shipment': shipment } )
+            html_content = htmly.render(d)
+            msg = EmailMultiAlternatives(subject, text_content, from_email=request.user.email,to=(cd['email'].pop(),), bcc=cd['email'], connection=connection)
+            msg.attach_alternative(html_content, "text/html")
+            try:
+                # If fail_silently=False, send_mail will raise an smtplib.SMTPException. See the smtplib docs for a list of
+                # possible exceptions, all of which are subclasses of SMTPException.
+                msg.send(fail_silently=False)
+            except Exception, e:
+                return HttpResponse(e)
+
+            #return HttpResponseRedirect('/myfruitcake/success/')
+            return HttpResponse("this_shipment.id: %s, this_shipment.parent: %s, this_shipment.origin: %s, prior_shipment.id: %s, prior_shipment.origin: %s" % (this_shipment.id, this_shipment.parent, this_shipment.origin, prior_shipment.id, prior_shipment.origin))
+            #return HttpResponseRedirect("/myfruitcake/%(id)s/?err=success" % {"id":shipment_id})
+            #return HttpResponse("check email list: %s" % cd['email'])
+        else:
+            return HttpResponse('Sorry, something invalid in your email addresses. Should be a comma-separated list of email addresses.')
+    else:
+        form = EmailContactForm()    # initial={'message': 'Happy fruitcake!'}
+
+    return render_to_response('myfruitcake/shipment_detail.html', csrf(request, form=form))
+    #return render_to_response('myfruitcake/shipment_detail.html', csrf(request))
+
 
 class UploadFruitcakeForm(ModelForm):
     class Meta:

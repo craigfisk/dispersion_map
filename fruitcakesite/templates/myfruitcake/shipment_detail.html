@@ -29,6 +29,32 @@
         </ul>
 
 
+
+        {% if form.errors %}
+        Sorry, please fix the error:
+        <ol>
+            {% for error in form.errors %}
+            <li><strong>{{ error|escape }}</strong></li>
+            {% endfor %}
+        </ol>
+        {% endif %}
+
+        <form action="" method="POST">{% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Submit">
+        </form>
+
+
+
+        <P>Travels:</P>
+        <ul>
+            {% for shipment in shipment_list %}
+            <li>origin: {{ shipment.origin }}, parent: {{ shipment.parent }}, id: {{ shipment.id }}, shipped: {{ shipment.dt }}, by {{ shipment.sender.username }}, with message: {{ shipment.message }}</li>
+            {% endfor %}
+        </ul>
+
         {% else %}
             Sorry, you do not have a fruitcake list.
         {% endif %}

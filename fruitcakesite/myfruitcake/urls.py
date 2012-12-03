@@ -1,6 +1,6 @@
 from django.views.generic import DetailView, ListView, TemplateView
 from myfruitcake.models import Fruitcake, Upload, Shipment
-from myfruitcake.views import activity, upload_file, FruitcakeListView, email_fruitcake
+from myfruitcake.views import activity, upload_file, FruitcakeListView, ShipmentDetailView, email_fruitcake, regift_fruitcake
 #, ShipmentDetailView
 #EmailTemplateView, e
 #, MyFruitcakeListView
@@ -15,7 +15,8 @@ urlpatterns = patterns('myfruitcake.views',
     url(r'^upload/$', 'upload_file'),
     url(r'^success/$', 'success'),
     url(r'^email/(?P<pk>\d+)/$', 'email_fruitcake'),
-    url(r'^shipment/(?P<pk>\d+)/$', DetailView.as_view(model=Shipment)),
+#    url(r'^shipment/(?P<pk>\d+)/$', ShipmentDetailView.as_view(model=Shipment)),
+    url(r'^shipment/(?P<pk>\d+)/$', 'regift_fruitcake'),
 #    url(r'^email/$', 'email_fruitcake'),
 #    url(r'^email/(\d+)/$', EmailTemplateView.as_view(model=Fruitcake), name='emailtemplateview'), 
 #    url(r'^myuploads/$', login_required(MyFruitcakeListView.as_view(model=Fruitcake)))

@@ -75,7 +75,9 @@ class FauxShipment(models.Model):
 """
 
 class Shipment(models.Model):
-    dt = models.DateTimeField(auto_now_add=True) 
+    dt = models.DateTimeField(auto_now_add=True)
+    origin = models.ForeignKey('Shipment', null=True, related_name='shipment_origin')
+    parent = models.ForeignKey('Shipment', null=True, related_name='shipment_parent')
     fruitcake = models.ForeignKey(Fruitcake)
     sender = models.ForeignKey(User, verbose_name='senders', related_name='senders')
     emailcontacts = models.ManyToManyField('EmailContact', related_name='emailcontacts',verbose_name='emailcontacts', null=True)
@@ -83,7 +85,7 @@ class Shipment(models.Model):
     text = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
-        return unicode(self.dt)
+        return unicode(self.id)
 
 
 ### Admin
