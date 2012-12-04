@@ -135,7 +135,7 @@ class MultiEmailField(forms.Field):
         
 class EmailContactForm(forms.Form):
     # see class MultiEmailField above
-    email = MultiEmailField()
+    email = MultiEmailField(help_text="(Please enter comma-separated email addresses.)")
     
 #    to = forms.EmailField(help_text='A valid email address, please.')
 
@@ -144,7 +144,7 @@ from django.forms.models import inlineformset_factory
 from myfruitcake.models import EmailContact
 from django.template import RequestContext
 
-
+@login_required
 def email_fruitcake(request, fruitcake_id, shipment_id=None):
     """Create instance of Shipment and associated Addressees and send it as email. 
     1) obtain the fruitcake id from passed in value of pk, the sender from request.user, fill in the message
@@ -161,16 +161,20 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             cd = form.cleaned_data # cd['email'] is list of email addresses to send to
             subject = 'Fruitcake for you'
             fruitcake = Fruitcake.objects.get(id=fruitcake_id)
-            if shipment_id:
-                prior_shipment = Shipment.objects.get(id=shipment_id)
+            
             this_shipment = Shipment(dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=subject)
             this_shipment.save()
-            if shipment_id:
-                if not prior_shipment.origin:
-                    this_shipment.origin = prior_shipment
-                this_shipment.parent = prior_shipment
 
+            if not shipment_id:
+                this_shipment.origin = this_shipment
+                this_shipment.parent = this_shipment
+            else:
+                prior_shipment = Shipment.objects.get(id=shipment_id)
+                this_shipment.origin = prior_shipment.origin
+                this_shipment.parent = prior_shipment
+            
             this_shipment.save()
+            
             for email in cd['email']:
                 ##emailcontact = shipment.emailcontacts.create(email=email)
                 # Using get_or_create, so we get only unique email addresses added to EmailContact
@@ -204,9 +208,18 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             except Exception, e:
                 return HttpResponse(e)
 
-            return HttpResponseRedirect('/myfruitcake/success/')
+            ##return HttpResponseRedirect('/myfruitcake/success/')
             #return HttpResponseRedirect("/myfruitcake/%(id)s/?err=success" % {"id":shipment_id})
-            #return HttpResponse("check email list: %s" % cd['email'])
+            if not this_shipment.origin:
+                this_shipment_origin = 0
+            else:
+                this_shipment_origin = this_shipment.origin
+            if not this_shipment.parent:
+                this_shipment_parent = 0
+            else:
+                this_shipment_parent = this_shipment.parent
+
+            return HttpResponse("Sent with following values: shipment_id: %s, this_shipment_origin: %s, this_shipment_parent: %s" % (shipment_id, this_shipment_origin, this_shipment_parent) )
         else:
             return HttpResponse('Sorry, something invalid in your email addresses. Should be a comma-separated list of email addresses.')
 
@@ -222,7 +235,8 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
     else:
         shipment=None
                 
-    return render_to_response('myfruitcake/fruitcake_shipment.html', add_csrf(request, form=form, fruitcake=fruitcake, shipment=shipment))
+    return render_to_response('myfruitcake/fruitcake_shipment.html', add_csrf(request, form=form, fruitcake=fruitcake,
+        shipment=shipment))
 
 class UploadFruitcakeForm(ModelForm):
     class Meta:

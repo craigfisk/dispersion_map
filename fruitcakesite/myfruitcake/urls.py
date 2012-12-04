@@ -1,6 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView, ListView, TemplateView
 from myfruitcake.models import Fruitcake, Upload, Shipment
-from myfruitcake.views import activity, upload_file, FruitcakeListView, ShipmentDetailView, email_fruitcake, regift_fruitcake
+from myfruitcake.views import activity, upload_file, FruitcakeListView, ShipmentDetailView, email_fruitcake
 #, ShipmentDetailView
 #EmailTemplateView, e
 #, MyFruitcakeListView
