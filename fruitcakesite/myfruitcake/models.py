@@ -67,6 +67,16 @@ class EmailContact(models.Model):
     def __unicode__(self):
         return unicode(self.email)
 
+class IP(models.Model):
+    address = models.GenericIPAddressField(null=True)
+    city = models.CharField(max_length=60)
+    region = models.CharField(max_length=30)
+    country = models.CharField(max_length=50)
+    country_code = models.CharField(max_length=2)
+
+    def __unicode__(self):
+        return unicode(self.address)
+
 """
 class FauxShipment(models.Model):
     dt = models.DateTimeField(auto_now_add=True)
