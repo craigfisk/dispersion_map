@@ -48,10 +48,10 @@
             {# [dev data -- origin: {{ s.origin_id }}, parent: {{ s.parent_id }}, id: {{ s.id }}] #}
             {% endfor %}
         </ul>
-
+        {% comment %}
         {% else %}
             Sorry, you do not have a shipment list.
-
+        {% endcomment %}
 {% endif %}
 
 
