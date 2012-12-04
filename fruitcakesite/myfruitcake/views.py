@@ -210,6 +210,13 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
                 ungoogle_msg = EmailMultiAlternatives(subject, text_content, from_email=request.user.email,to=(to,), bcc=bcc, connection=connection)
                 ungoogle_msg.attach_alternative(html_content, "text/html")
 
+                try:
+                    # If fail_silently=False, send_mail will raise an smtplib.SMTPException. See the smtplib docs for a list of
+                    # possible exceptions, all of which are subclasses of SMTPException.
+                    ungoogle_msg.send(fail_silently=False)
+                except Exception, e:
+                    return HttpResponse(e)
+
             # gmail section (the templates have no images)
             if google:
                 to = google.pop()
@@ -225,13 +232,12 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
                 google_msg = EmailMultiAlternatives(subject, text_content, from_email=request.user.email,to=(to,), bcc=bcc, connection=connection)
                 google_msg.attach_alternative(html_content, "text/html")
 
-            try:
-                # If fail_silently=False, send_mail will raise an smtplib.SMTPException. See the smtplib docs for a list of
-                # possible exceptions, all of which are subclasses of SMTPException.
-                ungoogle_msg.send(fail_silently=False)
-                google_msg.send(fail_silently=False)
-            except Exception, e:
-                return HttpResponse(e)
+                try:
+                    # If fail_silently=False, send_mail will raise an smtplib.SMTPException. See the smtplib docs for a list of
+                    # possible exceptions, all of which are subclasses of SMTPException.
+                    google_msg.send(fail_silently=False)
+                except Exception, e:
+                    return HttpResponse(e)
 
             ##return HttpResponseRedirect('/myfruitcake/success/')
             #return HttpResponseRedirect("/myfruitcake/%(id)s/?err=success" % {"id":shipment_id})
