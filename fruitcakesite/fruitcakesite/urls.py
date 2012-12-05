@@ -16,7 +16,9 @@ urlpatterns = patterns('',
 ##    url(r'^world/', include('world.urls')),
     # CF20121104 changed next line from 'registration.urls' (deprecated) to 'registration.backends.default.urls'?
     # See http://docs.b-list.org/django-registration/0.8/upgrade.html on how to rewrite for changes to the API
-    # accounts -> registration:
+    # accounts -> registration. Update CF20121205: not clear what "deprecated" means here, because a customization
+    # of the site-packages/registration urlconf would be at fruitcakesite/registration/urls.py, which would be
+    # include('registration.urls').
     # url(r'^registration/', include('registration.urls')),
     url(r'^registration/', include('registration.backends.default.urls')),
     #

@@ -182,6 +182,13 @@ MIDDLEWARE_CLASSES = (
 ###    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+LOGIN_URL = '/registration/login/'
+
+LOGOUT_URL = '/registration/logout/'
+
+LOGIN_REDIRECT_URL = '/registration/profile/'
+
+
 ROOT_URLCONF = 'fruitcakesite.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
