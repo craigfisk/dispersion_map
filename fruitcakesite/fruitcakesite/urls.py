@@ -14,10 +14,18 @@ urlpatterns = patterns('',
     url(r'forum/', include('forum.urls')),
     url(r'myfruitcake/', include('myfruitcake.urls')),
 ##    url(r'^world/', include('world.urls')),
-    #CF20121104 change next line 'registration.urls' (deprecated) to 'registration.backends.default.urls'?
-    #more info, see http://docs.b-list.org/django-registration/0.8/upgrade.html on how to rewrite for changes to the API
+    # CF20121104 changed next line from 'registration.urls' (deprecated) to 'registration.backends.default.urls'?
+    # See http://docs.b-list.org/django-registration/0.8/upgrade.html on how to rewrite for changes to the API
     # accounts -> registration:
-    ##url(r'^registration/', include('registration.urls')),
+    # url(r'^registration/', include('registration.urls')),
     url(r'^registration/', include('registration.backends.default.urls')),
+    #
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'static'} ),
 )
+
+# django-registration latest (see above):
+# - How to upgrade for latest (0.8):  http://docs.b-list.org/django-registration/0.8/upgrade.html
+# - Template examples from Matias Herranz at https://github.com/matiasherranz/scoobygalletas/downloads
+# - Tutorial:  see "Django by Example" part 3, http://lightbird.net/dbe/forum3.html (helpful but deprecated
+# registration.urls etc. model)
+
