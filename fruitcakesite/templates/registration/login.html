@@ -17,9 +17,10 @@
     <td>{{ form.password }}</td>
 </tr>
 </table>
-<p><a href="{% url auth_password_reset %}">Forgot</a> your password?  <a href="{% url registration_register %}">Need an account</a>?</p>
+<p><a href="{% url auth_password_reset %}">Forgot</a> your password?  <a href="{% url registration_register %}">Need to
+    create a sign-on</a>?</p>
 
-<input type="submit" value="login" />
+<input type="submit" value="sign in" />
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
