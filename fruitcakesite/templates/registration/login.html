@@ -1,5 +1,4 @@
 {% extends "admin/base_site.html" %}
-{% load i18n %}
 
 {% block extrastyle %}{% load adminmedia %}{{ block.super }}<link rel="stylesheet" type="text/css" href="css/login.css" />{% endblock %}
 
@@ -14,6 +13,9 @@
 <p class="errornote">{{ error_message }}</p>
 {% endif %}
 <div id="content-main">
+
+    <P><b>file: templates/registration/login.html</b></P>
+
     <form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
   <div class="form-row">
     <label for="id_username">{% trans 'Username:' %}</label> <input type="text" name="username" id="id_username" />
