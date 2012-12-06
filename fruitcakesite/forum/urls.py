@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import *
-from forum.models import *
+from forum.models import UserProfile, Thread, Post, Forum
 from forum.views import *
 #main, forum, thread, post, reply, profile, new_thread, add_csrf
 

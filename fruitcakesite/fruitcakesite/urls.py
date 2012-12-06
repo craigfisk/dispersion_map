@@ -1,4 +1,6 @@
 from django.conf.urls import patterns, include, url
+from myfruitcake.models import Fruitcake, Shipment
+from forum.models import UserProfile, Forum, Thread, Post
 from fruitcakesite.views import home_page, logout_page
 from django.contrib import admin
 admin.autodiscover()
@@ -10,7 +12,7 @@ urlpatterns = patterns('',
     url(r'^login/$', 'django.contrib.auth.views.login'),
     url(r'^logout/$', logout_page),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^polls/', include('polls.urls')),
+#    url(r'^polls/', include('polls.urls')),
     url(r'forum/', include('forum.urls')),
     url(r'myfruitcake/', include('myfruitcake.urls')),
 ##    url(r'^world/', include('world.urls')),

@@ -2,7 +2,7 @@
 
 {% block title %}Myfruitcake{% endblock %}
 
-{% block sidebar %} - myfruitcake{% endblock %}
+{% block sidebar %} - my fruitcake{% endblock %}
 
 {% block forum-content %}
 {% comment %}
@@ -37,9 +37,11 @@
         {% comment %}
  <br />by: {{ item.uploader.username }}
         {% endcomment %}
-
+        
+        {% comment %}
         {% else %}
             Sorry, you do not have a fruitcake list.
+        {% endcomment %}
         {% endif %}
         </div>
 

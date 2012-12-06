@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib import admin
 #from django.db.models.signals import post_save
 from django.core.files import File
 from os.path import join as pjoin
@@ -102,32 +101,4 @@ class Shipment(models.Model):
         shipment_list = Shipment.objects.filter(origin=self.origin).order_by('-dt')
         return shipment_list
 
-
-### Admin
-
-class FruitcakeAdmin(admin.ModelAdmin):
-    list_display = ['popup']
-    search_fields = ['popup']
-
-admin.site.register(Fruitcake, FruitcakeAdmin)
-
-class UploadAdmin(admin.ModelAdmin):
-    pass
-
-"""
-class EmailContactInline(admin.TabularInline):
-    model = EmailContact
-    extra = 3
-
-admin.site.register(EmailContact)
-"""
-
-class ShipmentAdmin(admin.ModelAdmin):
-    list_display = ['dt', 'fruitcake', 'sender', 'message']
-    search_fields = ['message']
-#    inlines = [EmailContactInline]
-    list_filter = ['dt']
-    date_hierarchy = 'dt'
-
-admin.site.register(Shipment, ShipmentAdmin)
 

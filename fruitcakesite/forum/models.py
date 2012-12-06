@@ -81,23 +81,6 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return unicode(self.user)
 
- 
-
-### Admin
-
-class ProfileAdmin(admin.ModelAdmin):
-    list_display = ["user"]
-
-class ForumAdmin(admin.ModelAdmin):
-    pass
-
-class ThreadAdmin(admin.ModelAdmin):
-    list_display = ["title", "forum", "creator", "created"]
-    list_filter = ["forum", "creator"]
-
-class PostAdmin(admin.ModelAdmin):
-    search_fields = ["title", "creator"]
-    list_display = ["title", "thread", "creator", "created"]
 
 ####CF20121105 replacing following function (and UserProfile.user def above) on model of 1.4 django docs
 # see https://docs.djangoproject.com/en/1.4/topics/auth/#storing-additional-information-about-users

@@ -25,6 +25,8 @@ IGNORABLE_404_URLS = (
         re.compile(r'^/robots\.txt$'),
         )
 
+#CF20121205 temporary
+DEBUG=True
 
 TEMPLATE_DEBUG = DEBUG
 

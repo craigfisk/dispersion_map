@@ -1,6 +1,6 @@
 {% extends "base/base.html" %}
 
-{% block title %}{{ block.super }} ForumApp {% endblock %}
+{% block title %}{{ block.super }} BaseApp {% endblock %}
 
 {% block sidebar %} - website{% endblock %} 
 
@@ -18,10 +18,10 @@
                 {% if user.is_authenticated %}
                     <a href="{% url forum.views.profile user.pk %}">Edit profile</a> {% endif %}
 
-                {% if not user.is_authenticated %}<a href="/registration/login/?next=/myfruitcake/">login</a> | <a
+                {% if not user.is_authenticated %}<a href="/registration/login/?next=/myfruitcake/">sign-in</a> | <a
                     href="/registration/register/">register</a>{% endif %}
 
-                {% if user.is_authenticated %}<a href="/registration/logout/?next=/myfruitcake/">logout</a>
+                {% if user.is_authenticated %}<a href="/registration/logout/?next=/myfruitcake/">sign-out</a>
                     {% endif %}
 
             {% endblock %}
