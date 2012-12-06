@@ -62,11 +62,25 @@ class FruitcakeListView(ListView):
         return context
 
     def get_queryset(self):
+        return Fruitcake.objects.all().order_by('-dt')[:8]
+
+class MyFruitcakeListView(ListView):
+#    @method_decorator(login_required)
+#    def dispatch(self, *args, **kwargs):
+#        return super(MyFruitcakeListView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(MyFruitcakeListView, self).get_context_data(**kwargs)
+        context['user'] = self.request.user
+        context['uploader'] = self.request.user
+        return context
+
+    def get_queryset(self):
         if self.request.user.id:
-            return Fruitcake.objects.filter(uploader=self.request.user)
+            return Fruitcake.objects.filter(uploader=self.request.user).order_by('-dt')
             # or: popup__startswith='Pick me'
         else:
-            return Fruitcake.objects.all()
+            return Fruitcake.objects.all().order_by('-dt')[:8]
 
 class ShipmentDetailView(DetailView):
     """Retrieve information about a shipment.

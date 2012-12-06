@@ -3,10 +3,12 @@ from myfruitcake.models import Fruitcake, Shipment
 from forum.models import UserProfile, Forum, Thread, Post
 from fruitcakesite.views import home_page, logout_page
 from django.contrib import admin
+from myfruitcake.views import FruitcakeListView
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', home_page),
+##    url(r'^$', home_page),
+    url(r'^$', FruitcakeListView.as_view(model=Fruitcake), name='home'),
 #    url(r'^home/$', home),
 ##    url(r'^$', main),
     url(r'^login/$', 'django.contrib.auth.views.login'),

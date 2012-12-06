@@ -16,17 +16,17 @@
 {% block myfruitcakelist %}{% endblock myfruitcakelist %}        
 
 
-        {% if fruitcake_list %}
+        {% if fruitcake_list and user.is_authenticated %}
         <br />
-        <P class="main">Listing of fruitcake (<b>click to send</b>):</P>
+        <P class="main">Listing of fruitcake uploaded by <i><u>{{ uploader }}</u></i> (<b>click to send</b>):</P>
 
         <div id="gallery_tape">
         <ul class="gallery tape">
             {% for item in fruitcake_list %}
                 <li>
                 <figure>
-                    <a href="{{ item.id }}/shipment/">
-                        <img src="{{ MEDIA_URL }}{{ item.pic }}" title="{{ item.popup }}" />
+                    <a href="{{ item.id }}/shipment/" title="{{ item.popup }}">
+                        <img src="{{ MEDIA_URL }}{{ item.pic }}"/>
                     </a>
                     <figcaption>uploaded: {{ item.dt }}<br />by: {{ item.uploader.username }}</figcaption>
                 </figure>
@@ -38,10 +38,8 @@
  <br />by: {{ item.uploader.username }}
         {% endcomment %}
         
-        {% comment %}
         {% else %}
-            Sorry, you do not have a fruitcake list.
-        {% endcomment %}
+            (Sorry, looks like you have not uploaded any fruitcake, yet.)
         {% endif %}
         </div>
 
