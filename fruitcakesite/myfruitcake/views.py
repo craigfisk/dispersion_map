@@ -120,15 +120,20 @@ class MultiEmailField(forms.Field):
         # remove whitespace from the string
         pattern = re.compile('\s')
         value = pattern.sub('', value)
+ 
         # normalize to list of strings; return empty list if no input
         if not value:
             return []
-        return value.split(',')
-    
+        #return value.split(',')
+        # Return a list that is split on [;: ,] as valid separators of email addresses
+        #value = re.split('[;\: \,]+', value)
+        return re.split('[;\: \,]+', value)
+
+
     # See https://docs.djangoproject.com/en/dev/ref/forms/validation/#form-field-default-cleaning
     def validate(self, value):
         super(MultiEmailField, self).validate(value)
-        
+       
         for email in value:
             validate_email(email)
         
