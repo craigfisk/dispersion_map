@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView, ListView, TemplateView
 from myfruitcake.models import Fruitcake, Upload, Shipment
 from myfruitcake.views import activity, upload_file, MyFruitcakeListView, ShipmentDetailView, email_fruitcake
+#ShipmentListView, email_fruitcake
 #, ShipmentDetailView
 #EmailTemplateView, e
 #, MyFruitcakeListView
@@ -13,6 +14,7 @@ urlpatterns = patterns('myfruitcake.views',
 #    url(r"", "main"),
 #    url(r'^$', login_required(FruitcakeListView.as_view(model=Fruitcake))),
     url(r'^$', MyFruitcakeListView.as_view(model=Fruitcake), name='fruitcakelistview'),
+#    url(r'^myshipments', ShipmentListView.as_view(model=Shipment), name='myshipments'),
     url(r'^upload/$', 'upload_file'),
     url(r'^success/$', 'success'),
 #    url(r'^email/(?P<fruitcake_id>\d+)/$', 'email_fruitcake'),
