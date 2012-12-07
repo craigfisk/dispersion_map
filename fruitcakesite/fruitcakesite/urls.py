@@ -2,8 +2,11 @@ from django.conf.urls import patterns, include, url
 from myfruitcake.models import Fruitcake, Shipment
 from forum.models import UserProfile, Forum, Thread, Post
 from fruitcakesite.views import home_page, logout_page
+from myfruitcake.views import email_fruitcake
 from django.contrib import admin
-from myfruitcake.views import FruitcakeListView
+
+from fruitcakesite.views import FruitcakeListView
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -17,7 +20,9 @@ urlpatterns = patterns('',
     url(r'forum/', include('forum.urls')),
     url(r'myfruitcake/', include('myfruitcake.urls')),
 
-    url(r'^$', FruitcakeListView.as_view(model=Fruitcake), name='home'),
+    url(r'^$', FruitcakeListView.as_view(model=Fruitcake), name='fruitcakelistview'),
+    url(r'^(?P<fruitcake_id>\d+)/shipment/$', 'myfruitcake.views.email_fruitcake'),
+
 ##    url(r'^world/', include('world.urls')),
     # CF20121104 changed next line from 'registration.urls' (deprecated) to 'registration.backends.default.urls'?
     # See http://docs.b-list.org/django-registration/0.8/upgrade.html on how to rewrite for changes to the API

@@ -51,19 +51,6 @@ def activity(request, pk):
     shipments = mk_paginator(request, shipments, 15)
     return render_to_response("myfruitcake/activity.html", add_csrf(request, shipments=shipments, media_url=MEDIA_URL), context_instance=RequestContext(request))
 
-class FruitcakeListView(ListView):
-#    @method_decorator(login_required)
-#    def dispatch(self, *args, **kwargs):
-#        return super(FruitcakeListView, self).dispatch(*args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(FruitcakeListView, self).get_context_data(**kwargs)
-        context['user'] = self.request.user
-        return context
-
-    def get_queryset(self):
-        return Fruitcake.objects.all().order_by('-dt')[:8]
-
 class MyFruitcakeListView(ListView):
 #    @method_decorator(login_required)
 #    def dispatch(self, *args, **kwargs):
@@ -76,7 +63,7 @@ class MyFruitcakeListView(ListView):
         return context
 
     def get_queryset(self):
-        if self.request.user.id:
+        if self.request.user.id:   # should be is_authenticated not id
             return Fruitcake.objects.filter(uploader=self.request.user).order_by('-dt')
             # or: popup__startswith='Pick me'
         else:

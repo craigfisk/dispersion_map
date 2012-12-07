@@ -15,10 +15,11 @@
 
 {% block myfruitcakelist %}{% endblock myfruitcakelist %}        
 
-{# and user.is_authenticated #}
+    {% if user.is_authenticated %}
+
         {% if fruitcake_list %}
         <br />
-        <P class="main">Listing of fruitcake uploaded by <i><u>{{ uploader }}</u></i> (<b>click to send</b>):</P>
+        <P class="main">Recently uploaded fruitcake (<b>click to send</b>):</P>
 
         <div id="gallery_tape">
         <ul class="gallery tape">
@@ -41,5 +42,43 @@
             (Sorry, looks like you have not uploaded any fruitcake, yet.)
         {% endif %}
         </div>
+
+    {% else %}
+        
+        {% comment %}
+        Context[uploader] is in MyFruitcakeListView and not FruitcakeListView, so this is one way to tell how we got here
+        {% endcomment %}
+
+        {% if not uploader %} 
+
+            {% if fruitcake_list %}
+            <br />
+            <P class="main">Recently uploaded fruitcake (<b>click to send</b>):</P>
+
+            <div id="gallery_tape">
+            <ul class="gallery tape">
+                {% for item in fruitcake_list %}
+                    <li>
+                    <figure>
+                        <a href="{{ item.id }}/shipment/" title="{{ item.popup }}">
+                            <img src="{{ MEDIA_URL }}{{ item.pic }}"/>
+                        </a>
+                        <figcaption>uploaded: {{ item.dt }}<br />by: {{ item.uploader.username }}</figcaption>
+                    </figure>
+                    </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                (Sorry, no fruitcake.)
+            {% endif %}
+
+        {% else %}
+        
+            <P>(When you register, if you upload some fruitcake photos, they will be displayed here and you can then
+            click to email them.  Or you can just click to email fruitcake photos on the &quot;Home&quot; page.)</P> 
+
+        {% endif %}
+
+    {% endif %}
 
 {% endblock %}
