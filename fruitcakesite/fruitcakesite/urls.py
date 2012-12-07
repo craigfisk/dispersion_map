@@ -8,7 +8,6 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 ##    url(r'^$', home_page),
-    url(r'^$', FruitcakeListView.as_view(model=Fruitcake), name='home'),
 #    url(r'^home/$', home),
 ##    url(r'^$', main),
     url(r'^login/$', 'django.contrib.auth.views.login'),
@@ -17,6 +16,8 @@ urlpatterns = patterns('',
 #    url(r'^polls/', include('polls.urls')),
     url(r'forum/', include('forum.urls')),
     url(r'myfruitcake/', include('myfruitcake.urls')),
+
+    url(r'^$', FruitcakeListView.as_view(model=Fruitcake), name='home'),
 ##    url(r'^world/', include('world.urls')),
     # CF20121104 changed next line from 'registration.urls' (deprecated) to 'registration.backends.default.urls'?
     # See http://docs.b-list.org/django-registration/0.8/upgrade.html on how to rewrite for changes to the API
