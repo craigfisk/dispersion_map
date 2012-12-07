@@ -49,7 +49,7 @@ def activity(request, pk):
     #Listing of posts in a thread.
     shipments = Shipment.objects.all().order_by("dt")
     shipments = mk_paginator(request, shipments, 15)
-    return render_to_response("myfruitcake/activity.html", add_csrf(request, shipments=shipments, media_url=MEDIA_URL))
+    return render_to_response("myfruitcake/activity.html", add_csrf(request, shipments=shipments, media_url=MEDIA_URL), context_instance=RequestContext(request))
 
 class FruitcakeListView(ListView):
 #    @method_decorator(login_required)
@@ -287,7 +287,7 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
         shipment=None
                 
     return render_to_response('myfruitcake/fruitcake_shipment.html', add_csrf(request, form=form, fruitcake=fruitcake,
-        shipment=shipment))
+        shipment=shipment), context_instance=RequestContext(request))
 
 class UploadFruitcakeForm(ModelForm):
     class Meta:
@@ -316,7 +316,7 @@ def upload_file(request):
     else:
         form = UploadFruitcakeForm()
 
-    return render_to_response('myfruitcake/upload.html', add_csrf(request, form=form)) 
+    return render_to_response('myfruitcake/upload.html', add_csrf(request, form=form), context_instance=RequestContext(request)) 
 
 def success(request):
     return HttpResponse("Success!")
@@ -346,7 +346,7 @@ def meta(request):
 
 @staff_member_required
 def search_form(request):
-    return render_to_response('myfruitcake/search_form.html', {'user': request.user} )
+    return render_to_response('myfruitcake/search_form.html', {'user': request.user} , context_instance=RequestContext(request))
 
 @staff_member_required
 def search(request):
@@ -362,11 +362,11 @@ def search(request):
             fruitcakes = Fruitcake.objects.filter(popup__icontains=q)
             if len(fruitcakes):
                 return render_to_response('myfruitcake/search_results.html', {'fruitcakes': fruitcakes, 'query':q,
-                    'user':request.user})
+                    'user':request.user}, context_instance=RequestContext(request))
             else:
                 errors.append('No results for that search.')
 
-    return render_to_response('myfruitcake/search_form.html', {'errors': errors, 'user': request.user} )
+    return render_to_response('myfruitcake/search_form.html', {'errors': errors, 'user': request.user} , context_instance=RequestContext(request))
 
 
 

@@ -49,11 +49,27 @@
                     <div id="col2">
  
                         <h2>My shipments:</h2>
+                        {% comment %}
                         <ul>
-                            <li>What I sent: 0</li>
-                            <li>Downstream forwards: 0</li>
-                            <li>Uploads by me: 0</li>
-                        </ul>
+                            <li>What I myself sent: {{ my_shipments|length }} </li>
+                        {% endcomment %}
+                            {% if my_shipments %}
+                            <ul>
+                                {% for shipment in my_shipments %}
+                                    <li>{{ shipment.dt }} </li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                            <P>No shipments, yet</P>
+                            {% endif %}
+
+
+
+                            {% comment %}
+                            <li>Downstream forwards: [tbd] </li>
+                            <li>Uploads by me: [tdb]</li>
+                            {% endcomment %}
+                            {# </ul> #}
                            
                     </div>
                     <div id="col3">
@@ -71,7 +87,10 @@
                         </div>
 
                         <h2>My forum posts:</h2>
-
+                        <ul>
+                            <li>Posts: {{ my_posts|length }} </li>
+                        </ul>
+ 
                     </div>
                 </div>
             </div>

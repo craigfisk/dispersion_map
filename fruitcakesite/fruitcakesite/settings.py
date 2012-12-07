@@ -173,6 +173,24 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+#CF20121206 added template_context_processors for myfruitcake/user_context_processor.py
+# See see http://stackoverflow.com/questions/9832172/queryset-in-an-inherited-django-template
+# Documentation: https://docs.djangoproject.com/en/dev/ref/templates/api/#subclassing-context-requestcontext
+# Bennet example:  http://www.b-list.org/weblog/2006/jun/14/django-tips-template-context-processors/
+TEMPLATE_CONTEXT_PROCESSORS = (
+        'django.contrib.auth.context_processors.auth',
+        'django.core.context_processors.debug',
+        'django.core.context_processors.i18n',
+        'django.core.context_processors.media',
+        'django.core.context_processors.static',
+        'django.core.context_processors.tz',
+        'django.core.context_processors.request',
+        'django.contrib.messages.context_processors.messages',
+        #
+        'myfruitcake.context_processors.my_shipments_context_processor',
+        'myfruitcake.context_processors.my_posts_context_processor',
+        )
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

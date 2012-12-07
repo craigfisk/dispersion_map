@@ -15,8 +15,8 @@
 
 {% block myfruitcakelist %}{% endblock myfruitcakelist %}        
 
-
-        {% if fruitcake_list and user.is_authenticated %}
+{# and user.is_authenticated #}
+        {% if fruitcake_list %}
         <br />
         <P class="main">Listing of fruitcake uploaded by <i><u>{{ uploader }}</u></i> (<b>click to send</b>):</P>
 
@@ -37,7 +37,6 @@
         {% comment %}
  <br />by: {{ item.uploader.username }}
         {% endcomment %}
-        
         {% else %}
             (Sorry, looks like you have not uploaded any fruitcake, yet.)
         {% endif %}
