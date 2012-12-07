@@ -123,6 +123,25 @@ h3 { margin-right: 30px; display: inline; }
 	font: 100%/120% Handlee, Arial, Helvetica, sans-serif;
 	color: #787568;
 }
+.history_area li {
+    width: 600px;
+    padding: 4px;
+    color: gray;
+    margin: 0px 0px 0px 0px;
+    display: inline-block;
+    list-style: none;
+    background: #fff;
+    border: solid 0px #ccc;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+.history_item li {
+    padding: 20px;
+    margin: 5px 5px 5px 5px;
+    color: orange;
+}
+
 /*
 .tape a:before {
 	position: absolute;
@@ -135,8 +154,33 @@ h3 { margin-right: 30px; display: inline; }
 	margin-left: -57px;
 }
 */
-/* 
-	background: url(http://webdesignerwall.com/wp-content/uploads/2012/09/tape.png) no-repeat;
+/*
+#history-container {
+    width:90%
+    margin: 10px auto;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid gray;
+    line-height: 130%;
+}
+#history-image {
+    float:left;
+    width: 230px;
+    margin: 0;
+    padding: 1em;
+}
+#history-content {
+    margin-left: 250px;
+    border-left: 1px solid gray;
+    padding: 1em;
+    max-width: 36em;
+}
+
+*/
+
+
+/*
+ * background: url(http://webdesignerwall.com/wp-content/uploads/2012/09/tape.png) no-repeat;
 */
 
 .footer { align: center; text-align: center; margin-top: 5px; padding-top: 5px; }
