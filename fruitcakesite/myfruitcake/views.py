@@ -122,8 +122,8 @@ import re
 class MultiEmailField(forms.Field):
     def to_python(self, value):
         # remove whitespace from the string
-        pattern = re.compile('\s')
-        value = pattern.sub('', value)
+        ##pattern = re.compile('\s')
+        ##value = pattern.sub('', value)
  
         # normalize to list of strings; return empty list if no input
         if not value:
@@ -131,7 +131,8 @@ class MultiEmailField(forms.Field):
         #return value.split(',')
         # Return a list that is split on [;: ,] as valid separators of email addresses
         #value = re.split('[;\: \,]+', value)
-        return re.split('[;\: \,]+', value)
+        pattern = '[;: ,]+'
+        return re.split(pattern, value)
 
 
     # See https://docs.djangoproject.com/en/dev/ref/forms/validation/#form-field-default-cleaning
@@ -168,10 +169,11 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
         #formset = EmailContactFormset(request.POST, instance=shipment)
         if form.is_valid():
             cd = form.cleaned_data # cd['email'] is list of email addresses to send to
-            subject = 'Fruitcake for you'
+            #subject = 'Fruitcake for you'
+            message = cd['message']
             fruitcake = Fruitcake.objects.get(id=fruitcake_id)
             
-            this_shipment = Shipment(dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=subject)
+            this_shipment = Shipment(dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=message)
             this_shipment.save()
 
             if not shipment_id:
@@ -209,6 +211,7 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             connection = get_connection()  #uses smtp server specified in settings.py
 
             sender_message = cd['message']
+            subject = 'Fruitcake for you!'
             
             if cd['email']:
                 to = cd['email'].pop()
@@ -242,7 +245,9 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             else:
                 this_shipment_parent = this_shipment.parent
 
-            return HttpResponse("Sent!")
+
+            #return HttpResponse("Sent!")
+            return render_to_response("myfruitcake/sent.html", add_csrf(request, media_url=MEDIA_URL), context_instance=RequestContext(request))
             #return HttpResponse("Sent with following values: shipment_id: %s, this_shipment_origin: %s, this_shipment_parent: %s" % (shipment_id, this_shipment_origin, this_shipment_parent) )
             ##return HttpResponseRedirect('/myfruitcake/success/')
             #return HttpResponseRedirect("/myfruitcake/%(id)s/?err=success" % {"id":shipment_id})
