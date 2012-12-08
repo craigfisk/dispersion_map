@@ -129,9 +129,10 @@ h3 { margin-right: 30px; display: inline; }
     color: gray;
     margin: 0px 0px 0px 0px;
     display: inline-block;
-    list-style: none;
+/*    list-style: */
     padding-left: 1em;
     text-indent: -1em;
+
     background: #fff;
     border: solid 0px #ccc;
     box-shadow: none;
@@ -143,7 +144,30 @@ h3 { margin-right: 30px; display: inline; }
     margin: 5px 5px 5px 5px;
     color: orange;
 }
-
+/*
+ol {
+    display:block
+    color:orange;
+    list-style-type:decimal;
+    margin-before:1em;
+    margin-after:1em;
+    margin-start:0;
+    margin-end:0;
+    padding-start:40px:
+}
+*/
+/*
+ol {
+    list-style-type:none;
+    counter-reset:item; 
+}
+ol > li {
+    counter-increment:item -1;
+}
+ol > li:before {
+    content:counter(item) ". ";
+}
+*/
 /*
 .tape a:before {
 	position: absolute;

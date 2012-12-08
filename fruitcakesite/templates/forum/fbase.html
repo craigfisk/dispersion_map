@@ -48,19 +48,20 @@
                     </div>
                     <div id="col2">
  
-                        <h2>My shipments:</h2>
-                        {% comment %}
-                        <ul>
-                            <li>What I myself sent: {{ my_shipments|length }} </li>
-                        {% endcomment %}
+                        <h2>My shipment count: {% if my_shipments %}{{ my_shipments|length }}{% endif %}</h2>
+
                             {% if my_shipments %}
+                            <P><a href="/myfruitcake/myshipments/">Click to view</a></P>
+                            {% comment %}
+                            Latest dates:
                             <ul>
                                 {% for shipment in my_shipments %}
                                     <li>{{ shipment.dt }} </li>
                                 {% endfor %}
                             </ul>
+                            {% endcomment %}
                             {% else %}
-                            <P>No shipments, yet</P>
+                            <P>No shipments</P>
                             {% endif %}
 
 
@@ -80,16 +81,18 @@
                                         <img src="http://www.justfruitcake.com/static/media/{{ user.get_profile.avatar }}">
                                 </div>
                             {% elif user.username and not user.get_profile.avatar %}
-                                No photo? It would be nice if you would please click the &quot;Edit profile&quot; button and upload a picture of yourself.
+                                No photo? It would be nice if you would click the &quot;Edit profile&quot; button and upload a picture of yourself.
                             {% else %}
                                 
                             {% endif %}
                         </div>
-
+                
+                        {% comment %}
                         <h2>My forum posts:</h2>
                         <ul>
                             <li>Posts: {{ my_posts|length }} </li>
                         </ul>
+                        {% endcomment %}
  
                     </div>
                 </div>

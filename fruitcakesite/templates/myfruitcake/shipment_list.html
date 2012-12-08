@@ -41,21 +41,19 @@
 
                 <td valign="top">
                 {% if item.get_shipment_list %}
-                    <ul class="history_area">
+                    <ol class="history_area" reversed >
                     {% for segment in item.get_shipment_list %}
                     <li class="history_item">
                         {{ segment.dt }} sent by {{ segment.sender }} 
-                        
-                        {% comment %} 
+                        {#       ({{ city }}, {{ region }}, {{ country }}) #}
                         with message &quot;{{ segment.message }}&quot;
                         <br />to 
                             {% for email in segment.emailcontacts.all %} 
                                 {{email }}{% if not forloop.last %}, {% endif %} 
                             {% endfor %} 
-                        {% endcomment %}
                     </li>
                     {% endfor %}
-                    </ul>
+                    </ol>
                 {% else %}
                     <b>no list</b>
                 {% endif %}

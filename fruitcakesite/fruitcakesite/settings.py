@@ -32,6 +32,7 @@ TEMPLATE_DEBUG = DEBUG
 
 WIDTH_AVATAR = 120
 WIDTH_FRUITCAKE = 192
+GEOIP_PATH = '/home/fisk/virt/geoip_data'
 
 ADMINS = (
     ('Craig Fisk', 'craigfisk@justfruitcake.com'),
