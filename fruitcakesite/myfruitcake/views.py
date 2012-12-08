@@ -37,14 +37,6 @@ class ProfileForm(ModelForm):
         model = UserProfile
 #        exclude = ["posts", "user"]
 
-"""
-@login_required
-def main(request):
-    return HttpResponseRedirect("/myfruitcake/")
-#    fruitcake = Fruitcake.objects.all()
-#    return render_to_response("myfruitcake/myfruitcake_list.html", dict(fruitcake=fruitcake, user=request.user))
-"""
-
 def activity(request, pk):
     #Listing of posts in a thread.
     shipments = Shipment.objects.all().order_by("dt")
@@ -140,7 +132,8 @@ class MultiEmailField(forms.Field):
         
 class EmailContactForm(forms.Form):
     # see class MultiEmailField above
-    email = MultiEmailField(help_text="(Please enter comma-separated email addresses.)", widget=forms.TextInput(attrs={'size':'32'}) )
+    email = MultiEmailField(help_text="(Please provide one or more email addresses.)", widget=forms.TextInput(attrs={'size':'32'}) )
+    message = forms.CharField(max_length='256', widget=forms.Textarea(attrs={'size':'32'}) )
 
 from django.core.mail import get_connection
 from django.forms.models import inlineformset_factory
@@ -192,19 +185,20 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             # CF20121126 solution: http://stackoverflow.com/questions/7583801/send-mass-emails-with-emailmultialternatives
             # CF20121129 on 1) mail test env and 2) connection management, see "SMTP Backend" and "Sending multiple emails" 
             # Separate into Gmail (no inline images) and other mail
-            google = []
-            ungoogle = []
-            x = [ungoogle.append(e) if e.split('@')[1] != 'gmail.com' else google.append(e) for e in cd['email'] ]
+            """
+            To retrieve gmail vs. other, go back to bbef9e1 Craig Fisk      Fri Dec 7 15:16:05 2012 -0800   "Got Home or MyFruitcake x Anonymous or SignedIn x
+            display or click to send = all working again" -- this was an interim scheme to handle gmail separately.
+            """
+            ## x = [cd['email'].append(e) if e.split('@')[1] != 'gmail.com' else google.append(e) for e in cd['email'] ]
             # sections in https://docs.djangoproject.com/en/dev/topics/email/
             # CF20121129 on using Celery to send emails in the background, see documentation pointed to in
             # http://stackoverflow.com/questions/7626071/python-django-sending-emails-in-the-background
             connection = get_connection()  #uses smtp server specified in settings.py
 
-            # non-gmail section
-            if ungoogle:
-                to = ungoogle.pop()
-                if ungoogle:
-                    bcc = ungoogle
+            if cd['email']:
+                to = cd['email'].pop()
+                if cd['email']:
+                    bcc = cd['email']
                 else:
                     bcc = None
                 txty = get_template('myfruitcake/shipment_email.txt')
@@ -213,35 +207,13 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
                 d = Context( {'fruitcake': fruitcake, 'shipment': this_shipment } )
                 text_content = txty.render(d)
                 html_content = htmly.render(d)
-                ungoogle_msg = EmailMultiAlternatives(subject, text_content, from_email=request.user.email,to=(to,), bcc=bcc, connection=connection)
-                ungoogle_msg.attach_alternative(html_content, "text/html")
+                msg = EmailMultiAlternatives(subject, text_content, from_email=request.user.email,to=(to,), bcc=bcc, connection=connection)
+                msg.attach_alternative(html_content, "text/html")
 
                 try:
                     # If fail_silently=False, send_mail will raise an smtplib.SMTPException. See the smtplib docs for a list of
                     # possible exceptions, all of which are subclasses of SMTPException.
-                    ungoogle_msg.send(fail_silently=False)
-                except Exception, e:
-                    return HttpResponse(e)
-
-            # gmail section (the templates have no images)
-            if google:
-                to = google.pop()
-                if google:
-                    bcc = google
-                else:
-                    bcc = None
-                txty = get_template('myfruitcake/shipment_gmail.txt')
-                htmly = get_template('myfruitcake/shipment_gmail.html')
-                d = Context( {'fruitcake': fruitcake, 'shipment': this_shipment } )
-                text_content = txty.render(d)
-                html_content = htmly.render(d)
-                google_msg = EmailMultiAlternatives(subject, text_content, from_email=request.user.email,to=(to,), bcc=bcc, connection=connection)
-                google_msg.attach_alternative(html_content, "text/html")
-
-                try:
-                    # If fail_silently=False, send_mail will raise an smtplib.SMTPException. See the smtplib docs for a list of
-                    # possible exceptions, all of which are subclasses of SMTPException.
-                    google_msg.send(fail_silently=False)
+                    msg.send(fail_silently=False)
                 except Exception, e:
                     return HttpResponse(e)
 
@@ -262,7 +234,7 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             return HttpResponse('Sorry, something invalid in your email addresses. Should be a comma-separated list of email addresses.')
 
     else:
-        form = EmailContactForm()    # initial={'message': 'Happy fruitcake!'}
+        form = EmailContactForm(initial={'message': 'Fruitcake for you!'})
 
     if fruitcake_id:
         fruitcake = Fruitcake.objects.get(id=fruitcake_id)
