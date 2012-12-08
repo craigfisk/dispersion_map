@@ -61,6 +61,17 @@ class MyFruitcakeListView(ListView):
         else:
             return Fruitcake.objects.all().order_by('-dt')[:8]
 
+class ShipmentListView(ListView):
+    def get_context_data(self, **kwargs):
+        context = super(ShipmentListView, self).get_context_data(**kwargs)
+        context['user'] = self.request.user
+        return context
+
+    def get_queryset(self):
+        if self.request.user:   # should be is_authenticated not id
+            return Shipment.objects.filter(sender=self.request.user).order_by('-dt')
+
+
 class ShipmentDetailView(DetailView):
     """Retrieve information about a shipment.
     Includes information chain on parents. If parent is None, put the current shipment_id in as the parent. If

@@ -130,6 +130,8 @@ h3 { margin-right: 30px; display: inline; }
     margin: 0px 0px 0px 0px;
     display: inline-block;
     list-style: none;
+    padding-left: 1em;
+    text-indent: -1em;
     background: #fff;
     border: solid 0px #ccc;
     box-shadow: none;
