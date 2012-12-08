@@ -76,13 +76,6 @@ class IPAddress(models.Model):
     def __unicode__(self):
         return unicode(self.address)
 
-"""
-class FauxShipment(models.Model):
-    dt = models.DateTimeField(auto_now_add=True)
-    message = models.CharField(max_length=256, blank=False, null=False)
-    emailcontacts = models.ManyToManyField('EmailContact', related_name='fauxemailcontacts',verbose_name='fauxemailcontacts', null=True)
-"""
-
 class Shipment(models.Model):
     dt = models.DateTimeField(auto_now_add=True)
     origin = models.ForeignKey('Shipment', null=True, related_name='shipment_origin')

@@ -6,3 +6,4 @@ While you are there, you can send the fruitcake on to other people. If you also 
 
 Happy fruitcake!
 
+{{ sender_message }}

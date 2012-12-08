@@ -150,6 +150,8 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
     EmailMultiAlternatives.
 
     """
+    sender_message = None
+
     if request.method == 'POST':
         form = EmailContactForm(request.POST)
         #formset = EmailContactFormset(request.POST, instance=shipment)
@@ -173,7 +175,7 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             
             for email in cd['email']:
                 ##emailcontact = shipment.emailcontacts.create(email=email)
-                # Using get_or_create, so we get only unique email addresses added to EmailContact
+                # Using get_or_create() to only add unique email addresses to EmailContact that are not already there.
                 # See https://docs.djangoproject.com/en/dev/ref/models/querysets/#django.db.models.query.QuerySet.get_or_create
                 emailcontact, created = EmailContact.objects.get_or_create(email=email)
                 this_shipment.emailcontacts.add(emailcontact)
@@ -195,6 +197,8 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             # http://stackoverflow.com/questions/7626071/python-django-sending-emails-in-the-background
             connection = get_connection()  #uses smtp server specified in settings.py
 
+            sender_message = cd['message']
+            
             if cd['email']:
                 to = cd['email'].pop()
                 if cd['email']:
@@ -204,7 +208,8 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
                 txty = get_template('myfruitcake/shipment_email.txt')
                 htmly = get_template('myfruitcake/shipment_email.html')
 
-                d = Context( {'fruitcake': fruitcake, 'shipment': this_shipment } )
+
+                d = Context( {'fruitcake': fruitcake, 'shipment': this_shipment, 'sender_message': sender_message} )
                 text_content = txty.render(d)
                 html_content = htmly.render(d)
                 msg = EmailMultiAlternatives(subject, text_content, from_email=request.user.email,to=(to,), bcc=bcc, connection=connection)
@@ -217,8 +222,6 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
                 except Exception, e:
                     return HttpResponse(e)
 
-            ##return HttpResponseRedirect('/myfruitcake/success/')
-            #return HttpResponseRedirect("/myfruitcake/%(id)s/?err=success" % {"id":shipment_id})
             if not this_shipment.origin:
                 this_shipment_origin = 0
             else:
@@ -230,11 +233,19 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
 
             return HttpResponse("Sent!")
             #return HttpResponse("Sent with following values: shipment_id: %s, this_shipment_origin: %s, this_shipment_parent: %s" % (shipment_id, this_shipment_origin, this_shipment_parent) )
+            ##return HttpResponseRedirect('/myfruitcake/success/')
+            #return HttpResponseRedirect("/myfruitcake/%(id)s/?err=success" % {"id":shipment_id})
+
         else:
             return HttpResponse('Sorry, something invalid in your email addresses. Should be a comma-separated list of email addresses.')
 
     else:
-        form = EmailContactForm(initial={'message': 'Fruitcake for you!'})
+        if sender_message:
+            message = sender_message
+        else:
+            message = 'Fruitcake for you!'
+
+        form = EmailContactForm(initial={'message': message})
 
     if fruitcake_id:
         fruitcake = Fruitcake.objects.get(id=fruitcake_id)
