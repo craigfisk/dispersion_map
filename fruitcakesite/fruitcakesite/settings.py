@@ -207,7 +207,9 @@ LOGIN_URL = '/registration/login/'
 
 LOGOUT_URL = '/registration/logout/'
 
-LOGIN_REDIRECT_URL = '/registration/profile/'
+##LOGIN_REDIRECT_URL = '/registration/profile/'
+LOGIN_REDIRECT_URL = '/myfruitcake/'
+
 
 
 ROOT_URLCONF = 'fruitcakesite.urls'
