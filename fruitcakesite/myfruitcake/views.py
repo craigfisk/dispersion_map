@@ -173,11 +173,11 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             message = cd['message']
             fruitcake = Fruitcake.objects.get(id=fruitcake_id)
             
-            this_shipment = Shipment(dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=message)
+            ip, created = IPAddress.objects.get_or_create(ipaddress=request.META['REMOTE_ADDR'])
+            #this_shipment.ipaddress.add(ip)
+            this_shipment = Shipment(ipaddress=ip, dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=message)
             # adding ipaddress info:
             # Use get_or_create() to only add unique ip's
-#            ipaddress, added = IPAddress.objects.get_or_create(ipaddress=request.META['REMOTE_ADDR'])
-#            this_shipment.ipaddress.add(ipaddress)
 
             this_shipment.save()
 

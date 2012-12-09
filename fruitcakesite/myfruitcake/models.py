@@ -74,7 +74,7 @@ class IPAddress(models.Model):
     country_code = models.CharField(max_length=2, null=True)
 
     def __unicode__(self):
-        return unicode(self.address)
+        return unicode(self.ipaddress)
 
 class Shipment(models.Model):
     dt = models.DateTimeField(auto_now_add=True)
