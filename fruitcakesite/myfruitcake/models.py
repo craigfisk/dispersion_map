@@ -83,7 +83,7 @@ class Shipment(models.Model):
     fruitcake = models.ForeignKey(Fruitcake)
     sender = models.ForeignKey(User, verbose_name='senders', related_name='senders')
     emailcontacts = models.ManyToManyField('EmailContact', related_name='emailcontacts',verbose_name='emailcontacts', null=True)
-    ipaddress = models.ForeignKey(IPAddress, related_name='ipaddresses', verbose_name='ipaddresses', blank=True,null=True)
+    ipaddresses = models.ManyToManyField('IPAddress', related_name='ipaddresses', verbose_name='ipaddresses', null=True)
     message = models.TextField(max_length=256, blank=False, null=False)
     text = models.TextField(blank=True, null=True)
 

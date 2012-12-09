@@ -173,11 +173,7 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             message = cd['message']
             fruitcake = Fruitcake.objects.get(id=fruitcake_id)
             
-            ip, created = IPAddress.objects.get_or_create(ipaddress=request.META['REMOTE_ADDR'])
-            #this_shipment.ipaddress.add(ip)
-            this_shipment = Shipment(ipaddress=ip, dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=message)
-            # adding ipaddress info:
-            # Use get_or_create() to only add unique ip's
+            this_shipment = Shipment(dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=message)
 
             this_shipment.save()
 
@@ -190,14 +186,17 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
                 this_shipment.parent = prior_shipment
             
             this_shipment.save()
-            
+ 
+            # Using get_or_create() to only add unique ipaddressses. ip is the object; created is a boolean.
+            ip, created = IPAddress.objects.get_or_create(ipaddress=request.META['REMOTE_ADDR'])
+            this_shipment.ipaddresses.add(ip)
+           
             for email in cd['email']:
-                ##emailcontact = shipment.emailcontacts.create(email=email)
                 # Using get_or_create() to only add unique email addresses to EmailContact that are not already there.
                 # See https://docs.djangoproject.com/en/dev/ref/models/querysets/#django.db.models.query.QuerySet.get_or_create
                 emailcontact, created = EmailContact.objects.get_or_create(email=email)
                 this_shipment.emailcontacts.add(emailcontact)
-                
+               
             #Note: add an "emailed successfully" column to shipment (T/F) to set at the try below?
 
             # Notes: the emailing part --
