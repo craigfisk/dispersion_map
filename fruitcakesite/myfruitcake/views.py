@@ -15,7 +15,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR, WIDTH_FRUITCAKE
 
-from myfruitcake.models import Fruitcake, Shipment, Upload, Like
+from myfruitcake.models import Fruitcake, Shipment, Upload, Like, IPAddress
 from forum.models import UserProfile
 from forum.views import mk_paginator, UserProfile, profile
 
@@ -174,6 +174,11 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             fruitcake = Fruitcake.objects.get(id=fruitcake_id)
             
             this_shipment = Shipment(dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=message)
+            # adding ipaddress info:
+            # Use get_or_create() to only add unique ip's
+#            ipaddress, added = IPAddress.objects.get_or_create(ipaddress=request.META['REMOTE_ADDR'])
+#            this_shipment.ipaddress.add(ipaddress)
+
             this_shipment.save()
 
             if not shipment_id:

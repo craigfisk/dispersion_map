@@ -67,11 +67,11 @@ class EmailContact(models.Model):
         return unicode(self.email)
 
 class IPAddress(models.Model):
-    address = models.GenericIPAddressField(null=True)
-    city = models.CharField(max_length=60)
-    region = models.CharField(max_length=30)
-    country = models.CharField(max_length=50)
-    country_code = models.CharField(max_length=2)
+    ipaddress = models.GenericIPAddressField(default='255.255.255.255')  # GeoIP returns None for this address
+    city = models.CharField(max_length=60, null=True)
+    region = models.CharField(max_length=30, null=True)
+    country = models.CharField(max_length=50, null=True)
+    country_code = models.CharField(max_length=2, null=True)
 
     def __unicode__(self):
         return unicode(self.address)
