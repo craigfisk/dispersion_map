@@ -76,6 +76,14 @@ class IPAddress(models.Model):
     def __unicode__(self):
         return unicode(self.ipaddress)
 
+    def get_city(self):
+        from django.contrib.gis.geoip import GeoIP
+        g = GeoIP()     
+        #ip = IPAddress.objects.get(ipaddress=ipaddress)
+        # The following returns a dict, incl. area_code, city, country_code, country_name, country_code3 (abbrev),
+        # region, postal_code, latitude, longitude, and dma_code
+        return g.city(self.ipaddress)
+
 class Shipment(models.Model):
     dt = models.DateTimeField(auto_now_add=True)
     origin = models.ForeignKey('Shipment', null=True, related_name='shipment_origin')

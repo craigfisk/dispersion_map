@@ -65,6 +65,7 @@ class ShipmentListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ShipmentListView, self).get_context_data(**kwargs)
         context['user'] = self.request.user
+#        context['geoip'] = Shipment.objects.get(pk=pk)
         return context
 
     def get_queryset(self):

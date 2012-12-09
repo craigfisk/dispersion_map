@@ -45,6 +45,12 @@
                     {% for segment in item.get_shipment_list %}
                     <li class="history_item">
                         {{ segment.dt }} sent by {{ segment.sender }} 
+                        {# ({{ segment.ipaddresses.get_city }}) #}
+                        {% comment %}
+                        {% for info in segment.ipaddresses.getinfo %}
+                            {{ info }}, 
+                        {% endfor %}
+                        {% endcomment %}
                         {#       ({{ city }}, {{ region }}, {{ country }}) #}
                         with message &quot;{{ segment.message }}&quot;
                         <br />to 
