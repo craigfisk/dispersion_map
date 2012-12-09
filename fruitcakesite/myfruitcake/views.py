@@ -227,7 +227,6 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
                 txty = get_template('myfruitcake/shipment_email.txt')
                 htmly = get_template('myfruitcake/shipment_email.html')
 
-
                 d = Context( {'fruitcake': fruitcake, 'shipment': this_shipment, 'sender_message': sender_message} )
                 text_content = txty.render(d)
                 html_content = htmly.render(d)
@@ -249,7 +248,6 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
                 this_shipment_parent = 0
             else:
                 this_shipment_parent = this_shipment.parent
-
 
             #return HttpResponse("Sent!")
             return render_to_response("myfruitcake/sent.html", add_csrf(request, media_url=MEDIA_URL), context_instance=RequestContext(request))
