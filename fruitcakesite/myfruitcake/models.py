@@ -6,6 +6,9 @@ from os.path import join as pjoin
 from tempfile import *
 from PIL import Image as PImage
 from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR, WIDTH_FRUITCAKE
+from django.contrib.gis.geoip import GeoIP
+
+geoip = GeoIP()
 
 class Fruitcake(models.Model):
     dt = models.DateTimeField(auto_now_add=True)
@@ -53,7 +56,7 @@ class Like(models.Model):
     user = models.ManyToManyField(User)
 
 class Upload(models.Model):
-    dt = models.DateTimeField(auto_now_add=True)
+    dt = models.DateTimeField(auto_now_add=True) 
     fruitcake = models.ForeignKey(Fruitcake)
     uploader = models.OneToOneField(User)
 
@@ -77,12 +80,9 @@ class IPAddress(models.Model):
         return unicode(self.ipaddress)
 
     def get_city(self):
-        from django.contrib.gis.geoip import GeoIP
-        g = GeoIP()     
-        #ip = IPAddress.objects.get(ipaddress=ipaddress)
-        # The following returns a dict, incl. area_code, city, country_code, country_name, country_code3 (abbrev),
-        # region, postal_code, latitude, longitude, and dma_code
-        return g.city(self.ipaddress)
+        # Returns a dict with area_code, city, country_code, country_name, 
+        # country_code3 (abbrev), region, postal_code, latitude, longitude, and dma_code
+        return geoip.city(self.ipaddress)
 
 class Shipment(models.Model):
     dt = models.DateTimeField(auto_now_add=True)

@@ -44,14 +44,9 @@
                     <ol class="history_area" reversed >
                     {% for segment in item.get_shipment_list %}
                     <li class="history_item">
-                        {{ segment.dt }} sent by {{ segment.sender }} 
-                        {# ({{ segment.ipaddresses.get_city }}) #}
-                        {% comment %}
-                        {% for info in segment.ipaddresses.getinfo %}
-                            {{ info }}, 
-                        {% endfor %}
-                        {% endcomment %}
-                        {#       ({{ city }}, {{ region }}, {{ country }}) #}
+                    id #{{ segment.id }} {{ segment.dt }} sent by {{ segment.sender }}
+                        {{ segment.ipaddresses_all }} 
+                        {# ({{ segment.ipaddresses_get_city['city'] }}) #}
                         with message &quot;{{ segment.message }}&quot;
                         <br />to 
                             {% for email in segment.emailcontacts.all %} 

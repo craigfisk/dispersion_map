@@ -4,7 +4,7 @@
 import socket
 if socket.gethostname() == 'zazen':
     DEBUG = False
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 else:
     DEBUG = True
     #NOTE: switch to following IF DEBUGGING LOCALLY -- writes to console (or to file)
@@ -32,13 +32,15 @@ TEMPLATE_DEBUG = DEBUG
 
 WIDTH_AVATAR = 120
 WIDTH_FRUITCAKE = 192
-GEOIP_PATH = '/home/fisk/virt/geoip_data'
 
 ADMINS = (
     ('Craig Fisk', 'craigfisk@justfruitcake.com'),
 )
 
 MANAGERS = ADMINS
+
+
+GEOIP_PATH = '/home/fisk/virt/geoip_data'
 
 DATABASES = {
     'default': {
