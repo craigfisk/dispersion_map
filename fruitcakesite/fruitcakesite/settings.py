@@ -77,9 +77,10 @@ EMAIL_USE_TLS = True
 # next 2 are used to authenticate to the smtp server.
 EMAIL_HOST_USER = 'craigfisk@picocosmos.net'
 EMAIL_HOST_PASSWORD = 'Sp8rky=4242'
-DEFAULT_FROM_EMAIL = 'craigfisk@picocosmos.net' #support@justfruitcake.com'
-SERVER_EMAIL = 'craigfisk@picocosmos.net'
-##SERVER_EMAIL = 'support@justfruitcake.com' #default: root@localhost
+DEFAULT_FROM_EMAIL = 'support@justfruitcake.com'
+##DEFAULT_FROM_EMAIL = 'craigfisk@picocosmos.net' #support@justfruitcake.com'
+##SERVER_EMAIL = 'craigfisk@picocosmos.net'
+SERVER_EMAIL = 'support@justfruitcake.com' #default: root@localhost
 
 FILE_UPLOAD_MAX_MEMORY_SIZE = 16777216 #16MB, 2^24; default 2621440 (2.5 MB)
 FILE_UPLOAD_TEMP_DIR = None #default: Note, so Django uses Linux default /tmp

@@ -73,6 +73,7 @@ class ShipmentListView(ListView):
             return Shipment.objects.filter(sender=self.request.user).order_by('-dt')
 
 
+
 class ShipmentDetailView(DetailView):
     """Retrieve information about a shipment.
     Includes information chain on parents. If parent is None, put the current shipment_id in as the parent. If
@@ -230,7 +231,8 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
                 d = Context( {'fruitcake': fruitcake, 'shipment': this_shipment, 'sender_message': sender_message} )
                 text_content = txty.render(d)
                 html_content = htmly.render(d)
-                msg = EmailMultiAlternatives(subject, text_content, from_email=request.user.email,to=(to,), bcc=bcc, connection=connection)
+                #msg = EmailMultiAlternatives(subject, text_content, from_email=request.user.email,to=(to,), bcc=bcc, connection=connection, headers={'Reply-To': request.user.email} )
+                msg = EmailMultiAlternatives(subject, text_content, from_email=request.user.email,to=(to,), bcc=bcc, connection=connection, headers={'Reply-To': request.user.email} )
                 msg.attach_alternative(html_content, "text/html")
 
                 try:
