@@ -193,7 +193,7 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             # Using get_or_create() to only add unique ipaddressses. ip is the object; created is a boolean.
             addr=request.META['REMOTE_ADDR']
             city=g.city(addr)
-            ip, created = IPAddress.objects.get_or_create(ipaddress=a,city=city['city'],region=city['region'],country_name=city['country_name'],country_code=city['country_code'])
+            ip, created = IPAddress.objects.get_or_create(ipaddress=addr,city=city['city'],region=city['region'],country_name=city['country_name'],country_code=city['country_code'])
             this_shipment.ipaddresses.add(ip)
            
             for email in cd['email']:
