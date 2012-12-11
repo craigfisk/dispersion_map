@@ -46,7 +46,7 @@
                     <li class="history_item">
                     id #{{ segment.id }} {{ segment.dt }} sent by {{ segment.sender }}
                         {{ segment.ipaddresses_all }} 
-                        {# ({{ segment.ipaddresses_get_city['city'] }}) #}
+                        ({{ segment.ipaddresses.city }}) 
                         with message &quot;{{ segment.message }}&quot;
                         <br />to 
                             {% for email in segment.emailcontacts.all %} 
