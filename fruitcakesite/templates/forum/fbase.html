@@ -11,6 +11,7 @@
                 <!-- MENU -->
                 <h3><a href="{% url fruitcakelistview %}">Home</a></h3>
                 <h3><a href="{% url myfruitcakelistview %}">MyFruitcake</a></h3>
+                <h3><a href="{% url myshipments %}">MyShipments</a></h3>
                 <h3><a href="{% url forum.views.main %}">Forum</a></h3>
 
                 {% if user.is_staff %} <a href="{% url admin:index %}">Admin</a> {% endif %}
@@ -48,30 +49,26 @@
                     </div>
                     <div id="col2">
  
-                        <h2>My shipment count: {% if my_shipments %}{{ my_shipments|length }}{% endif %}</h2>
-
+                        <h2>My stats (tbd): {% if mystats %}{{ mystats|length }}{% endif %}</h2>
+                        {% comment %}
                             {% if my_shipments %}
                             <P><a href="/myfruitcake/myshipments/">Click to view</a></P>
-                            {% comment %}
                             Latest dates:
                             <ul>
                                 {% for shipment in my_shipments %}
                                     <li>{{ shipment.dt }} </li>
                                 {% endfor %}
                             </ul>
-                            {% endcomment %}
                             {% else %}
                             <P>No shipments</P>
                             {% endif %}
 
 
 
-                            {% comment %}
                             <li>Downstream forwards: [tbd] </li>
                             <li>Uploads by me: [tdb]</li>
-                            {% endcomment %}
                             {# </ul> #}
-                           
+                        {% endcomment %}
                     </div>
                     <div id="col3">
 

@@ -22,7 +22,8 @@ urlpatterns = patterns('myfruitcake.views',
 #    url(r'^email/(?P<fruitcake_id>\d+)/$', 'email_fruitcake'),
 #    url(r'^email/(?P<fruitcake_id>\d+)/shipment/(?P<shipment_id>\d+)/$', 'email_fruitcake'),
 
-    url(r'^(?P<fruitcake_id>\d+)/shipment/$', 'email_fruitcake'),
+    #url(r'^(?P<fruitcake_id>\d+)/shipment/$', 'email_fruitcake'),
+    url(r'(?P<fruitcake_id>\d+)/shipment/$', 'email_fruitcake'),
     url(r'^(?P<fruitcake_id>\d+)/shipment/(?P<shipment_id>\d+)/$', 'email_fruitcake'),
    
 #    url(r'^email/(?P<fruitcake_id>\d+)/shipment/(?P<shipment_id>\d+)/$', ShipmentDetailView.as_view(model=Shipment), name='address_email'),

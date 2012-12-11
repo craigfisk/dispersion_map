@@ -246,6 +246,7 @@ INSTALLED_APPS = (
 #django-registration, see readthedocs
     'registration',
     'myfruitcake',
+#    'myshipments',
     'forum',
 )
 

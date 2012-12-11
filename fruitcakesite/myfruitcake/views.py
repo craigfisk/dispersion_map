@@ -164,7 +164,6 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
 
     """
     sender_message = None
-
     if request.method == 'POST':
         form = EmailContactForm(request.POST)
         #formset = EmailContactFormset(request.POST, instance=shipment)
@@ -213,6 +212,7 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             # sections in https://docs.djangoproject.com/en/dev/topics/email/
             # CF20121129 on using Celery to send emails in the background, see documentation pointed to in
             # http://stackoverflow.com/questions/7626071/python-django-sending-emails-in-the-background
+
             connection = get_connection()  #uses smtp server specified in settings.py
 
             sender_message = cd['message']
@@ -230,13 +230,14 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
                 d = Context( {'fruitcake': fruitcake, 'shipment': this_shipment, 'sender_message': sender_message} )
                 text_content = txty.render(d)
                 html_content = htmly.render(d)
-                #msg = EmailMultiAlternatives(subject, text_content, from_email=request.user.email,to=(to,), bcc=bcc, connection=connection, headers={'Reply-To': request.user.email} )
                 msg = EmailMultiAlternatives(subject, text_content, from_email=request.user.email,to=(to,), bcc=bcc, connection=connection, headers={'Reply-To': request.user.email} )
+
                 msg.attach_alternative(html_content, "text/html")
 
                 try:
                     # If fail_silently=False, send_mail will raise an smtplib.SMTPException. See the smtplib docs for a list of
                     # possible exceptions, all of which are subclasses of SMTPException.
+                    # see https://docs.djangoproject.com/en/1.4/topics/email/#email-backends
                     msg.send(fail_silently=False)
                 except Exception, e:
                     return HttpResponse(e)
