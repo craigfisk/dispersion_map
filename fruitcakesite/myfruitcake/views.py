@@ -31,6 +31,9 @@ from django.template.loader import get_template
 from django.template import Context
 
 from datetime import datetime
+from django.contrib.gis.geoip import GeoIP
+
+g = GeoIP()
 
 class ProfileForm(ModelForm):
     class Meta:
@@ -188,7 +191,9 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             this_shipment.save()
  
             # Using get_or_create() to only add unique ipaddressses. ip is the object; created is a boolean.
-            ip, created = IPAddress.objects.get_or_create(ipaddress=request.META['REMOTE_ADDR'])
+            addr=request.META['REMOTE_ADDR']
+            city=g.city(addr)
+            ip, created = IPAddress.objects.get_or_create(ipaddress=a,city=city['city'],region=city['region'],country_name=city['country_name'],country_code=city['country_code'])
             this_shipment.ipaddresses.add(ip)
            
             for email in cd['email']:

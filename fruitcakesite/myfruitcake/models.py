@@ -73,7 +73,7 @@ class IPAddress(models.Model):
     ipaddress = models.GenericIPAddressField(default='255.255.255.255')  # GeoIP returns None for this address
     city = models.CharField(max_length=60, null=True)
     region = models.CharField(max_length=30, null=True)
-    country = models.CharField(max_length=50, null=True)
+    country_name = models.CharField(max_length=50, null=True)
     country_code = models.CharField(max_length=2, null=True)
 
     def __unicode__(self):
