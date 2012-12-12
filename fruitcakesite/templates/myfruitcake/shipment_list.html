@@ -43,17 +43,19 @@
                 {% if item.get_shipment_list %}
                 <u>Latest</u>
                     <ol class="history_area" reversed >
-                    {% for segment in item.get_shipment_list %}
+                    {% for s in item.get_shipment_list %}
                     <li class="history_item">
-                    - shipment {{ segment.id }}, {{ segment.dt }} sent by <b>{{ segment.sender }}
-                        {% for ip in segment.ipaddresses.all %}
+                    - Shipment {{ s.id }}, {{ s.dt }} sent by <b>{{ s.sender }}
+                        {% for ip in s.ipaddresses.all %}
                         ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }}) 
                         {% endfor %}</b>
-                        with message &quot;{{ segment.message }}&quot;
+                        with message &quot;{{ s.message }}&quot;
+                        {% comment %}
                         <br />to 
-                            {% for email in segment.emailcontacts.all %} 
+                            {% for email in s.emailcontacts.all %} 
                                 {{email }}{% if not forloop.last %}, {% endif %} 
                             {% endfor %} 
+                        {% endcomment %}
                     </li>
                     {% endfor %}
                     </ol>
