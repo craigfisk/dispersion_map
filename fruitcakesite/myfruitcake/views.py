@@ -132,11 +132,12 @@ class MultiEmailField(forms.Field):
         # normalize to list of strings; return empty list if no input
         if not value:
             return []
-        #return value.split(',')
-        # Return a list that is split on [;: ,] as valid separators of email addresses
+
+        # First remove whitespace from before and after the string before splitting it.
+        # then return a list that is split on [;: ,] as valid separators of email addresses
         #value = re.split('[;\: \,]+', value)
         pattern = '[;: ,]+'
-        return re.split(pattern, value)
+        return re.split(pattern, value.strip())
 
 
     # See https://docs.djangoproject.com/en/dev/ref/forms/validation/#form-field-default-cleaning
