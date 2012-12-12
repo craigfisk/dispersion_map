@@ -76,6 +76,7 @@ h3 { margin-right: 30px; display: inline; }
 .ppic { float: right; }
 .clear { clear: both; }
 .last { border: 0px; }
+#rtitle { color: red; }
 
 .post {
     margin: 8px; padding: 8px; border: 1px solid #ccc; margin-bottom: 14px; background: white;
