@@ -41,12 +41,14 @@
 
                 <td valign="top">
                 {% if item.get_shipment_list %}
+                <u>Latest</u>
                     <ol class="history_area" reversed >
                     {% for segment in item.get_shipment_list %}
                     <li class="history_item">
-                    id #{{ segment.id }} {{ segment.dt }} sent by {{ segment.sender }}
-                        {{ segment.ipaddresses_all }} 
-                        ({{ segment.ipaddresses.city }}) 
+                    - shipment {{ segment.id }}, {{ segment.dt }} sent by <b>{{ segment.sender }}
+                        {% for ip in segment.ipaddresses.all %}
+                        ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }}) 
+                        {% endfor %}</b>
                         with message &quot;{{ segment.message }}&quot;
                         <br />to 
                             {% for email in segment.emailcontacts.all %} 
@@ -58,6 +60,7 @@
                 {% else %}
                     <b>no list</b>
                 {% endif %}
+                <u>Start</u>
                 </td>
                 {# </li> #}
                 </tr></table>
