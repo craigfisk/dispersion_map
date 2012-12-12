@@ -20,7 +20,7 @@
         {% if sender  %}
          Sent by <i><u>{{ sender }}</u></i>
          {% endif %}
-         (<b>click to send</b>):</P>
+         (<b>click photo to send</b>):</P>
 
         <div id="gallery_tape">
         <ul class="gallery tape">
@@ -32,7 +32,7 @@
                 <td valign="top">
 
                 <figure>
-                    <a href="{{ item.fruitcake.id }}/shipment/" title="{{ item.popup }}">
+                    <a href="{{ item.fruitcake.id }}/shipment/" title="{{ item.fruitcake.popup }}">
                         <img src="{{ MEDIA_URL }}{{ item.fruitcake.pic }}"/>
                     </a>
                     <figcaption>uploaded: {{ item.fruitcake.dt }}<br />by: {{ item.fruitcake.uploader.username }}</figcaption>
