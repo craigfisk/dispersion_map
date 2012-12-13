@@ -73,7 +73,7 @@ class ShipmentListView(ListView):
 
     def get_queryset(self):
         if self.request.user:   # should be is_authenticated not id
-            return Shipment.objects.filter(sender=self.request.user.pk).order_by('-dt')
+            return Shipment.objects.filter(sender=self.request.user).order_by('-dt')
 
 
 
