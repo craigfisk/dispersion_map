@@ -16,7 +16,7 @@ urlpatterns = patterns('myfruitcake.views',
 #    url(r'^$', login_required(FruitcakeListView.as_view(model=Fruitcake))),
     url(r'^$', MyFruitcakeListView.as_view(model=Fruitcake), name='myfruitcakelistview'),
 
-    url(r'^myshipments', ShipmentListView.as_view(model=Shipment), name='myshipments'),
+    url(r'^myshipments', login_required(ShipmentListView.as_view(model=Shipment)), name='myshipments'),
     url(r'^upload/$', 'upload_file'),
     url(r'^success/$', 'success'),
 #    url(r'^email/(?P<fruitcake_id>\d+)/$', 'email_fruitcake'),
