@@ -166,6 +166,10 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             fruitcake.times_shipped += 1
             fruitcake.save()
 
+            u = UserProfile.objects.get(pk=request.user.id)
+            u.shipments += 1
+            u.save()
+
             # Using get_or_create() to only add unique ipaddressses. ip is the object; created is a boolean.
             addr=request.META['REMOTE_ADDR']
             city=g.city(addr)

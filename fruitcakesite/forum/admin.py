@@ -3,10 +3,10 @@ from forum.models import UserProfile, Forum, Thread, Post
 ### Admin
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ["user"]
+    list_display = ["id", "user", "shipments", "posts", "avatar"]
 
 class ForumAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["title"]
 
 class ThreadAdmin(admin.ModelAdmin):
     list_display = ["title", "forum", "creator", "created"]
