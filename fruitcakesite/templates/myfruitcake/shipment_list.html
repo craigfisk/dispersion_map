@@ -35,7 +35,7 @@
                     <a href="{{ item.fruitcake.id }}/shipment/" title="{{ item.fruitcake.popup }}">
                         <img src="{{ MEDIA_URL }}{{ item.fruitcake.pic }}"/>
                     </a>
-                    <figcaption>uploaded: {{ item.fruitcake.dt }}<br />by: {{ item.fruitcake.uploader.username }}</figcaption>
+                    <figcaption>uploaded: {{ item.fruitcake.dt }}<br />by: {{ item.fruitcake.uploader.username }} (sent {{item.fruitcake.times_shipped}}x)</figcaption>
                 </figure>
                 </td>
 

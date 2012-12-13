@@ -19,7 +19,7 @@
 
         {% if fruitcake_list %}
         <br />
-        <P class="main">Recently uploaded fruitcake (<b>click photo to send</b>):</P>
+        <P class="main">Most shipped fruitcake (<b>click photo to send</b>):</P>
 
         <div id="gallery_tape">
         <ul class="gallery tape">
@@ -29,7 +29,7 @@
                     <a href="{{ item.id }}/shipment/" title="{{ item.popup }}">
                         <img src="{{ MEDIA_URL }}{{ item.pic }}"/>
                     </a>
-                    <figcaption>uploaded: {{ item.dt }}<br />by: {{ item.uploader.username }}</figcaption>
+                    <figcaption>uploaded: {{ item.dt }}<br />by: {{ item.uploader.username }} (sent {{item.times_shipped }}x)</figcaption>
                 </figure>
                 </li>
             {% endfor %}
@@ -53,7 +53,7 @@
 
             {% if fruitcake_list %}
             <br />
-            <P class="main">Recently uploaded fruitcake (<b>click photo to send</b>):</P>
+            <P class="main">Most shipped fruitcake (<b>click photo to send</b>):</P>
 
             <div id="gallery_tape">
             <ul class="gallery tape">
@@ -63,7 +63,7 @@
                         <a href="{{ item.id }}/shipment/" title="{{ item.popup }}">
                             <img src="{{ MEDIA_URL }}{{ item.pic }}"/>
                         </a>
-                        <figcaption>uploaded: {{ item.dt }}<br />by: {{ item.uploader.username }}</figcaption>
+                        <figcaption>uploaded: {{ item.dt }}<br />by: {{ item.uploader.username }} (sent {{item.times_shipped}}x )</figcaption>
                     </figure>
                     </li>
                 {% endfor %}
@@ -75,7 +75,7 @@
         {% else %}
         
             <P>(When you register, if you upload some fruitcake photos, they will be displayed here and you can then
-            click to email them.  Or you can just click to email fruitcake photos on the &quot;Home&quot; page.)</P> 
+            click to send them.  Or you can just click to send fruitcake photos on the &quot;Home&quot; page.)</P> 
 
         {% endif %}
 

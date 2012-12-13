@@ -24,7 +24,7 @@ class Fruitcake(models.Model):
     uploads = models.ManyToManyField('Upload', related_name='uploads', verbose_name='uploads')
     uploader = models.ForeignKey(User)
     likes = models.ManyToManyField('Like', related_name='likes', verbose_name='likes', blank=True, null=True)
-
+    times_shipped = models.IntegerField(default=0)
     def __unicode__(self):
         return unicode(self.pic)
 

@@ -21,7 +21,7 @@ class FruitcakeListView(ListView):
         return context
 
     def get_queryset(self):
-        return Fruitcake.objects.all().order_by('-dt')[:16]
+        return Fruitcake.objects.all().order_by('-times_shipped')[:16]
 
 
 

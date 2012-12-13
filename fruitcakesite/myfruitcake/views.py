@@ -178,7 +178,7 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             fruitcake = Fruitcake.objects.get(id=fruitcake_id)
             
             this_shipment = Shipment(dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=message)
-
+            
             this_shipment.save()
 
             if not shipment_id:
@@ -190,7 +190,10 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
                 this_shipment.parent = prior_shipment
             
             this_shipment.save()
- 
+
+            fruitcake.times_shipped += 1
+            fruitcake.save()
+
             # Using get_or_create() to only add unique ipaddressses. ip is the object; created is a boolean.
             addr=request.META['REMOTE_ADDR']
             city=g.city(addr)
