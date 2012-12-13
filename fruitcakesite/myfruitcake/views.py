@@ -32,6 +32,7 @@ from django.template import Context
 
 from datetime import datetime
 from django.contrib.gis.geoip import GeoIP
+import re
 
 g = GeoIP()
 
@@ -121,7 +122,6 @@ class ShipmentForm(ModelForm):
         self.fields['receiver'].widget = forms.TextInput()
         
 from django.core.validators import validate_email
-import re
 
 class MultiEmailField(forms.Field):
     def to_python(self, value):
@@ -302,14 +302,27 @@ def upload_file(request):
     if request.method == "POST":
 
         form = UploadFruitcakeForm(request.POST, request.FILES)
+        
+        # See if there already is an upload of this file for this user
+        prior_fruitcake = Fruitcake.objects.filter(uploader=request.user)
+        pattern = re.compile('^pics\/')
+        prior_files = []
+        x = [ prior_files.append(pattern.sub('', str(f.pic.name))) for f in prior_fruitcake ] 
+        previously_uploaded = request.FILES['pic'].name in prior_files
+        #if form.is_valid() and not previously_uploaded:
         if form.is_valid():
-            pic = form.save(commit=False)
-            # resize is a now customization of save() in the class
-            # then add the request.user
-            pic.uploader = request.user
-            pic.save()
-#            return HttpResponseRedirect('/myfruitcake/success/')
-            return HttpResponseRedirect('/myfruitcake/')
+            if not previously_uploaded:
+                pic = form.save(commit=False)
+                # resize is a now customization of save() in the class
+                # then add the request.user
+                pic.uploader = request.user
+                pic.save()
+    #            return HttpResponseRedirect('/myfruitcake/success/')
+                return HttpResponseRedirect('/myfruitcake/')
+            else:
+                return HttpResponse('Oops! You already uploaded this file. Please try a different one. Thanks!')
+                #return HttpResponse("Testing! (previously_uploaded: %s, prior uploads for request.user %s for request.FILES['filename'].name %s were %s)" % (previously_uploaded, request.user,request.FILES['pic'].name, len(prior_fruitcake) ) )
+
     else:
         form = UploadFruitcakeForm()
 

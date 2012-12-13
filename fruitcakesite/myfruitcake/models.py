@@ -10,6 +10,9 @@ from django.contrib.gis.geoip import GeoIP
 
 geoip = GeoIP()
 
+from fruitcakesite.custom import MyFileStorage
+mfs = MyFileStorage()
+
 class Fruitcake(models.Model):
     dt = models.DateTimeField(auto_now_add=True)
     thumbnail = models.ImageField("Thumbnail Pic", upload_to='thumbnails', blank=True, null=True)
