@@ -1,0 +1,18 @@
+{% extends "base/base_bar_only.html" %}
+{% block title %} Sent {% endblock %}
+{# {% block sidebar %} - message sent!{% endblock %} #}
+{% block body %}
+
+<h3>Sent!</P>
+
+    <P>Click to continue to:</P>
+    <ul>
+        <li><a href="{% url fruitcakelistview %}">Home</a></li>
+        <li><a href="{% url myfruitcakelistview %}">MyFruitcake</a></li>
+        <li><a href="{% url myshipments %}">MyShipments</a></li>
+    </ul>
+
+{% endblock %}
+
+
+

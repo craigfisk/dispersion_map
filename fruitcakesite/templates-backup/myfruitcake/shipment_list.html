@@ -1,0 +1,83 @@
+{% extends "forum/fbase.html" %}        
+
+{% block title %}Myfruitcake{% endblock %}
+
+{% block sidebar %} - my shipments{% endblock %}
+
+{% block forum-content %}
+
+            <div class="main">
+                <div id="rtitle">Upload a fruitcake photo? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>
+            </div>
+
+{% block myfruitcakelist %}{% endblock myfruitcakelist %}        
+
+{# and user.is_authenticated #}
+    {% if shipment_list %}
+
+        <br />
+        <P class="main">Listing of fruitcake 
+        {% if sender  %}
+         Sent by <i><u>{{ sender }}</u></i>
+         {% endif %}
+         (<b>click photo to send</b>):</P>
+
+        <div id="gallery_tape">
+        <ul class="gallery tape">
+            {% for item in shipment_list %}
+
+
+                <table><tr>
+                        {# <li> #}
+                <td valign="top">
+
+                <figure>
+                    <a href="{{ item.fruitcake.id }}/shipment/" title="{{ item.fruitcake.popup }}">
+                        <img src="{{ MEDIA_URL }}{{ item.fruitcake.pic }}"/>
+                    </a>
+                    <figcaption>uploaded: {{ item.fruitcake.dt }}<br />by: {{ item.fruitcake.uploader.username }} (sent {{item.fruitcake.times_shipped}}x)</figcaption>
+                </figure>
+                </td>
+
+                <td valign="top">
+                {% if item.get_shipment_list %}
+                <u>Latest</u>
+                    <ol class="history_area" reversed >
+                    {% for s in item.get_shipment_list %}
+                    <li class="history_item">
+                    - Shipment {{ s.id }}, {{ s.dt }} sent by <b>{{ s.sender }}
+                        {% for ip in s.ipaddresses.all %}
+                        ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }}) 
+                        {% endfor %}</b>
+                        with message &quot;{{ s.message }}&quot;
+                        {% comment %}
+                        <br />to 
+                            {% for email in s.emailcontacts.all %} 
+                                {{email }}{% if not forloop.last %}, {% endif %} 
+                            {% endfor %} 
+                        {% endcomment %}
+                    </li>
+                    {% endfor %}
+                    </ol>
+                {% else %}
+                    <b>no list</b>
+                {% endif %}
+                <u>Start</u>
+                </td>
+                {# </li> #}
+                </tr></table>
+
+            
+            {% endfor %}
+        </ul>
+        </div>
+
+        {% comment %}
+ <br />by: {{ item.uploader.username }}
+        {% endcomment %}
+     {% else %}
+         (Sorry, looks like you have not shipped any fruitcake, yet.)
+     {% endif %}
+
+
+{% endblock %}

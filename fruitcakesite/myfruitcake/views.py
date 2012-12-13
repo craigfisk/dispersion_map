@@ -76,40 +76,12 @@ class ShipmentListView(ListView):
             return Shipment.objects.filter(sender=self.request.user).order_by('-dt')
 
 
-
-class ShipmentDetailView(DetailView):
-    """Retrieve information about a shipment.
-    Includes information chain on parents. If parent is None, put the current shipment_id in as the parent. If
-    parent_id = shipment_id, we are at the originating shipment.
-    """
-    
-    context_object_name = 'shipment'
-    model = Shipment
-
-    def get_context_data(self, **kwargs):
-        context = super(ShipmentDetailView, self).get_context_data(**kwargs)
-        context['user'] = self.request.user
-        #context['shipment_list'] = Shipment.objects.all().order_by('dt')
-        #context['fruitcake'] = shipment.fruitcake
-        return context
-
-#    def get_queryset(self):
-#        return Shipment.objects.filter(sender=self.request.user)
-
      
 # https://docs.djangoproject.com/en/1.4/topics/forms/modelforms/   
 # --> should read the modelforms doc from time to time.  For example: 
 # "A subclass of ModelForm can accept an existing model instance as the keyword argument instance; if this is supplied,
 # save() will update that instance. If it's not supplied, save() will create a new instance of the specified model"
 # --> Especially, read the section "This save() method accepts an optional commit keyword argument, which  ..."
-"""
-from django.db import models
-
-class MyEmailField(models.EmailField):
-    def __init__(self, *args, **kwargs):
-        super(MyEmailField, self).__init__(*args, **kwargs)
-        self.attrs('is_hidden': False)
-"""
 
 class ShipmentForm(ModelForm):
     class Meta:
@@ -261,7 +233,7 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
                 this_shipment_parent = this_shipment.parent
 
             #return HttpResponse("Sent!")
-            return render_to_response("myfruitcake/sent.html", add_csrf(request, media_url=MEDIA_URL), context_instance=RequestContext(request))
+            return render_to_response("myfruitcake/shipment_sent.html", add_csrf(request, media_url=MEDIA_URL), context_instance=RequestContext(request))
             #return HttpResponse("Sent with following values: shipment_id: %s, this_shipment_origin: %s, this_shipment_parent: %s" % (shipment_id, this_shipment_origin, this_shipment_parent) )
             ##return HttpResponseRedirect('/myfruitcake/success/')
             #return HttpResponseRedirect("/myfruitcake/%(id)s/?err=success" % {"id":shipment_id})
@@ -329,7 +301,7 @@ def upload_file(request):
     else:
         form = UploadFruitcakeForm()
 
-    return render_to_response('myfruitcake/upload.html', add_csrf(request, form=form), context_instance=RequestContext(request)) 
+    return render_to_response('myfruitcake/fruitcake_upload.html', add_csrf(request, form=form), context_instance=RequestContext(request)) 
 
 def success(request):
     return HttpResponse("Success!")

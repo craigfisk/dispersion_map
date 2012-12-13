@@ -1,0 +1,16 @@
+{% extends "admin/fbase.html" %}
+{# {% extends "admin/base.html" %} #}
+
+{% load i18n %}
+
+{% block title %} {{ title }} | {% trans 'login' %}{% endblock %}
+
+{% block sidebar %} - administrative login{% endblock %}
+{# <h1 id="site-name"> - {% trans 'login' %} </h1> #}
+
+{% block branding %}
+{# <h1 id="site-name">{% trans 'login' %}</h1> #}
+{% endblock %}
+
+
+{% block nav-global %}{% endblock %}

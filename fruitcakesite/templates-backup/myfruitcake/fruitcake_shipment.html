@@ -1,0 +1,70 @@
+{% extends "forum/fbase.html" %}
+ 
+{% block title %}Email{% endblock %}
+
+{% block sidebar %} - email<style type="text/css"> </style> {% endblock %}
+
+{% block forum-content %}
+
+{% if fruitcake %}
+<P class="main">Your fruitcake:</P>
+
+        <div id="gallery_tape">
+        <ul class="gallery tape">
+                <li>
+                <figure>
+                    <img src="http://www.justfruitcake.com/static/media/{{ fruitcake.pic }}" title="{{ fruitcake.popup }}" />
+                    <figcaption>uploaded: {{ fruitcake.dt }}<br />by: {{ fruitcake.uploader.username }}</figcaption>
+                </figure>
+                </li>
+        </ul>
+        
+{% endif %}
+
+
+{% if shipment %}
+
+<P><b>Its Travels:</b></P>
+        <u>Latest</u>
+        <ul>
+            {% for s in shipment.get_shipment_list %}
+            <li>Shipment {{ s.id }}, {{ s.dt }} sent by <b>{{ s.sender }}
+                {% for ip in s.ipaddresses.all %}
+                ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }})
+                {% endfor %}</b> 
+            with message: &quot;{{ s.message }}&quot;</li> 
+            {# [dev data -- origin: {{ s.origin_id }}, parent: {{ s.parent_id }}, id: {{ s.id }}] #}
+            {% endfor %}        
+        </ul>
+        <u>Start</u>
+
+        {% comment %}
+        {% else %}
+            Sorry, you do not have a shipment list.
+        {% endcomment %}
+{% endif %}
+
+
+
+
+<P><b>Send it on?</b></P>
+
+{% if form.errors %}
+    Sorry, please fix the error:
+    <ol>
+        {% for error in form.errors %}
+        <li><strong>{{ error|escape }}</strong></li>
+        {% endfor %}
+    </ol>
+{% endif %}
+
+    <form action="" method="POST">{% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Send">
+    </form>
+
+
+{% endblock forum-content %}
+
