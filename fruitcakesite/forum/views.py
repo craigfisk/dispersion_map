@@ -12,13 +12,23 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR
 from django.template import RequestContext
-
+from django import forms
 from forum.models import *
 
 class ProfileForm(ModelForm):
     class Meta:
         model = UserProfile
-        exclude = ["posts", "user"]
+        exclude = ["user", "posts", "shipments"]
+
+class UserForm(ModelForm):
+    class Meta:
+        model = User
+        exclude = ["first_name","last_name","password","is_staff","is_active","is_superuser","last_login","date_joined","groups","user_permissions"]
+
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        #self.fields['username'].widget = forms.TextInput(attrs={'size':'32'}) 
+        self.fields['email'].widget = forms.TextInput(attrs={'size':'32'}) 
 
 def mk_paginator(request, items, num_items):
     """Create and return a paginator."""
@@ -71,7 +81,7 @@ class UserProfile(models.Model):
 
 
 @login_required
-def profile(request, pk):
+def profilepic(request, pk):
     profile = UserProfile.objects.get(user=pk)
     img = None
 
@@ -104,7 +114,23 @@ def profile(request, pk):
 
     if profile.avatar:
         img = MEDIA_URL + profile.avatar.name
-    return render_to_response("forum/profile.html", add_csrf(request, pf=pf, img=img), context_instance=RequestContext(request))
+    return render_to_response("forum/profilepic.html", add_csrf(request, profile=profile, pf=pf, img=img), context_instance=RequestContext(request))
+
+@login_required
+def userinfo(request, pk):
+    u = User.objects.get(pk=pk)
+
+    if request.method == "POST":
+        uf = UserForm(request.POST, instance=u)
+        if uf.is_valid():
+            uf.save()
+           
+    else:
+        uf = UserForm(instance=u)
+
+    return render_to_response("forum/userinfo.html", add_csrf(request, uf=uf, u=u), context_instance=RequestContext(request))
+
+
 
 @login_required
 def post(request, ptype, pk):

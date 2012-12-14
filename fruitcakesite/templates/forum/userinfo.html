@@ -1,8 +1,8 @@
 {% extends "forum/fbase.html" %}
 
-{% block title %}Profile{% endblock %}
+{% block title %}MyProfile{% endblock %}
 
-{% block sidebar %} - profile <style type="text/css"> </style> {% endblock %}
+{% block sidebar %} - my profile <style type="text/css"> </style> {% endblock %}
 
 {% block forum-content %}
     <style type="text/css">
@@ -19,18 +19,18 @@
     </style>
 
     <div class="main">
-        <div id="rtitle">Edit Profile</div><br />
+        <div id="rtitle">Edit My Profile</div><br />
 
         <p>
         <form enctype="multipart/form-data" action="" method="POST"> {% csrf_token %}
 
             <table>
-                {{ pf.as_table }}
+                {{ uf.as_table }}
             </table>
             <input type="submit" value="update">
 
 
-            {{ form.as_p }}
+            {{ form.as_p }} 
 
             {% comment %}
             <P>username: <input type="text" name="username" value="{{ profile.user.username }}" id="id_username" /></P>
@@ -45,7 +45,12 @@
             <input type="submit" value="Update profile" id="submit" />
             {% endcomment %}
             </form>
-          </p>
+        <P>Edit photo: 
+        {# <a href="{% url forum.views.profilepic uf.user.id %}">Edit photo</a> #}
+        <a href="/forum/profilepic/{{ u.pk }}/">click here</a>
+
+    
+        </p>
     </div>
 
 {% endblock forum-content %}

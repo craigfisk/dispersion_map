@@ -72,11 +72,6 @@ class UserProfile(models.Model):
     avatar = models.ImageField("Profile Pic", upload_to='images', blank=True, null=True)
     posts = models.IntegerField(default=0)
     shipments = models.IntegerField(default=0)
-    #CF20121107 added next 2:
-    #CF20121108 commented temporarily:
-###    shipments = models.IntegerField(default=0)
-###    receipts = models.IntegerField(default=0)
-####    user = models.ForeignKey(User, unique=True)
     user = models.OneToOneField(User)
 
     def __unicode__(self):

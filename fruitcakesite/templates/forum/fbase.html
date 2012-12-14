@@ -18,7 +18,7 @@
                 {% if user.is_staff %} <a href="{% url myfruitcake.views.search_form %}">Search</a> {% endif %}
 
                 {% if user.is_authenticated %}
-                    <a href="{% url forum.views.profile user.pk %}">Edit profile</a> {% endif %}
+                    <a href="{% url forum.views.userinfo user.pk %}">MyProfile</a> {% endif %}
 
                 {% if not user.is_authenticated %}<a href="/registration/login/?next=/myfruitcake/">sign-in</a> | <a
                     href="/registration/register/">register</a>{% endif %}

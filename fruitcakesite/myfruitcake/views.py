@@ -17,7 +17,7 @@ from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR, WIDTH_FR
 
 from myfruitcake.models import Fruitcake, Shipment, Upload, Like, IPAddress
 from forum.models import UserProfile
-from forum.views import mk_paginator, UserProfile, profile
+from forum.views import mk_paginator, UserProfile, userinfo, profilepic
 
 from django.views.generic import ListView, DetailView, TemplateView, FormView
 
