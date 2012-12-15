@@ -65,13 +65,18 @@ class MyFruitcakeListView(ListView):
         else:
             return Fruitcake.objects.all().order_by('-dt')[:8]
 
-class ShipmentListView(ListView):
+class ShipmentListView(ListView):       
+    """
+    Template is shipment_list.html
+    """
+
     def get_context_data(self, **kwargs):
         context = super(ShipmentListView, self).get_context_data(**kwargs)
         context['user'] = self.request.user
         return context
 
     def get_queryset(self):
+        # chain = Shipment.objects.filter(id__in=mylist)
         if self.request.user:   # should be is_authenticated not id
             return Shipment.objects.filter(sender=self.request.user).order_by('-dt')
 
