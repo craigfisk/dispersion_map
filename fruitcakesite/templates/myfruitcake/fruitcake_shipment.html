@@ -27,13 +27,13 @@
 <P><b>Its Travels:</b></P>
         <u>Latest</u>
         <ul>
-            {% for s in shipment.get_shipment_list %}
-            <li>Shipment {{ s.id }}, {{ s.dt }} sent by <b>{{ s.sender }}
-                {% for ip in s.ipaddresses.all %}
+            {% for leg in shipment.get_shipment_list %}
+            <li>Shipment {{ leg.id }}, {{ leg.dt }} sent by <b>{{ leg.sender }}
+                {% for ip in leg.ipaddresses.all %}
                 ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }})
                 {% endfor %}</b> 
-            with message: &quot;{{ s.message }}&quot;</li> 
-            {# [dev data -- origin: {{ s.origin_id }}, parent: {{ s.parent_id }}, id: {{ s.id }}] #}
+            with message: &quot;{{ leg.message }}&quot;</li> 
+            {# [dev data -- origin: {{ leg.origin_id }}, parent: {{ leg.parent_id }}, id: {{ leg.id }}] #}
             {% endfor %}        
         </ul>
         <u>Start</u>

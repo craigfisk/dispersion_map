@@ -24,7 +24,7 @@
 
         <div id="gallery_tape">
         <ul class="gallery tape">
-            {% for item in shipment_list %}
+            {% for shipment in shipment_list %}
 
 
                 <table><tr>
@@ -32,27 +32,27 @@
                 <td valign="top">
 
                 <figure>
-                    <a href="{{ item.fruitcake.id }}/shipment/" title="{{ item.fruitcake.popup }}">
-                        <img src="{{ MEDIA_URL }}{{ item.fruitcake.pic }}"/>
+                    <a href="{{ shipment.fruitcake.id }}/shipment/" title="{{ shipment.fruitcake.popup }}">
+                        <img src="{{ MEDIA_URL }}{{ shipment.fruitcake.pic }}"/>
                     </a>
-                    <figcaption>uploaded: {{ item.fruitcake.dt }}<br />by: {{ item.fruitcake.uploader.username }} (sent {{item.fruitcake.times_shipped}}x)</figcaption>
+                    <figcaption>uploaded: {{ shipment.fruitcake.dt }}<br />by: {{ shipment.fruitcake.uploader.username }} (sent {{shipment.fruitcake.times_shipped}}x)</figcaption>
                 </figure>
                 </td>
 
                 <td valign="top">
-                {% if item.get_shipment_list %}
+                {% if shipment.get_shipment_list %}
                 <u>Latest</u>
                     <ol class="history_area" reversed >
-                    {% for s in item.get_shipment_list %}
+                    {% for leg in shipment.get_shipment_list %}
                     <li class="history_item">
-                    - Shipment {{ s.id }}, {{ s.dt }} sent by <b>{{ s.sender }}
-                        {% for ip in s.ipaddresses.all %}
+                    - Shipment {{ leg.id }}, {{ leg.dt }} sent by <b>{{ leg.sender }}
+                        {% for ip in leg.ipaddresseleg.all %}
                         ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }}) 
                         {% endfor %}</b>
-                        with message &quot;{{ s.message }}&quot;
+                        with message &quot;{{ leg.message }}&quot;
                         {% comment %}
                         <br />to 
-                            {% for email in s.emailcontacts.all %} 
+                            {% for email in leg.emailcontacts.all %} 
                                 {{email }}{% if not forloop.last %}, {% endif %} 
                             {% endfor %} 
                         {% endcomment %}
@@ -73,7 +73,7 @@
         </div>
 
         {% comment %}
- <br />by: {{ item.uploader.username }}
+ <br />by: {{ shipment.uploader.username }}
         {% endcomment %}
      {% else %}
          (Sorry, looks like you have not shipped any fruitcake, yet.)
