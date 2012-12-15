@@ -36,6 +36,10 @@ import re
 
 g = GeoIP()
 
+def about(request):
+    return render_to_response("myfruitcake/about.html", add_csrf(request), context_instance=RequestContext(request))
+
+
 class ProfileForm(ModelForm):
     class Meta:
         model = UserProfile
@@ -193,7 +197,6 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             # https://docs.djangoproject.com/en/dev/topics/email/
             # CF20121126 solution: http://stackoverflow.com/questions/7583801/send-mass-emails-with-emailmultialternatives
             # CF20121129 on 1) mail test env and 2) connection management, see "SMTP Backend" and "Sending multiple emails" 
-            # Separate into Gmail (no inline images) and other mail
             """
             To retrieve gmail vs. other, go back to bbef9e1 Craig Fisk      Fri Dec 7 15:16:05 2012 -0800   "Got Home or MyFruitcake x Anonymous or SignedIn x
             display or click to send = all working again" -- this was an interim scheme to handle gmail separately.
@@ -267,13 +270,12 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
     else:
         shipment=None
                 
-    return render_to_response('myfruitcake/fruitcake_shipment.html', add_csrf(request, form=form, fruitcake=fruitcake,
-        shipment=shipment), context_instance=RequestContext(request))
+    return render_to_response('myfruitcake/fruitcake_shipment.html', add_csrf(request, form=form, fruitcake=fruitcake,shipment=shipment), context_instance=RequestContext(request))
 
 class UploadFruitcakeForm(ModelForm):
     class Meta:
         model = Fruitcake
-        exclude = ['uploader', 'shipments', 'uploads', 'source', 'thumbnail']
+        exclude = ['uploader', 'shipments', 'uploads', 'source', 'thumbnail', 'times_shipped']
 
 class LikeForm(ModelForm):
     class Meta:

@@ -16,6 +16,7 @@ mfs = MyFileStorage()
 class Fruitcake(models.Model):
     dt = models.DateTimeField(auto_now_add=True)
     thumbnail = models.ImageField("Thumbnail Pic", upload_to='thumbnails', blank=True, null=True)
+    ##CF20121215 dropping the pics prefix,so just going straight to /STATIC/MEDIA
     pic = models.ImageField("Regular Pic", upload_to='pics', blank=False, null=False)
     popup = models.CharField(max_length=256, blank=True, null=True)
     source = models.URLField(max_length=200, blank=True, null=True)

@@ -35,13 +35,13 @@
             with message: &quot;{{ leg.message }}&quot;</li> 
             {# [dev data -- origin: {{ leg.origin_id }}, parent: {{ leg.parent_id }}, id: {{ leg.id }}] #}
 
-                <br />
                 {% if leg.sender = user %}
                 --> sent to: 
                     {% for email in leg.emailcontacts.all %} 
                         {{email }}{% if not forloop.last %}, {% endif %} 
                     {% endfor %} 
                 {% endif %}
+                <P/>
 
             {% endfor %}        
         </ul>

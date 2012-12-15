@@ -192,6 +192,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
         'django.contrib.messages.context_processors.messages',
         #
         'myfruitcake.context_processors.my_shipments_context_processor',
+        'myfruitcake.context_processors.my_latest_shipment_context_processor',
         'myfruitcake.context_processors.my_posts_context_processor',
         )
 
