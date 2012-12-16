@@ -28,5 +28,5 @@ def get_chain(pk):
     qry = "select id, parent_id, origin_id from myfruitcake_shipment where origin_id=%s;" % current.parent.id
     cursor.execute(qry)
     results = cursor.fetchall()
-    return results
+    return { 'chain': results }
 
