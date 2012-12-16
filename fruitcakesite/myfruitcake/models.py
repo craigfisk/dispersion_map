@@ -106,4 +106,16 @@ class Shipment(models.Model):
         shipment_list = Shipment.objects.filter(origin=self.origin).order_by('-dt')
         return shipment_list
 
+    def get_parent_list(self):
+        shipment_list = Shipment.objects.filter(origin=self.origin).order_by('-dt')
+        mylist = []
+        for shipment in shipment_list:
+            if (shipment.id==shipment_list[0].id) or (shipment.id==prior.parent_id):
+                mylist.append(shipment.id)
+                prior = shipment
+            if shipment.id == prior.id:
+                prior = shipment
+                
+        parent_list = Shipment.objects.filter(pk__in=mylist).order_by('-dt')
+        return parent_list
 

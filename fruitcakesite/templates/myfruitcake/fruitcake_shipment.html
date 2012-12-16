@@ -27,7 +27,7 @@
 <P><b>Its Travels:</b></P>
         <u>Latest</u>
         <ul>
-            {% for leg in shipment.get_shipment_list %}
+            {% for leg in shipment.get_parent_list %}
             <li>Shipment {{ leg.id }}, {{ leg.dt }} sent by <b>{{ leg.sender }}
                 {% for ip in leg.ipaddresses.all %}
                 ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }})

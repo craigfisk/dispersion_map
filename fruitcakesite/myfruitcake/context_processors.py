@@ -24,11 +24,12 @@ def my_latest_post_context_processor(request):
     else:
         return { 'my_latest_post' : None }
 
-def get_chain(pk):
+"""
+def get_chain(request, pk):
     cursor = connection.cursor()
     current = Shipment.objects.get(pk=pk)
     qry = "select id, parent_id, origin_id from myfruitcake_shipment where origin_id=%s;" % current.parent.id
     cursor.execute(qry)
     results = cursor.fetchall()
-    return { 'chain': results }
-
+    return { 'get_chain': results }
+"""
