@@ -51,20 +51,29 @@
                     </div>
                     <div id="col2">
  
-                        <h2>My stats: </h2>
+                        <h2>My activity: </h2>
                             {% comment %}
                             my_shipments is defined in myfruitcake/context_processors.py and settings
                             {% endcomment %}
-                            {% if my_shipments %}
-                            {# <P><a href="/myfruitcake/myshipments/">Click to view</a></P> #}
                             <ul>
+                                {% if my_shipments %}
                                 <li>Shipments: {{ my_shipments|length }}</li>
                                 <li>Latest: <a href="/myfruitcake/myshipments/{{ my_latest_shipment.id }}/">{{ my_latest_shipment.dt }}</a></li>
-                            </ul>
-                            {% else %}
-                            <P>No shipments</P>
-                            {% endif %}
+                                {% else %}
+                                <li>No shipments</li>
+                                {% endif %}
+                                
+                                {% if my_posts %}
+                                <li>Posts: {{ my_posts|length }}</li>
+                                <li>Latest: 
+                                    {{ my_latest_post.created }} in thread &quot;<a href="/forum/thread/{{my_latest_post.thread.id}}/">{{ my_latest_post.thread.title}}</a>&quot;
+                                    {# </a> #}
+                                </li>
+                                {% else %}
+                                <li>No posts</li>
+                                {% endif %}
 
+                            </ul>
 
                             {% comment %}
                             <li>Downstream forwards: [tbd] </li>

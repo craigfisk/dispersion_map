@@ -194,6 +194,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
         'myfruitcake.context_processors.my_shipments_context_processor',
         'myfruitcake.context_processors.my_latest_shipment_context_processor',
         'myfruitcake.context_processors.my_posts_context_processor',
+        'myfruitcake.context_processors.my_latest_post_context_processor',
+        'myfruitcake.context_processors.get_chain_context_processor',
         )
 
 MIDDLEWARE_CLASSES = (
