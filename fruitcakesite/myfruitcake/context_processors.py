@@ -4,13 +4,14 @@ from django.db import connection
 
 def my_shipments_context_processor(request):
     return {
-            'my_shipments' : Shipment.objects.filter(sender_id=request.user.id).order_by('-dt')
-            }
+       'my_shipments' : Shipment.objects.filter(sender_id=request.user.id).order_by('-dt')
+       }
 
 def my_latest_shipment_context_processor(request):
-    return {
-            'my_latest_shipment' : Shipment.objects.filter(sender_id=request.user.id).order_by('-dt')[0]
-            }
+    if request.user.is_authenticated():
+        return { 'my_latest_shipment' : Shipment.objects.filter(sender_id=request.user.id).order_by('-dt')[0]  }
+    else:
+        return { 'my_latest_shipment' : None }
 
 def my_posts_context_processor(request):
     return {
@@ -18,9 +19,10 @@ def my_posts_context_processor(request):
             }
 
 def my_latest_post_context_processor(request):
-    return {
-            'my_latest_post' : Post.objects.filter(creator_id=request.user.id).order_by('-created')[0]
-            }
+    if request.user.is_authenticated():
+        return { 'my_latest_post' : Post.objects.filter(creator_id=request.user.id).order_by('-created')[0] }
+    else:
+        return { 'my_latest_post' : None }
 
 def get_chain(pk):
     cursor = connection.cursor()

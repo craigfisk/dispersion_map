@@ -55,6 +55,7 @@
                             {% comment %}
                             my_shipments is defined in myfruitcake/context_processors.py and settings
                             {% endcomment %}
+                            {% if user.is_authenticated %}
                             <ul>
                                 {% if my_shipments %}
                                 <li>Shipments: {{ my_shipments|length }}</li>
@@ -72,15 +73,12 @@
                                 {% else %}
                                 <li>No posts</li>
                                 {% endif %}
-
                             </ul>
+                            {% else %}
+                            <P>(Not available for anonymous user)
+                            {% endif %}
 
-                            {% comment %}
-                            <li>Downstream forwards: [tbd] </li>
-                            <li>Uploads by me: [tdb]</li>
-                            {# </ul> #}
-                            {% endcomment %}
-                    </div>
+                        </div>
                     <div id="col3">
 
                          <div id="avatarinfo">
