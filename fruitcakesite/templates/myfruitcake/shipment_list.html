@@ -46,7 +46,7 @@
                     {% for leg in shipment.get_shipment_list %}
                     <li class="history_item">
                     - Shipment {{ leg.id }}, {{ leg.dt }} sent by <b>{{ leg.sender }}
-                        {% for ip in leg.ipaddresseleg.all %}
+                        {% for ip in leg.ipaddresses.all %}
                         ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }}) 
                         {% endfor %}</b>
                         with message &quot;{{ leg.message }}&quot;
