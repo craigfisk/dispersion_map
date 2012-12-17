@@ -102,6 +102,10 @@ class Shipment(models.Model):
     def __unicode__(self):
         return unicode(self.id)
 
+    def latest_shipment(self):
+        latest_shipment = Shipment.objects.filter(sender=self.request.user).order_by('-dt')[0]
+        return latest_shipment
+ 
     def get_shipment_list(self):
         shipment_list = Shipment.objects.filter(origin=self.origin).order_by('-dt')
         return shipment_list
