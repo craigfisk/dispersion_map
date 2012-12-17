@@ -138,7 +138,8 @@ from django.forms.models import inlineformset_factory
 from myfruitcake.models import EmailContact
 from django.template import RequestContext
 
-@login_required
+#@login_required # switched to is_authenticated on POST only so GET displays; user can see but not send.
+
 def email_fruitcake(request, fruitcake_id, shipment_id=None):
     """Create instance of Shipment and associated Addressees and send it as email. 
     1) obtain the fruitcake id from passed in value of pk, the sender from request.user, fill in the message
@@ -149,7 +150,8 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
 
     """
     sender_message = None
-    if request.method == 'POST':
+    #if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_authenticated():
         form = EmailContactForm(request.POST)
         #formset = EmailContactFormset(request.POST, instance=shipment)
         if form.is_valid():
@@ -250,8 +252,14 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             ##return HttpResponseRedirect('/myfruitcake/success/')
             #return HttpResponseRedirect("/myfruitcake/%(id)s/?err=success" % {"id":shipment_id})
 
+
+
         else:
             return HttpResponse('Sorry, something invalid in your email addresses. Should be a comma-separated list of email addresses.')
+
+    #CF20121217 to require login for sending if not is_authenticated
+    elif request.method == 'POST':
+        return HttpResponseRedirect('/login/?next=%s' % request.path)
 
     else:
         if sender_message:
