@@ -26,7 +26,7 @@ IGNORABLE_404_URLS = (
         )
 
 #CF20121205 temporary
-DEBUG=True
+#DEBUG=True
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -192,9 +192,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
         'django.contrib.messages.context_processors.messages',
         #
         'myfruitcake.context_processors.my_shipments_context_processor',
-        'myfruitcake.context_processors.my_latest_shipment_context_processor',
+#        'myfruitcake.context_processors.my_latest_shipment_context_processor',
         'myfruitcake.context_processors.my_posts_context_processor',
-        'myfruitcake.context_processors.my_latest_post_context_processor',
+#        'myfruitcake.context_processors.my_latest_post_context_processor',
 #        'myfruitcake.context_processors.get_chain_context_processor',
         )
 
@@ -244,12 +244,9 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 #    'polls',
-##    'accounts',
 ##    'world',
-#django-registration, see readthedocs
     'registration',
     'myfruitcake',
-#    'myshipments',
     'forum',
 )
 
