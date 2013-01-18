@@ -1,8 +1,13 @@
-nginx.conf and fruitcake_vassal.ini (<-- django.ini) are the only config files being used here.
+fruitcake_nginx.conf and fruitcake_vassal.ini (<-- django.ini) are the only config files being used here.
 
-nginx.conf is symlinked to /etc/nginx/sites-enabled/  Note the final "/"!!
+fruitcake_nginx.conf is symlinked from /etc/nginx/sites-enabled/  Note the final "/"!!
 
 fruitcake-vassal.ini is the uwsgi control file.  Note carefully how it is symlinked:
     sudo ln -sfn /home/fisk/virt/justfruitcake/fruitcakesite/deployment/fruitcake_vassal.ini /etc/uwsgi/vassal/
 
-The other files are leftover from attempting to get Emperor mode running.
+The other files are leftover from getting Emperor mode running.
+
+- uwsgi_init_deb.sh is boilerplate.
+- etc_init.d_uwsgi is a copy of /etc/init.d/uwsgi, an adaptation for justfruitcake of the boilerplate.
+- Not tracked in the justfruitcake git is ~virt/geoip_data, which has its own git.
+
