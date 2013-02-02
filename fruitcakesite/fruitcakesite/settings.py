@@ -248,6 +248,7 @@ INSTALLED_APPS = (
     'registration',
     'myfruitcake',
     'forum',
+    'south',
 )
 
 
