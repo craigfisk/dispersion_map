@@ -1,14 +1,26 @@
 # nginx.conf
 ## is for calomel tweaks CF20121124 per https://calomel.org/nginx.html
-upstream fruitcakesite_uwsgi_server {
+upstream fruitcakesite_uwsgi {
     # connect to this socket
     server unix:///tmp/uwsgi.sock;    # for a file socket
-#    server 127.0.0.1:3031;              # for web port socket
+#    server 127.0.0.1:8001;              # for web port socket
     }
 
 server {
     listen 198.101.154.253:80;
 #    listen 80; does not work without address
+    server_name www.justfruitcake.com justfruitcake.com;
+
+    access_log /var/log/nginx/fruitcake.log; #_access.log;
+    error_log /var/log/nginx/fruitcake.log; #_error.log;
+
+    location / {
+        rewrite ^.+ http://www.justfruitcake.com:8000$uri;
+    }
+}
+
+server {
+    listen 8000; # default_server;
     server_name www.justfruitcake.com justfruitcake.com;
 
     access_log /var/log/nginx/fruitcake.log; #_access.log;
@@ -34,31 +46,9 @@ server {
     # max upload size
     client_max_body_size 75M;
  
-#    location / {
-#        rewrite ^.+ http://www.justfruitcake.com:8000$uri;
-#    }
-
-    location / {
-        try_files $uri @fruitcakesite_proxy;
-    }
-
-    # send everything else to the Django server
-    location @fruitcakesite_proxy {
-        include /etc/nginx/uwsgi_params;
-        uwsgi_pass  fruitcakesite_uwsgi_server;
-    }
-
     location = /robots.txt { log_not_found off; access_log off; }
     location = /favicon.ico {access_log off; log_not_found off; }
    
-    # django media
-    location /media {
-        alias /home/fisk/virt/justfruitcake/fruitcakesite/static/media;
-    }
-    location /static {
-        alias /home/fisk/virt/justfruitcake/fruitcakesite/static;
-    }
-  
     ## to stop image and document hijacking
 #   location ~* (\.jpg|\.png|\.css)$ {
 #       if ($http_referer !~ ^(http://justfruitcake.com) ) {
@@ -72,5 +62,18 @@ server {
 #        return 503;
 #    }
  
+    # django media
+    location /media {
+        alias /home/fisk/virt/justfruitcake/fruitcakesite/static/media;
+    }
+    location /static {
+        alias /home/fisk/virt/justfruitcake/fruitcakesite/static;
+    }
+  
+    # send everything else to the Django server
+    location / {
+        uwsgi_pass  fruitcakesite_uwsgi;
+        include /etc/nginx/uwsgi_params;
+    }
 }
  
