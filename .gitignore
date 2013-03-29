@@ -3,7 +3,9 @@
 bin/
 glyphish200/
 include/
-lib/
+#CF20130329 changed to not exclude registration tree, since I'm using patched version of Django 1.5
+#lib/
+lib/!*lib/python2.7/site-packages/registration/
 local/
 src/
 
