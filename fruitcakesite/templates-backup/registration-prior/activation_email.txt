@@ -1,9 +1,0 @@
-Your activation key: {{ activation_key }}
-
-Please click this link to activate your sign-in:
-
-http://www.justfruitcake.com:8000/registration/activate/{{ activation_key }}/
-
-After activation, click below to sign in:
-
-http://www.justfruitcake.com:8000/registration/login/?next=/myfruitcake/

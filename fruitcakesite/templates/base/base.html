@@ -5,7 +5,11 @@
 <head>
     <title>Justfruitcake {% block title %}{% endblock %}</title>
     <!-- <meta http-equiv="refresh" content="2">  -->
+    {% comment %}
     <link rel="stylesheet" href="http://www.justfruitcake.com/static/fbasestyles.css" type="text/css" media="screen" charset="utf-8" />
+    {% endcomment %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}fbasestyles.css" type="text/css" media="screen" charset="utf-8" />
+
     <script type="text/javascript">
         window.onload = function() {
             document.getElementById("id_username").focus();
@@ -104,12 +108,20 @@
         {% endblock %}
 
 
+            {% block page-content %}
+                page-content goes here
+            
+                <div id="content">
+
+                </div>
+               
+            {% endblock %}
+
+            {#    {% block body %}{% endblock %} #}
 
 
-        <div id="content">
-            {% block forum-content %}{% endblock %}
 
-            {% block body %}{% endblock %}
+        
     {% block footer %}
     <br />
     <div class="footer">

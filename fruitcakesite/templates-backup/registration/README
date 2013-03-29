@@ -1,7 +1,0 @@
-- How to upgrade to latest:  http://docs.b-list.org/django-registration/0.8/upgrade.html
-
-Template examples from Matias Herranz at https://github.com/matiasherranz/scoobygalletas/downloads
-
-Tutorial:  see "Django by Example" part 3, http://lightbird.net/dbe/forum3.html
-
-See also notes in fruitcakesite/urls.py

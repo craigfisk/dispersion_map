@@ -88,6 +88,11 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 16777216 #16MB, 2^24; default 2621440 (2.5 MB)
 FILE_UPLOAD_TEMP_DIR = None #default: Note, so Django uses Linux default /tmp
 FILE_UPLOAD_PERMISSIONS = None #default: None; numeric mode which to set newly upload files, as used with os.chmod, see docs.python.org/lib/os-file-dir.html
 #------------------------------
+
+# Hosts/domain names that are valid for this site; required if DEBUG is False
+# See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
+ALLOWED_HOSTS = []
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -248,7 +253,7 @@ INSTALLED_APPS = (
     'registration',
     'myfruitcake',
     'forum',
-    'south',
+###    'south',
 )
 
 
