@@ -3,9 +3,6 @@
 bin/
 glyphish200/
 include/
-#CF20130329 changed to not exclude registration tree, since I'm using patched version of Django 1.5
-#lib/
-lib/!*lib/python2.7/site-packages/registration/
 local/
 src/
 
@@ -16,4 +13,23 @@ src/
 *~
 *.py[cod]
 *.swp
+
+#CF20130329 changed to not exclude registration tree, since I'm using patched version of Django 1.5
+#lib/
+# Want instead:
+#lib/!*lib/python2.7/site-packages/registration/
+
+#--> To do this, unignore every parent directory of anything you want to unigore, so in pairs: 
+#iginore everything in a directory, but not some certain subdirectory, as follows:
+
+!lib/
+
+lib/*
+!lib/python2.7/
+
+lib/python2.7/*
+!lib/python2.7/site-packages/
+
+lib/python2.7/site-packages/*
+!lib/python2.7/site-packages/registration/
 
