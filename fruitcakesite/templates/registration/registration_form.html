@@ -1,11 +1,15 @@
-{% extends "registration/registration_base.html" %}
-{% block title %} Registration{% endblock %}
-{# {% block sidebar %} - registration{% endblock %} #}
-{% block body %}
+{% extends "base/base.html" %}
+{# {% extends "registration/registration_base.html" %} #}
+{% block title %} registration{% endblock %}
+{% block sidebar %} - registration{% endblock %} 
+{% block page-content %}
+Registration form
 <table>
     <form method='post' action=''>{% csrf_token %}
+
         {{ form }}
-        <tr><td></td><td><input type="submit" value="Send activation email" /></td>
+
+        <tr><td></td><td><input type="submit" value="Send me an activation email" /></td>
     </form>
 </table>
 {% endblock %}

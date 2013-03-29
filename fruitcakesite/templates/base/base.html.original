@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Justfruitcake {% block title %}{% endblock %}</title>
+    <!-- <meta http-equiv="refresh" content="2">  -->
+    {% comment %}
+    <link rel="stylesheet" href="http://www.justfruitcake.com/static/fbasestyles.css" type="text/css" media="screen" charset="utf-8" />
+    {% endcomment %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}fbasestyles.css" type="text/css" media="screen" charset="utf-8" />
+
+    <script type="text/javascript">
+        window.onload = function() {
+            document.getElementById("id_username").focus();
+        };
+        $(function() {
+            $("#id_username").focus();
+        });
+        $(document).ready(function() {
+            alert($().jquery);
+        });
+
+    </script>
+
+</head>
+
+<body>
+    <div id="sidebar">Justfruitcake
+        {% block sidebar %} - website{% endblock %} 
+    </div>
+
+    <div id="container">
+        <div id="menu">
+            {% block nav-global %}
+
+                <!-- MENU -->
+                {% comment %}
+                <h3><a href="{% url myfruitcake.views.main %}">MyFruitcake</a></h3>
+                {% endcomment %}
+
+                <h3><a href="{% url forum.views.main %}">ForumApp</a></h3>
+
+                {% if user.is_staff %} <a href="{% url admin:index %}">Admin</a> {% endif %}
+                {% if user.is_staff %} <a href="{% url myfruitcake.views.search_form %}">Find</a> {% endif %}
+
+                {% if user.is_authenticated %}
+                    <a href="{% url forum.views.userinfo user.pk %}">MyProfile</a> {% endif %}
+
+                {% if not user.is_authenticated %}<a href="/registration/login/?next=/myfruitcake/">login</a> | <a
+                    href="/registration/register/">register</a>{% endif %}
+
+                {% if user.is_authenticated %}<a href="/registration/logout/?next=/myfruitcake/">logout</a>
+                    {% endif %}
+
+            {% endblock %}
+        </div>
+
+        {% block signin %}
+        <div id="container3">
+            <div id="container2">
+                <div id="container1">
+                    <div id="col1">
+                        <br /><h2>
+                        {% if user.username and user.get_profile.avatar %} 
+                            Hi <i>{{ user.username }}</i>!
+                        {% elif user.username and not user.get_profile.avatar %}
+                            Hi <i>{{ user.username }}!</i>.
+                        {% else %}
+                            Hi, <i>anonymous</i>!
+                        {% endif %}
+                    </h2><br />
+                        <P><b>Justfruitcake.com</b> is TOTALLY FREE (until it's not; and then it will be very, very inexpensive, plus maybe have some surprises!)</P>
+
+
+                    </div>
+                    <div id="col2">
+ 
+                        <h2>My shipments:</h2>
+                        <ul>
+                            <li>What I sent: 0</li>
+                            <li>Downstream forwards: 0</li>
+                            <li>Uploads by me: 0</li>
+                        </ul>
+                           
+                    </div>
+                    <div id="col3">
+
+                         <div id="avatarinfo">
+                            {% if user.username and user.get_profile.avatar %} 
+                                <div class="avatar">
+                                        <img src="http://www.justfruitcak.com/static/media/{{ user.get_profile.avatar }}">
+                                </div>
+                            {% elif user.username and not user.get_profile.avatar %}
+                                No photo? It would be nice if you would please click the &quot;Edit profile&quot; button and upload a picture of yourself.
+                            {% else %}
+                                
+                            {% endif %}
+                        </div>
+
+                        <h2>My forum posts:</h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endblock %}
+
+
+            {% block page-content %}
+                page-content goes here
+            
+                <div id="content">
+
+                </div>
+               
+            {% endblock %}
+
+            {#    {% block body %}{% endblock %} #}
+
+
+
+        
+    {% block footer %}
+    <br />
+    <div class="footer">
+        &copy; Copyright 2012 Picocosmos Corporation</div>
+    {% endblock %}
+
+
+        </div>
+    </div>
+</body>
+</html>
+

@@ -4,6 +4,4 @@ Template examples from Matias Herranz at https://github.com/matiasherranz/scooby
 
 Tutorial:  see "Django by Example" part 3, http://lightbird.net/dbe/forum3.html
 
-See also Read the Docs on django-registration: http://http://django-registration.readthedocs.org/
-
 See also notes in fruitcakesite/urls.py

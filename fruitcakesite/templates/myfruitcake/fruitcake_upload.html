@@ -4,7 +4,7 @@
 
 {% block sidebar %} - upload<style type="text/css"> </style> {% endblock %}
 
-{% block forum-content %}
+{% block page-content %}
 <P>Fruitcake upload form:</P>
 
     <form enctype="multipart/form-data" action="" method="POST"> {% csrf_token %}
@@ -35,5 +35,5 @@
     </ol>
     {% endif %}
 
-{% endblock forum-content %}
+{% endblock %}
 

@@ -4,7 +4,7 @@
 
 {% block sidebar %} - search results{% endblock %}
 
-{% block forum-content %}
+{% block page-content %}
 
 {% if fruitcakes %}
 <P>Found {{ fruitcakes|length }} fruitcake{{ fruitcakes|pluralize }} matching the search for: &quot;{{ query }}&quot;</P>
@@ -19,5 +19,5 @@
 {% endcomment %}
 {% endif %}
 
-{% endblock forum-content %}
+{% endblock %}
 
