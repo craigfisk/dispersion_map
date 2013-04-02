@@ -6,6 +6,9 @@ include/
 local/
 src/
 
+pics/
+thumbnails/
+
 #/*-backup/
 #/*-delete/
 #/*-prior/
