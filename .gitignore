@@ -1,7 +1,6 @@
 static/media/
 pics/
 thumbnails/
-images/
 #
 bin/
 glyphish200/
@@ -20,14 +19,23 @@ src/
 #--> To do this, unignore every parent directory of anything you want to unigore, so in pairs: 
 #iginore everything in a directory, but not some certain subdirectory, as follows:
 
-!lib/
+#!lib/
 
-lib/*
-!lib/python2.7/
+#lib/*
+#!lib/python2.7/
 
-lib/python2.7/*
-!lib/python2.7/site-packages/
+#lib/python2.7/*
+#!lib/python2.7/site-packages/
 
-lib/python2.7/site-packages/*
-!lib/python2.7/site-packages/registration/
+#lib/python2.7/site-packages/*
+#!lib/python2.7/site-packages/registration/
+
+#ignore all /lib/ stuff
+/lib/*
+#except do not ignore registration directory
+!/lib/python2.7/site-packages/registration/
+!/lib/python2.7/site-packages/registration/*
+#also subdirectories of registration
+!/lib/python2.7/site-packages/registration/**/*
+
 
