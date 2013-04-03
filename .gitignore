@@ -1,22 +1,17 @@
-./static/media/
+static/media/
+pics/
+thumbnails/
+images/
 #
 bin/
 glyphish200/
 include/
 local/
 src/
-
-pics/
-thumbnails/
-
-#/*-backup/
-#/*-delete/
-#/*-prior/
-
+#
 *~
 *.py[cod]
 *.swp
-
 #CF20130329 changed to not exclude registration tree, since I'm using patched version of Django 1.5
 #lib/
 # Want instead:
