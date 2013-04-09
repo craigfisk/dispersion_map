@@ -287,7 +287,7 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
 class UploadFruitcakeForm(ModelForm):
     class Meta:
         model = Fruitcake
-        exclude = ['uploader', 'shipments', 'uploads', 'source', 'thumbnail', 'times_shipped']
+        exclude = ['uploader', 'shipments', 'uploads', 'source', 'times_shipped']
 
 class LikeForm(ModelForm):
     class Meta:
@@ -311,11 +311,11 @@ def upload_file(request):
         if form.is_valid():
             if not previously_uploaded:
                 pic = form.save(commit=False)
-                # resize is a now customization of save() in the class
                 # then add the request.user
                 pic.uploader = request.user
+                # .save() method on the model saves 2 processed versions of the image in pics and thumbnails
                 pic.save()
-    #            return HttpResponseRedirect('/myfruitcake/success/')
+                # return HttpResponseRedirect('/myfruitcake/success/')
                 return HttpResponseRedirect('/myfruitcake/')
             else:
                 return HttpResponse('Oops! You already uploaded this file. Please try a different one. Thanks!')

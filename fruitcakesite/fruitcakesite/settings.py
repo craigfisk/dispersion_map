@@ -32,6 +32,7 @@ TEMPLATE_DEBUG = DEBUG
 
 WIDTH_AVATAR = 120
 WIDTH_FRUITCAKE = 192
+WIDTH_STANDARD = 384
 
 ADMINS = (
     ('Craig Fisk', 'craigfisk@justfruitcake.com'),

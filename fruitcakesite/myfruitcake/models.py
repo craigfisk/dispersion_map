@@ -5,8 +5,9 @@ from django.core.files import File
 from os.path import join as pjoin
 from tempfile import *
 from PIL import Image as PImage
-from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR, WIDTH_FRUITCAKE
+from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR, WIDTH_FRUITCAKE, WIDTH_STANDARD
 from django.contrib.gis.geoip import GeoIP
+import re
 
 geoip = GeoIP()
 
@@ -36,16 +37,30 @@ class Fruitcake(models.Model):
         shipments = self.shipments.shipment_set.count()
         return uploads, shipments
     """
-    # Resize to standard width during save()
+    # Resizes to standard width and to thumbnail width during save()
     def save(self, *args, **kwargs):
         super(Fruitcake, self).save(*args, **kwargs)
+        
         # self.pic.name <-- self.name; otherwise error: ImageFieldFile has no attribute 'startswith'
         imfn = pjoin(MEDIA_ROOT, self.pic.name)
         im = PImage.open(imfn)
-        wpercent = (WIDTH_FRUITCAKE/float(im.size[0]))
+        wpercent = (WIDTH_STANDARD/float(im.size[0]))
         hsize = int((float(im.size[1])*float(wpercent)))
-        im = im.resize((WIDTH_FRUITCAKE, hsize), PImage.ANTIALIAS)
-        im.save(imfn, "JPEG") 
+        im = im.resize((WIDTH_STANDARD, hsize), PImage.ANTIALIAS)
+        # According to www.pythonware.com/library/pil/handbook/image.htm, if save() fails it will "usually" put up 
+        # IOError exception and you are responsible for removing any file(s) that may have been created.
+        im.save(imfn, "JPEG")
+
+        """
+        re.sub()
+        self.thumbnail.name = self.pic.name
+        imfn_thumb = pjoin(MEDIA_ROOT, self.thumbnail.name)
+        im_thumb = PImage.open(imfn_thumb)
+        wpercent_thumb = (WIDTH_FRUITCAKE/float(im_thumb.size[0]))
+        hsize_thumb = int((float(im_thumb.size[1])*float(wpercent_thumb)))
+
+        im_thumb.save(imfn_thumb, "JPEG")
+        """
 
 CHOICES = (
         (None, "Like?"),
