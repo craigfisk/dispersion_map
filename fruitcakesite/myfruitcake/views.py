@@ -13,7 +13,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR, WIDTH_FRUITCAKE
+from fruitcakesite.settings import MEDIA_URL  #MEDIA_ROOT, WIDTH_AVATAR, WIDTH_THUMBNAIL
 
 from myfruitcake.models import Fruitcake, Shipment, Upload, Like, IPAddress
 from forum.models import UserProfile
@@ -313,6 +313,8 @@ def upload_file(request):
                 pic = form.save(commit=False)
                 # then add the request.user
                 pic.uploader = request.user
+                #CF20130410 added next line
+                ##pic.thumbnail.name = re.sub('^pics\/', 'thumbnails/', pic.pic.name)
                 # .save() method on the model saves 2 processed versions of the image in pics and thumbnails
                 pic.save()
                 # return HttpResponseRedirect('/myfruitcake/success/')

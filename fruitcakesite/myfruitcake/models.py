@@ -5,7 +5,7 @@ from django.core.files import File
 from os.path import join as pjoin
 from tempfile import *
 from PIL import Image as PImage
-from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR, WIDTH_FRUITCAKE, WIDTH_STANDARD
+from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR, WIDTH_THUMBNAIL, WIDTH_STANDARD
 from django.contrib.gis.geoip import GeoIP
 import re
 
@@ -37,30 +37,46 @@ class Fruitcake(models.Model):
         shipments = self.shipments.shipment_set.count()
         return uploads, shipments
     """
-    # Resizes to standard width and to thumbnail width during save()
+    
     def save(self, *args, **kwargs):
+        """
+        Saves STANDARD and THUMBNAIL versions of uploaded image
+        """
+
         super(Fruitcake, self).save(*args, **kwargs)
         
-        # self.pic.name <-- self.name; otherwise error: ImageFieldFile has no attribute 'startswith'
+        # WIDTH_STANDARD:
+        
+        # Use self.pic.name <-- not self.name; otherwise you get the error: ImageFieldFile has no attribute 'startswith'
         imfn = pjoin(MEDIA_ROOT, self.pic.name)
         im = PImage.open(imfn)
         wpercent = (WIDTH_STANDARD/float(im.size[0]))
         hsize = int((float(im.size[1])*float(wpercent)))
+        # Replace the image with a STANDARD-sized version of itself.
         im = im.resize((WIDTH_STANDARD, hsize), PImage.ANTIALIAS)
         # According to www.pythonware.com/library/pil/handbook/image.htm, if save() fails it will "usually" put up 
         # IOError exception and you are responsible for removing any file(s) that may have been created.
-        im.save(imfn, "JPEG")
+        try:
+            im.save(imfn, "JPEG")
+        except IOError as e:
+            print "Error: %s" % e
 
-        """
-        re.sub()
-        self.thumbnail.name = self.pic.name
-        imfn_thumb = pjoin(MEDIA_ROOT, self.thumbnail.name)
-        im_thumb = PImage.open(imfn_thumb)
-        wpercent_thumb = (WIDTH_FRUITCAKE/float(im_thumb.size[0]))
-        hsize_thumb = int((float(im_thumb.size[1])*float(wpercent_thumb)))
+        # WIDTH_THUMBNAIL:
 
-        im_thumb.save(imfn_thumb, "JPEG")
-        """
+        # The only thing we're doing to the model (table) is updating with name for the thumbnail
+        self.thumbnail.name = re.sub('^pics\/', 'thumbnails/', self.pic.name)
+        imfn = pjoin(MEDIA_ROOT, self.thumbnail.name)
+        wpercent = (WIDTH_THUMBNAIL/float(im.size[0]))                    #why do this twice?
+        hsize = int((float(im.size[1])*float(wpercent)))
+        # image.resize() returns a new image
+        im2 = im.resize((WIDTH_THUMBNAIL, hsize), PImage.ANTIALIAS)       #PImage.open(imfn_thumb)
+        
+        try:
+            im2.save(imfn, "JPEG")
+        except IOError as e:
+            print "Error: %s" % e
+
+
 
 CHOICES = (
         (None, "Like?"),
@@ -137,4 +153,3 @@ class Shipment(models.Model):
                 
         parent_list = Shipment.objects.filter(pk__in=mylist).order_by('-dt')
         return parent_list
-

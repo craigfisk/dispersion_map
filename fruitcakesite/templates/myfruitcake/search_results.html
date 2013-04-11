@@ -10,7 +10,7 @@
 <P>Found {{ fruitcakes|length }} fruitcake{{ fruitcakes|pluralize }} matching the search for: &quot;{{ query }}&quot;</P>
     <ul>
         {% for fruitcake in fruitcakes %}
-        <li>{{ fruitcake.id}} {{ fruitcake.popup }} {{ fruitcake.pic }}</li>
+        <li>{{ fruitcake.id}} {{ fruitcake.popup }} {{ fruitcake.thumbnail }}</li>
         {% endfor %}
     </ul>
 {% comment %}    
