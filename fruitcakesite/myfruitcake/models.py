@@ -29,6 +29,9 @@ class Fruitcake(models.Model):
     times_shipped = models.IntegerField(default=0)
     def __unicode__(self):
         return unicode(self.pic)
+    
+    class Meta:
+        app_label = 'myfruitcake'
 
     #CF20121107  todo; compare forum.Post.profile_data()
     """
@@ -90,6 +93,13 @@ class Like(models.Model):
     fruitcake = models.ManyToManyField(Fruitcake)
     user = models.ManyToManyField(User)
 
+    def __unicode__(self):
+        return unicode(self.like)
+
+    class Meta:
+        app_label = 'myfruitcake'
+
+
 class Upload(models.Model):
     dt = models.DateTimeField(auto_now_add=True) 
     fruitcake = models.ForeignKey(Fruitcake)
@@ -98,11 +108,19 @@ class Upload(models.Model):
     def __unicode__(self):
         return unicode(self.dt)
 
+    class Meta:
+        app_label = 'myfruitcake'
+
+
 class EmailContact(models.Model):
     email = models.EmailField(max_length=256, blank=False, null=False)
 
     def __unicode__(self):
         return unicode(self.email)
+
+    class Meta:
+        app_label = 'myfruitcake'
+
 
 class IPAddress(models.Model):
     ipaddress = models.GenericIPAddressField(default='255.255.255.255')  # GeoIP returns None for this address
@@ -113,6 +131,9 @@ class IPAddress(models.Model):
 
     def __unicode__(self):
         return unicode(self.ipaddress)
+
+    class Meta:
+        app_label = 'myfruitcake'
 
     def get_city(self):
         # Returns a dict with area_code, city, country_code, country_name, 
@@ -132,6 +153,9 @@ class Shipment(models.Model):
 
     def __unicode__(self):
         return unicode(self.id)
+
+    class Meta:
+        app_label = 'myfruitcake'
 
     def latest_shipment(self):
         latest_shipment = Shipment.objects.filter(sender=self.request.user).order_by('-dt')[0]
