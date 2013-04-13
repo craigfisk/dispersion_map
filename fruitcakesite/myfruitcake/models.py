@@ -1,11 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 #from django.db.models.signals import post_save
-from django.core.files import File
+#from django.core.files import File
 from os.path import join as pjoin
-from tempfile import *
+#from tempfile import *
 from PIL import Image as PImage
-from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR, WIDTH_THUMBNAIL, WIDTH_STANDARD
+from fruitcakesite.settings import MEDIA_ROOT, WIDTH_STANDARD # WIDTH_THUMBNAIL, , MEDIA_URL, WIDTH_AVATAR, 
 from django.contrib.gis.geoip import GeoIP
 import re
 
@@ -40,12 +40,17 @@ class Fruitcake(models.Model):
         shipments = self.shipments.shipment_set.count()
         return uploads, shipments
     """
-    
+    """ 
+    def __init__(self, *args, **kwargs):
+        p = getattr(self, pic)
+        thumbname = re.sub('^pics\/', 'thumbnails/', p.name)
+        setattr(self, self.thumbnail.name, thumbname)
+    """
+
     def save(self, *args, **kwargs):
         """
         Saves STANDARD and THUMBNAIL versions of uploaded image
         """
-
         super(Fruitcake, self).save(*args, **kwargs)
         
         # WIDTH_STANDARD:
@@ -67,7 +72,8 @@ class Fruitcake(models.Model):
         # WIDTH_THUMBNAIL:
 
         # The only thing we're doing to the model (table) is updating with name for the thumbnail
-        self.thumbnail.name = re.sub('^pics\/', 'thumbnails/', self.pic.name)
+        #CF20130412: NOTE: the next line might need to go BEFORE super() above -----------------------
+        """
         imfn = pjoin(MEDIA_ROOT, self.thumbnail.name)
         wpercent = (WIDTH_THUMBNAIL/float(im.size[0]))                    #why do this twice?
         hsize = int((float(im.size[1])*float(wpercent)))
@@ -78,7 +84,7 @@ class Fruitcake(models.Model):
             im2.save(imfn, "JPEG")
         except IOError as e:
             print "Error: %s" % e
-
+        """
 
 
 CHOICES = (
@@ -168,8 +174,10 @@ class Shipment(models.Model):
     def get_parent_list(self):
         shipment_list = Shipment.objects.filter(origin=self.origin).order_by('-dt')
         mylist = []
+        prior = None
+        
         for shipment in shipment_list:
-            if (shipment.id==shipment_list[0].id) or (shipment.id==prior.parent_id):
+            if (shipment.id==shipment_list[0].id) or (prior and shipment.id==prior.parent_id):
                 mylist.append(shipment.id)
                 prior = shipment
             if shipment.id == prior.id:
@@ -177,3 +185,4 @@ class Shipment(models.Model):
                 
         parent_list = Shipment.objects.filter(pk__in=mylist).order_by('-dt')
         return parent_list
+        

@@ -314,7 +314,7 @@ def upload_file(request):
                 # then add the request.user
                 pic.uploader = request.user
                 #CF20130410 added next line
-                ##pic.thumbnail.name = re.sub('^pics\/', 'thumbnails/', pic.pic.name)
+                pic.thumbnail.name = re.sub('^pics\/', 'thumbnails/', pic.pic.name)
                 # .save() method on the model saves 2 processed versions of the image in pics and thumbnails
                 pic.save()
                 # return HttpResponseRedirect('/myfruitcake/success/')
