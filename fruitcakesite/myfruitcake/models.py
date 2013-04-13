@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from os.path import join as pjoin
 #from tempfile import *
 from PIL import Image as PImage
-from fruitcakesite.settings import MEDIA_ROOT, WIDTH_STANDARD # WIDTH_THUMBNAIL, , MEDIA_URL, WIDTH_AVATAR, 
+from fruitcakesite.settings import MEDIA_ROOT, WIDTH_STANDARD, WIDTH_THUMBNAIL # MEDIA_URL, WIDTH_AVATAR, 
 from django.contrib.gis.geoip import GeoIP
 import re
 
@@ -73,7 +73,6 @@ class Fruitcake(models.Model):
 
         # The only thing we're doing to the model (table) is updating with name for the thumbnail
         #CF20130412: NOTE: the next line might need to go BEFORE super() above -----------------------
-        """
         imfn = pjoin(MEDIA_ROOT, self.thumbnail.name)
         wpercent = (WIDTH_THUMBNAIL/float(im.size[0]))                    #why do this twice?
         hsize = int((float(im.size[1])*float(wpercent)))
@@ -84,7 +83,6 @@ class Fruitcake(models.Model):
             im2.save(imfn, "JPEG")
         except IOError as e:
             print "Error: %s" % e
-        """
 
 
 CHOICES = (
