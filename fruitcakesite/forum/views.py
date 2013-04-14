@@ -10,7 +10,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR
+from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR, THUMBNAIL_PATH
 from django.template import RequestContext
 from django import forms
 from forum.models import *

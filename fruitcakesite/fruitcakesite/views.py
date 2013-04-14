@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from myfruitcake.models import Fruitcake
 from django.views.generic import ListView
 
+from django.conf import settings
 
 class FruitcakeListView(ListView):
 #    @method_decorator(login_required)
@@ -26,6 +27,7 @@ class FruitcakeListView(ListView):
 
 
 def home_page(request):
+#    context['thumbnail_path'] = settings.THUMBNAIL_PATH
     return render_to_response('myfruitcake/fruitcake_list.html', context_instance=RequestContext(request))
 #   return render_to_response('index.html', context_instance=RequestContext(request))
     """
