@@ -265,8 +265,6 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             ##return HttpResponseRedirect('/myfruitcake/success/')
             #return HttpResponseRedirect("/myfruitcake/%(id)s/?err=success" % {"id":shipment_id})
 
-
-
         else:
             return HttpResponse('Sorry, something invalid in your email addresses. Should be a comma-separated list of email addresses.')
 
@@ -314,7 +312,9 @@ def upload_file(request):
         prior_fruitcake = Fruitcake.objects.filter(uploader=request.user)
         pattern = re.compile('^pics\/')
         prior_files = []
-        x = [ prior_files.append(pattern.sub('', str(f.pic.name))) for f in prior_fruitcake ] 
+        #x = [ prior_files.append(pattern.sub('', str(f.pic.name))) for f in prior_fruitcake ] 
+
+        x = [ prior_files.append(f.pic.name) for f in prior_fruitcake ] 
         previously_uploaded = request.FILES['pic'].name in prior_files
         #if form.is_valid() and not previously_uploaded:
         if form.is_valid():
@@ -322,8 +322,10 @@ def upload_file(request):
                 pic = form.save(commit=False)
                 # then add the request.user
                 pic.uploader = request.user
-                #CF20130410 added next line
-                pic.thumbnail.name = 'thumbnails/' + pic.pic.name 
+
+                pic.thumbnail.name = 'thumbnails/' + re.sub('pics\/', 'thumbnails/', pic.pic.name)
+                #pic.thumbnail.name = 'thumbnails/' + pic.pic.name
+                ## pic.thumbnail.name = pic.pic.name
                 #re.sub('pics', 'thumbnails', pic.pic.name)
                 # .save() method on the model saves 2 processed versions of the image in pics and thumbnails
                 pic.save()

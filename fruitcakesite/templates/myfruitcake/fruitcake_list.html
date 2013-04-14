@@ -27,7 +27,7 @@
                 <li>
                 <figure>
                     <a href="{{ item.id }}/shipment/" title="{{ item.popup }}">
-                        <img src="{{ MEDIA_URL }}thumbnails/{{ item.thumbnail }}"/>
+                        <img src="{{ MEDIA_URL }}{{ item.thumbnail }}"/>
                     </a>
                     <figcaption>uploaded: {{ item.dt }}<br />by: {{ item.uploader.username }} (sent {{item.times_shipped }}x)</figcaption>
                 </figure>

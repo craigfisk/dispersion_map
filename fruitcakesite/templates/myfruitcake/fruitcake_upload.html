@@ -19,7 +19,9 @@
         {% endif %}
 
         Photo (jpg): <input type="file" name="pic" value="filename" id="pic" />
-
+        {% comment %}
+        <input type="hiidden" name="thumbnail" value="filename" id="thumbnail" />
+        {% endcomment %}
         Pop-up message: <input type="text" name="popup" value="Pick me!" id="popup" />
 
         <input type="submit" value="Upload" id="submit" />
