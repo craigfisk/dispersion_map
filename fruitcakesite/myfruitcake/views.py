@@ -312,9 +312,8 @@ def upload_file(request):
         prior_fruitcake = Fruitcake.objects.filter(uploader=request.user)
         pattern = re.compile('^pics\/')
         prior_files = []
-        #x = [ prior_files.append(pattern.sub('', str(f.pic.name))) for f in prior_fruitcake ] 
-
-        x = [ prior_files.append(f.pic.name) for f in prior_fruitcake ] 
+        x = [ prior_files.append(pattern.sub('', str(f.pic.name))) for f in prior_fruitcake ] 
+        #x = [ prior_files.append(f.pic.name) for f in prior_fruitcake ] 
         previously_uploaded = request.FILES['pic'].name in prior_files
         #if form.is_valid() and not previously_uploaded:
         if form.is_valid():
