@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 urlpatterns = patterns('myfruitcake.views',
     url(r'^$', login_required(MyFruitcakeListView.as_view(model=Fruitcake)), name='myfruitcakelistview'),
+    #url(r'^$', MyFruitcakeListView.as_view(model=Fruitcake), name='myfruitcakelistview',
     url(r'^myshipments', login_required(ShipmentListView.as_view(model=Shipment)), name='myshipments'),
     url(r'^upload/$', 'upload_file'),
     url(r'^about/$', 'about'),
