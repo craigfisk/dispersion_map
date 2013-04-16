@@ -78,7 +78,7 @@ class MyFruitcakeListView(ListView):
             return Fruitcake.objects.filter(uploader=self.request.user).order_by('-dt')
             # or: popup__startswith='Pick me'
         else:
-            return Fruitcake.objects.all().order_by('-dt')[:8]
+            return Fruitcake.objects.all().order_by('-dt') # [:8]
 
 class ShipmentListView(ListView):       
     """
