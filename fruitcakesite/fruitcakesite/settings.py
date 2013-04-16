@@ -137,8 +137,6 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static/media/')
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = '/static/media/'
 #MEDIA_URL = ''
-PIC_PATH = 'pics/'
-THUMBNAIL_PATH = 'thumbnails/'
 
 ##
 LOGIN_URL = '/login/'

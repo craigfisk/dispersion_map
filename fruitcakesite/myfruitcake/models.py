@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from os.path import join as pjoin
 #from tempfile import *
 from PIL import Image as PImage
-from fruitcakesite.settings import MEDIA_ROOT, WIDTH_STANDARD, WIDTH_THUMBNAIL, THUMBNAIL_PATH 
+from fruitcakesite.settings import MEDIA_ROOT, WIDTH_STANDARD, WIDTH_THUMBNAIL 
 from django.contrib.gis.geoip import GeoIP
 import re
 

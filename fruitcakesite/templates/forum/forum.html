@@ -10,10 +10,10 @@
 
       <div class="ttitle">Forum: {{ title }}</div>
         <div id="back">
-            <a href="{% url forum.views.main %}">&lt;&lt; back to list of forums</a>
+            <a href="{% url 'forum.views.main' %}">&lt;&lt; back to list of forums</a>
         </div>
 
-      &nbsp;<a id="new_topic" class="buttont" href="{% url forum.views.post 'new_thread' pk %}">&gt;&gt; start new discussion</a>
+      &nbsp;<a id="new_topic" class="buttont" href="{% url 'forum.views.post' 'new_thread' pk %}">&gt;&gt; start new discussion</a>
         <br />
         <br />
 
@@ -39,13 +39,13 @@
             {% for thread in threads.object_list %}
             <tr>
                 <td {% if forloop.last %}class="last"{% endif %}>
-                <div class="title"><a href="{% url forum.views.thread thread.pk %}">{{ thread.title }}</a>
+                <div class="title"><a href="{% url 'forum.views.thread' thread.pk %}">{{ thread.title }}</a>
                     </div></td>
                 <td {% if forloop.last %}class="last"{% endif %}>{{ thread.num_replies }}</td>
                 <td {% if forloop.last %}class="last"{% endif %}>
                     {{ thread.last_post.short|linebreaksbr }}</td>
                 <td {% if forloop.last %}class="last"{% endif %}>
-                    <a class="button" href="{% url forum.views.thread thread.pk %}">VIEW</a>
+                    <a class="button" href="{% url 'forum.views.thread' thread.pk %}">VIEW</a>
                 </td>
             </tr>
 

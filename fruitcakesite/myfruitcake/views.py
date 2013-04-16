@@ -13,7 +13,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from fruitcakesite.settings import MEDIA_URL, THUMBNAIL_PATH  #MEDIA_ROOT, WIDTH_AVATAR, WIDTH_THUMBNAIL
+from fruitcakesite.settings import MEDIA_URL  #MEDIA_ROOT, WIDTH_AVATAR, WIDTH_THUMBNAIL
 
 from myfruitcake.models import Fruitcake, Shipment, Upload, Like, IPAddress
 from forum.models import UserProfile
@@ -34,8 +34,8 @@ from datetime import datetime
 from django.contrib.gis.geoip import GeoIP
 import re
 
-#CF20130413 next 2 lines to enable THUMBNAIL_PATH, PIC_PATH to be a constant in templates
-from django.conf import settings    # also needs render_to_response imported above
+#CF20130413 next line to enable THUMBNAIL_PATH etc to be a constant in templates. Leaving here as example.
+#from django.conf import settings    # also needs render_to_response imported above
 
 g = GeoIP()
 
@@ -57,7 +57,7 @@ def activity(request, pk):
     shipments = Shipment.objects.all().order_by("dt")
     shipments = mk_paginator(request, shipments, 15)
     #CF20130413 added:
-    context['thumbnail_path'] = settings.THUMBNAIL_PATH
+    #context['thumbnail_path'] = settings.THUMBNAIL_PATH
     return render_to_response("myfruitcake/activity.html", add_csrf(request, shipments=shipments, media_url=MEDIA_URL), context_instance=RequestContext(request))
 
 class MyFruitcakeListView(ListView):
@@ -69,8 +69,6 @@ class MyFruitcakeListView(ListView):
         context = super(MyFruitcakeListView, self).get_context_data(**kwargs)
         context['user'] = self.request.user
         context['uploader'] = self.request.user
-        #CF20130413 added:
-        context['thumbnail_path'] = settings.THUMBNAIL_PATH
         return context
 
     def get_queryset(self):
@@ -88,8 +86,6 @@ class ShipmentListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ShipmentListView, self).get_context_data(**kwargs)
         context['user'] = self.request.user
-        #CF20130413 added:
-        context['thumbnail_path'] = settings.THUMBNAIL_PATH
         return context
 
     def get_queryset(self):

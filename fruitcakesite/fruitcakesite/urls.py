@@ -7,6 +7,9 @@ from django.contrib import admin
 
 from fruitcakesite.views import FruitcakeListView
 
+import warnings
+warnings.simplefilter('error',DeprecationWarning)
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
