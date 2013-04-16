@@ -1,4 +1,4 @@
-% extends "forum/fbase.html" %}
+{% extends "forum/fbase.html" %}
  
 {% block title %}Email{% endblock %}
 
@@ -13,7 +13,7 @@
         <ul class="gallery tape">
                 <li>
                 <figure>
-                    <img src="http://www.justfruitcake.com/static/media/thumbnails/{{ fruitcake.thumbnail }}" title="{{ fruitcake.popup }}" />
+                    <img src="{{ MEDIA_URL }}{{ fruitcake.thumbnail }}" title="{{ fruitcake.popup }}" />
                     <figcaption>uploaded: {{ fruitcake.dt }}<br />by: {{ fruitcake.uploader.username }}</figcaption>
                 </figure>
                 </li>
