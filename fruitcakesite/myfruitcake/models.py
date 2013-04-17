@@ -7,7 +7,7 @@ from os.path import join as pjoin
 from PIL import Image as PImage
 from fruitcakesite.settings import MEDIA_ROOT, WIDTH_STANDARD, WIDTH_THUMBNAIL 
 from django.contrib.gis.geoip import GeoIP
-import re
+#import re
 
 geoip = GeoIP()
 
