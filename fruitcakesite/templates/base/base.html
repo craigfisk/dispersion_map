@@ -30,15 +30,17 @@
       #map-canvas { height: 100% }
     </style>
     <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?libraries=panoramio&key=AIzaSyCEiPQThe6LQAKPQpcNRPHVb-GMfGLRquY&sensor=false">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEiPQThe6LQAKPQpcNRPHVb-GMfGLRquY&sensor=false">
     </script>
     <script type="text/javascript">
       function initialize() {
         var mapOptions = {
-          center: new google.maps.LatLng(-34.397, 150.644),
+          center: new google.maps.LatLng(45.5191, -122.6755),
           zoom: 8,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
+        {# Australia: -34.397, 150.644 #}
+
         var map = new google.maps.Map(document.getElementById("map-canvas"),
             mapOptions);
       }
@@ -105,64 +107,53 @@
             {% endblock %}
         </div>
 
-        {% block signin %}
-        <div id="container3">
-            <div id="container2">
-                <div id="container1">
-                    <div id="col1">
-                        <br /><h2>
-                            {% if user.get_username %}
-                                Hi <i>{{ user.get_username }}</i>!
-                            {% else %}
-                                Hi anonymous!
-                            {% endif %}                
-                        
-                        </h2><br /><br />
+            {% block signin %}
+            <div id="container3">
+                <div id="container2">
+                    <div id="container1">
+                        <div id="col1">
+                            <br /><h2>
+                                {% if user.get_username %}
+                                    Hi <i>{{ user.get_username }}</i>!
+                                {% else %}
+                                    Hi anonymous!
+                                {% endif %}                
+                            
+                            </h2><br /><br />
 
+                        </div>
+                        <div id="col2">
+     
+                              
+                        </div>
+                        <div id="col3">
 
+                       </div>
                     </div>
-                    <div id="col2">
- 
-                          
-                    </div>
-                    <div id="col3">
-
-                   </div>
                 </div>
             </div>
-        </div>
 
-        {% endblock %}
-
-
+            {% endblock %}
 
 
             {% block page-content %}
                 page-content goes here
             
                 <div id="content">
-
-                </div>
+                </div> 
                
             {% endblock %}
 
-            {#    {% block body %}{% endblock %} #}
 
-
-    {% block footer %}
-    <br />
-    <div class="footer">
-        &copy; Copyright 2012-2013 Picocosmos Corporation</div>
-    {% endblock %}
+            {% block footer %}
+            <br />
+            <div class="footer">
+                &copy; Copyright 2012-2013 Picocosmos Corporation</div>
+            {% endblock %}
 
 
         </div>
     </div>
-
-    {# from Google maps sample code #}
-    <div id="map-canvas" />
-
-    <iframe style="float: right; margin: 10px" src="http://www.panoramio.com/wapi/template/list.html?tag=mountain&amp;width=280&amp;height=140&amp;rows=2&amp;columns=4&amp;orientation=horizontal" frameborder="0" width="280" height="140" scrolling="no" marginwidth="0" marginheight="0"> </iframe>
 
 </body>
 </html>
