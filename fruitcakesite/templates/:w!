@@ -27,8 +27,9 @@
         <div id="gallery_tape">
         <ul class="gallery tape">
 
+        mapping = True
 
-        {% if shipment_list %}
+        if not(mapping):
 
             {% for shipment in shipment_list %}
 
@@ -45,13 +46,11 @@
                 </td>
 
                 <td valign="top">
+                {% if shipment.get_shipment_list %}
 
                 <b>Map: {{ shipment.get_shipment_list | length }}</b>
 
-                {% comment %}
- 
-                {% if shipment.get_shipment_list %}
-
+               
                 <u>Latest</u>
                     <ol class="history_area" reversed >
                     {% for leg in shipment.get_shipment_list %}
@@ -71,15 +70,10 @@
                     </li>
                     {% endfor %}
                     </ol>
-
-                    <u>Start</u>
-
                 {% else %}
                     <b>no list</b>
                 {% endif %}
-
-                {% endcomment %}
-
+                <u>Start</u>
 
 
                 </td>
