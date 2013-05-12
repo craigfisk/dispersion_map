@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView, ListView, TemplateView
 from myfruitcake.models import Fruitcake, Upload, Shipment
-from myfruitcake.views import activity, upload_file, MyFruitcakeListView, ShipmentListView, email_fruitcake, about
+from myfruitcake.views import activity, upload_file, MyFruitcakeListView, ShipmentListView, email_fruitcake, about, testmap
 #about_sample
 from fruitcakesite.views import FruitcakeListView
 from django.conf.urls import patterns, include, url
@@ -21,6 +21,7 @@ urlpatterns = patterns('myfruitcake.views',
     url(r'^meta/.*$', 'meta'),
     url(r'^search-form/$', 'search_form'),
     url(r'^search/$', 'search'),
+    url(r'^map/$', 'testmap'),
 ) 
 
 

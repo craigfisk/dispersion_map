@@ -1,5 +1,7 @@
 {% extends "forum/fbase.html" %}        
 
+
+
 {% block title %}About{% endblock %}
 
 {% block sidebar %} - about{% endblock %}
@@ -19,7 +21,6 @@ life of its own at a certain point.
     <li><b>Sign-in/Sign-out</b>
     <li><b>About</b>
 </ul>
-
 {% comment %}
 <P>Click <a href="{% url myfruitcake.views.about_sample %}">here</a> for a screenshot. Without having created a sign-in, you can
 click on the Justfruitcake message link in an email to open it in Justfruitcake.com and see the fruitcake's travels, but to
@@ -34,10 +35,11 @@ send it on or to send other Justfruitcake messsages, you just need to create a s
     yet.
 </ol>
 
-{# comment #}
+{% comment %}
 <P>Etherpad:
 <iframe src='http://pad.test.de/p/PAD_NAME?showChat=false&showLineNumbers=false' width=600 height=400></iframe>
 </P>
-{# endcomment #}
+{% endcomment %}
+
 
 {% endblock %}

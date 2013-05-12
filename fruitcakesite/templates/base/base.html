@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <title>Justfruitcake {% block title %}{% endblock %}</title>
-    <!-- <meta http-equiv="refresh" content="2">  -->
+    <!-- <meta http-equiv="refresh" content="2">  //-->
     {% comment %}
     <link rel="stylesheet" href="http://www.justfruitcake.com/static/fbasestyles.css" type="text/css" media="screen" charset="utf-8" />
     {% endcomment %}
@@ -29,8 +29,8 @@
       body { height: 100%; margin: 0; padding: 0 }
       #map-canvas { height: 100% }
     </style>
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEiPQThe6LQAKPQpcNRPHVb-GMfGLRquY&sensor=false">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvM4T-nBKtDRonQmnOw-pfl8FWsb0OfVQ&sensor=false">
+
     </script>
     <script type="text/javascript">
       function initialize() {
@@ -39,7 +39,6 @@
           zoom: 8,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        {# Australia: -34.397, 150.644 #}
 
         var map = new google.maps.Map(document.getElementById("map-canvas"),
             mapOptions);

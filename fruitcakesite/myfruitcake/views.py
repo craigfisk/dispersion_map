@@ -39,6 +39,13 @@ import re
 
 g = GeoIP()
 
+
+
+def testmap(request):
+    return render_to_response("myfruitcake/map.html", add_csrf(request), context_instance=RequestContext(request))
+
+
+
 def about(request):
     return render_to_response("myfruitcake/about.html", add_csrf(request), context_instance=RequestContext(request))
 
