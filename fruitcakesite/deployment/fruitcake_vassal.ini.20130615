@@ -34,9 +34,5 @@ chmod-socket = 664
 # clear environment on exit
 # Testing changes --- touch
 ###threads = 2
-single-interpreter = true
-lazy-apps = true
 
-#NEW_RELIC_CONFIG_FILE=myfruitcake_newrelic.ini
-#export NEW_RELIC_CONFIG_FILE
 
