@@ -38,7 +38,7 @@
             <!-- Threads  -->
             {% for thread in threads.object_list %}
             <tr>
-                <td {% if forloop.last %}class="last"{% endif %}>
+                <td {% if forloop.last %}class="last"{% endif %}>rabbit
                 <div class="title"><a href="{% url 'forum.views.thread' thread.pk %}">{{ thread.title }}</a>
                     </div></td>
                 <td {% if forloop.last %}class="last"{% endif %}>{{ thread.num_replies }}</td>
