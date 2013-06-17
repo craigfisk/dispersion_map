@@ -1,0 +1,45 @@
+{% extends "forum/fbase.html" %}        
+
+
+
+{% block title %}About{% endblock %}
+
+{% block sidebar %} - about{% endblock %}
+
+{% block page-content %}
+
+<P>Justfruitcake has the simple purpose of providing a platform for tracking the travels of virtual
+fruitcake. It is one of those side projects that started from a fun and whimsical notion, but took on a
+life of its own at a certain point.
+<P>Overview:
+<ul>
+    <li><b>Home</b> - The most popular fruitcake photos (by how often they've been sent).
+    <li><b>MyFruitcake</b> - Photos you have uploaded.
+    <li><b>MyShipments</b> - Messages you've sent using fruitcakes.
+    <li><b>Forum</b> - Discussion area with topics.
+    <li><b>MyProfile</b> - Username, email, photo.
+    <li><b>Sign-in/Sign-out</b>
+    <li><b>About</b>
+</ul>
+{% comment %}
+<P>Click <a href="{% url myfruitcake.views.about_sample %}">here</a> for a screenshot. Without having created a sign-in, you can
+click on the Justfruitcake message link in an email to open it in Justfruitcake.com and see the fruitcake's travels, but to
+send it on or to send other Justfruitcake messsages, you just need to create a sign-in with a verified email address.
+{% endcomment %}
+
+<P>FAQ:
+<ol>
+    <li>I sent a fruitcake so why doesn't it show up in MyShipments? Answer: try hitting F5 to refresh the browser.
+    <li>I received a fruitcake message in an email but when I click the link, why do I need to register/sign in?
+    Answer: well, it was intended to not be needed, but there hasn't been time to work up the software for that,
+    yet.
+</ol>
+
+{% comment %}
+<P>Etherpad:
+<iframe src='http://pad.test.de/p/PAD_NAME?showChat=false&showLineNumbers=false' width=600 height=400></iframe>
+</P>
+{% endcomment %}
+
+
+{% endblock %}

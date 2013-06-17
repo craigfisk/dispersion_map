@@ -1,0 +1,69 @@
+{% extends "forum/fbase.html" %}
+
+{% block title %}{{ block.super }} Discussion{% endblock %}
+
+{% block sidebar %} - discussion <style type="text/css"> </style> {% endblock %}
+
+{% block page-content %}
+
+    <div class="main">
+
+        <div class="ttitle">Discussion: {{ title }}</div>
+            <div id="back">
+                <a href="{% url 'forum.views.forum' forum_pk %}">&lt;&lt; back to list of discussions</a>
+            </div>
+        <div id="list">
+
+            <!-- Posts  -->
+            {% for post in posts.object_list %}
+                <div class="post">
+
+                    <div class="ppic">
+                        {% with post.profile_data as pdata %}
+                            {% if pdata.1 %}
+                                {% comment %}
+                                media_root in next line is media_url in forumsrc but media_root in post, pt2
+                                {% endcomment %}
+                                <img src="{{ media_url }}{{ pdata.1 }}" /> <br />
+                            {% endif %}
+                        {{ post.creator }}<br />
+                        Posts: {{ pdata.0 }}<br />
+                        Joined: {{ post.creator.date_joined|date:"M d Y" }}
+                        {% endwith %}
+                    </div>
+
+                    <span class="title">{{ post.title }}</span><br />
+                    by {{ post.creator }} | <span class="date">{{ post.created }}</span> <br /><br />
+
+                    {{ post.body|linebreaksbr }} <br />
+
+                    <div class="clear"></div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Next/Prev page links  -->
+        {% if threads.object_list and threads.paginator.num_pages > 1 %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if threads.has_previous %}
+                    <a href= "?page={{ threads.previous_page_number }}">previous &lt;&lt; </a>
+                {% endif %}
+
+                <span class="current">
+                    &nbsp;Page {{ threads.number }} of {{ threads.paginator.num_pages }}
+                </span>
+
+                {% if threads.has_next %}
+                    <a href="?page={{ threads.next_page_number }}"> &gt;&gt; next</a>
+                {% endif %}
+            </span>
+        </div>
+        {% endif %}
+
+        <br />
+        <a class="button" href="{% url 'forum.views.post' 'reply' pk %}">Reply</a>
+
+    </div>
+
+{% endblock %}

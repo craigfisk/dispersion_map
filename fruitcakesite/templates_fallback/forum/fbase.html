@@ -1,0 +1,125 @@
+{% extends "base/base.html" %}
+
+{% block title %}{{ block.super }} BaseApp {% endblock %}
+
+{% block sidebar %} - website{% endblock %} 
+
+    <div id="container">
+        <div id="menu">
+            {% block nav-global %}
+
+                <!-- MENU -->
+                <h3><a href="{% url 'fruitcakelistview' %}">Home</a></h3>
+                <h3><a href="{% url 'myfruitcakelistview' %}">MyFruitcake</a></h3>
+                <h3><a href="{% url 'myshipments' %}">MyShipments</a></h3>
+                <h3><a href="{% url 'forum.views.main' %}">Forum</a></h3>
+
+                {% if user.is_staff %} <a href="{% url 'admin:index' %}">Admin</a> {% endif %}
+                {% if user.is_staff %} <a href="{% url 'myfruitcake.views.search_form' %}">Search</a> {% endif %}
+
+                {% if user.is_authenticated %}
+                    <h3><a href="{% url 'forum.views.userinfo' user.pk %}">MyProfile</a></h3> {% endif %}
+
+                {% if not user.is_authenticated %}<h3><a href="/registration/login/?next=/myfruitcake/">sign-in</a> | <a href="/registration/register/">register</a></h3>{% endif %}
+
+                {% if user.is_authenticated %}<h3><a href="/registration/logout/?next=/myfruitcake/">sign-out</a></h3>
+                    {% endif %}
+
+                <h3><a href="{% url 'myfruitcake.views.about' %}">About</a></h3>
+
+
+            {% endblock %}
+        </div>
+
+        {% block signin %}
+        <div id="container3">
+            <div id="container2">
+                <div id="container1">
+                    <div id="col1">
+                        <br /><h2>
+                        {% if user.username and user.get_profile.avatar %} 
+                            Hi <i>{{ user.username }}</i>!
+                        {% elif user.username and not user.get_profile.avatar %}
+                            Hi <i>{{ user.username }}!</i>.
+                        {% else %}
+                        Hi, <i>anonymous</i>! 
+                        {% endif %}
+                    </h2><br />
+                        <P><b>Justfruitcake.com</b> is TOTALLY FREE (until it's not; and then it will be very, very inexpensive, plus maybe have some nice surprises!)</P>
+
+
+                    </div>
+                    <div id="col2">
+ 
+                        <h2>My activity: </h2>
+                            {% comment %}
+                            my_shipments is defined in myfruitcake/context_processors.py and settings
+                            {% endcomment %}
+                            {% if user.is_authenticated %}
+                            <ul>
+                                {% if my_shipments %}
+                                <li>Shipments: {{ my_shipments|length }}</li>
+                                {% comment %}
+                                {% if my_latest_shipment %}
+                                <li>Latest: <a href="/myfruitcake/myshipments/{{ my_latest_shipment.id }}/">{{ my_latest_shipment.dt }}</a></li>
+                                {% endif %}
+                                {% endcomment %}
+                                {% else %}
+                                <li>No shipments</li>
+                                {% endif %}
+                                
+                                {% if my_posts %}
+                                <li>Posts: {{ my_posts|length }}</li>
+                                {% comment %}
+                                {% if my_latest_post %}
+                                <li>Latest: <a href="/forum/thread/{{ my_latest_post.thread.id}}/">{{my_latest_post.created}}</a></li>
+                                {% endif %}
+                                {% endcomment %}
+                                {% else %}
+                                <li>No posts</li>
+                                {% endif %}
+                            </ul>
+                            {% else %}
+                            <P>(Not available for anonymous user)
+                            {% endif %}
+
+                        </div>
+                    <div id="col3">
+
+                         <div id="avatarinfo">
+                            {% if user.username and user.get_profile.avatar %} 
+                                <div class="avatar">
+                                        <img src="http://www.justfruitcake.com/static/media/{{ user.get_profile.avatar }}">
+                                </div>
+                            {% elif user.username and not user.get_profile.avatar %}
+                                No photo? It would be nice if you would go to your profile and upload your picture.
+                            {% else %}
+                                
+                            {% endif %}
+                        </div>
+                
+                        {% comment %}
+                        <h2>My forum posts:</h2>
+                        <ul>
+                            <li>Posts: {{ my_posts|length }} </li>
+                        </ul>
+                        {% endcomment %}
+ 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endblock %}
+
+
+
+
+        <div id="content">
+            {% block page-content %}{% endblock %}
+        </div>
+    </div>
+
+</body>
+</html>
+

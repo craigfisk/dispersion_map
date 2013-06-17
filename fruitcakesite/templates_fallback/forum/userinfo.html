@@ -1,0 +1,56 @@
+{% extends "forum/fbase.html" %}
+
+{% block title %}MyProfile{% endblock %}
+
+{% block sidebar %} - my profile <style type="text/css"> </style> {% endblock %}
+
+{% block page-content %}
+    <style type="text/css">
+        .main { margin-left: 25px; margin-top: 30px; }
+
+        #rtitle {
+            /* background: #eee; */
+            font-size: 1.3em; padding: 3px; margin-top: 40px;
+            padding-left: 20px; margin-bottom: -10px;
+        }
+        #submit { float: left; }
+
+        img { margin-left: 85px; border: 1px solid #ccc; padding: 4px; }
+    </style>
+
+    <div class="main">
+        <div id="rtitle">Edit My Profile</div><br />
+
+        <p>
+        <form enctype="multipart/form-data" action="" method="POST"> {% csrf_token %}
+
+            <table>
+                {{ uf.as_table }}
+            </table>
+            <input type="submit" value="update">
+
+
+            {{ form.as_p }} 
+
+            {% comment %}
+            <P>username: <input type="text" name="username" value="{{ profile.user.username }}" id="id_username" /></P>
+            <P>email: <input type="text" name="email" value="{{ profile.user.email }}" id="id_email" /></P>
+            {% endcomment %}
+
+            {# {% if img %} <p><img border="0" alt="Profile Pic" src="{{ img }}" /></p> {% endif %} #}
+
+            {% comment %}
+            Profile Pic: {{ pf.avatar|cut:"images/" }}<br />
+            <P>    
+            <input type="submit" value="Update profile" id="submit" />
+            {% endcomment %}
+            </form>
+        <P>Edit photo: 
+        {# <a href="{% url forum.views.profilepic uf.user.id %}">Edit photo</a> #}
+        <a href="/forum/profilepic/{{ u.pk }}/">click here</a>
+
+    
+        </p>
+    </div>
+
+{% endblock %}

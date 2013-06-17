@@ -1,0 +1,8 @@
+{% extends "registration/registration_base.html" %}
+{% block title %}Activation complete{% endblock %}
+{% block sidebar %} - activation complete{% endblock %}
+{% block page-content %}
+Thanks, activation complete!  You may now <a href="{% url 'django.contrib.auth.views.login' %}">login</a> using the username and password you set at registration.
+{% endblock %}
+
+
