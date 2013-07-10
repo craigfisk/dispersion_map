@@ -1,5 +1,6 @@
 # Django settings for fruitcakesite project.
 
+
 # Check if deployed (server name is 'zazen')  or else assume localhost
 import socket
 if socket.gethostname() == 'zazen':
