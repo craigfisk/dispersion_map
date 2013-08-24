@@ -1,10 +1,10 @@
 ## The following requirements were added by pip --freeze:
-Django==1.5.1
+Django==1.5.2
 PIL==1.1.7
 South==0.7.6
 argparse==1.2.1
 django-registration==0.8
-psycopg2==2.4.6
+psycopg2==2.5.1
 uWSGI==1.9.3
 wsgiref==0.1.2
 yolk==0.4.3
