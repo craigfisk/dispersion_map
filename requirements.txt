@@ -10,3 +10,4 @@ psycopg2==2.5.1
 uWSGI==1.9.3
 wsgiref==0.1.2
 yolk==0.4.3
+# uninstalled on frisky: paramiko, mementos, codegen
