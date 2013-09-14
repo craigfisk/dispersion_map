@@ -9,6 +9,10 @@ include/
 local/
 src/
 #
+#CF20130914 added:
+build
+distribute*
+#
 *~
 *.py[cod]
 *.swp
