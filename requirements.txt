@@ -1,14 +1,9 @@
 ## The following requirements were added by pip --freeze:
 Django==1.5.3
 PIL==1.1.7
-#South==0.7.6
-argparse==1.2.1
-# django-registration==1.0 now available but check it out before switching
+django-paypal==0.1.2
 django-registration==0.8
 psycopg2==2.5.1
-# uWSGI=1.9.16 now available but check it out before switching
-uWSGI==1.9.3
+pygeocoder==1.1.4
 wsgiref==0.1.2
 yolk==0.4.3
-# uninstalled on frisky: paramiko, mementos, codegen; 
-# also options==1.0, pycrypto==2.6
