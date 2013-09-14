@@ -1,7 +1,7 @@
 ## The following requirements were added by pip --freeze:
 Django==1.5.3
 PIL==1.1.7
-South==0.7.6
+#South==0.7.6
 argparse==1.2.1
 django-registration==0.8
 psycopg2==2.5.1
