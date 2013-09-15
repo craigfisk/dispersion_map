@@ -1,9 +1,11 @@
-## The following requirements were added by pip --freeze:
 Django==1.5.3
 PIL==1.1.7
+argparse==1.2.1
 django-paypal==0.1.2
 django-registration==0.8
 psycopg2==2.5.1
-pygeocoder==1.1.4
+pygeocoder==1.2.1.1
+requests==1.2.3
+uWSGI==1.9.3
 wsgiref==0.1.2
 yolk==0.4.3
