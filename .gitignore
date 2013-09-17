@@ -36,11 +36,11 @@ distribute*
 #!lib/python2.7/site-packages/registration/
 
 #ignore all /lib/ stuff
-/lib/*
+lib/*
 #except do not ignore registration directory
-!/lib/python2.7/site-packages/registration/
-!/lib/python2.7/site-packages/registration/*
+!lib/python2.7/site-packages/registration/
+!lib/python2.7/site-packages/registration/*
 #also subdirectories of registration
-!/lib/python2.7/site-packages/registration/**/*
+!lib/python2.7/site-packages/registration/**/*
 
 
