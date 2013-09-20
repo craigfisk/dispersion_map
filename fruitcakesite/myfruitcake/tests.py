@@ -1,16 +1,19 @@
-"""
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
+import datetime
 
-Replace this with more appropriate tests for your application.
-"""
-
+from django.utils import timezone
 from django.test import TestCase
+from django.core.urlresolvers import reverse
 
+from myfruitcake.models import Fruitcake, IPAddress
+from django.contrib.gis.geoip import GeoIP
+geoip = GeoIP()
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
+class IPAddresMethodTests(TestCase):
+
+    def test_get_city(self):
         """
-        Tests that 1 + 1 always equals 2.
+        get_city() should return 'Portland' for ipaddress 184.76.1.84
         """
-        self.assertEqual(1 + 1, 2)
+        addr = '184.76.1.84'
+        city = geoip.city(addr)['city']
+        self.assertEqual(city==u'Portland', True)
