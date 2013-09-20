@@ -34,6 +34,7 @@ urlpatterns = patterns('',
     # include('registration.urls').
     # url(r'^registration/', include('registration.urls')),
     url(r'^registration/', include('registration.backends.default.urls')),
+    url(r'^registration/login/', include('registration.backends.default.urls')),
     #
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'static'} ),
 )
