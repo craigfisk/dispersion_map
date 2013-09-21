@@ -13,6 +13,7 @@ src/
 build
 distribute*
 #
+#
 *~
 *.py[cod]
 *.swp
