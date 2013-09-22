@@ -27,9 +27,8 @@ class SimpleTest(TestCase):
         self.content_test("/forum/", ['<a href="/forum/forum/1/">forum</a>'])
         self.content_test("/forum/forum/1/", ['<a href="/forum/thread/1/">thread</a>', "ak - post"])
 
-        self.content_test("/forum/thread/1/", ['<div class="ttitle">thread</div>',
-               '<span class="title">post</span>', 'body <br />', 'by ak |'])
-
+        self.content_test("/forum/thread/1/", ['<div class="ttitle">thread</div>', '<span class="title">post</span>', 'body <br />', 'by ak |'])
+        # '<div class="ttitle">thread</div>' , '<span class="title">post</span>' , 'body <br />', 'by ak |'
         r = self.c.post("/forum/new_thread/1/", {"subject": "thread2", "body": "body2"})
         r = self.c.post("/forum/reply/2/", {"subject": "post2", "body": "body3"})
         self.content_test("/forum/thread/2/", ['<div class="ttitle">thread2</div>',
