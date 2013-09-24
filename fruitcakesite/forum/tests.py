@@ -20,6 +20,7 @@ class SimpleTest(TestCase):
         for v in values:
             self.assertTrue(v in r.content)
 
+
     def test(self):
         self.c = Client()
         self.c.login(username="ak", password="pwd")

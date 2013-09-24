@@ -15,6 +15,7 @@ from django.template import RequestContext
 from django import forms
 from forum.models import *
 
+
 class ProfileForm(ModelForm):
     class Meta:
         model = UserProfile

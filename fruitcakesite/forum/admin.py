@@ -2,6 +2,7 @@ from django.contrib import admin
 from forum.models import UserProfile, Forum, Thread, Post
 ### Admin
 
+
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ["id", "user", "shipments", "posts", "avatar"]
 

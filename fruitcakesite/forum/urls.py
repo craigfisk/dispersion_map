@@ -4,6 +4,7 @@ from forum.models import UserProfile, Thread, Post, Forum
 from forum.views import main, forum, thread, post, reply, profilepic, userinfo, new_thread
 #main, forum, thread, post, reply, profile, new_thread, add_csrf
 
+
 urlpatterns = patterns('forum.views',
     url(r'^forum/(\d+)/$', 'forum'),
     url(r'^thread/(\d+)/$', 'thread'),
