@@ -22,17 +22,14 @@ distribute*
 # Want instead:
 #lib/!*lib/python2.7/site-packages/registration/
 
-#--> To do this, unignore every parent directory of anything you want to unigore, so in pairs: 
-#iginore everything in a directory, but not some certain subdirectory, as follows:
+#--> To do this, unignore every parent directory of anything you want to unignore, so in pairs: 
+#ignore everything in a directory, but not some certain subdirectory, as follows:
 
 #!lib/
-
 #lib/*
 #!lib/python2.7/
-
 #lib/python2.7/*
 #!lib/python2.7/site-packages/
-
 #lib/python2.7/site-packages/*
 #!lib/python2.7/site-packages/registration/
 
