@@ -1,32 +1,33 @@
-from string import join
-from PIL import Image as PImage
-from os.path import join as pjoin
+#from string import join
+#from PIL import Image as PImage
+#from os.path import join as pjoin
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 #from django.utils.decorators import method_decorator
 
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import render_to_response #get_object_or_404, 
 from django.core.context_processors import csrf
-from django.core.paginator import Paginator, InvalidPage, EmptyPage
+#from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.forms import ModelForm
-from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+#from django.contrib.auth.models import User
+#from django.core.urlresolvers import reverse
 from fruitcakesite.settings import MEDIA_URL  #MEDIA_ROOT, WIDTH_AVATAR, WIDTH_THUMBNAIL
 
-from myfruitcake.models import Fruitcake, Shipment, Upload, Like, IPAddress
+from myfruitcake.models import Fruitcake, Shipment, Like, IPAddress  #Upload
 from forum.models import UserProfile
-from forum.views import mk_paginator, UserProfile, userinfo, profilepic
+from forum.views import mk_paginator #, profilepic  #userinfo
 
-from django.views.generic import ListView, DetailView, TemplateView, FormView
+from django.views.generic import ListView #, TemplateView, FormView  #DetailView
 
 from django import forms
 
 #from django.db import models
 
-from fruitcakesite.settings import DEFAULT_FROM_EMAIL
-from django.core.mail import EmailMessage, EmailMultiAlternatives
+#from fruitcakesite.settings import DEFAULT_FROM_EMAIL
+#from django.core.mail import EmailMessage # 
+from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
 

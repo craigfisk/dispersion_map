@@ -1,10 +1,20 @@
-from django.contrib.auth.decorators import login_required
-from django.views.generic import DetailView, ListView, TemplateView
-from myfruitcake.models import Fruitcake, Upload, Shipment
-from myfruitcake.views import activity, upload_file, MyFruitcakeListView, ShipmentListView, email_fruitcake, about, testmap
+#from django.contrib.auth.decorators import login_required
+#from django.views.generic import DetailView, ListView, TemplateView
+from myfruitcake.models import Fruitcake, Shipment  # Upload
+# MyFruitcakeListView, ShipmentListView, 
+from myfruitcake.views import MyFruitcakeListView, ShipmentListView
+#from myfruitcake.views import upload_file
+#from myfruitcake.views import email_fruitcake
+#from myfruitcake.views import about
+#from myfruitcake.views import success 
+#from myfruitcake.views import testmap
+#from myfruitcake.views import search
+#from myfruitcake.views import search_form
+#from myfruitcake.views import meta
+#from myfruitcake.views import path #activity 
 #about_sample
-from fruitcakesite.views import FruitcakeListView
-from django.conf.urls import patterns, include, url
+#from fruitcakesite.views import FruitcakeListView
+from django.conf.urls import patterns, url  #include
 from django.contrib.auth.decorators import login_required
 
 urlpatterns = patterns('myfruitcake.views',
