@@ -1,0 +1,9 @@
+base:
+
+[head]
+title
+[body]
+menu (#menu)
+heading (#heading)
+content (#content)
+footer (#footer)

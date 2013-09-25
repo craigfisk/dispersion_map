@@ -1,0 +1,72 @@
+--> before:
+
+fruitcake=# \d myfruitcake_shipment_receiver;
+                            Table "public.myfruitcake_shipment_receiver"
+   Column    |  Type   |                                 Modifiers                                  
+-------------+---------+----------------------------------------------------------------------------
+ id          | integer | not null default nextval('myfruitcake_shipment_receiver_id_seq'::regclass)
+ shipment_id | integer | not null
+ user_id     | integer | not null
+Indexes:
+    "myfruitcake_shipment_receiver_pkey" PRIMARY KEY, btree (id)
+    "myfruitcake_shipment_receiver_shipment_id_user_id_key" UNIQUE CONSTRAINT, btree (shipment_id, user_id)
+    "myfruitcake_shipment_receiver_shipment_id" btree (shipment_id)
+    "myfruitcake_shipment_receiver_user_id" btree (user_id)
+Foreign-key constraints:
+    "myfruitcake_shipment_receiver_user_id_fkey" FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED
+    "shipment_id_refs_id_cd13e3ee" FOREIGN KEY (shipment_id) REFERENCES myfruitcake_shipment(id) DEFERRABLE INITIALLY DEFERRED
+
+
+-----------------------------------
+ALTERATIONS:
+-----------------------------------
+
+alter table myfruitcake_shipment_receiver rename user_id to emailcontact_id;
+ALTER TABLE
+
+alter table myfruitcake_shipment_receiver drop constraint shipment_id_refs_id_cd13e3ee;
+ALTER TABLE
+fruitcake=# alter table myfruitcake_shipment_receiver drop constraint myfruitcake_shipment_receiver_user_id_fkey;
+ALTER TABLE
+fruitcake=# 
+
+alter index myfruitcake_shipment_receiver_shipment_id_user_id_key rename to myfruitcake_shipment_receiver_shipment_id_emailcontact_id_key;
+ALTER INDEX
+fruitcake=# alter index myfruitcake_shipment_receiver_user_id rename to myfruitcake_shipment_receiver_emailcontact_id;
+ALTER INDEX
+
+create table emailcontact(id serial primary key, email varchar(255) not null);
+
+truncate myfruitcake_shipment cascade;
+NOTICE:  truncate cascades to table "myfruitcake_fruitcake_shipments"
+TRUNCATE TABLE
+truncate myfruitcake_shipment_receiver cascade;
+TRUNCATE TABLE
+
+alter table myfruitcake_shipment_receiver add foreign key (emailcontact_id) references emailcontact(id) deferrable initially deferred;
+ALTER TABLE
+alter table myfruitcake_shipment_receiver add foreign key (shipment_id) references myfruitcake_shipment(id) deferrable initially deferred;
+ALTER TABLE
+
+--> after:
+
+fruitcake=# \d myfruitcake_shipment_receiver;
+                              Table "public.myfruitcake_shipment_receiver"
+     Column      |  Type   |                                 Modifiers                                  
+-----------------+---------+----------------------------------------------------------------------------
+ id              | integer | not null default nextval('myfruitcake_shipment_receiver_id_seq'::regclass)
+ shipment_id     | integer | not null
+ emailcontact_id | integer | not null
+Indexes:
+    "myfruitcake_shipment_receiver_pkey" PRIMARY KEY, btree (id)
+    "myfruitcake_shipment_receiver_shipment_id_emailcontact_id_key" UNIQUE CONSTRAINT, btree (shipment_id, emailcontact_id)
+    "myfruitcake_shipment_receiver_emailcontact_id" btree (emailcontact_id)
+    "myfruitcake_shipment_receiver_shipment_id" btree (shipment_id)
+Foreign-key constraints:
+    "myfruitcake_shipment_receiver_emailcontact_id_fkey" FOREIGN KEY (emailcontact_id) REFERENCES emailcontact(id) DEFERRABLE INITIALLY DEFERRED
+    "myfruitcake_shipment_receiver_shipment_id_fkey" FOREIGN KEY (shipment_id) REFERENCES myfruitcake_shipment(id) DEFERRABLE INITIALLY DEFERRED
+
+
+fruitcake=# create unique index myfruitcake_shipment_receiver_shipment_id_emailcontact_id on myfruitcake_shipment_receiver (shipment_id, emailcontact_id);
+CREATE INDEX
+
