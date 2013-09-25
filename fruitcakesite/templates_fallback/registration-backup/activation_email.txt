@@ -1,8 +1,0 @@
-You asked for a sign-in at {{ site.name }}.  If you changed your mind, just ignore this email.
-
-To activate your sign-in, please click the following link within the next {{ expiration_days }} day(s):
-
-http://{{site.domain}}/registration/activate/{{ activation_key }}
-
-Sincerely,
-{{ site.name }} 
