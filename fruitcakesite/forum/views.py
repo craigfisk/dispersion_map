@@ -1,10 +1,10 @@
-from string import join
+#from string import join
 from PIL import Image as PImage
 from os.path import join as pjoin
 
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import get_object_or_404, render_to_response
+from django.http import HttpResponseRedirect #, HttpResponse
+from django.shortcuts import render_to_response #get_object_or_404, 
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.forms import ModelForm
@@ -13,7 +13,19 @@ from django.core.urlresolvers import reverse
 from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR
 from django.template import RequestContext
 from django import forms
-from forum.models import *
+from forum.models import Forum, Thread, Post
+from django.db import models
+
+class UserProfile(models.Model):
+    # was upload_to="images/" in Django by Example but ReadTheDocs "How do I use image and file fields" says MEDIA_ROOT
+    # See http://readthedocs.org/docs/django/en/latest/faq/usage.html#how-do-i-use-image-and-file-fields
+    # Also in forum/models.py
+    avatar = models.ImageField("Profile Pic", upload_to='images', blank=True, null=True)
+    posts = models.IntegerField(default=0)
+    user = models.ForeignKey(User, unique=True)
+
+    def __unicode__(self):
+        return unicode(self.user)
 
 
 class ProfileForm(ModelForm):
@@ -63,22 +75,11 @@ def thread(request, pk):
     """Listing of posts in a thread."""
     posts = Post.objects.filter(thread=pk).order_by("created")
     posts = mk_paginator(request, posts, 15)
-    title = Thread.objects.get(pk=pk).title
+    #title = Thread.objects.get(pk=pk).title
     t = Thread.objects.get(pk=pk)
     return render_to_response("forum/thread.html", add_csrf(request, posts=posts, pk=pk, title=t.title,
         forum_pk=t.forum.pk, media_url=MEDIA_URL), context_instance=RequestContext(request))
     # forum_pk=t.forum.pk
-
-class UserProfile(models.Model):
-    # was upload_to="images/" in Django by Example but ReadTheDocs "How do I use image and file fields" says MEDIA_ROOT
-    # See http://readthedocs.org/docs/django/en/latest/faq/usage.html#how-do-i-use-image-and-file-fields
-    # Also in forum/models.py
-    avatar = models.ImageField("Profile Pic", upload_to='images', blank=True, null=True)
-    posts = models.IntegerField(default=0)
-    user = models.ForeignKey(User, unique=True)
-
-    def __unicode__(self):
-        return unicode(self.user)
 
 
 @login_required

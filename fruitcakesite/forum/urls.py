@@ -1,7 +1,7 @@
 #from django.conf.urls.defaults import *
-from django.conf.urls import patterns, url, include
-from forum.models import UserProfile, Thread, Post, Forum
-from forum.views import main, forum, thread, post, reply, profilepic, userinfo, new_thread
+from django.conf.urls import patterns, url
+#from forum.models import UserProfile, Thread, Post, Forum
+#from forum.views import main, forum, thread, post, reply, profilepic, userinfo, new_thread
 #main, forum, thread, post, reply, profile, new_thread, add_csrf
 
 
