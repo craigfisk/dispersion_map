@@ -76,10 +76,11 @@ class EmailTest(TestCase):
     
     def test_send_activation_email(self):
         # Send a message on locmem
-        """
         mail.send_mail('Subject here', 'Here is the message', 'from@example.com', ['to@example.com'], fail_silently=False)
         
         self.assertEqual(len(mail.outbox), 1)
+        for item in mail.outbox:
+            print "Type of the outbox item is: %s" % (type(mail.outbox[0]))
+
         print "Ok, email in the mail.outbox: %d" % (len(mail.outbox))
-        """
 
