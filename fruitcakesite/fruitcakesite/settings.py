@@ -11,9 +11,9 @@ else:
     #NOTE: switch to following IF DEBUGGING LOCALLY -- writes to console (or to file)
     # On Django email backends, see https://docs.djangoproject.com/en/1.5/topics/email/
     #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+    #EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
     #EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
-    #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     EMAIL_FILE_PATH = '/tmp/fruitcake_shipments'
 
 # Django will email ADMINS about broken links 404 with DEBUG = False + the following setting, 

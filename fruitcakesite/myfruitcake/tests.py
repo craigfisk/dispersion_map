@@ -2,13 +2,14 @@ from datetime import datetime
 from django.utils import timezone
 from django.core.urlresolvers import reverse
 
+from django.utils import unittest
 from django.test.utils import setup_test_environment
 setup_test_environment()
 
 from django.test import TestCase
 from django.test.client import Client
 from django.core import mail
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, UserManager
 from django.contrib.sites.models import Site
 
 from myfruitcake.models import Fruitcake, Shipment, IPAddress, Like, Upload, EmailContact
@@ -31,21 +32,48 @@ class FruitcakeTestCase(TestCase):
  
     def test_random(self):
         print "This is a random test"
+
+    def test_login(self):
+        c = Client()
+        response = c.post('/registration/login/?next=/myfruitcake/', {'username': 'fred', 'password': 'gobbledygook'})
+        self.assertEqual(response.status_code, 200)
    
+    def test_login_fail_w_blank_password(self):
+        c = Client()
+        response = c.post('/registration/login/?next=/myfruitcake/', {'username': 'fred', 'password': ''})
+        self.assertEqual(response.status_code, 200)
+ 
     def test_create_logged_in_user(self):
         """ test create_logged_in_user and send activation email.
         first goes to /registration/login/register/?next=/registration/registration_complete/
         """
         c = Client()
-        username = 'wcf1'
-        email = 'fred@gmail.com'
-        response = c.post('/registration/login/register/?next=/registration/registration_complete/',
-                {'username': username, 'email': email ,'password': 'Sp8rky=4242', 'password2': 'S[8rky=4242'})
-        print "Your status code: %d for test user: %s" % (response.status_code, username)
-        
-        print "Since the mail.outbox is emptied at the start of every TestCase..."
-        print "Ok, email in the mail.outbox: %d" % (len(mail.outbox))
+        pwd = 'Sp8rky=4242'
 
+        username = 'lucy'
+        email = 'lucy@lucyricky.com'
+        response = c.post('/registration/login/register/?next=/registration/registration_complete/',
+                {'username': username, 'email': email ,'password': pwd, 'password2': pwd})
+        print "Status code: %d for: %s" % (response.status_code, username)
+        self.assertEqual(response.status_code, 200)
+
+        username = 'ricky'
+        email = 'ricky@lucyricky.com'
+        user = User.objects.create_user(username, email, pwd)
+        # Now see if we can log in on the same credentials
+        self.assertEqual(c.login(username=username, password=pwd), True)
+
+        """
+        print "Since the mail.outbox is emptied at the start of every TestCase..."
+        print "Ok, first time: email in the mail.outbox: %d" % (len(mail.outbox))
+        print "Now see if we can login with this user"
+
+        result = c.login(username='wcf1', password='Sp8rky=4242')
+        if result:
+            print 'Logged in ok with newly-created user wcf1 and password'
+        else:
+            print 'Failed to log in'
+        """
         # submit
 
         # goes to http://127.0.0.1:8000/registration/login/register/complete/
@@ -58,6 +86,9 @@ class FruitcakeTestCase(TestCase):
         test_create_fruitcake should create a fruitcake with a popup
         """
         """
+        c = Client()
+        response = c.post('/registration/login/?next=/myfruitcake/', {'username': 'fred', 'password': ''})
+ 
         f = Fruitcake.objects.create(pic="pics/2ef7bcf22a6564a342f41ff827643477.jpg", uploader_id="30", dt=datetime.now(), times_shipped=0, popup=u"Pick me! I'm tasty")
         self.assertEqual(f.popup, "Pick me! I'm tasty")
         """
@@ -82,5 +113,5 @@ class EmailTest(TestCase):
         for item in mail.outbox:
             print "Type of the outbox item is: %s" % (type(mail.outbox[0]))
 
-        print "Ok, email in the mail.outbox: %d" % (len(mail.outbox))
+        print "Ok, second time: email in the mail.outbox: %d" % (len(mail.outbox))
 
