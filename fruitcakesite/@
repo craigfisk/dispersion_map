@@ -1,110 +1,127 @@
-{% extends "base/base.html" %}
+from datetime import datetime
+from django.utils import timezone
+from django.core.urlresolvers import reverse
 
-{% block title %}{{ block.super }} BaseApp {% endblock %}
+from django.utils import unittest
+from django.test.utils import setup_test_environment
+setup_test_environment()
 
-{% block sidebar %} - website{% endblock %} 
+from django.test import TestCase
+from django.test.client import Client
+from django.core import mail
+from django.contrib.auth.models import User, UserManager
+from django.contrib.sites.models import Site
 
-    <div id="container">
-        <div id="menu">
-            {% block nav-global %}
+from myfruitcake.models import Fruitcake, Shipment, IPAddress, Like, Upload, EmailContact
 
-                <!-- MENU -->
-                <h3><a href="{% url fruitcakelistview %}">Home</a></h3>
-                <h3><a href="{% url myfruitcakelistview %}">MyFruitcake</a></h3>
-                <h3><a href="{% url myshipments %}">MyShipments</a></h3>
-                <h3><a href="{% url forum.views.main %}">Forum</a></h3>
+from django.contrib.gis.geoip import GeoIP
+geoip = GeoIP()
 
-                {% if user.is_staff %} <a href="{% url admin:index %}">Admin</a> {% endif %}
-                {% if user.is_staff %} <a href="{% url myfruitcake.views.search_form %}">Search</a> {% endif %}
+class IPAddresMethodTests(TestCase):
 
-                {% if user.is_authenticated %}
-                    <h3><a href="{% url forum.views.userinfo user.pk %}">MyProfile</a></h3> {% endif %}
+    def test_get_city(self):
+        """
+        get_city() should return 'Portland' for ipaddress 184.76.1.84
+        """
+        """
+        addr = '184.76.1.84'
+        city = geoip.city(addr)['city']
+        self.assertEqual(city==u'Portland', True)
+        """
 
-                {% if not user.is_authenticated %}<h3><a href="/registration/login/?next=/myfruitcake/">sign-in</a> | <a href="/registration/register/">register</a></h3>{% endif %}
+class FruitcakeTestCase(TestCase):
+    """
+    def test_random(self):
+        print "This is a random test"
 
-                {% if user.is_authenticated %}<h3><a href="/registration/logout/?next=/myfruitcake/">sign-out</a></h3>
-                    {% endif %}
+    def test_login(self):
+        c = Client()
+        response = c.post('/registration/login/?next=/myfruitcake/', {'username': 'fred', 'password': 'gobbledygook'})
+        self.assertEqual(response.status_code, 200)
+   
+    def test_login_fail_w_blank_password(self):
+        c = Client()
+        response = c.post('/registration/login/?next=/myfruitcake/', {'username': 'fred', 'password': ''})
+        self.assertEqual(response.status_code, 200)
+    """
 
-                <h3><a href="{% url myfruitcake.views.about %}">About</a></h3>
+    def test_create_logged_in_user_and_ship_fruitcake(self):
+        """ test create_logged_in_user and send activation email.
+        Create one user, then try to create another on the same username (should fail), then on the same email address (should fail), then send a fruitcake from the first user.
+        """
+        c = Client()
+        pwd = 'Sp8rky=4242'
+        username = 'lucy'
+        email = 'lucy@lucyricky.com'
+        # Register first user
+        response = c.post('/registration/login/register/?next=/registration/registration_complete/',
+                {'username': username, 'email': email ,'password': pwd, 'password2': pwd})
+#        print "Status code: %d for: %s" % (response.status_code, username)
+        self.assertEqual(response.status_code, 200)
+        u = User.objects.all() #get(email=email)
+        print len(u) #u.email
 
+        # Try to register someone else on same username as first user 
+        username = 'lucy'
+        email = 'ricky@lucyricky.com'
+        response = c.post('/registration/login/register/?next=/registration/registration_complete/',
+            {'username': username, 'email': email ,'password': pwd, 'password2': pwd})
+#        print "Status code: %d for: %s" % (response.status_code, username)
+        self.assertEqual(response.status_code, 200)
+        #u = User.objects.get(email=email)
+        #print u.email
 
-            {% endblock %}
-        </div>
+        #self.assertNotEqual(response.status_code, 200)
 
-        {% block signin %}
-        <div id="container3">
-            <div id="container2">
-                <div id="container1">
-                    <div id="col1">
-                        <br /><h2>
-                        {% if user.username and user.get_profile.avatar %} 
-                            Hi <i>{{ user.username }}</i>!
-                        {% elif user.username and not user.get_profile.avatar %}
-                            Hi <i>{{ user.username }}!</i>.
-                        {% else %}
-                        Hi, <i>anonymous</i>! 
-                        {% endif %}
-                    </h2><br />
-                        <P><b>Justfruitcake.com</b> is TOTALLY FREE (until it's not; and then it will be very, very inexpensive, plus maybe have some nice surprises!)</P>
+        # Try to register someone else on same email as first user 
+        username = 'ricky'
+        email = 'lucy@lucyricky.com'
+        response = c.post('/registration/login/register/?next=/registration/registration_complete/',
+            {'username': username, 'email': email ,'password': pwd, 'password2': pwd})
+#        print "Status code: %d for: %s" % (response.status_code, username)
+        self.assertEqual(response.status_code, 200)
 
+        # Ship a fruitcake from first user
+        u = User.objects.get(username='lucy')
+        s = Shipment.objects.create(dt=datetime.now(), fruitcake_id=f.id, sender_id=u.id,message="Hey there, this is a fine fruitcake!")
+        self.assertEqual(s.message, "Hey there, this is a fine fruitcake!")
+        self.assertEqual(len(mail.outbox), 1)
 
-                    </div>
-                    <div id="col2">
+    def test_upload_fruitcake(self):
+        """
+        print "Test upload goes here"
+        """
+
+    def test_create_fruitcake(self):
+        """
+        test_create_fruitcake should create a fruitcake with a popup
+        """
+        """
+        c = Client()
+        response = c.post('/registration/login/?next=/myfruitcake/', {'username': 'fred', 'password': ''})
  
-                        <h2>My stats (tbd): {% if mystats %}{{ mystats|length }}{% endif %}</h2>
-                            {% if my_shipments %}
-                            {# <P><a href="/myfruitcake/myshipments/">Click to view</a></P> #}
-                            Latest dates:
-                            <ul>
-                                <li>{{ (my_shipments|first).dt }}</li>
-                            </ul>
-                            {% else %}
-                            <P>No shipments</P>
-                            {% endif %}
+        f = Fruitcake.objects.create(pic="pics/2ef7bcf22a6564a342f41ff827643477.jpg", uploader_id="30", dt=datetime.now(), times_shipped=0, popup=u"Pick me! I'm tasty")
+        self.assertEqual(f.popup, "Pick me! I'm tasty")
+        """
 
+    def test_create_shipment(self):
+        """
+        test_create_shipment should create a shipment with a shipment message
+        """
+        """
+        #print "%d %d" % (f.id, f.uploader_id)
+        s = Shipment.objects.create(dt=datetime.now(), fruitcake_id=f.id, sender_id=f.uploader_id,message="Hey there, this is a fine fruitcake!")
+        self.assertEqual(s.message, "Hey there, this is a fine fruitcake!")
+        """
 
-                            {% comment %}
-                            <li>Downstream forwards: [tbd] </li>
-                            <li>Uploads by me: [tdb]</li>
-                            {# </ul> #}
-                            {% endcomment %}
-                    </div>
-                    <div id="col3">
-
-                         <div id="avatarinfo">
-                            {% if user.username and user.get_profile.avatar %} 
-                                <div class="avatar">
-                                        <img src="http://www.justfruitcake.com/static/media/{{ user.get_profile.avatar }}">
-                                </div>
-                            {% elif user.username and not user.get_profile.avatar %}
-                                No photo? It would be nice if you would click the &quot;Edit profile&quot; button and upload a picture of yourself.
-                            {% else %}
-                                
-                            {% endif %}
-                        </div>
-                
-                        {% comment %}
-                        <h2>My forum posts:</h2>
-                        <ul>
-                            <li>Posts: {{ my_posts|length }} </li>
-                        </ul>
-                        {% endcomment %}
- 
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {% endblock %}
-
-
-
-
-        <div id="content">
-            {% block forum-content %}{% endblock %}
-        </div>
-    </div>
-
-</body>
-</html>
-
+class EmailTest(TestCase):
+    
+    def test_send_activation_email(self):
+        """ test send activation email tests whether an email goes into the outbox
+        """
+        """
+        mail.send_mail('Subject here', 'Here is the message', 'from@example.com', 
+                ['to@example.com'], fail_silently=False)
+        
+        self.assertEqual(len(mail.outbox), 1)
+        """
