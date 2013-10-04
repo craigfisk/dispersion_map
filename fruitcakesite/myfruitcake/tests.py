@@ -1,3 +1,8 @@
+from django import forms
+from registration.models import RegistrationProfile
+import os
+from fruitcakesite.settings import MEDIA_ROOT
+
 from datetime import datetime
 from django.utils import timezone
 from django.core.urlresolvers import reverse
@@ -31,9 +36,6 @@ class IPAddresMethodTests(TestCase):
 
 class FruitcakeTestCase(TestCase):
     """
-    def test_random(self):
-        print "This is a random test"
-
     def test_login(self):
         c = Client()
         response = c.post('/registration/login/?next=/myfruitcake/', {'username': 'fred', 'password': 'gobbledygook'})
@@ -45,52 +47,71 @@ class FruitcakeTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
     """
 
-    def test_create_logged_in_user_and_ship_fruitcake(self):
+    def test_create_user_and_activate_and_ship_fruitcake(self):
         """ test create_logged_in_user and send activation email.
         Create one user, then try to create another on the same username (should fail), then on the same email address (should fail), then send a fruitcake from the first user.
         """
-        c = Client()
+        # Credentials to use
         pwd = 'Sp8rky=4242'
         username = 'lucy'
         email = 'lucy@lucyricky.com'
-        # Register first user
-        response = c.post('/registration/login/register/?next=/registration/registration_complete/',
-                {'username': username, 'email': email ,'password': pwd, 'password2': pwd})
-#        print "Status code: %d for: %s" % (response.status_code, username)
-        self.assertEqual(response.status_code, 200)
-        u = User.objects.all() #get(email=email)
-        print len(u) #u.email
+       
+        # Register user
+        resp = self.client.post(reverse('registration_register'),
+                data={'username' : username,
+                      'email'    : email,
+                      'password1': pwd,
+                      'password2': pwd})
+        self.assertRedirects(resp, reverse('registration_complete'))
 
-        # Try to register someone else on same username as first user 
-        username = 'lucy'
-        email = 'ricky@lucyricky.com'
-        response = c.post('/registration/login/register/?next=/registration/registration_complete/',
-            {'username': username, 'email': email ,'password': pwd, 'password2': pwd})
-#        print "Status code: %d for: %s" % (response.status_code, username)
-        self.assertEqual(response.status_code, 200)
-        #u = User.objects.get(email=email)
-        #print u.email
+        # Get the new user and check username, pwd, email, not yet activated,
+        #  and activation email sent
+        new_user = User.objects.get(username=username)
+        self.failUnless(new_user.check_password(pwd))
+        self.assertEqual(new_user.email, email)
+        self.failIf(new_user.is_active)
+        self.assertEqual(RegistrationProfile.objects.count(), 1)
+        self.assertEqual(len(mail.outbox), 1)
 
-        #self.assertNotEqual(response.status_code, 200)
+        # Test activation
+        #import pydevd; pydevd.settrace()
+        
+        profile = RegistrationProfile.objects.get(user__username=username)
+        resp = self.client.get(reverse('registration_activate',
+                                       args=(),
+                                       kwargs={'activation_key': profile.activation_key}))
+        self.assertRedirects(resp, reverse('registration_activation_complete'))
 
-        # Try to register someone else on same email as first user 
-        username = 'ricky'
-        email = 'lucy@lucyricky.com'
-        response = c.post('/registration/login/register/?next=/registration/registration_complete/',
-            {'username': username, 'email': email ,'password': pwd, 'password2': pwd})
-#        print "Status code: %d for: %s" % (response.status_code, username)
-        self.assertEqual(response.status_code, 200)
+        mypath = '/home/fisk/Desktop/fruitcake_pinterest_more/'
+        myfile = '2ef7bcf22a6564a342f41ff827643477.jpg'
+        mypopup = "Pick me! I'm super tasty!"
 
-        # Ship a fruitcake from first user
-        u = User.objects.get(username='lucy')
+        # For image file upload, open as rb and add file name to post
+        f = open(''.join([mypath, myfile]), "rb" )
+        #thumbnail = '/'.join(['thumbnails', myfile])
+        #pic = '/'.join(['pics', myfile])
+        print "New user info: %s %d" % (new_user.username, new_user.id)
+        resp = self.client.post('/myfruitcake/upload/', {'name': myfile, 'pic': f, 'uploader': new_user.id, 'popup': mypopup})
+        f.close()
+        #self.assertEqual(resp.status_code, 200)
+        print resp.status_code
+        self.assertEqual( (myfile in os.listdir(''.join([MEDIA_ROOT, 'pics']))), 1)
+            
+        # Ship a fruitcake
+        ##u = User.objects.get(username='lucy')
+        ##print "User %s has id %d" % (u.username, u.id)
+        """
         s = Shipment.objects.create(dt=datetime.now(), fruitcake_id=f.id, sender_id=u.id,message="Hey there, this is a fine fruitcake!")
         self.assertEqual(s.message, "Hey there, this is a fine fruitcake!")
         self.assertEqual(len(mail.outbox), 1)
+        """
 
     def test_upload_fruitcake(self):
         """
         print "Test upload goes here"
         """
+        # Test if can still log in as user created above
+
 
     def test_create_fruitcake(self):
         """
