@@ -78,7 +78,6 @@ class FruitcakeTestCase(TestCase):
         
         profile = RegistrationProfile.objects.get(user__username=username)
         resp = self.client.get(reverse('registration_activate',
-                                       args=(),
                                        kwargs={'activation_key': profile.activation_key}))
         self.assertRedirects(resp, reverse('registration_activation_complete'))
 

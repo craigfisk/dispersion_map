@@ -55,14 +55,14 @@ class Fruitcake(models.Model):
         
         # WIDTH_STANDARD:
         
-        # Use self.pic.name <-- not self.name; otherwise you get the error: ImageFieldFile has no attribute 'startswith'
+        # Use self.pic.name <-- not self.name; else error: ImageFieldFile has no attribute 'startswith'
         imfn = pjoin(MEDIA_ROOT, self.pic.name)
         im = PImage.open(imfn)
         wpercent = (WIDTH_STANDARD/float(im.size[0]))
         hsize = int((float(im.size[1])*float(wpercent)))
         # Replace the image with a STANDARD-sized version of itself.
         im = im.resize((WIDTH_STANDARD, hsize), PImage.ANTIALIAS)
-        # According to www.pythonware.com/library/pil/handbook/image.htm, if save() fails it will "usually" put up 
+        # According to www.pythonware.com/library/pil/handbook/image.htm, if save() fails, "usually"  
         # IOError exception and you are responsible for removing any file(s) that may have been created.
         try:
             im.save(imfn, "JPEG")
