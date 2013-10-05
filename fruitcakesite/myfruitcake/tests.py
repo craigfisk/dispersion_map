@@ -28,14 +28,11 @@ class IPAddresMethodTests(TestCase):
         """
         get_city() should return 'Portland' for ipaddress 184.76.1.84
         """
-        """
         addr = '184.76.1.84'
         city = geoip.city(addr)['city']
         self.assertEqual(city==u'Portland', True)
-        """
 
 class FruitcakeTestCase(TestCase):
-    """
     def test_login(self):
         c = Client()
         response = c.post('/registration/login/?next=/myfruitcake/', {'username': 'fred', 'password': 'gobbledygook'})
@@ -45,10 +42,10 @@ class FruitcakeTestCase(TestCase):
         c = Client()
         response = c.post('/registration/login/?next=/myfruitcake/', {'username': 'fred', 'password': ''})
         self.assertEqual(response.status_code, 200)
-    """
 
     def test_create_user_and_activate_and_ship_fruitcake(self):
-        """ test create_logged_in_user and send activation email.
+        """ TODO: too much in here; reduce it.
+        test create_logged_in_user and send activation email.
         Create one user, then try to create another on the same username (should fail), then on the same email address (should fail), then send a fruitcake from the first user.
         """
         # Credentials to use
@@ -79,6 +76,7 @@ class FruitcakeTestCase(TestCase):
         profile = RegistrationProfile.objects.get(user__username=username)
         resp = self.client.get(reverse('registration_activate',
                                        kwargs={'activation_key': profile.activation_key}))
+        print "After getting reverse('registration_activate'), redirecting to: %s" % (resp)
         self.assertRedirects(resp, reverse('registration_activation_complete'))
 
         mypath = '/home/fisk/Desktop/fruitcake_pinterest_more/'
@@ -90,8 +88,9 @@ class FruitcakeTestCase(TestCase):
         #thumbnail = '/'.join(['thumbnails', myfile])
         #pic = '/'.join(['pics', myfile])
         #print "New user info: %s %d" % (new_user.username, new_user.id)
-        resp = self.client.post('/myfruitcake/upload/', {'name': myfile, 'pic': f, 'uploader': new_user.id, 'popup': mypopup})
+        resp = self.client.post(reverse('myfruitcake_upload'), {'name': myfile, 'pic': f, 'uploader': new_user.id, 'popup': mypopup})
         #f.close()
+        print "After upload, redirecting to: %s" % (resp)
         #self.assertRedirects(resp, reverse('myfruitcake') )
         print resp.status_code
         #self.assertEqual( (myfile in os.listdir(''.join([MEDIA_ROOT, 'pics']))), 1)

@@ -5,6 +5,8 @@ from django.contrib.sites.models import Site
 
 from forum.models import *
 
+from django.core.urlresolvers import reverse
+
 class SimpleTest(TestCase):
     def setUp(self):
         f = Forum.objects.create(title="forum")
@@ -34,3 +36,22 @@ class SimpleTest(TestCase):
         r = self.c.post("/forum/reply/2/", {"subject": "post2", "body": "body3"})
         self.content_test("/forum/thread/2/", ['<div class="ttitle">thread2</div>',
                '<span class="title">post2</span>', 'body2 <br />', 'body3 <br />'])
+
+class ForumTest(TestCase):
+    def test_main(self):
+        self.c = Client()
+        self.c.login(username="ak", password="pwd")
+        resp = self.c.get('/forum/', {'username': 'ak', 'password': 'pwd'})
+        print "After getting forum, resp is: %s" % (resp)
+        #self.assertRedirects(resp, '/forum/.*')
+
+    def test_post(self):
+        self.c = Client()
+        self.c.login(username="ak", password="pwd")
+        resp = self.c.get('/forum/post/new_thread/', {'ptype': 'new_thread', 'pk': '10' } )
+        print "After getting post, resp is: %s" % (resp)
+ 
+        resp = self.c.post('/forum/post/new_thread/10/', {'subject': 'Kumquat Cake', 'body': "Is there such a thing?"})
+        print "After posting to post, resp is: %s" % (resp)
+        self.assertRedirects(resp, '/registration/login/?next=/forum/post/new_thread/10/')
+ 

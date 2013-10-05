@@ -6,12 +6,12 @@ from django.conf.urls import patterns, url
 
 
 urlpatterns = patterns('forum.views',
-    url(r'^forum/(\d+)/$', 'forum'),
+    url(r'^forum/(\d+)/$', 'forum', name='forum_content'),
     url(r'^thread/(\d+)/$', 'thread'),
     url(r'^post/(new_thread|reply)/(\d+)/$', 'post'),
     url(r'^reply/(\d+)/$', 'reply'),
     url(r'^profilepic/(\d+)/$', 'profilepic'),
     url(r'^userinfo/(\d+)/$', 'userinfo'),
     url(r'^new_thread/(\d+)/$', 'new_thread'),
-    url(r'', 'main'),
+    url(r'', 'main', name="forum_main"),
 )
