@@ -7,6 +7,8 @@ from forum.models import *
 
 from django.core.urlresolvers import reverse
 
+from selenium import webdriver
+
 class SimpleTest(TestCase):
     def setUp(self):
         f = Forum.objects.create(title="forum")
@@ -54,4 +56,16 @@ class ForumTest(TestCase):
         resp = self.c.post('/forum/post/new_thread/10/', {'subject': 'Kumquat Cake', 'body': "Is there such a thing?"})
         print "After posting to post, resp is: %s" % (resp)
         self.assertRedirects(resp, '/registration/login/?next=/forum/post/new_thread/10/')
- 
+
+class PostTest(TestCase):
+    def setUp(self):
+        self.driver = webdriver.Firefox()
+
+    def test_post(self):
+        self.driver.post("http://localhost:8000/myfruitcake/", {'username':'lindamagee', 'password':'Sp8rky=4242'})
+        self.driver.post("http://localhost:8000/forum/post/new_thread/3/", {'subject':'Rabbits', 'body':"Seems like there are a lot of rabbits running around."})
+        print "Trying Firefox driver in Selenium"
+
+    def tearDown(self):
+        self.driver.quit
+
