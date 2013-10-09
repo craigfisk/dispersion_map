@@ -13,7 +13,7 @@
                 <h3><a href="{% url 'fruitcakelistview' %}">Home</a></h3>
                 <h3><a href="{% url 'myfruitcakelistview' %}">MyFruitcake</a></h3>
                 <h3><a href="{% url 'myshipments' %}">MyShipments</a></h3>
-                <h3><a href="{% url 'forum.views.main' %}">Forum</a></h3>
+                <h3><a name='forum' href="{% url 'forum.views.main' %}">Forum</a></h3>
 
                 {% if user.is_staff %} <a href="{% url 'admin:index' %}">Admin</a> {% endif %}
                 {% if user.is_staff %} <a href="{% url 'myfruitcake.views.search_form' %}">Search</a> {% endif %}
