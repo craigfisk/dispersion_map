@@ -78,6 +78,7 @@ class ForumSeleniumTests(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         cls.selenium = WebDriver()
+        #cls.selenium.set_script_timeout(30000)
         super(ForumSeleniumTests, cls).setUpClass()
 
     @classmethod
@@ -87,20 +88,29 @@ class ForumSeleniumTests(LiveServerTestCase):
 
     def testforum(self): 
 #        self.selenium.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS)
+        self.selenium.implicitly_wait(30)
         self.selenium.get('%s%s' % (self.live_server_url, '/'))
         ###driver = webdriver.Firefox()
         ###driver.get("/")    #"http://localhost:8000/"
         #driver.get("http://127.0.0.1:8000/")
-        self.selenium.find_element_by_link_text("sign-in").click()
+        #from self.selenium.webdriver.support.wait import WebDriverWait
+        #WebDriverWait(self.selenium, 60).until(
+        #        lambda driver: driver.find_element_by_link_text("sign-in"))
+        signin_element = self.selenium.find_element_by_link_text("sign-in")
+        signin_element.click()
         # signin_element.tag_name --> u'a'
         # signin_element.text --> u'sign-in'
         ###signin_elem.click()   # goes to the sign-in page
         # where username and password are the names of the form fields to fill in:
+        #WebDriverWait(self.selenium, 60).until(
+        #        lambda driver: driver.find_element_by_name('password'))
         elem_username = self.selenium.find_element_by_name('username')
-        elem_password = self.selenium.find_element_by_name('password')
         # send the text to the form:
-        elem_username.send_keys('lindamagee')
+        elem_username.send_keys("lindamagee")
+        
+        elem_password = self.selenium.find_element_by_name('password')
         elem_password.send_keys("Sp8rky=4242")
+        
         elem_password.submit()          # bubbles up to the form and submits it
 
         # go to Forum
@@ -132,6 +142,10 @@ class ForumSeleniumTests(LiveServerTestCase):
         elem_new_body.send_keys("This is the body of a test")
         elem_new_body.submit()
         # end
+
+        signout_element = self.selenium.find_element_by_link_text("sign-out")
+        signout_element.click()
+ 
         #self.selenium.close()  # closes the window
         self.selenium.quit()   # exits the driver and closes window
 
