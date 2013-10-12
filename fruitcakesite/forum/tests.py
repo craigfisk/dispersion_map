@@ -44,10 +44,25 @@ class SimpleTest(TestCase):
         self.content_test("/forum/thread/2/", ['<div class="ttitle">thread2</div>',
                '<span class="title">post2</span>', 'body2 <br />', 'body3 <br />'])
 
+        # new_thread
         r = self.c.get("/forum/forum/1/")
         r = self.c.get("/forum/post/new_thread/1")
         r = self.c.post("/forum/post/new_thread/1/", {"subject": "topci", "body" : "Waiting for content"} )
         self.content_test("/forum/forum/1/", ['<div class="title"><a href=', "topic"])
+
+        # reply
+        r = self.c.get("/forum/forum/1/")
+        r = self.c.get("/forum/thread/1/")
+#        r = self.c.get("/forum/post/reply/1/")
+
+        r = self.c.post("/forum/post/reply/1/", {"subject" : "Re: thread", "body" : "Dogfood"} )
+        self.content_test("/forum/thread/1/", ['Dogfood'])
+
+
+
+
+
+
 """
 class ForumTest(TestCase):
     def test_main(self):
