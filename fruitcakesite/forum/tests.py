@@ -1,5 +1,7 @@
 from django.test import TestCase
-from django.test.client import Client
+#from django.test.client import Client
+from django.test import Client
+
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 
@@ -11,6 +13,7 @@ from selenium.webdriver.common.keys import Keys
 
 from django.test import LiveServerTestCase
 from selenium.webdriver.firefox.webdriver import WebDriver
+import time
 
 class SimpleTest(TestCase):
     def setUp(self):
@@ -27,7 +30,6 @@ class SimpleTest(TestCase):
         for v in values:
             self.assertTrue(v in r.content)
 
-
     def test(self):
         self.c = Client()
         self.c.login(username="ak", password="pwd")
@@ -42,6 +44,11 @@ class SimpleTest(TestCase):
         self.content_test("/forum/thread/2/", ['<div class="ttitle">thread2</div>',
                '<span class="title">post2</span>', 'body2 <br />', 'body3 <br />'])
 
+        r = self.c.get("/forum/forum/1/")
+        r = self.c.get("/forum/post/new_thread/1")
+        r = self.c.post("/forum/post/new_thread/1/", {"subject": "topci", "body" : "Waiting for content"} )
+        self.content_test("/forum/forum/1/", ['<div class="title"><a href=', "topic"])
+"""
 class ForumTest(TestCase):
     def test_main(self):
         self.c = Client()
@@ -60,7 +67,6 @@ class ForumTest(TestCase):
         print "After posting to post, resp is: %s" % (resp)
         self.assertRedirects(resp, '/registration/login/?next=/forum/post/new_thread/10/')
 
-"""
 class PostTest(TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
@@ -72,7 +78,7 @@ class PostTest(TestCase):
 
     def tearDown(self):
         self.driver.quit
-"""
+
 
 class ForumSeleniumTests(LiveServerTestCase):
     @classmethod
@@ -104,10 +110,11 @@ class ForumSeleniumTests(LiveServerTestCase):
         # where username and password are the names of the form fields to fill in:
         #WebDriverWait(self.selenium, 60).until(
         #        lambda driver: driver.find_element_by_name('password'))
+        time.sleep(10)
         elem_username = self.selenium.find_element_by_name('username')
         # send the text to the form:
         elem_username.send_keys("lindamagee")
-        
+        time.sleep(10) 
         elem_password = self.selenium.find_element_by_name('password')
         elem_password.send_keys("Sp8rky=4242")
         
@@ -149,5 +156,5 @@ class ForumSeleniumTests(LiveServerTestCase):
         #self.selenium.close()  # closes the window
         self.selenium.quit()   # exits the driver and closes window
 
-
+"""
                 

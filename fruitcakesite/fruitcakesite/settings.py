@@ -96,7 +96,7 @@ FILE_UPLOAD_PERMISSIONS = None #default: None; numeric mode which to set newly u
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['.justfruitcake.com', '127.0.0.1:8000']
+ALLOWED_HOSTS = ['.justfruitcake.com', '127.0.0.1:8000', 'localhost:8081']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name

@@ -41,4 +41,5 @@ lib/*
 #also subdirectories of registration
 !lib/python2.7/site-packages/registration/**/*
 
+htmlcov
 
