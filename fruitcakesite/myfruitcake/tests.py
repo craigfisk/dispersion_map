@@ -23,8 +23,10 @@ from django.contrib.gis.geoip import GeoIP
 geoip = GeoIP()
 
 class IPAddresMethodTests(TestCase):
+    def setUp(self):
+        ip = IPAddress(ipaddress='184.76.1.84')
 
-    def test_get_city(self):
+    def test_get_city_from_geoIP(self):
         """
         get_city() should return 'Portland' for ipaddress 184.76.1.84
         """
@@ -32,7 +34,47 @@ class IPAddresMethodTests(TestCase):
         city = geoip.city(addr)['city']
         self.assertEqual(city==u'Portland', True)
 
+    def test_IPAddress__unicode__(self):
+        test = IPAddress(ipaddress='184.76.1.84')
+        self.assertEqual(test.__unicode__(), '184.76.1.84')
+        self.assertEqual(test.get_city()['city'], u'Portland')
+
+class EmailContactTestCase(TestCase):
+    def setUp(self):
+        EmailContact.objects.create(email='support@justfruitcake.com')
+
+    def test_EmailContact_has_email(self):
+        contact = EmailContact.objects.get(email='support@justfruitcake.com')
+        self.assertEqual(contact.email, 'support@justfruitcake.com')
+        self.assertEqual(contact.__unicode__(), 'support@justfruitcake.com')
+
+class NewFruitcakeTestCase(TestCase):
+    def setUp(self):
+        user = User.objects.create(username='ak', password='pwd', email='ak@justfruitcake.com')
+        #f = Fruitcake.objects.create(pic='pics/241435229994408022_DoszNqwg_b_1.jpg', popup='This is a test', uploader_id=30, dt=datetime.now())
+
+    def content_test(self, url, values):
+        """Get content of url and test that each of items in `values` list is present."""
+        r = self.c.get(url)
+        self.assertEquals(r.status_code, 200)
+        for v in values:
+            self.assertTrue(v in r.content)
+
+    def test_get_upload_file_form(self):
+        self.c = Client()
+        self.c.login(username='ak', password='pwd')
+        r = self.c.get('/upload/', follow=True)
+        self.assertEqual(r.status_code, 200)
+        #r = self.c.post('/registration/login/login/', {'username': 'ak', 'password': 'pwd'}, follow=True)
+        #r = self.c.get('/myfruitcake/')
+        #self.assertTrue('photo?' in r.content)
+
 class FruitcakeTestCase(TestCase):
+    """
+    def setUp(self):
+        f = Fruitcake.objects.create(pic='pics/241435229994408022_DoszNqwg_b_1.jpg', popup='This is a test', uploader_id=30, dt=datetime.now())
+    """
+
     def test_login(self):
         c = Client()
         response = c.post('/registration/login/?next=/myfruitcake/', {'username': 'fred', 'password': 'gobbledygook'})
@@ -42,6 +84,11 @@ class FruitcakeTestCase(TestCase):
         c = Client()
         response = c.post('/registration/login/?next=/myfruitcake/', {'username': 'fred', 'password': ''})
         self.assertEqual(response.status_code, 200)
+
+    """
+    def test_fruitcake_exists(self):
+        self.assertEqual(self.f.pic, 'pics/241435229994408022_DoszNqwg_b_1.jpg')
+    """
 
     def test_create_user_and_activate_and_ship_fruitcake(self):
         """ TODO: too much in here; reduce it.
