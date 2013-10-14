@@ -1,0 +1,191 @@
+[
+{
+  "pk": 1, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "permission", 
+    "name": "permission", 
+    "app_label": "auth"
+  }
+},
+{
+  "pk": 2, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "group", 
+    "name": "group", 
+    "app_label": "auth"
+  }
+},
+{
+  "pk": 3, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "user", 
+    "name": "user", 
+    "app_label": "auth"
+  }
+},
+{
+  "pk": 4, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "contenttype", 
+    "name": "content type", 
+    "app_label": "contenttypes"
+  }
+},
+{
+  "pk": 5, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "session", 
+    "name": "session", 
+    "app_label": "sessions"
+  }
+},
+{
+  "pk": 6, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "site", 
+    "name": "site", 
+    "app_label": "sites"
+  }
+},
+{
+  "pk": 7, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "logentry", 
+    "name": "log entry", 
+    "app_label": "admin"
+  }
+},
+{
+  "pk": 8, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "forum", 
+    "name": "forum", 
+    "app_label": "forum"
+  }
+},
+{
+  "pk": 9, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "thread", 
+    "name": "thread", 
+    "app_label": "forum"
+  }
+},
+{
+  "pk": 10, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "post", 
+    "name": "post", 
+    "app_label": "forum"
+  }
+},
+{
+  "pk": 11, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "userprofile", 
+    "name": "user profile", 
+    "app_label": "forum"
+  }
+},
+{
+  "pk": 12, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "registrationprofile", 
+    "name": "registration profile", 
+    "app_label": "registration"
+  }
+},
+{
+  "pk": 13, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "poll", 
+    "name": "poll", 
+    "app_label": "polls"
+  }
+},
+{
+  "pk": 14, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "choice", 
+    "name": "choice", 
+    "app_label": "polls"
+  }
+},
+{
+  "pk": 15, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "fruitcake", 
+    "name": "fruitcake", 
+    "app_label": "myfruitcake"
+  }
+},
+{
+  "pk": 16, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "upload", 
+    "name": "upload", 
+    "app_label": "myfruitcake"
+  }
+},
+{
+  "pk": 17, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "shipment", 
+    "name": "shipment", 
+    "app_label": "myfruitcake"
+  }
+},
+{
+  "pk": 19, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "like", 
+    "name": "like", 
+    "app_label": "myfruitcake"
+  }
+},
+{
+  "pk": 20, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "emailcontact", 
+    "name": "email contact", 
+    "app_label": "myfruitcake"
+  }
+},
+{
+  "pk": 21, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "ipaddress", 
+    "name": "ip address", 
+    "app_label": "myfruitcake"
+  }
+},
+{
+  "pk": 22, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "migrationhistory", 
+    "name": "migration history", 
+    "app_label": "south"
+  }
+}
+]

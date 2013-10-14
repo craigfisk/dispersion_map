@@ -1,0 +1,3897 @@
+[
+{
+  "pk": 9, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Pick me! You'll really like me!", 
+    "pic": "pics/40673202855098790_uBoSgwl7_b.jpg", 
+    "source": null, 
+    "times_shipped": 5, 
+    "uploads": [], 
+    "uploader": 30, 
+    "dt": "2012-11-13T23:56:57.798Z", 
+    "thumbnail": "thumbnails/40673202855098790_uBoSgwl7_b.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 10, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Pick me! Your relatives will like me.", 
+    "pic": "pics/36380709460037694_iBUS3kgk_b.jpg", 
+    "source": null, 
+    "times_shipped": 9, 
+    "uploads": [], 
+    "uploader": 30, 
+    "dt": "2012-11-13T23:56:57.798Z", 
+    "thumbnail": "thumbnails/36380709460037694_iBUS3kgk_b.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 11, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Pick me! I'm really juicy!", 
+    "pic": "pics/94575660895330123_iXFBAhfO_b.jpg", 
+    "source": null, 
+    "times_shipped": 6, 
+    "uploads": [], 
+    "uploader": 30, 
+    "dt": "2012-11-13T23:56:57.798Z", 
+    "thumbnail": "thumbnails/94575660895330123_iXFBAhfO_b.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 23, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Pick me! I'm better than the others!", 
+    "pic": "pics/alcohol_free_orange_fruit_cake_5_5.jpg", 
+    "source": null, 
+    "times_shipped": 10, 
+    "uploads": [], 
+    "uploader": 30, 
+    "dt": "2012-11-13T23:56:57.798Z", 
+    "thumbnail": "thumbnails/alcohol_free_orange_fruit_cake_5_5.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 24, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Pick me! This looks pretty good!", 
+    "pic": "pics/baked-fruitcake_2.jpg", 
+    "source": null, 
+    "times_shipped": 10, 
+    "uploads": [], 
+    "uploader": 28, 
+    "dt": "2012-11-13T23:56:57.798Z", 
+    "thumbnail": "thumbnails/baked-fruitcake_2.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 25, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Pick me! I'll be a world traveller!", 
+    "pic": "pics/27795722671260849_2XNkzMvN_b_1.jpg", 
+    "source": "", 
+    "times_shipped": 6, 
+    "uploads": [], 
+    "uploader": 31, 
+    "dt": "2012-11-13T23:56:57.798Z", 
+    "thumbnail": "thumbnails/27795722671260849_2XNkzMvN_b_1.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 29, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Pick me! I'm going to go around the world!", 
+    "pic": "pics/156640893259624578_Fx17EopA_b_1.jpg", 
+    "source": null, 
+    "times_shipped": 3, 
+    "uploads": [], 
+    "uploader": 31, 
+    "dt": "2012-11-14T00:26:51.163Z", 
+    "thumbnail": "thumbnails/156640893259624578_Fx17EopA_b_1.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 31, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Pick me! I'm better than you think!", 
+    "pic": "pics/64950419596308635_2VngrH7D_c.jpg", 
+    "source": null, 
+    "times_shipped": 24, 
+    "uploads": [], 
+    "uploader": 30, 
+    "dt": "2012-11-14T02:16:31.686Z", 
+    "thumbnail": "thumbnails/64950419596308635_2VngrH7D_c.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 32, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Pick me! This one could be good with millet seeds and whipped cream, yum!", 
+    "pic": "pics/131097039122465254_Trse3JTV_c.jpg", 
+    "source": null, 
+    "times_shipped": 2, 
+    "uploads": [], 
+    "uploader": 46, 
+    "dt": "2012-12-02T08:50:58.963Z", 
+    "thumbnail": "thumbnails/131097039122465254_Trse3JTV_c.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 33, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Pick me! This is good with hot toddies!", 
+    "pic": "pics/241435229994408022_DoszNqwg_b_1.jpg", 
+    "source": "", 
+    "times_shipped": 4, 
+    "uploads": [], 
+    "uploader": 47, 
+    "dt": "2012-12-02T09:13:51.280Z", 
+    "thumbnail": "thumbnails/241435229994408022_DoszNqwg_b_1.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 36, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Pick me, i'm cool!", 
+    "pic": "pics/457792142_988797a647_z.jpg", 
+    "source": null, 
+    "times_shipped": 2, 
+    "uploads": [], 
+    "uploader": 55, 
+    "dt": "2012-12-08T16:28:07.546Z", 
+    "thumbnail": "thumbnails/457792142_988797a647_z.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 37, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Pick me, I'm fruitie!", 
+    "pic": "pics/7481144720_de5a9628d4_z.jpg", 
+    "source": null, 
+    "times_shipped": 6, 
+    "uploads": [], 
+    "uploader": 55, 
+    "dt": "2012-12-08T16:29:54.008Z", 
+    "thumbnail": "thumbnails/7481144720_de5a9628d4_z.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 38, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Pick me, I'm seedie!", 
+    "pic": "pics/2056156127_b3c165a1db.jpg", 
+    "source": null, 
+    "times_shipped": 3, 
+    "uploads": [], 
+    "uploader": 55, 
+    "dt": "2012-12-08T16:30:37.465Z", 
+    "thumbnail": "thumbnails/2056156127_b3c165a1db.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 40, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Totally", 
+    "pic": "pics/fruitcake-B-Texas-Manor-Ring.jpg", 
+    "source": null, 
+    "times_shipped": 5, 
+    "uploads": [], 
+    "uploader": 56, 
+    "dt": "2012-12-09T07:45:04.747Z", 
+    "thumbnail": "thumbnails/fruitcake-B-Texas-Manor-Ring.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 41, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Appreciating moff's mad fruitcake skillz!", 
+    "pic": "pics/fruitcake_flickr-moff.jpg", 
+    "source": null, 
+    "times_shipped": 1, 
+    "uploads": [], 
+    "uploader": 56, 
+    "dt": "2012-12-09T07:47:49.999Z", 
+    "thumbnail": "thumbnails/fruitcake_flickr-moff.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 42, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Fruitfulness from scottfeldsteing", 
+    "pic": "pics/fruitcake_flickr-scottfeldstein.jpg", 
+    "source": null, 
+    "times_shipped": 15, 
+    "uploads": [], 
+    "uploader": 58, 
+    "dt": "2012-12-09T08:17:23.360Z", 
+    "thumbnail": "thumbnails/fruitcake_flickr-scottfeldstein.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 43, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Pick me! I've around the world a few times already!", 
+    "pic": "pics/60446819968146915_mwJLqLyW_b_1.jpg", 
+    "source": null, 
+    "times_shipped": 17, 
+    "uploads": [], 
+    "uploader": 11, 
+    "dt": "2012-12-11T05:42:01.758Z", 
+    "thumbnail": "thumbnails/60446819968146915_mwJLqLyW_b_1.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 68, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Pick me!", 
+    "pic": "pics/27795722671260849_2XNkzMvN_b.jpg", 
+    "source": null, 
+    "times_shipped": 0, 
+    "uploads": [], 
+    "uploader": 30, 
+    "dt": "2013-04-14T23:36:16.482Z", 
+    "thumbnail": "thumbnails/27795722671260849_2XNkzMvN_b.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 69, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Pick me!", 
+    "pic": "pics/B0043PO6QW.01._PA12101010_PT5_SCLZZZZZZZ_.jpg", 
+    "source": null, 
+    "times_shipped": 5, 
+    "uploads": [], 
+    "uploader": 30, 
+    "dt": "2013-04-15T23:34:02.932Z", 
+    "thumbnail": "thumbnails/B0043PO6QW.01._PA12,10,10,10_PT5_SCLZZZZZZZ_.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 72, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "Pick me!", 
+    "pic": "pics/2ef7bcf22a6564a342f41ff827643477.jpg", 
+    "source": null, 
+    "times_shipped": 0, 
+    "uploads": [], 
+    "uploader": 30, 
+    "dt": "2013-10-03T21:34:38.214Z", 
+    "thumbnail": "thumbnails/2ef7bcf22a6564a342f41ff827643477.jpg", 
+    "likes": []
+  }
+},
+{
+  "pk": 73, 
+  "model": "myfruitcake.fruitcake", 
+  "fields": {
+    "shipments": [], 
+    "popup": "This is a test", 
+    "pic": "pics/241435229994408022_DoszNqwg_b_1.jpg", 
+    "source": null, 
+    "times_shipped": 0, 
+    "uploads": [], 
+    "uploader": 30, 
+    "dt": "2013-10-12T21:52:52.144Z", 
+    "thumbnail": "", 
+    "likes": []
+  }
+},
+{
+  "pk": 37, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "shoujigui@gmail.com"
+  }
+},
+{
+  "pk": 38, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "pipmagee@comcast.net"
+  }
+},
+{
+  "pk": 39, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "wcraigfisk@gmail.com"
+  }
+},
+{
+  "pk": 40, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "magee@cmnw.org"
+  }
+},
+{
+  "pk": 41, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "lindasuemagee@gmail.com"
+  }
+},
+{
+  "pk": 42, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "craigfisk@picocosmos.net"
+  }
+},
+{
+  "pk": 43, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "craigfisk@comcast.net"
+  }
+},
+{
+  "pk": 44, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "s"
+  }
+},
+{
+  "pk": 45, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "h"
+  }
+},
+{
+  "pk": 46, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "o"
+  }
+},
+{
+  "pk": 47, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "u"
+  }
+},
+{
+  "pk": 48, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "j"
+  }
+},
+{
+  "pk": 49, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "i"
+  }
+},
+{
+  "pk": 50, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "g"
+  }
+},
+{
+  "pk": 51, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "@"
+  }
+},
+{
+  "pk": 52, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "m"
+  }
+},
+{
+  "pk": 53, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "a"
+  }
+},
+{
+  "pk": 54, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "l"
+  }
+},
+{
+  "pk": 55, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "."
+  }
+},
+{
+  "pk": 56, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "c"
+  }
+},
+{
+  "pk": 57, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": ","
+  }
+},
+{
+  "pk": 58, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": " "
+  }
+},
+{
+  "pk": 59, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "w"
+  }
+},
+{
+  "pk": 60, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "r"
+  }
+},
+{
+  "pk": 61, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "f"
+  }
+},
+{
+  "pk": 62, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "k"
+  }
+},
+{
+  "pk": 63, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": ";"
+  }
+},
+{
+  "pk": 64, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "p"
+  }
+},
+{
+  "pk": 65, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "n"
+  }
+},
+{
+  "pk": 66, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "e"
+  }
+},
+{
+  "pk": 67, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "t"
+  }
+},
+{
+  "pk": 68, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "friskyfrog@comcast.net"
+  }
+},
+{
+  "pk": 69, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "shoujgui@gmail.com"
+  }
+},
+{
+  "pk": 70, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "jlewins@comcast.net"
+  }
+},
+{
+  "pk": 71, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "jewins@comcast.net"
+  }
+},
+{
+  "pk": 72, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "jkeet@comcast.net"
+  }
+},
+{
+  "pk": 73, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "friskyfrog@comcas.net"
+  }
+},
+{
+  "pk": 74, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "strayf@freeshell.org"
+  }
+},
+{
+  "pk": 75, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "scfrd1@gmail.com"
+  }
+},
+{
+  "pk": 76, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "steve@dafarafet.com"
+  }
+},
+{
+  "pk": 77, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "chirperx@comcast.net"
+  }
+},
+{
+  "pk": 78, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "chiprerx@comcas.net"
+  }
+},
+{
+  "pk": 79, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "hirschfeld@cmnw.org"
+  }
+},
+{
+  "pk": 80, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "coopermagee@comcast.net"
+  }
+},
+{
+  "pk": 81, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "fisk0003@umn.edu"
+  }
+},
+{
+  "pk": 82, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "craigfisk@picocosmos.com"
+  }
+},
+{
+  "pk": 83, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "secayford@freeshell.org"
+  }
+},
+{
+  "pk": 84, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "pcfisk@gmail.com"
+  }
+},
+{
+  "pk": 85, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "lovebirds935@gmail.com"
+  }
+},
+{
+  "pk": 86, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "sallyjaeger@gmail.com"
+  }
+},
+{
+  "pk": 87, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "annesandrapost@gmail.com"
+  }
+},
+{
+  "pk": 88, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "cookiepudding@gmail.com"
+  }
+},
+{
+  "pk": 89, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "saweyer@gmail.com"
+  }
+},
+{
+  "pk": 90, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "jjfisk@gmail.com"
+  }
+},
+{
+  "pk": 91, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "kateschultz@hotmail.com"
+  }
+},
+{
+  "pk": 92, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "csweeter@grhousing.com"
+  }
+},
+{
+  "pk": 93, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "MadameLuna25@aol.com"
+  }
+},
+{
+  "pk": 94, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "per.sweetman@gmail.com"
+  }
+},
+{
+  "pk": 95, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "cid1950@hotmail.com"
+  }
+},
+{
+  "pk": 96, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "bearsweet@hotmail.com"
+  }
+},
+{
+  "pk": 97, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "ashby.alan@gmail.com"
+  }
+},
+{
+  "pk": 98, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "saywht@aol.com"
+  }
+},
+{
+  "pk": 99, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "crane52@comcast.net"
+  }
+},
+{
+  "pk": 100, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "CBrumbaugh-Cayford@brethren.org"
+  }
+},
+{
+  "pk": 101, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "elviscayford@yahoo.com"
+  }
+},
+{
+  "pk": 102, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "leardwik@sbcglobal.net"
+  }
+},
+{
+  "pk": 103, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "mdouglas@umn.edu"
+  }
+},
+{
+  "pk": 104, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "apricot.jalopeno1970@gmail.com"
+  }
+},
+{
+  "pk": 105, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "alissavaldovinos@yahoo.com"
+  }
+},
+{
+  "pk": 106, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "lalunapagina@gmail.com"
+  }
+},
+{
+  "pk": 107, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "ajladycake@gmail.com"
+  }
+},
+{
+  "pk": 108, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "fregerhaven@centurytel.net"
+  }
+},
+{
+  "pk": 109, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "emgeier@yahoo.com"
+  }
+},
+{
+  "pk": 110, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "saraheuph72@yahoo.com"
+  }
+},
+{
+  "pk": 111, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "jaeger.terrib@charter.net"
+  }
+},
+{
+  "pk": 112, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "cesch@nwhealth.edu"
+  }
+},
+{
+  "pk": 113, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "jaegerwebster@gmail.com"
+  }
+},
+{
+  "pk": 114, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "scbonham@gmail.com"
+  }
+},
+{
+  "pk": 115, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "djjayne@gmail.com"
+  }
+},
+{
+  "pk": 116, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "akupriss@verizon.net"
+  }
+},
+{
+  "pk": 117, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "lessiescott@gmail.com"
+  }
+},
+{
+  "pk": 118, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "jaegerl@gmail.com"
+  }
+},
+{
+  "pk": 119, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "btjayne@gmail.com"
+  }
+},
+{
+  "pk": 120, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "miller.kellyr@gmail.com"
+  }
+},
+{
+  "pk": 121, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "rrose76@uic.edu"
+  }
+},
+{
+  "pk": 122, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "david.schnepple@gmail.com"
+  }
+},
+{
+  "pk": 123, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "harmonypark_2000@yahoo.com"
+  }
+},
+{
+  "pk": 124, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "yallabaxna@yahoo.com"
+  }
+},
+{
+  "pk": 125, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "nrjaxon@hushmail.com"
+  }
+},
+{
+  "pk": 126, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "sofyakareeus@yahoo.com"
+  }
+},
+{
+  "pk": 127, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "christine.hochstatter@mpls.k12.mn.us"
+  }
+},
+{
+  "pk": 128, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "lailamonteforte@gmail.com"
+  }
+},
+{
+  "pk": 129, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "cdouglas@maths.ox.ac.uk"
+  }
+},
+{
+  "pk": 130, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "johnmagee@terra.es"
+  }
+},
+{
+  "pk": 131, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "versathe@yahoo.fr"
+  }
+},
+{
+  "pk": 132, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "roma0014@mchsi.com"
+  }
+},
+{
+  "pk": 133, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "aliyaallison@gmail.com"
+  }
+},
+{
+  "pk": 134, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "nico27mag@hotmail.com"
+  }
+},
+{
+  "pk": 135, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "jaegershome@sympatico.ca"
+  }
+},
+{
+  "pk": 136, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "jaeger.thomasm@charter.net"
+  }
+},
+{
+  "pk": 137, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "judyd2@q.com"
+  }
+},
+{
+  "pk": 138, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "gloriao.martineza@gmail.com"
+  }
+},
+{
+  "pk": 139, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "marco.unzaga@imss.gob.mx"
+  }
+},
+{
+  "pk": 140, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "soniaparraj@gmail.com"
+  }
+},
+{
+  "pk": 141, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "rebeccadipti@gmail.com"
+  }
+},
+{
+  "pk": 142, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "christy0003@gmail.com"
+  }
+},
+{
+  "pk": 143, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "amanda.elliott@mpls.k12.mn.us"
+  }
+},
+{
+  "pk": 144, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "frank.cirrin@mpls.k12.mn.us"
+  }
+},
+{
+  "pk": 145, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "tjsmpls@yahoo.com"
+  }
+},
+{
+  "pk": 146, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "rachelannepost@gmail.com"
+  }
+},
+{
+  "pk": 147, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "dianaharris1009@yahoo.com"
+  }
+},
+{
+  "pk": 148, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "computadorasviveros@live.com"
+  }
+},
+{
+  "pk": 149, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "brenda.escamilla@atogapan.com"
+  }
+},
+{
+  "pk": 150, 
+  "model": "myfruitcake.emailcontact", 
+  "fields": {
+    "email": "gcsargo@comcast.net"
+  }
+},
+{
+  "pk": 3, 
+  "model": "myfruitcake.ipaddress", 
+  "fields": {
+    "country_name": "United States", 
+    "city": "Fairview", 
+    "region": "OR", 
+    "ipaddress": "207.224.19.11", 
+    "country_code": "US"
+  }
+},
+{
+  "pk": 4, 
+  "model": "myfruitcake.ipaddress", 
+  "fields": {
+    "country_name": "United States", 
+    "city": "Portland", 
+    "region": "OR", 
+    "ipaddress": "67.168.194.54", 
+    "country_code": "US"
+  }
+},
+{
+  "pk": 5, 
+  "model": "myfruitcake.ipaddress", 
+  "fields": {
+    "country_name": "United States", 
+    "city": "Portland", 
+    "region": "OR", 
+    "ipaddress": "98.232.246.175", 
+    "country_code": "US"
+  }
+},
+{
+  "pk": 6, 
+  "model": "myfruitcake.ipaddress", 
+  "fields": {
+    "country_name": "Mexico", 
+    "city": "Mexico", 
+    "region": "09", 
+    "ipaddress": "201.124.105.183", 
+    "country_code": "MX"
+  }
+},
+{
+  "pk": 8, 
+  "model": "myfruitcake.ipaddress", 
+  "fields": {
+    "country_name": "United States", 
+    "city": "Portland", 
+    "region": "OR", 
+    "ipaddress": "70.102.23.162", 
+    "country_code": "US"
+  }
+},
+{
+  "pk": 10, 
+  "model": "myfruitcake.ipaddress", 
+  "fields": {
+    "country_name": "United States", 
+    "city": "Seattle", 
+    "region": "WA", 
+    "ipaddress": "208.54.32.255", 
+    "country_code": "US"
+  }
+},
+{
+  "pk": 11, 
+  "model": "myfruitcake.ipaddress", 
+  "fields": {
+    "country_name": "United States", 
+    "city": "Wilsonville", 
+    "region": "OR", 
+    "ipaddress": "98.232.246.175", 
+    "country_code": "US"
+  }
+},
+{
+  "pk": 12, 
+  "model": "myfruitcake.ipaddress", 
+  "fields": {
+    "country_name": "United States", 
+    "city": "Seattle", 
+    "region": "WA", 
+    "ipaddress": "64.105.66.203", 
+    "country_code": "US"
+  }
+},
+{
+  "pk": 13, 
+  "model": "myfruitcake.ipaddress", 
+  "fields": {
+    "country_name": "United States", 
+    "city": "Seattle", 
+    "region": "WA", 
+    "ipaddress": "208.54.32.137", 
+    "country_code": "US"
+  }
+},
+{
+  "pk": 14, 
+  "model": "myfruitcake.ipaddress", 
+  "fields": {
+    "country_name": "United States", 
+    "city": null, 
+    "region": null, 
+    "ipaddress": "64.134.134.7", 
+    "country_code": "US"
+  }
+},
+{
+  "pk": 15, 
+  "model": "myfruitcake.ipaddress", 
+  "fields": {
+    "country_name": "United States", 
+    "city": "Happy Valley", 
+    "region": "OR", 
+    "ipaddress": "67.5.193.115", 
+    "country_code": "US"
+  }
+},
+{
+  "pk": 16, 
+  "model": "myfruitcake.ipaddress", 
+  "fields": {
+    "country_name": "Mexico", 
+    "city": "Mexico", 
+    "region": "09", 
+    "ipaddress": "189.146.93.138", 
+    "country_code": "MX"
+  }
+},
+{
+  "pk": 17, 
+  "model": "myfruitcake.ipaddress", 
+  "fields": {
+    "country_name": "United States", 
+    "city": "Mauricetown", 
+    "region": "NJ", 
+    "ipaddress": "174.57.67.249", 
+    "country_code": "US"
+  }
+},
+{
+  "pk": 18, 
+  "model": "myfruitcake.ipaddress", 
+  "fields": {
+    "country_name": "United States", 
+    "city": "Saint Paul", 
+    "region": "MN", 
+    "ipaddress": "98.240.230.81", 
+    "country_code": "US"
+  }
+},
+{
+  "pk": 19, 
+  "model": "myfruitcake.ipaddress", 
+  "fields": {
+    "country_name": "United States", 
+    "city": "Portland", 
+    "region": "OR", 
+    "ipaddress": "184.76.1.84", 
+    "country_code": "US"
+  }
+},
+{
+  "pk": 94, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 94, 
+    "sender": 30, 
+    "parent": 94, 
+    "text": null, 
+    "emailcontacts": [
+      37
+    ], 
+    "fruitcake": 33, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-09T01:43:45.344Z", 
+    "message": "Fruitcake for you! Er, ip, yes, but needed to uncomment."
+  }
+},
+{
+  "pk": 95, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 95, 
+    "sender": 30, 
+    "parent": 95, 
+    "text": null, 
+    "emailcontacts": [
+      37
+    ], 
+    "fruitcake": 36, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-09T01:44:58.268Z", 
+    "message": "Fruitcake for you! This is a thing uploaded by Adora."
+  }
+},
+{
+  "pk": 96, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 96, 
+    "sender": 30, 
+    "parent": 96, 
+    "text": null, 
+    "emailcontacts": [
+      37
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-09T01:48:57.523Z", 
+    "message": "Fruitcake for you! This looks like it's probably Stollen."
+  }
+},
+{
+  "pk": 97, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 97, 
+    "sender": 56, 
+    "parent": 97, 
+    "text": null, 
+    "emailcontacts": [
+      74
+    ], 
+    "fruitcake": 41, 
+    "ipaddresses": [
+      3
+    ], 
+    "dt": "2012-12-09T07:48:19.487Z", 
+    "message": "Fruitcake for you!"
+  }
+},
+{
+  "pk": 98, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 98, 
+    "sender": 58, 
+    "parent": 98, 
+    "text": null, 
+    "emailcontacts": [
+      37
+    ], 
+    "fruitcake": 42, 
+    "ipaddresses": [
+      3
+    ], 
+    "dt": "2012-12-09T08:22:33.591Z", 
+    "message": "Woot!"
+  }
+},
+{
+  "pk": 99, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 99, 
+    "sender": 58, 
+    "parent": 99, 
+    "text": null, 
+    "emailcontacts": [
+      75
+    ], 
+    "fruitcake": 37, 
+    "ipaddresses": [
+      3
+    ], 
+    "dt": "2012-12-09T08:24:51.080Z", 
+    "message": "Fruitcake for you!"
+  }
+},
+{
+  "pk": 100, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 100, 
+    "sender": 56, 
+    "parent": 100, 
+    "text": null, 
+    "emailcontacts": [
+      76
+    ], 
+    "fruitcake": 40, 
+    "ipaddresses": [
+      3
+    ], 
+    "dt": "2012-12-09T08:25:37.505Z", 
+    "message": "Fruitcake for you!"
+  }
+},
+{
+  "pk": 101, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 98, 
+    "sender": 28, 
+    "parent": 98, 
+    "text": null, 
+    "emailcontacts": [
+      75
+    ], 
+    "fruitcake": 42, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-09T08:27:29.227Z", 
+    "message": "Fruitcake for you! Indeed, indeed! Yeah, fruitcake world domination!"
+  }
+},
+{
+  "pk": 102, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 102, 
+    "sender": 28, 
+    "parent": 102, 
+    "text": null, 
+    "emailcontacts": [
+      75
+    ], 
+    "fruitcake": 24, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-09T08:29:08.808Z", 
+    "message": "Fruitcake for you! Sleeping birds are pooped!"
+  }
+},
+{
+  "pk": 103, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 103, 
+    "sender": 55, 
+    "parent": 103, 
+    "text": null, 
+    "emailcontacts": [
+      70, 
+      72
+    ], 
+    "fruitcake": 25, 
+    "ipaddresses": [
+      5
+    ], 
+    "dt": "2012-12-09T17:03:18.575Z", 
+    "message": "Yes indeed, Fruitcake for you!"
+  }
+},
+{
+  "pk": 104, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 103, 
+    "sender": 55, 
+    "parent": 103, 
+    "text": null, 
+    "emailcontacts": [
+      72, 
+      77
+    ], 
+    "fruitcake": 25, 
+    "ipaddresses": [
+      5
+    ], 
+    "dt": "2012-12-09T17:07:34.674Z", 
+    "message": "More Fruitcake for you!"
+  }
+},
+{
+  "pk": 105, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 105, 
+    "sender": 55, 
+    "parent": 105, 
+    "text": null, 
+    "emailcontacts": [
+      72, 
+      78
+    ], 
+    "fruitcake": 37, 
+    "ipaddresses": [
+      5
+    ], 
+    "dt": "2012-12-09T17:09:46.704Z", 
+    "message": "Yet More Fruitcake for you!"
+  }
+},
+{
+  "pk": 107, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 107, 
+    "sender": 55, 
+    "parent": 107, 
+    "text": null, 
+    "emailcontacts": [
+      72, 
+      77
+    ], 
+    "fruitcake": 38, 
+    "ipaddresses": [
+      5
+    ], 
+    "dt": "2012-12-09T17:13:13.942Z", 
+    "message": "Fruitcake for you!"
+  }
+},
+{
+  "pk": 108, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 108, 
+    "sender": 55, 
+    "parent": 108, 
+    "text": null, 
+    "emailcontacts": [
+      70, 
+      72, 
+      77, 
+      79
+    ], 
+    "fruitcake": 38, 
+    "ipaddresses": [
+      5
+    ], 
+    "dt": "2012-12-09T17:16:03.406Z", 
+    "message": "Fruitcake for you!"
+  }
+},
+{
+  "pk": 109, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 109, 
+    "sender": 28, 
+    "parent": 109, 
+    "text": null, 
+    "emailcontacts": [
+      37, 
+      42
+    ], 
+    "fruitcake": 24, 
+    "ipaddresses": [
+      4
+    ], 
+    "dt": "2012-12-09T19:59:34.761Z", 
+    "message": "Fruitcake for you!  Here is your Sunday morning fruitcake!"
+  }
+},
+{
+  "pk": 111, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 111, 
+    "sender": 55, 
+    "parent": 111, 
+    "text": null, 
+    "emailcontacts": [
+      77
+    ], 
+    "fruitcake": 37, 
+    "ipaddresses": [
+      5
+    ], 
+    "dt": "2012-12-09T20:45:08.141Z", 
+    "message": "Fruitcake for you! from Adora again"
+  }
+},
+{
+  "pk": 112, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 112, 
+    "sender": 28, 
+    "parent": 112, 
+    "text": null, 
+    "emailcontacts": [
+      38, 
+      43, 
+      68
+    ], 
+    "fruitcake": 24, 
+    "ipaddresses": [
+      4
+    ], 
+    "dt": "2012-12-09T20:47:57.144Z", 
+    "message": "Fruitcake for you!  Ok, fruitcake party!"
+  }
+},
+{
+  "pk": 113, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 113, 
+    "sender": 55, 
+    "parent": 113, 
+    "text": null, 
+    "emailcontacts": [
+      70, 
+      72, 
+      77
+    ], 
+    "fruitcake": 38, 
+    "ipaddresses": [
+      5
+    ], 
+    "dt": "2012-12-09T20:54:07.094Z", 
+    "message": "Fruitcake for you! 12345"
+  }
+},
+{
+  "pk": 114, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 114, 
+    "sender": 28, 
+    "parent": 114, 
+    "text": null, 
+    "emailcontacts": [
+      38, 
+      43, 
+      68
+    ], 
+    "fruitcake": 24, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-10T00:12:08.371Z", 
+    "message": "Fruitcake for you!  Nice to see fruitcake piling up here."
+  }
+},
+{
+  "pk": 115, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 115, 
+    "sender": 28, 
+    "parent": 115, 
+    "text": null, 
+    "emailcontacts": [
+      69
+    ], 
+    "fruitcake": 24, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-10T01:30:47.542Z", 
+    "message": "Fruitcake for you! This sure looks like a tasty one!"
+  }
+},
+{
+  "pk": 116, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 116, 
+    "sender": 28, 
+    "parent": 116, 
+    "text": null, 
+    "emailcontacts": [
+      39
+    ], 
+    "fruitcake": 24, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-10T02:01:31.048Z", 
+    "message": "Fruitcake for you!  Hi Princess! In Thuringia, we also have excellent cakes."
+  }
+},
+{
+  "pk": 117, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 117, 
+    "sender": 37, 
+    "parent": 117, 
+    "text": null, 
+    "emailcontacts": [
+      38, 
+      39, 
+      68, 
+      69
+    ], 
+    "fruitcake": 42, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-10T20:06:38.215Z", 
+    "message": "Fruitcake for you!  Is the a strawberry or a cherry?  Looks pretty good in either case!"
+  }
+},
+{
+  "pk": 118, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 118, 
+    "sender": 37, 
+    "parent": 118, 
+    "text": null, 
+    "emailcontacts": [
+      38, 
+      39, 
+      68, 
+      69
+    ], 
+    "fruitcake": 42, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-10T20:09:46.836Z", 
+    "message": "Fruitcake for you!  Is the a strawberry or a cherry?  Looks pretty good in either case!"
+  }
+},
+{
+  "pk": 119, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 119, 
+    "sender": 37, 
+    "parent": 119, 
+    "text": null, 
+    "emailcontacts": [
+      38, 
+      39, 
+      68, 
+      69
+    ], 
+    "fruitcake": 42, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-10T20:10:35.312Z", 
+    "message": "Fruitcake for you!  Is the a strawberry or a cherry?  Looks pretty good in either case!"
+  }
+},
+{
+  "pk": 120, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 120, 
+    "sender": 37, 
+    "parent": 120, 
+    "text": null, 
+    "emailcontacts": [
+      38, 
+      39, 
+      68, 
+      69
+    ], 
+    "fruitcake": 42, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-10T20:11:12.914Z", 
+    "message": "Fruitcake for you!  Is the a strawberry or a cherry?  Looks pretty good in either case!"
+  }
+},
+{
+  "pk": 121, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 121, 
+    "sender": 55, 
+    "parent": 121, 
+    "text": null, 
+    "emailcontacts": [
+      70, 
+      72, 
+      77
+    ], 
+    "fruitcake": 37, 
+    "ipaddresses": [
+      5
+    ], 
+    "dt": "2012-12-10T20:53:18.523Z", 
+    "message": "Fruitcake for you, yet again!"
+  }
+},
+{
+  "pk": 122, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 122, 
+    "sender": 28, 
+    "parent": 122, 
+    "text": null, 
+    "emailcontacts": [
+      37, 
+      39
+    ], 
+    "fruitcake": 24, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-10T21:05:14.790Z", 
+    "message": "Fruitcake for you! Check if these show up twice or once."
+  }
+},
+{
+  "pk": 123, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 123, 
+    "sender": 30, 
+    "parent": 123, 
+    "text": null, 
+    "emailcontacts": [
+      39
+    ], 
+    "fruitcake": 10, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-10T22:05:14.811Z", 
+    "message": "Fruitcake for you! This one looks pretty good!"
+  }
+},
+{
+  "pk": 124, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 124, 
+    "sender": 30, 
+    "parent": 124, 
+    "text": null, 
+    "emailcontacts": [
+      39
+    ], 
+    "fruitcake": 10, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-10T22:07:05.320Z", 
+    "message": "Fruitcake for you! This one looks pretty good!"
+  }
+},
+{
+  "pk": 125, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 125, 
+    "sender": 30, 
+    "parent": 125, 
+    "text": null, 
+    "emailcontacts": [
+      39
+    ], 
+    "fruitcake": 11, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-10T22:08:08.503Z", 
+    "message": "Fruitcake for you! See if this arrives twice?"
+  }
+},
+{
+  "pk": 126, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 126, 
+    "sender": 30, 
+    "parent": 126, 
+    "text": null, 
+    "emailcontacts": [
+      39
+    ], 
+    "fruitcake": 11, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-10T22:17:08.296Z", 
+    "message": "Fruitcake for you! New, improved description."
+  }
+},
+{
+  "pk": 127, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 127, 
+    "sender": 53, 
+    "parent": 127, 
+    "text": null, 
+    "emailcontacts": [
+      43, 
+      80
+    ], 
+    "fruitcake": 33, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-10T23:51:16.147Z", 
+    "message": "Fruitcake for you! This one is for the birds."
+  }
+},
+{
+  "pk": 128, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 128, 
+    "sender": 53, 
+    "parent": 128, 
+    "text": null, 
+    "emailcontacts": [
+      68
+    ], 
+    "fruitcake": 33, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-10T23:54:07.565Z", 
+    "message": "Fruitcake for you! Oops, guess some other coopermagee will be receiving my first shipment."
+  }
+},
+{
+  "pk": 129, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 129, 
+    "sender": 31, 
+    "parent": 129, 
+    "text": null, 
+    "emailcontacts": [
+      43
+    ], 
+    "fruitcake": 25, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-10T23:57:54.132Z", 
+    "message": "Fruitcake for you!  Can it be that cooper didn't send anything yet?"
+  }
+},
+{
+  "pk": 130, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 130, 
+    "sender": 30, 
+    "parent": 130, 
+    "text": null, 
+    "emailcontacts": [
+      81
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-11T01:19:23.680Z", 
+    "message": "Fruitcake for you!  Appears to be some kind of Stollen, like we picked up at the German School Christmas market.  Hmm... Oops, almost forgot:  yeah!"
+  }
+},
+{
+  "pk": 131, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 130, 
+    "sender": 59, 
+    "parent": 130, 
+    "text": null, 
+    "emailcontacts": [
+      37
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      6
+    ], 
+    "dt": "2012-12-11T04:37:47.456Z", 
+    "message": "Fruitcake for you!\r\n\r\nThis virtual fruitcake is virtually delicious! Enjoy!"
+  }
+},
+{
+  "pk": 132, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 130, 
+    "sender": 11, 
+    "parent": 131, 
+    "text": null, 
+    "emailcontacts": [
+      81
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      4
+    ], 
+    "dt": "2012-12-11T05:11:22.409Z", 
+    "message": "Fruitcake for you!  Hi there! Thanks for your comments, esp. on writing tone, since you're the first person to come into Justfruitcake by way of an email."
+  }
+},
+{
+  "pk": 133, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 133, 
+    "sender": 28, 
+    "parent": 133, 
+    "text": null, 
+    "emailcontacts": [], 
+    "fruitcake": 24, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-11T16:34:16.908Z", 
+    "message": "Fruitcake for you! Fruitcake on smartphones."
+  }
+},
+{
+  "pk": 134, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 134, 
+    "sender": 28, 
+    "parent": 134, 
+    "text": null, 
+    "emailcontacts": [], 
+    "fruitcake": 24, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-11T16:40:10.591Z", 
+    "message": "Fruitcake for you! Fruitcake on smartphones."
+  }
+},
+{
+  "pk": 135, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 135, 
+    "sender": 30, 
+    "parent": 135, 
+    "text": null, 
+    "emailcontacts": [], 
+    "fruitcake": 43, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-11T17:16:07.301Z", 
+    "message": "Fruitcake for you! Your Tuesday morning fruitcake, sir!"
+  }
+},
+{
+  "pk": 136, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 136, 
+    "sender": 30, 
+    "parent": 136, 
+    "text": null, 
+    "emailcontacts": [], 
+    "fruitcake": 43, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-11T17:17:15.870Z", 
+    "message": "Fruitcake for you! Your Tuesday morning fruitcake, sir!"
+  }
+},
+{
+  "pk": 137, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 137, 
+    "sender": 30, 
+    "parent": 137, 
+    "text": null, 
+    "emailcontacts": [
+      39
+    ], 
+    "fruitcake": 43, 
+    "ipaddresses": [
+      4
+    ], 
+    "dt": "2012-12-11T17:19:05.088Z", 
+    "message": "Fruitcake for you! A new one!"
+  }
+},
+{
+  "pk": 138, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 138, 
+    "sender": 30, 
+    "parent": 138, 
+    "text": null, 
+    "emailcontacts": [
+      39
+    ], 
+    "fruitcake": 33, 
+    "ipaddresses": [
+      4
+    ], 
+    "dt": "2012-12-11T17:23:28.121Z", 
+    "message": "Fruitcake for you! I think the birds will like this one."
+  }
+},
+{
+  "pk": 139, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 139, 
+    "sender": 31, 
+    "parent": 139, 
+    "text": null, 
+    "emailcontacts": [
+      39
+    ], 
+    "fruitcake": 29, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-11T21:22:08.357Z", 
+    "message": "Fruitcake for you!  Hi Lucy, how's in going?"
+  }
+},
+{
+  "pk": 140, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 140, 
+    "sender": 31, 
+    "parent": 140, 
+    "text": null, 
+    "emailcontacts": [
+      37, 
+      39
+    ], 
+    "fruitcake": 29, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-12T00:07:13.478Z", 
+    "message": "Fruitcake for you! Back up with more fruitcake!"
+  }
+},
+{
+  "pk": 141, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 141, 
+    "sender": 37, 
+    "parent": 141, 
+    "text": null, 
+    "emailcontacts": [
+      37, 
+      42
+    ], 
+    "fruitcake": 42, 
+    "ipaddresses": [
+      10
+    ], 
+    "dt": "2012-12-12T00:56:59.783Z", 
+    "message": "Fruitcake for you! Coming to you from my Android phone."
+  }
+},
+{
+  "pk": 142, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 142, 
+    "sender": 37, 
+    "parent": 142, 
+    "text": null, 
+    "emailcontacts": [
+      37
+    ], 
+    "fruitcake": 43, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-12T01:06:52.267Z", 
+    "message": "Fruitcake for you! Just looking at how fast these things go out."
+  }
+},
+{
+  "pk": 143, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 142, 
+    "sender": 11, 
+    "parent": 142, 
+    "text": null, 
+    "emailcontacts": [
+      41, 
+      81
+    ], 
+    "fruitcake": 43, 
+    "ipaddresses": [
+      10
+    ], 
+    "dt": "2012-12-12T01:14:43.889Z", 
+    "message": "Fruitcake for you!  Looks pretty tasty!"
+  }
+},
+{
+  "pk": 144, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 144, 
+    "sender": 11, 
+    "parent": 144, 
+    "text": null, 
+    "emailcontacts": [
+      41, 
+      81
+    ], 
+    "fruitcake": 23, 
+    "ipaddresses": [
+      10
+    ], 
+    "dt": "2012-12-12T01:45:10.061Z", 
+    "message": "Fruitcake for you! Fruitcake coming to you from the #51 bus."
+  }
+},
+{
+  "pk": 145, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 144, 
+    "sender": 30, 
+    "parent": 144, 
+    "text": null, 
+    "emailcontacts": [
+      77
+    ], 
+    "fruitcake": 23, 
+    "ipaddresses": [
+      4
+    ], 
+    "dt": "2012-12-12T04:09:06.528Z", 
+    "message": "Fruitcake for you!  And SweetPea too!\r\nBirdie nom noms!\r\n\r\n\r\n\r\n"
+  }
+},
+{
+  "pk": 148, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 148, 
+    "sender": 59, 
+    "parent": 148, 
+    "text": null, 
+    "emailcontacts": [
+      37
+    ], 
+    "fruitcake": 32, 
+    "ipaddresses": [
+      6
+    ], 
+    "dt": "2012-12-12T04:41:09.096Z", 
+    "message": "Fruitcake for you!\r\n\r\nHappy Holidays!!\r\nLove,\r\nEmily"
+  }
+},
+{
+  "pk": 150, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 150, 
+    "sender": 60, 
+    "parent": 150, 
+    "text": null, 
+    "emailcontacts": [
+      76
+    ], 
+    "fruitcake": 10, 
+    "ipaddresses": [
+      3
+    ], 
+    "dt": "2012-12-12T07:00:49.244Z", 
+    "message": "Fruitcake for you!"
+  }
+},
+{
+  "pk": 151, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 150, 
+    "sender": 58, 
+    "parent": 150, 
+    "text": null, 
+    "emailcontacts": [
+      75
+    ], 
+    "fruitcake": 10, 
+    "ipaddresses": [
+      3
+    ], 
+    "dt": "2012-12-12T07:02:18.625Z", 
+    "message": "Fruitcake for you!"
+  }
+},
+{
+  "pk": 152, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 150, 
+    "sender": 56, 
+    "parent": 151, 
+    "text": null, 
+    "emailcontacts": [
+      37
+    ], 
+    "fruitcake": 10, 
+    "ipaddresses": [
+      3
+    ], 
+    "dt": "2012-12-12T07:04:33.199Z", 
+    "message": "Fruitcake for you! This one's been around a bit....\r\n"
+  }
+},
+{
+  "pk": 153, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 150, 
+    "sender": 11, 
+    "parent": 152, 
+    "text": "", 
+    "emailcontacts": [
+      37, 
+      75, 
+      82
+    ], 
+    "fruitcake": 10, 
+    "ipaddresses": [
+      4
+    ], 
+    "dt": "2012-12-12T07:58:04.603Z", 
+    "message": "Fruitcake for you!  Gradually making improvements and getting closer to fruitcake world domination.  "
+  }
+},
+{
+  "pk": 154, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 154, 
+    "sender": 59, 
+    "parent": 154, 
+    "text": null, 
+    "emailcontacts": [
+      41
+    ], 
+    "fruitcake": 42, 
+    "ipaddresses": [
+      6
+    ], 
+    "dt": "2012-12-12T17:25:32.955Z", 
+    "message": "Fruitcake for you!\r\n\r\nA tasty slice to start your day off right!  Have a great day!  I'll be thinking of you trying to clean your office -- you can do it!!"
+  }
+},
+{
+  "pk": 155, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 155, 
+    "sender": 11, 
+    "parent": 155, 
+    "text": null, 
+    "emailcontacts": [], 
+    "fruitcake": 43, 
+    "ipaddresses": [], 
+    "dt": "2012-12-13T22:35:51.876Z", 
+    "message": "Fruitcake for you!  Just trying to get my count up a bit."
+  }
+},
+{
+  "pk": 156, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 156, 
+    "sender": 11, 
+    "parent": 156, 
+    "text": null, 
+    "emailcontacts": [], 
+    "fruitcake": 43, 
+    "ipaddresses": [], 
+    "dt": "2012-12-13T22:38:23.190Z", 
+    "message": "Fruitcake for you!  Just trying to get my count up a bit."
+  }
+},
+{
+  "pk": 157, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 157, 
+    "sender": 11, 
+    "parent": 157, 
+    "text": null, 
+    "emailcontacts": [], 
+    "fruitcake": 43, 
+    "ipaddresses": [], 
+    "dt": "2012-12-13T22:39:50.607Z", 
+    "message": "Fruitcake for you!  Just trying to get my count up a bit."
+  }
+},
+{
+  "pk": 158, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 158, 
+    "sender": 11, 
+    "parent": 158, 
+    "text": null, 
+    "emailcontacts": [], 
+    "fruitcake": 43, 
+    "ipaddresses": [], 
+    "dt": "2012-12-13T22:40:15.618Z", 
+    "message": "Fruitcake for you!  Just trying to get my count up a bit."
+  }
+},
+{
+  "pk": 159, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 159, 
+    "sender": 11, 
+    "parent": 159, 
+    "text": null, 
+    "emailcontacts": [
+      68
+    ], 
+    "fruitcake": 43, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-13T22:40:38.956Z", 
+    "message": "Fruitcake for you!  Just trying to get my count up a bit."
+  }
+},
+{
+  "pk": 160, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 160, 
+    "sender": 11, 
+    "parent": 160, 
+    "text": null, 
+    "emailcontacts": [
+      68
+    ], 
+    "fruitcake": 24, 
+    "ipaddresses": [
+      8
+    ], 
+    "dt": "2012-12-13T22:41:53.543Z", 
+    "message": "Fruitcake for you! This is also a very popular fruitcake."
+  }
+},
+{
+  "pk": 161, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 161, 
+    "sender": 11, 
+    "parent": 161, 
+    "text": null, 
+    "emailcontacts": [
+      41, 
+      81, 
+      77, 
+      75, 
+      83, 
+      42, 
+      39, 
+      37, 
+      40
+    ], 
+    "fruitcake": 23, 
+    "ipaddresses": [
+      12
+    ], 
+    "dt": "2012-12-14T19:11:59.221Z", 
+    "message": "Fruitcake for you!  Notice that MyShipments now has locations and when signed in there is a MyProfile button for editing username, email, photo, if desired.  Need to add MyStats info and blurb each page you arrive on from the menu with text on the top about what it's for (moving \"Totally free\" etc. to an About page).  Hoping to be sending fruitcake to people tonight! Yeah!"
+  }
+},
+{
+  "pk": 162, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 161, 
+    "sender": 11, 
+    "parent": 161, 
+    "text": null, 
+    "emailcontacts": [
+      37, 
+      39, 
+      42
+    ], 
+    "fruitcake": 23, 
+    "ipaddresses": [
+      12
+    ], 
+    "dt": "2012-12-14T19:14:23.338Z", 
+    "message": "Fruitcake for you!  Just adding to the history of this under-recognized beauty of a fruitcake."
+  }
+},
+{
+  "pk": 163, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 161, 
+    "sender": 11, 
+    "parent": 162, 
+    "text": null, 
+    "emailcontacts": [
+      37, 
+      39, 
+      42
+    ], 
+    "fruitcake": 23, 
+    "ipaddresses": [
+      12
+    ], 
+    "dt": "2012-12-14T19:16:05.008Z", 
+    "message": "Fruitcake for you! Third shipment leg."
+  }
+},
+{
+  "pk": 164, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 161, 
+    "sender": 59, 
+    "parent": 161, 
+    "text": null, 
+    "emailcontacts": [
+      41
+    ], 
+    "fruitcake": 23, 
+    "ipaddresses": [
+      6
+    ], 
+    "dt": "2012-12-14T22:40:15.155Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi Linda!  How's your week going? Just wanted to share this lovely fruitcake with you. Love,Emily"
+  }
+},
+{
+  "pk": 165, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 165, 
+    "sender": 11, 
+    "parent": 165, 
+    "text": null, 
+    "emailcontacts": [], 
+    "fruitcake": 23, 
+    "ipaddresses": [], 
+    "dt": "2012-12-16T17:15:55.151Z", 
+    "message": "Fruitcake for you! Hi there, Baby!"
+  }
+},
+{
+  "pk": 166, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 166, 
+    "sender": 11, 
+    "parent": 166, 
+    "text": null, 
+    "emailcontacts": [
+      39
+    ], 
+    "fruitcake": 23, 
+    "ipaddresses": [
+      4
+    ], 
+    "dt": "2012-12-16T17:19:14.509Z", 
+    "message": "Fruitcake for you! Hi there, Baby!"
+  }
+},
+{
+  "pk": 167, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 167, 
+    "sender": 30, 
+    "parent": 167, 
+    "text": null, 
+    "emailcontacts": [
+      39
+    ], 
+    "fruitcake": 42, 
+    "ipaddresses": [
+      4
+    ], 
+    "dt": "2012-12-17T01:37:16.305Z", 
+    "message": "Fruitcake for you!  Sunday night in December, coming up on the holidays, nice!"
+  }
+},
+{
+  "pk": 168, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 168, 
+    "sender": 30, 
+    "parent": 168, 
+    "text": null, 
+    "emailcontacts": [
+      43
+    ], 
+    "fruitcake": 9, 
+    "ipaddresses": [
+      4
+    ], 
+    "dt": "2012-12-17T01:44:14.394Z", 
+    "message": "Fruitcake for you! Hi Sparky, having fun?!"
+  }
+},
+{
+  "pk": 169, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 168, 
+    "sender": 28, 
+    "parent": 168, 
+    "text": null, 
+    "emailcontacts": [
+      68
+    ], 
+    "fruitcake": 9, 
+    "ipaddresses": [
+      4
+    ], 
+    "dt": "2012-12-17T01:47:23.302Z", 
+    "message": "Fruitcake for you! Over to you, Cooper!"
+  }
+},
+{
+  "pk": 170, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 168, 
+    "sender": 31, 
+    "parent": 169, 
+    "text": null, 
+    "emailcontacts": [
+      38
+    ], 
+    "fruitcake": 9, 
+    "ipaddresses": [
+      4
+    ], 
+    "dt": "2012-12-17T01:50:41.440Z", 
+    "message": "Fruitcake for you! Just for you, Pip, our little yellow friend!"
+  }
+},
+{
+  "pk": 171, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 168, 
+    "sender": 46, 
+    "parent": 170, 
+    "text": null, 
+    "emailcontacts": [
+      42
+    ], 
+    "fruitcake": 9, 
+    "ipaddresses": [
+      4
+    ], 
+    "dt": "2012-12-17T07:13:58.371Z", 
+    "message": "Fruitcake for you! Back home with this fruitcake."
+  }
+},
+{
+  "pk": 172, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 172, 
+    "sender": 28, 
+    "parent": 172, 
+    "text": null, 
+    "emailcontacts": [
+      42
+    ], 
+    "fruitcake": 9, 
+    "ipaddresses": [
+      4
+    ], 
+    "dt": "2012-12-17T08:14:30.098Z", 
+    "message": "Fruitcake for you! Getting ready for a live run."
+  }
+},
+{
+  "pk": 173, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 173, 
+    "sender": 11, 
+    "parent": 173, 
+    "text": null, 
+    "emailcontacts": [
+      81, 
+      84, 
+      85, 
+      75, 
+      77, 
+      86, 
+      87, 
+      41
+    ], 
+    "fruitcake": 43, 
+    "ipaddresses": [
+      4
+    ], 
+    "dt": "2012-12-17T20:20:59.510Z", 
+    "message": "Fruitcake for you!  Ok, happy holidays to everybody!  Let's see where this fruitcake goes."
+  }
+},
+{
+  "pk": 174, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 173, 
+    "sender": 59, 
+    "parent": 173, 
+    "text": null, 
+    "emailcontacts": [
+      88
+    ], 
+    "fruitcake": 43, 
+    "ipaddresses": [
+      6
+    ], 
+    "dt": "2012-12-17T21:20:21.913Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi Stephanie!  Have a lovely holiday!  Pass the fruitcake on!\r\n\r\nLove, Emily"
+  }
+},
+{
+  "pk": 175, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 173, 
+    "sender": 11, 
+    "parent": 173, 
+    "text": null, 
+    "emailcontacts": [
+      37, 
+      81, 
+      86, 
+      87
+    ], 
+    "fruitcake": 43, 
+    "ipaddresses": [
+      13
+    ], 
+    "dt": "2012-12-17T22:31:20.852Z", 
+    "message": "Fruitcake for you! Sent from the car on I-5 somewhere near Albany, OR."
+  }
+},
+{
+  "pk": 176, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 173, 
+    "sender": 11, 
+    "parent": 175, 
+    "text": null, 
+    "emailcontacts": [
+      89
+    ], 
+    "fruitcake": 43, 
+    "ipaddresses": [
+      13
+    ], 
+    "dt": "2012-12-17T22:45:24.610Z", 
+    "message": "Fruitcake for you! Fruitcake for you! Sent from the car on I-5 near Eugene, OR. Might be a topic for your class."
+  }
+},
+{
+  "pk": 177, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 173, 
+    "sender": 11, 
+    "parent": 173, 
+    "text": null, 
+    "emailcontacts": [
+      81
+    ], 
+    "fruitcake": 43, 
+    "ipaddresses": [
+      13
+    ], 
+    "dt": "2012-12-17T22:51:05.157Z", 
+    "message": "Fruitcake for you!  Fruitcake for you! Sent from the car on I-5 near Eugene, OR. Might be a topic for your friends. (Hi, Wee Winkie!)"
+  }
+},
+{
+  "pk": 178, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 178, 
+    "sender": 11, 
+    "parent": 178, 
+    "text": null, 
+    "emailcontacts": [
+      90, 
+      91, 
+      92, 
+      93, 
+      94
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      14
+    ], 
+    "dt": "2012-12-18T06:10:30.224Z", 
+    "message": "Fruitcake for you!  Linda and I are enroute to California and happy to have made it through the Siskiyou Pass earlier this evening just ahead of a blizzard. In other news, this Justfruitcake.com thing is a little side project that was just launched today, so please try it out and send fruitcakes to whomever you like.  Happy holidays!"
+  }
+},
+{
+  "pk": 179, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 179, 
+    "sender": 11, 
+    "parent": 179, 
+    "text": null, 
+    "emailcontacts": [
+      95, 
+      96
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      14
+    ], 
+    "dt": "2012-12-18T06:26:05.765Z", 
+    "message": "Fruitcake for you! Linda and I are enroute to California and happy to have made it through the Siskiyou Pass earlier this evening just ahead of a blizzard. In other news, this Justfruitcake.com thing is a little side project that was just launched today, so please try it out and send fruitcakes to whomever you like. Happy holidays!"
+  }
+},
+{
+  "pk": 180, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 180, 
+    "sender": 55, 
+    "parent": 180, 
+    "text": null, 
+    "emailcontacts": [
+      97
+    ], 
+    "fruitcake": 37, 
+    "ipaddresses": [
+      11
+    ], 
+    "dt": "2012-12-18T17:01:48.981Z", 
+    "message": "Here's a virtual fruitcake for you, send it on!"
+  }
+},
+{
+  "pk": 181, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 181, 
+    "sender": 55, 
+    "parent": 181, 
+    "text": null, 
+    "emailcontacts": [
+      98
+    ], 
+    "fruitcake": 37, 
+    "ipaddresses": [
+      11
+    ], 
+    "dt": "2012-12-18T17:05:35.978Z", 
+    "message": "Here's a virtual fruitcake for you, send it on!\" "
+  }
+},
+{
+  "pk": 182, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 182, 
+    "sender": 55, 
+    "parent": 182, 
+    "text": null, 
+    "emailcontacts": [
+      99
+    ], 
+    "fruitcake": 36, 
+    "ipaddresses": [
+      11
+    ], 
+    "dt": "2012-12-18T17:06:56.184Z", 
+    "message": "Here's a fruitcake for you, send it on!"
+  }
+},
+{
+  "pk": 183, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 183, 
+    "sender": 56, 
+    "parent": 183, 
+    "text": null, 
+    "emailcontacts": [
+      100
+    ], 
+    "fruitcake": 11, 
+    "ipaddresses": [
+      15
+    ], 
+    "dt": "2012-12-20T08:53:44.306Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi, my friend Craig made up this site for the fun of it - and to send pictures of fruitcake to people. :)\r\n\r\n-Steve"
+  }
+},
+{
+  "pk": 184, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 184, 
+    "sender": 56, 
+    "parent": 184, 
+    "text": null, 
+    "emailcontacts": [
+      101
+    ], 
+    "fruitcake": 42, 
+    "ipaddresses": [
+      15
+    ], 
+    "dt": "2012-12-20T08:55:51.896Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi, my friend Craig created this site for the fun of it, and to send people pictures of fruitcake. :)\r\n\r\n-Steve\r\n"
+  }
+},
+{
+  "pk": 185, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 185, 
+    "sender": 56, 
+    "parent": 185, 
+    "text": null, 
+    "emailcontacts": [
+      102
+    ], 
+    "fruitcake": 40, 
+    "ipaddresses": [
+      15
+    ], 
+    "dt": "2012-12-20T08:58:13.423Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi, my friend Craig created this site for the fun of it. And to send fruitcake. Or at least pictures of fruitcake.\r\n\r\n:)\r\n\r\n-Steve"
+  }
+},
+{
+  "pk": 186, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 186, 
+    "sender": 59, 
+    "parent": 186, 
+    "text": null, 
+    "emailcontacts": [
+      103
+    ], 
+    "fruitcake": 23, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:07:47.985Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi Mum! Yummy fruitcake...pass it on!  Love, Emily"
+  }
+},
+{
+  "pk": 187, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 187, 
+    "sender": 59, 
+    "parent": 187, 
+    "text": null, 
+    "emailcontacts": [
+      104
+    ], 
+    "fruitcake": 23, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:08:59.842Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi April!  Yummy fruitcake...pass it on!  Love, Emily"
+  }
+},
+{
+  "pk": 188, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 188, 
+    "sender": 59, 
+    "parent": 188, 
+    "text": null, 
+    "emailcontacts": [
+      105
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:10:26.638Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi Alissa!  Yummy fruitcake...pass it on!  Love, Emily"
+  }
+},
+{
+  "pk": 189, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 189, 
+    "sender": 59, 
+    "parent": 189, 
+    "text": null, 
+    "emailcontacts": [
+      106
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:11:05.256Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi Paige!  Yummy fruitcake...pass it on!  Hugs, Emily"
+  }
+},
+{
+  "pk": 190, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 190, 
+    "sender": 59, 
+    "parent": 190, 
+    "text": null, 
+    "emailcontacts": [
+      107
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:11:35.720Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi Anna!  Yummy fruitcake...pass it on!  Love, Emily"
+  }
+},
+{
+  "pk": 191, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 191, 
+    "sender": 59, 
+    "parent": 191, 
+    "text": null, 
+    "emailcontacts": [
+      108
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:12:11.647Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi Gretchen!  Yummy fruitcake...pass it on!  Love, Emily"
+  }
+},
+{
+  "pk": 192, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 192, 
+    "sender": 59, 
+    "parent": 192, 
+    "text": null, 
+    "emailcontacts": [
+      109
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:13:14.936Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi Erin!  Yummy fruitcake...pass it on!  Hugs, Emily"
+  }
+},
+{
+  "pk": 193, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 193, 
+    "sender": 59, 
+    "parent": 193, 
+    "text": null, 
+    "emailcontacts": [
+      110
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:13:44.517Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi Sarah!  Yummy fruitcake...pass it on!  Love, Emily"
+  }
+},
+{
+  "pk": 194, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 194, 
+    "sender": 59, 
+    "parent": 194, 
+    "text": null, 
+    "emailcontacts": [
+      86
+    ], 
+    "fruitcake": 11, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:14:34.367Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi Sally!  Yummy fruitcake...pass it on!  Love, Emily"
+  }
+},
+{
+  "pk": 195, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 195, 
+    "sender": 59, 
+    "parent": 195, 
+    "text": null, 
+    "emailcontacts": [
+      111
+    ], 
+    "fruitcake": 42, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:15:11.668Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi Terri!  Yummy fruitcake...pass it on!  Love, Emily"
+  }
+},
+{
+  "pk": 196, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 196, 
+    "sender": 59, 
+    "parent": 196, 
+    "text": null, 
+    "emailcontacts": [
+      88
+    ], 
+    "fruitcake": 42, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:15:55.045Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi Stephanie!  Yummy fruitcake...pass it on!  Love, Emily"
+  }
+},
+{
+  "pk": 197, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 197, 
+    "sender": 59, 
+    "parent": 197, 
+    "text": null, 
+    "emailcontacts": [
+      112
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:16:48.313Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi Sue and Chuck!  Yummy fruitcake...pass it on!  Love, Emily"
+  }
+},
+{
+  "pk": 198, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 198, 
+    "sender": 59, 
+    "parent": 198, 
+    "text": null, 
+    "emailcontacts": [
+      113
+    ], 
+    "fruitcake": 11, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:17:38.930Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi Erika!  Yummy fruitcake...pass it on!  Love, Emily"
+  }
+},
+{
+  "pk": 199, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 199, 
+    "sender": 59, 
+    "parent": 199, 
+    "text": null, 
+    "emailcontacts": [
+      114
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:18:12.774Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi Shuli!  Yummy fruitcake...pass it on!  Love, Emily"
+  }
+},
+{
+  "pk": 200, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 200, 
+    "sender": 59, 
+    "parent": 200, 
+    "text": null, 
+    "emailcontacts": [
+      115
+    ], 
+    "fruitcake": 40, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:19:39.867Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi Dorothy!  Yummy fruitcake...pass it on!  Love, Emily"
+  }
+},
+{
+  "pk": 201, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 201, 
+    "sender": 59, 
+    "parent": 201, 
+    "text": null, 
+    "emailcontacts": [
+      116
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:20:39.332Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi Anita!  Yummy fruitcake...pass it on!  Love, Emily"
+  }
+},
+{
+  "pk": 202, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 202, 
+    "sender": 59, 
+    "parent": 202, 
+    "text": null, 
+    "emailcontacts": [
+      117
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:21:19.533Z", 
+    "message": "Fruitcake for you!\r\n\r\nHi Lessie!  Yummy fruitcake...pass it on!  Hugs, Emily"
+  }
+},
+{
+  "pk": 203, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 203, 
+    "sender": 59, 
+    "parent": 203, 
+    "text": null, 
+    "emailcontacts": [
+      85
+    ], 
+    "fruitcake": 40, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:22:01.968Z", 
+    "message": "Fruitcake for you!\r\nHi Kumiko!  Yummy fruitcake...pass it on!  Love, Emily"
+  }
+},
+{
+  "pk": 204, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 204, 
+    "sender": 59, 
+    "parent": 204, 
+    "text": null, 
+    "emailcontacts": [
+      118
+    ], 
+    "fruitcake": 25, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:23:09.489Z", 
+    "message": "Fruitcake for you!\r\nHi Liam!  Yummy fruitcake...pass it on!  Love, Emily"
+  }
+},
+{
+  "pk": 205, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 205, 
+    "sender": 59, 
+    "parent": 205, 
+    "text": null, 
+    "emailcontacts": [
+      119
+    ], 
+    "fruitcake": 29, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:23:51.142Z", 
+    "message": "Fruitcake for you!\r\nHi Ben and Sofia!  Yummy fruitcake...pass it on!  Love, Emily"
+  }
+},
+{
+  "pk": 206, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 206, 
+    "sender": 59, 
+    "parent": 206, 
+    "text": null, 
+    "emailcontacts": [
+      120
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:24:32.090Z", 
+    "message": "Fruitcake for you!\r\nHi Kelly!  Yummy fruitcake...pass it on!  Love, Emily"
+  }
+},
+{
+  "pk": 207, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 207, 
+    "sender": 59, 
+    "parent": 207, 
+    "text": null, 
+    "emailcontacts": [
+      121
+    ], 
+    "fruitcake": 25, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:25:13.465Z", 
+    "message": "Fruitcake for you!\r\nHi Ruth!  Yummy fruitcake...pass it on!  Hugs, Emily"
+  }
+},
+{
+  "pk": 208, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 208, 
+    "sender": 59, 
+    "parent": 208, 
+    "text": null, 
+    "emailcontacts": [
+      122
+    ], 
+    "fruitcake": 11, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:25:54.058Z", 
+    "message": "Fruitcake for you!\r\nHi David and Jess!  Yummy fruitcake...pass it on!  Hugs, Emily"
+  }
+},
+{
+  "pk": 209, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 209, 
+    "sender": 59, 
+    "parent": 209, 
+    "text": null, 
+    "emailcontacts": [
+      123
+    ], 
+    "fruitcake": 25, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:26:29.996Z", 
+    "message": "Fruitcake for you!\r\nHi Christy!  Yummy fruitcake...pass it on!  Hugs, Emily"
+  }
+},
+{
+  "pk": 210, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 210, 
+    "sender": 59, 
+    "parent": 210, 
+    "text": null, 
+    "emailcontacts": [
+      124
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T02:27:03.723Z", 
+    "message": "Fruitcake for you!\r\nHi Siobhan!  Yummy fruitcake...pass it on!  Hugs, Emily"
+  }
+},
+{
+  "pk": 211, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 193, 
+    "sender": 63, 
+    "parent": 193, 
+    "text": null, 
+    "emailcontacts": [
+      125
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      17
+    ], 
+    "dt": "2012-12-31T04:12:15.910Z", 
+    "message": "Fruitcake for you!  Hi Nancy!  Yummy fruitcake...pass it on!  Love, Sarah"
+  }
+},
+{
+  "pk": 212, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 212, 
+    "sender": 59, 
+    "parent": 212, 
+    "text": null, 
+    "emailcontacts": [
+      104, 
+      105, 
+      86, 
+      107, 
+      108, 
+      106, 
+      111, 
+      109, 
+      110, 
+      88, 
+      126, 
+      115, 
+      113, 
+      112, 
+      84, 
+      114, 
+      118, 
+      127, 
+      85, 
+      117, 
+      128, 
+      75, 
+      119, 
+      129, 
+      120, 
+      130, 
+      124, 
+      121, 
+      122, 
+      131, 
+      123, 
+      132, 
+      133, 
+      134, 
+      135, 
+      136, 
+      137, 
+      138, 
+      139, 
+      140, 
+      141, 
+      142, 
+      143, 
+      144, 
+      145, 
+      146, 
+      87
+    ], 
+    "fruitcake": 42, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T19:00:34.045Z", 
+    "message": "Fruitcake for you!\r\nCheers and greetings!  Pass on the fruitcake and let's see where it goes!  Hugs, Emily"
+  }
+},
+{
+  "pk": 213, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 213, 
+    "sender": 59, 
+    "parent": 213, 
+    "text": null, 
+    "emailcontacts": [
+      147
+    ], 
+    "fruitcake": 42, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T19:06:11.813Z", 
+    "message": "Fruitcake for you! \r\nHi Diana, Cheers and greetings!  Pass on the fruitcake and let's see where it goes! -Emily"
+  }
+},
+{
+  "pk": 214, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 214, 
+    "sender": 59, 
+    "parent": 214, 
+    "text": null, 
+    "emailcontacts": [
+      148
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T19:18:15.114Z", 
+    "message": "Fruitcake for you!  Hola mi amor!  Besos y fruitcake para ti!  ;-)"
+  }
+},
+{
+  "pk": 215, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 215, 
+    "sender": 59, 
+    "parent": 215, 
+    "text": null, 
+    "emailcontacts": [
+      37
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T19:21:59.815Z", 
+    "message": "Fruitcake for you!\r\nHi Dad!  This is the fruitcake you sent me before. Let's see if the shipment shows up as the latest shipment for this same fruitcake, or if it shows up at the beginning of a new shipment chain. Love, Emily"
+  }
+},
+{
+  "pk": 216, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 216, 
+    "sender": 59, 
+    "parent": 216, 
+    "text": null, 
+    "emailcontacts": [
+      37
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T19:27:29.557Z", 
+    "message": "Fruitcake for you!  Hmmm, it seems to be showing up under a new shipment chain."
+  }
+},
+{
+  "pk": 217, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 217, 
+    "sender": 65, 
+    "parent": 217, 
+    "text": null, 
+    "emailcontacts": [
+      149
+    ], 
+    "fruitcake": 32, 
+    "ipaddresses": [
+      16
+    ], 
+    "dt": "2012-12-31T22:07:40.337Z", 
+    "message": "happy new year Brenda!!!!  desde de parte de Martha y Emily...."
+  }
+},
+{
+  "pk": 218, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 218, 
+    "sender": 66, 
+    "parent": 218, 
+    "text": null, 
+    "emailcontacts": [
+      150
+    ], 
+    "fruitcake": 40, 
+    "ipaddresses": [
+      18
+    ], 
+    "dt": "2013-01-01T02:58:45.146Z", 
+    "message": "Fruitcake for you!\r\n\r\nEmily's Dad created this site so...... Here is a fruitcake for the New Year.\r\n\r\nLove \r\n\r\nChris"
+  }
+},
+{
+  "pk": 219, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 219, 
+    "sender": 30, 
+    "parent": 219, 
+    "text": null, 
+    "emailcontacts": [], 
+    "fruitcake": 69, 
+    "ipaddresses": [], 
+    "dt": "2013-04-16T00:10:29.824Z", 
+    "message": "Fruitcake for you!"
+  }
+},
+{
+  "pk": 220, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 220, 
+    "sender": 30, 
+    "parent": 220, 
+    "text": null, 
+    "emailcontacts": [], 
+    "fruitcake": 69, 
+    "ipaddresses": [], 
+    "dt": "2013-04-16T00:20:34.800Z", 
+    "message": "Fruitcake for you!"
+  }
+},
+{
+  "pk": 221, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 221, 
+    "sender": 30, 
+    "parent": 221, 
+    "text": null, 
+    "emailcontacts": [], 
+    "fruitcake": 69, 
+    "ipaddresses": [], 
+    "dt": "2013-04-16T00:40:33.070Z", 
+    "message": "Fruitcake for you!"
+  }
+},
+{
+  "pk": 222, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 222, 
+    "sender": 30, 
+    "parent": 222, 
+    "text": null, 
+    "emailcontacts": [
+      42
+    ], 
+    "fruitcake": 69, 
+    "ipaddresses": [
+      19
+    ], 
+    "dt": "2013-04-16T01:08:39.040Z", 
+    "message": "Fruitcake for you!"
+  }
+},
+{
+  "pk": 223, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 223, 
+    "sender": 11, 
+    "parent": 223, 
+    "text": null, 
+    "emailcontacts": [
+      42
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      19
+    ], 
+    "dt": "2013-06-16T23:13:26.231Z", 
+    "message": "Hi there! Fruitcake for you!"
+  }
+},
+{
+  "pk": 224, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 224, 
+    "sender": 28, 
+    "parent": 224, 
+    "text": null, 
+    "emailcontacts": [
+      42
+    ], 
+    "fruitcake": 43, 
+    "ipaddresses": [
+      4
+    ], 
+    "dt": "2013-06-17T01:08:54.780Z", 
+    "message": "Sparky shipment. Fruitcake for you!"
+  }
+},
+{
+  "pk": 225, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 225, 
+    "sender": 30, 
+    "parent": 225, 
+    "text": null, 
+    "emailcontacts": [
+      42
+    ], 
+    "fruitcake": 69, 
+    "ipaddresses": [
+      19
+    ], 
+    "dt": "2013-06-17T22:21:45.403Z", 
+    "message": "Fruitcake for you! Hiya, hiya!"
+  }
+},
+{
+  "pk": 226, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 226, 
+    "sender": 30, 
+    "parent": 226, 
+    "text": null, 
+    "emailcontacts": [
+      42
+    ], 
+    "fruitcake": 42, 
+    "ipaddresses": [
+      19
+    ], 
+    "dt": "2013-06-17T22:26:43.426Z", 
+    "message": "Fruitcake for you! Here's another one."
+  }
+},
+{
+  "pk": 227, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 227, 
+    "sender": 30, 
+    "parent": 227, 
+    "text": null, 
+    "emailcontacts": [
+      42
+    ], 
+    "fruitcake": 43, 
+    "ipaddresses": [
+      19
+    ], 
+    "dt": "2013-06-17T22:33:02.495Z", 
+    "message": "Fruitcake for you! See if the picture shows up in the email yet."
+  }
+},
+{
+  "pk": 228, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 228, 
+    "sender": 30, 
+    "parent": 228, 
+    "text": null, 
+    "emailcontacts": [
+      42
+    ], 
+    "fruitcake": 10, 
+    "ipaddresses": [
+      19
+    ], 
+    "dt": "2013-06-17T22:38:37.308Z", 
+    "message": "Fruitcake for you!"
+  }
+},
+{
+  "pk": 229, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 229, 
+    "sender": 30, 
+    "parent": 229, 
+    "text": null, 
+    "emailcontacts": [
+      42
+    ], 
+    "fruitcake": 10, 
+    "ipaddresses": [
+      19
+    ], 
+    "dt": "2013-06-17T23:20:34.734Z", 
+    "message": "Fruitcake for you!"
+  }
+},
+{
+  "pk": 230, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 230, 
+    "sender": 30, 
+    "parent": 230, 
+    "text": null, 
+    "emailcontacts": [
+      42
+    ], 
+    "fruitcake": 31, 
+    "ipaddresses": [
+      4
+    ], 
+    "dt": "2013-06-18T04:23:10.455Z", 
+    "message": "Here you go!  Fruitcake for you!"
+  }
+},
+{
+  "pk": 231, 
+  "model": "myfruitcake.shipment", 
+  "fields": {
+    "origin": 231, 
+    "sender": 30, 
+    "parent": 231, 
+    "text": null, 
+    "emailcontacts": [
+      42
+    ], 
+    "fruitcake": 10, 
+    "ipaddresses": [
+      4
+    ], 
+    "dt": "2013-06-21T06:57:07.173Z", 
+    "message": "Fruitcake for you!"
+  }
+}
+]
