@@ -1,6 +1,7 @@
 #from django import forms
 #from registration.models import RegistrationProfile
 import os
+from os.path import join as pjoin
 from fruitcakesite.settings import MEDIA_ROOT
 
 from datetime import datetime
@@ -49,6 +50,8 @@ class NewFruitcakeTestCase(TestCase):
         self.assertEqual(testfruitcakepath, 'testfruitcake.jpg')
         r = self.c.get('/myfruitcake/upload/', follow=True)
         self.assertEqual(r.status_code, 200)
-        r = self.c.post('/myfruitcake/upload/?next=/myfruitcake/', {'pic': testfruitcakepath, 'popup': 'Tasty!'}, follow=True)
+        imfn = pjoin(MEDIA_ROOT, testfruitcakepath)
+        with open(imfn) as fp:
+            r = self.c.post('/myfruitcake/upload/?next=/myfruitcake/', {'pic': fp, 'popup': 'Tasty!'}, follow=True)
         self.assertEqual(r.status_code, 200)
 

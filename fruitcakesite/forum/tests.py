@@ -14,6 +14,8 @@ from selenium.webdriver.common.keys import Keys
 from django.test import LiveServerTestCase
 from selenium.webdriver.firefox.webdriver import WebDriver
 import time
+from os.path import join as pjoin
+from fruitcakesite.settings import MEDIA_ROOT
 
 class SimpleTest(TestCase):
     def setUp(self):
@@ -50,16 +52,11 @@ class SimpleTest(TestCase):
         r = self.c.get("/forum/post/new_thread/1")
         r = self.c.post("/forum/post/new_thread/1/", {"subject": "topci", "body" : "Waiting for content"} )
         self.content_test("/forum/forum/1/", ['<div class="title"><a href='])
-        """
-        # reply
-        r = self.c.get("/forum/forum/1/")
-        r = self.c.get("/forum/thread/1/")
-#        r = self.c.get("/forum/post/reply/1/")
 
-        r = self.c.post("/forum/post/reply/1/", {"subject" : "Re: thread", "body" : "Dogfood"} )
-        self.content_test("/forum/thread/1/", ['Dogfood'])
-        """
-
+        # upload avatar
+        testavatarpath = 'testavatar.jpg'
+        imfn = pjoin(MEDIA_ROOT, testavatarpath)
+        r = self.c.get('/forum/upload/', follow=True)
 
 
 
