@@ -37,7 +37,7 @@ class NewFruitcakeTestCase(TestCase):
         for v in values:
             self.assertTrue(v in r.content)
 
-    def test_get_upload_file_form(self):
+    def test_get_upload_fruitcake_and_ship_it(self):
         self.c = Client()
         a = self.c.login(username=self.user.username, password='pwd')
 
@@ -47,11 +47,36 @@ class NewFruitcakeTestCase(TestCase):
         #self.assertTrue('photo?' in r.content)
 
         testfruitcakepath = 'testfruitcake.jpg'
-        self.assertEqual(testfruitcakepath, 'testfruitcake.jpg')
+        # Can we get the upload form page?
         r = self.c.get('/myfruitcake/upload/', follow=True)
         self.assertEqual(r.status_code, 200)
+        # Can we upload a fruitcake using it?
         imfn = pjoin(MEDIA_ROOT, testfruitcakepath)
         with open(imfn) as fp:
             r = self.c.post('/myfruitcake/upload/?next=/myfruitcake/', {'pic': fp, 'popup': 'Tasty!'}, follow=True)
         self.assertEqual(r.status_code, 200)
+        # Are we prevented from uploading a duplicate fruitcake
+        with open(imfn) as fp:
+            r = self.c.post('/myfruitcake/upload/?next=/myfruitcake/', {'pic': fp, 'popup': 'Tasty!'}, follow=True)
+        self.assertEqual(r.status_code, 200)
+
+        # Has the fruitcake been uploaded to the correct locations? 
+        picpath = pjoin(MEDIA_ROOT, 'pics/testfruitcake.jpg')
+        thumbpath = pjoin(MEDIA_ROOT, 'thumbnails/testfruitcake.jpg')
+        
+        self.assertEqual(os.path.exists(picpath), True)
+        self.assertEqual(os.path.exists(picpath), True)
+
+        # Send the new fruitcake
+        thefruitcake = Fruitcake.objects.filter(uploader='ak')
+        #self.c.get'/myfruitcake/'
+        
+        # Can we get rid of the test fruitcake?
+        if os.path.exists(picpath):
+            os.unlink(picpath)
+        if os.path.exists(thumbpath):
+            os.unlink(thumbpath)
+        self.assertEqual(os.path.exists(picpath), False)
+        self.assertEqual(os.path.exists(picpath), False)
+
 

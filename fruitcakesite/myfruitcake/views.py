@@ -1,6 +1,6 @@
 #from string import join
 #from PIL import Image as PImage
-#from os.path import join as pjoin
+from os.path import join as pjoin
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
@@ -328,7 +328,11 @@ def upload_file(request):
                 # then add the request.user
                 pic.uploader = request.user
 
-                pic.thumbnail.name = 'thumbnails/' + re.sub('pics\/', 'thumbnails/', pic.pic.name)
+                file_to_upload = str(request.FILES['pic'])
+                pic.pic.name = pjoin('pics/', file_to_upload)
+                pic.thumbnail.name = pjoin('thumbnails/', file_to_upload)
+
+                #pic.thumbnail.name = 'thumbnails/' + re.sub('pics\/', 'thumbnails/', pic.pic.name)
                 #pic.thumbnail.name = 'thumbnails/' + pic.pic.name
                 ## pic.thumbnail.name = pic.pic.name
                 #re.sub('pics', 'thumbnails', pic.pic.name)
