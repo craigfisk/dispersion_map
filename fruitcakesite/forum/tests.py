@@ -1,15 +1,16 @@
 from django.test import TestCase
-#from django.test.client import Client
+from django.test.client import Client
 from django.test import Client
 
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 
-from forum.models import *
+from forum.models import Forum, Thread, Post
 
 from django.core.urlresolvers import reverse
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+
 
 from django.test import LiveServerTestCase
 from selenium.webdriver.firefox.webdriver import WebDriver
@@ -92,13 +93,16 @@ class PostTest(TestCase):
     def tearDown(self):
         self.driver.quit
 
-
 class ForumSeleniumTests(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         cls.selenium = WebDriver()
         #cls.selenium.set_script_timeout(30000)
         super(ForumSeleniumTests, cls).setUpClass()
+
+    def setUp(self):
+        self.user = User.objects.create_user(username='ak', password='pwd', email='ak@justfruitcake.com')
+        self.forum = Forum.objects.create(title="Raspberry pie")
 
     @classmethod
     def tearDownClass(cls):
@@ -107,10 +111,13 @@ class ForumSeleniumTests(LiveServerTestCase):
 
     def testforum(self): 
 #        self.selenium.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS)
-        self.selenium.implicitly_wait(30)
+        #self.selenium.implicitly_wait(30)
         self.selenium.get('%s%s' % (self.live_server_url, '/'))
-        ###driver = webdriver.Firefox()
-        ###driver.get("/")    #"http://localhost:8000/"
+        u = User.objects.get(username='ak')
+        f = Forum.objects.get(pk=1)
+        
+        driver = webdriver.Firefox()
+        driver.get("/")    #"http://localhost:8000/"
         #driver.get("http://127.0.0.1:8000/")
         #from self.selenium.webdriver.support.wait import WebDriverWait
         #WebDriverWait(self.selenium, 60).until(
@@ -165,9 +172,35 @@ class ForumSeleniumTests(LiveServerTestCase):
 
         signout_element = self.selenium.find_element_by_link_text("sign-out")
         signout_element.click()
- 
         #self.selenium.close()  # closes the window
         self.selenium.quit()   # exits the driver and closes window
-
 """
-                
+
+class ForumPostsTestCase(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='ak', password='pwd', email='ak@justfruitcake.com')
+        self.forum = Forum.objects.create(title="Raspberry pie")
+        
+    def test_post_new_reply_and_reply(self):
+        self.c = Client()
+        loggedin = self.c.login(username='ak', password='pwd')
+        f = Forum.objects.get(pk=1)
+       
+        # Check that our test forum exists
+        r1 = self.c.get('/forum/')
+        self.assertTrue("Raspberry pie" in r1.content)
+
+        # Create a new thread on that forum
+        r2 = self.c.get('/forum/post/new_thread/1')
+        r3 = self.c.post('/forum/post/new_thread/1', {'subject': 'About raspberry pie', 'body': 'Could raspberry pie be considered fruitcake?'}, follow=True)
+        self.c.get('/forum/forum/1')
+        #self.assertTrue("About raspberry pie" in r.content)
+        #r.content
+        #t = Thread.objects.all()
+        r4 = self.c.post('/forum/post/reply/1/', {'subject': 'About raspberry pie', 'body': 'Yes (maybe not).'})
+        r5 = self.c.get('/forum/forum/1')
+
+
+
+
+

@@ -161,13 +161,16 @@ class Shipment(models.Model):
     class Meta:
         app_label = 'myfruitcake'
 
+    """
     def latest_shipment(self):
         latest_shipment = Shipment.objects.filter(sender=self.request.user).order_by('-dt')[0]
         return latest_shipment
- 
+    """
+
     def get_shipment_list(self):
         shipment_list = Shipment.objects.filter(origin=self.origin).order_by('-dt')
         return shipment_list
+    """
 
     def get_parent_list(self):
         shipment_list = Shipment.objects.filter(origin=self.origin).order_by('-dt')
@@ -183,4 +186,5 @@ class Shipment(models.Model):
                 
         parent_list = Shipment.objects.filter(pk__in=mylist).order_by('-dt')
         return parent_list
-        
+    """
+    

@@ -18,7 +18,7 @@ from django.test.client import Client
 from django.contrib.auth.models import User #, UserManager
 #from django.contrib.sites.models import Site
 
-from myfruitcake.models import Fruitcake, IPAddress # Shipment, Upload, EmailContact, Like
+from myfruitcake.models import Fruitcake, IPAddress, Shipment # Upload, EmailContact, Like
 
 from django.contrib.gis.geoip import GeoIP
 geoip = GeoIP()
@@ -44,6 +44,8 @@ class MyfruitcakeTestCase(TestCase):
         self.assertTrue("Upload a fruitcake" in r.content)
 
         testfruitcakepath = 'testfruitcake.jpg'
+        testnonjpegpath = 'testnonjpeg.png'
+
         # Can we get the upload form page?
         r = self.c.get('/myfruitcake/upload/', follow=True)
         self.assertEqual(r.status_code, 200)
@@ -52,10 +54,11 @@ class MyfruitcakeTestCase(TestCase):
         with open(imfn) as fp:
             r = self.c.post('/myfruitcake/upload/?next=/myfruitcake/', {'pic': fp, 'popup': 'Tasty!'}, follow=True)
         self.assertEqual(r.status_code, 200)
-        # Are we prevented from uploading a duplicate fruitcake
-        #with open(imfn) as fp:
-        #    r = self.c.post('/myfruitcake/upload/?next=/myfruitcake/', {'pic': fp, 'popup': 'Tasty!'}, follow=True)
-        #self.assertEqual(r.status_code, 200)
+        # Are we prevented from uploading a non-JPEG fruitcake
+        imfn = pjoin(MEDIA_ROOT, testnonjpegpath)
+        with open(imfn) as fp:
+            r = self.c.post('/myfruitcake/upload/?next=/myfruitcake/', {'pic': fp, 'popup': 'Wrong kind!'}, follow=True)
+        self.assertNotEqual(r.status_code, 200)
 
         # Has the fruitcake been uploaded to the correct locations? 
         picpath = pjoin(MEDIA_ROOT, 'pics/testfruitcake.jpg')
@@ -70,6 +73,18 @@ class MyfruitcakeTestCase(TestCase):
         r = self.c.post(('/myfruitcake/' + str(f.id) + '/shipment/'), {'email': 'support@justfruitcake.com', 'message':'Hi there!'}, follow=True)
         self.assertTrue('Sent!' in r.content)
 
+        self.s = Shipment.objects.get(pk=1)
+        shipment_list = self.s.get_shipment_list()
+        self.assertEqual(len(shipment_list), 1)
+       
+        ## Note: 3 methods of Shipment are commented out and not used
+        ##latest_shipments = self.s.latest_shipment()
+        ##self.assertEqual(len(latest_shipments), 1)
+        ##parent_list = self.s.get_parent_list()
+        ##self.assertEqual(parent_list, None)
+        #latest_shipment = Shipment.objects.get(pk=1)
+        ##self.assertEqual(Shipment.objects.count(), 1)
+        
         # Can we get rid of the test fruitcake?
         if os.path.exists(picpath):
             os.unlink(picpath)
