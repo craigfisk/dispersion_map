@@ -32,6 +32,7 @@ urlpatterns = patterns('myfruitcake.views',
     url(r'^search-form/$', 'search_form'),
     url(r'^search/$', 'search'),
     url(r'^map/$', 'testmap'),
+    url(r'^duplicate/$', 'duplicate'),
 ) 
 
 

@@ -23,12 +23,11 @@ from myfruitcake.models import Fruitcake, IPAddress # Shipment, Upload, EmailCon
 from django.contrib.gis.geoip import GeoIP
 geoip = GeoIP()
 
-class NewFruitcakeTestCase(TestCase):
+class MyfruitcakeTestCase(TestCase):
     #fixtures = ['contenttypes.json', 'auth.json', 'registration.json', 'myfruitcake.json',]
     
     def setUp(self):
         self.user = User.objects.create_user(username='ak', password='pwd', email='ak@justfruitcake.com')
-        #f = Fruitcake.objects.create(pic='pics/241435229994408022_DoszNqwg_b_1.jpg', popup='This is a test', uploader_id=30, dt=datetime.now())
 
     def content_test(self, url, values):
         """Get content of url and test that each of items in `values` list is present."""
@@ -39,12 +38,10 @@ class NewFruitcakeTestCase(TestCase):
 
     def test_get_upload_fruitcake_and_ship_it(self):
         self.c = Client()
-        a = self.c.login(username=self.user.username, password='pwd')
+        loggedin = self.c.login(username='ak', password='pwd')
 
-#        b = self.c.login(username='ak', password='pwd')
-        #r = self.c.post('/registration/login/login/', {'username': 'ak', 'password': 'pwd'}, follow=True)
-        #r = self.c.get('/myfruitcake/')
-        #self.assertTrue('photo?' in r.content)
+        r = self.c.get('/myfruitcake/')
+        self.assertTrue("Upload a fruitcake" in r.content)
 
         testfruitcakepath = 'testfruitcake.jpg'
         # Can we get the upload form page?
@@ -56,9 +53,9 @@ class NewFruitcakeTestCase(TestCase):
             r = self.c.post('/myfruitcake/upload/?next=/myfruitcake/', {'pic': fp, 'popup': 'Tasty!'}, follow=True)
         self.assertEqual(r.status_code, 200)
         # Are we prevented from uploading a duplicate fruitcake
-        with open(imfn) as fp:
-            r = self.c.post('/myfruitcake/upload/?next=/myfruitcake/', {'pic': fp, 'popup': 'Tasty!'}, follow=True)
-        self.assertEqual(r.status_code, 200)
+        #with open(imfn) as fp:
+        #    r = self.c.post('/myfruitcake/upload/?next=/myfruitcake/', {'pic': fp, 'popup': 'Tasty!'}, follow=True)
+        #self.assertEqual(r.status_code, 200)
 
         # Has the fruitcake been uploaded to the correct locations? 
         picpath = pjoin(MEDIA_ROOT, 'pics/testfruitcake.jpg')
@@ -67,10 +64,12 @@ class NewFruitcakeTestCase(TestCase):
         self.assertEqual(os.path.exists(picpath), True)
         self.assertEqual(os.path.exists(picpath), True)
 
-        # Send the new fruitcake
-        thefruitcake = Fruitcake.objects.filter(uploader='ak')
-        #self.c.get'/myfruitcake/'
-        
+        # Send the new fruitcake (should be only the 1 that we just uploaded; uploader_id=f.id=1)
+        f = Fruitcake.objects.get(pk=1)
+        r = self.c.get(('/myfruitcake/'+ str(f.id) + '/shipment/'))
+        r = self.c.post(('/myfruitcake/' + str(f.id) + '/shipment/'), {'email': 'support@justfruitcake.com', 'message':'Hi there!'}, follow=True)
+        self.assertTrue('Sent!' in r.content)
+
         # Can we get rid of the test fruitcake?
         if os.path.exists(picpath):
             os.unlink(picpath)

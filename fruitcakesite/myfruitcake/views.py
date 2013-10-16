@@ -319,7 +319,7 @@ def upload_file(request):
         pattern = re.compile('^pics\/')
         prior_files = []
         x = [ prior_files.append(pattern.sub('', str(f.pic.name))) for f in prior_fruitcake ] 
-        #x = [ prior_files.append(f.pic.name) for f in prior_fruitcake ] 
+
         previously_uploaded = request.FILES['pic'].name in prior_files
         #if form.is_valid() and not previously_uploaded:
         if form.is_valid():
@@ -332,17 +332,14 @@ def upload_file(request):
                 pic.pic.name = pjoin('pics/', file_to_upload)
                 pic.thumbnail.name = pjoin('thumbnails/', file_to_upload)
 
-                #pic.thumbnail.name = 'thumbnails/' + re.sub('pics\/', 'thumbnails/', pic.pic.name)
-                #pic.thumbnail.name = 'thumbnails/' + pic.pic.name
-                ## pic.thumbnail.name = pic.pic.name
-                #re.sub('pics', 'thumbnails', pic.pic.name)
                 # .save() method on the model saves 2 processed versions of the image in pics and thumbnails
                 pic.save()
                 # return HttpResponseRedirect('/myfruitcake/success/')
                 return HttpResponseRedirect('/myfruitcake/')
             else:
-                return HttpResponse('Oops! You already uploaded this file. Please try a different one. Thanks!')
+                #return HttpResponse('Oops! You already uploaded this file. Please try a different one. Thanks!')
                 #return HttpResponse("Testing! (previously_uploaded: %s, prior uploads for request.user %s for request.FILES['filename'].name %s were %s)" % (previously_uploaded, request.user,request.FILES['pic'].name, len(prior_fruitcake) ) )
+                HttpResponseRedirect('/myfruitcake/duplicate/')
 
     else:
         form = UploadFruitcakeForm()
@@ -351,6 +348,9 @@ def upload_file(request):
 
 def success(request):
     return HttpResponse("Success!")
+
+def duplicate(request):
+    return HttpResponse("Duplicate; please try again!")
 
 def add_csrf(request, **kwargs):
     d = dict(user=request.user, **kwargs)
