@@ -108,8 +108,9 @@ def profilepic(request, pk):
                 hsize = int((float(im.size[1])*float(wpercent)))
                 im = im.resize((WIDTH_AVATAR, hsize), PImage.ANTIALIAS)
                 im.save(imfn, "JPEG")
-            except IOError:
-                print "Cannot create thumbnail for ", imfn
+            #CF20131018 modified to include e
+            except IOError as e:
+                print "Cannot create thumbnail for %s due to error: %s" % (imfn, e)
             
     else:
         pf = ProfileForm(instance=profile)

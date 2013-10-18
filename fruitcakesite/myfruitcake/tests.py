@@ -1,6 +1,7 @@
  #from django import forms
 #from registration.models import RegistrationProfile
 import os
+import re
 from os.path import join as pjoin
 from fruitcakesite.settings import MEDIA_ROOT
 
@@ -36,6 +37,15 @@ class MyfruitcakeTestCase(TestCase):
         for v in values:
             self.assertTrue(v in r.content)
 
+    def remove_test_files(self, subdirectory, pattern):
+        somedir = pjoin(MEDIA_ROOT, subdirectory)
+        names = os.listdir(somedir)
+        f_re = re.compile(pattern)
+        for name in names:
+            for m in f_re.finditer(name):
+                if m: os.unlink( pjoin(somedir, m.group()) )
+        
+
     def test_get_upload_fruitcake_and_ship_it(self):
         self.c = Client()
         loggedin = self.c.login(username='cf', password='pwd')
@@ -45,6 +55,8 @@ class MyfruitcakeTestCase(TestCase):
 
         testfruitcakepath = 'testfruitcake.jpg'
         ##testnonjpegpath = 'testnonjpeg.png'
+        self.remove_test_files("pics", r"testfruitcake_?\d*\..*$")
+        self.remove_test_files("thumbnails", r"testfruitcake_?\d*\..*$")
 
         try:
             # Can we get the upload form page?

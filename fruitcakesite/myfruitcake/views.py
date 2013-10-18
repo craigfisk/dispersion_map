@@ -15,7 +15,7 @@ from django.forms import ModelForm
 #from django.core.urlresolvers import reverse
 from fruitcakesite.settings import MEDIA_URL  #MEDIA_ROOT, WIDTH_AVATAR, WIDTH_THUMBNAIL
 
-from myfruitcake.models import Fruitcake, Shipment, Like, IPAddress  #Upload
+from myfruitcake.models import Fruitcake, Shipment, Like, IPAddress, FruitcakeException #Upload
 from forum.models import UserProfile
 from forum.views import mk_paginator #, profilepic  #userinfo
 
@@ -335,11 +335,13 @@ def upload_file(request):
                 # .save() methiod on the model saves 2 processed versions of the image in pics and thumbnails
                 try:
                     pic.save()
-                except IOError as e:
-                    return HttpResponse("Sorry, file to upload can only  be a JPEG format image file (*.jpg)" )
-                    #print "Sorry, can only upload JPEG files (*.jpg). Error message: %s" % (e)
+                except FruitcakeException as e:
+                    return HttpResponse("Sorry, error: %s" % e)
+                else:
+                    return HttpResponseRedirect('/myfruitcake/')
+                    #return HttpResponse("Could not catch error")
+                    
                 # return HttpResponseRedirect('/myfruitcake/success/')
-                return HttpResponseRedirect('/myfruitcake/')
             else:
                 #return HttpResponse('Oops! You already uploaded this file. Please try a different one. Thanks!')
                 #return HttpResponse("Testing! (previously_uploaded: %s, prior uploads for request.user %s for request.FILES['filename'].name %s were %s)" % (previously_uploaded, request.user,request.FILES['pic'].name, len(prior_fruitcake) ) )

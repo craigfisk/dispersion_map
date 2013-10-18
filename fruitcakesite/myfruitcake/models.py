@@ -14,6 +14,9 @@ geoip = GeoIP()
 from fruitcakesite.custom import MyFileStorage
 mfs = MyFileStorage()
 
+class FruitcakeException(Exception):
+    pass
+
 class Fruitcake(models.Model):
     dt = models.DateTimeField(auto_now_add=True)
     thumbnail = models.ImageField("Thumbnail Pic", upload_to='thumbnails', blank=True, null=True)
@@ -67,8 +70,13 @@ class Fruitcake(models.Model):
         try:
             im.save(imfn, "JPEG")
         except IOError as e:
-            print "Error: %s" % e
-
+            raise FruitcakeException("Pic IOError: %s" % e)
+        except EnvironmentError as e:
+            raise FruitcakeException("Pic EnvironmentError: %s" % e)
+        except BaseException as e:
+            raise FruitcakeException("Pic BaseException: %s" % e)
+        else:
+            raise FruitcakeException("Pic image file problem")
         # WIDTH_THUMBNAIL:
 
         # The only thing we're doing to the model (table) is updating with name for the thumbnail
@@ -81,9 +89,16 @@ class Fruitcake(models.Model):
         
         try:
             im2.save(imfn, "JPEG")
+        #except IOError as e:
+        #    print "Error: %s" % e
         except IOError as e:
-            print "Error: %s" % e
-
+            raise FruitcakeException("Thumbnail IOError: %s" % e)
+        except EnvironmentError as e:
+            raise FruitcakeException("Thumbnail EnvironmentError: %s" % e)
+        except BaseException as e:
+            raise FruitcakeException("Thumbnail BaseException: %s" % e)
+        else:
+            raise FruitcakeException("Thumbnail image file problem")
 
 CHOICES = (
         (None, "Like?"),
