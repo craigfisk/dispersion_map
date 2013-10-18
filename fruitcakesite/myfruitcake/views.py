@@ -332,8 +332,12 @@ def upload_file(request):
                 pic.pic.name = pjoin('pics/', file_to_upload)
                 pic.thumbnail.name = pjoin('thumbnails/', file_to_upload)
 
-                # .save() method on the model saves 2 processed versions of the image in pics and thumbnails
-                pic.save()
+                # .save() methiod on the model saves 2 processed versions of the image in pics and thumbnails
+                try:
+                    pic.save()
+                except IOError as e:
+                    return HttpResponse("Sorry, file to upload can only  be a JPEG format image file (*.jpg)" )
+                    #print "Sorry, can only upload JPEG files (*.jpg). Error message: %s" % (e)
                 # return HttpResponseRedirect('/myfruitcake/success/')
                 return HttpResponseRedirect('/myfruitcake/')
             else:
