@@ -60,23 +60,18 @@ class Fruitcake(models.Model):
         
         # Use self.pic.name <-- not self.name; else error: ImageFieldFile has no attribute 'startswith'
         imfn = pjoin(MEDIA_ROOT, self.pic.name)
-        im = PImage.open(imfn)
         wpercent = (WIDTH_STANDARD/float(im.size[0]))
         hsize = int((float(im.size[1])*float(wpercent)))
-        # Replace the image with a STANDARD-sized version of itself.
-        im = im.resize((WIDTH_STANDARD, hsize), PImage.ANTIALIAS)
-        # According to www.pythonware.com/library/pil/handbook/image.htm, if save() fails, "usually"  
-        # IOError exception and you are responsible for removing any file(s) that may have been created.
+
         try:
-            im.save(imfn, "JPEG")
+            im = PImage.open(imfn)
+            # Replace the image with a STANDARD-sized version of itself.
+            im = im.resize((WIDTH_STANDARD, hsize), PImage.ANTIALIAS)
+            # According to www.pythonware.com/library/pil/handbook/image.htm, if save() fails, "usually"  
+            # IOError exception and you are responsible for removing any file(s) that may have been created.
+            im.save(imfn)
         except IOError as e:
-            raise FruitcakeException("Pic IOError: %s" % e)
-        except EnvironmentError as e:
-            raise FruitcakeException("Pic EnvironmentError: %s" % e)
-        except BaseException as e:
-            raise FruitcakeException("Pic BaseException: %s" % e)
-        else:
-            raise FruitcakeException("Pic image file problem")
+            log(e)
         # WIDTH_THUMBNAIL:
 
         # The only thing we're doing to the model (table) is updating with name for the thumbnail
@@ -85,20 +80,11 @@ class Fruitcake(models.Model):
         wpercent = (WIDTH_THUMBNAIL/float(im.size[0]))                    #why do this twice?
         hsize = int((float(im.size[1])*float(wpercent)))
         # image.resize() returns a new image
-        im2 = im.resize((WIDTH_THUMBNAIL, hsize), PImage.ANTIALIAS)       #PImage.open(imfn_thumb)
-        
         try:
-            im2.save(imfn, "JPEG")
-        #except IOError as e:
-        #    print "Error: %s" % e
+            im2 = im.resize((WIDTH_THUMBNAIL, hsize), PImage.ANTIALIAS)       #PImage.open(imfn_thumb)
+            im2.save(imfn)
         except IOError as e:
-            raise FruitcakeException("Thumbnail IOError: %s" % e)
-        except EnvironmentError as e:
-            raise FruitcakeException("Thumbnail EnvironmentError: %s" % e)
-        except BaseException as e:
-            raise FruitcakeException("Thumbnail BaseException: %s" % e)
-        else:
-            raise FruitcakeException("Thumbnail image file problem")
+            log(e)
 
 CHOICES = (
         (None, "Like?"),

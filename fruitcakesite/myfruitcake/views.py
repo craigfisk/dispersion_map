@@ -1,3 +1,6 @@
+import logging
+log = logging.getLogger(__name__)
+
 #from string import join
 #from PIL import Image as PImage
 from os.path import join as pjoin
@@ -333,13 +336,7 @@ def upload_file(request):
                 pic.thumbnail.name = pjoin('thumbnails/', file_to_upload)
 
                 # .save() methiod on the model saves 2 processed versions of the image in pics and thumbnails
-                try:
-                    pic.save()
-                except FruitcakeException as e:
-                    return HttpResponse("Sorry, error: %s" % e)
-                else:
-                    return HttpResponseRedirect('/myfruitcake/')
-                    #return HttpResponse("Could not catch error")
+                pic.save()
                     
                 # return HttpResponseRedirect('/myfruitcake/success/')
             else:

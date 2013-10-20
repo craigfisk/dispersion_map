@@ -271,6 +271,7 @@ AUTH_PROFILE_MODULE = 'forum.UserProfile'
 # the site admins on every HTTP 500 error when DEBUG=False.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
+"""
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -284,7 +285,16 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'console':{
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'null': {
+            'level': 'DEBUG',
+            'class': 'django.utils.log.NullHandler',
+        },
     },
     'loggers': {
         'django.request': {
@@ -294,3 +304,113 @@ LOGGING = {
         },
     }
 }
+"""
+"""
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'filters': {
+        'special': {
+            '()': 'myfruitcake.logging.SpecialFilter',
+            'foo': 'bar',
+        }
+    },
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'django.utils.log.NullHandler',
+        },
+        'console':{
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            #'filters': ['special']
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'formatter':'verbose',
+            'filename':'myfruitcake.log'
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['null'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'myfruitcake.custom': {
+            'handlers': ['console', 'mail_admins'],
+            'level': 'INFO',
+            'filters': ['special']
+        }
+    }
+}
+"""
+
+import logging, sys
+
+LOGGING = {
+ 'version': 1,
+ 'disable_existing_loggers': True,
+ 'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+ 'formatters': {
+  'verbose': {
+   'format': '%(levelname)s %(name)s %(asctime)s %(module)s %(process)d %(thread)d %(pathname)s@%(lineno)s: %(message)s'
+  },
+  'simple': {
+   'format': '%(levelname)s %(name)s %(filename)s@%(lineno)s: %(message)s'
+  },
+ },
+  # let the 'handlers' get all messages and filter level in 'loggers'
+ 'handlers': {
+  'null': {
+   'level':'DEBUG',
+   'class':'django.utils.log.NullHandler',
+  },
+  'console':{
+   'level':'WARNING',
+   'class':'logging.StreamHandler',
+   'formatter': 'simple',
+   'stream': sys.stderr,
+   # 'stream': sys.stdout
+   # see https://code.google.com/p/modwsgi/wiki/ApplicationIssues#Writing_To_Standard_Output
+   
+  },
+  'mail_admins': {
+   'level': 'ERROR',
+   'filters': ['require_debug_false'],
+   'class': 'django.utils.log.AdminEmailHandler',
+   'formatter': 'verbose'
+  }
+ },
+ 'loggers': {
+  # catch all logger ex. any logger = logging.getLogger(__name__)
+  '': { 
+   'handlers': ['mail_admins', 'console'],
+   'level': 'WARNING',
+  },
+ }
+}
+
