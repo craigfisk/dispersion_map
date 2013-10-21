@@ -114,10 +114,13 @@ def profilepic(request, pk):
             
     else:
         pf = ProfileForm(instance=profile)
-
     if profile.avatar:
         img = MEDIA_URL + profile.avatar.name
+    #uf = UserForm(request.POST, instance=profile.user)
     return render_to_response("forum/profilepic.html", add_csrf(request, profile=profile, pf=pf, img=img), context_instance=RequestContext(request))
+    #return render_to_response("forum/userinfo.html", add_csrf(request, uf=uf, u=profile.user, img=img), context_instance=RequestContext(request))
+    #return HttpResponseRedirect(reverse("forum.views.userinfo", args=[pk]))
+
 
 @login_required
 def userinfo(request, pk):
@@ -131,7 +134,9 @@ def userinfo(request, pk):
     else:
         uf = UserForm(instance=u)
 
-    return render_to_response("forum/userinfo.html", add_csrf(request, uf=uf, u=u), context_instance=RequestContext(request))
+    if u.userprofile.avatar.name:
+        img = MEDIA_URL + u.userprofile.avatar.name
+    return render_to_response("forum/userinfo.html", add_csrf(request, uf=uf, u=u, img=img), context_instance=RequestContext(request))
 
 
 
