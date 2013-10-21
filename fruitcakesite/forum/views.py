@@ -16,6 +16,7 @@ from django import forms
 from forum.models import Forum, Thread, Post
 from django.db import models
 
+#CF20131021 hmm, looks like this is superceded by class UserProfile (avatar, user, posts, shipments) in forum.models
 class UserProfile(models.Model):
     # was upload_to="images/" in Django by Example but ReadTheDocs "How do I use image and file fields" says MEDIA_ROOT
     # See http://readthedocs.org/docs/django/en/latest/faq/usage.html#how-do-i-use-image-and-file-fields

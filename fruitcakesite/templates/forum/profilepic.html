@@ -38,7 +38,7 @@
             <P>email: <input type="text" name="email" value="{{ profile.user.email }}" id="id_email" /></P>
             {% endcomment %}
 
-            {# {% if img %} <p><img border="0" alt="Profile Pic" src="{{ img }}" /></p> {% endif %} #}
+            {% if img %} <p><img border="0" alt="Profile Pic" src="{{ img }}" /></p> {% endif %} 
 
             {% comment %}
             Profile Pic: {{ pf.avatar|cut:"images/" }}<br />

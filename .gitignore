@@ -1,7 +1,9 @@
 fruitcakesite/static/media/pics
 fruitcakesite/static/media/thumbnails
-pics/
-thumbnails/
+fruitcakesite/static/media/images
+#pics/
+#thumbnails/
+#images/
 #
 bin/
 glyphish200/
