@@ -13,10 +13,11 @@ from django.core.urlresolvers import reverse
 from fruitcakesite.settings import MEDIA_ROOT, MEDIA_URL, WIDTH_AVATAR
 from django.template import RequestContext
 from django import forms
-from forum.models import Forum, Thread, Post
+from forum.models import Forum, Thread, Post, UserProfile
 from django.db import models
 
 #CF20131021 hmm, looks like this is superceded by class UserProfile (avatar, user, posts, shipments) in forum.models
+"""
 class UserProfile(models.Model):
     # was upload_to="images/" in Django by Example but ReadTheDocs "How do I use image and file fields" says MEDIA_ROOT
     # See http://readthedocs.org/docs/django/en/latest/faq/usage.html#how-do-i-use-image-and-file-fields
@@ -27,7 +28,7 @@ class UserProfile(models.Model):
 
     def __unicode__(self):
         return unicode(self.user)
-
+"""
 
 class ProfileForm(ModelForm):
     class Meta:
@@ -109,8 +110,8 @@ def profilepic(request, pk):
                 hsize = int((float(im.size[1])*float(wpercent)))
                 im = im.resize((WIDTH_AVATAR, hsize), PImage.ANTIALIAS)
                 im.save(imfn, "JPEG")
-            except IOError:
-                print "Cannot create thumbnail for ", imfn
+            except IOError as e:
+                print "Cannot create thumbnail for %s, error: %s" % (imfn, e)
             
     else:
         pf = ProfileForm(instance=profile)
