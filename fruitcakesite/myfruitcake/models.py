@@ -70,19 +70,18 @@ class Fruitcake(models.Model):
         
         # Use self.pic.name <-- not self.name; else error: ImageFieldFile has no attribute 'startswith'
         imfn = pjoin(MEDIA_ROOT, self.pic.name)
-        
-        try:
-            im = PImage.open(imfn)
-        
-            wpercent = (WIDTH_STANDARD/float(im.size[0]))
-            hsize = int((float(im.size[1])*float(wpercent)))
+        im = PImage.open(imfn)
+        wpercent = (WIDTH_STANDARD/float(im.size[0]))
+        hsize = int((float(im.size[1])*float(wpercent)))
 # Replace the image with a STANDARD-sized version of itself.
-            im = im.resize((WIDTH_STANDARD, hsize), PImage.ANTIALIAS)
-            # According to www.pythonware.com/library/pil/handbook/image.htm, if save() fails, "usually"  
-            # IOError exception and you are responsible for removing any file(s) that may have been created.
-            im.save(imfn)
+        im = im.resize((WIDTH_STANDARD, hsize), PImage.ANTIALIAS)
+        # According to www.pythonware.com/library/pil/handbook/image.htm, if save() fails, "usually"  
+        # IOError exception and you are responsible for removing any file(s) that may have been created.
+        try:
+            im.save(imfn, "JPEG")
         except IOError as e:
-            log(e)
+            print "Error: %s" % e
+
         # WIDTH_THUMBNAIL:
 
         # The only thing we're doing to the model (table) is updating with name for the thumbnail
@@ -91,11 +90,11 @@ class Fruitcake(models.Model):
         wpercent = (WIDTH_THUMBNAIL/float(im.size[0]))                    #why do this twice?
         hsize = int((float(im.size[1])*float(wpercent)))
         # image.resize() returns a new image
+        im2 = im.resize((WIDTH_THUMBNAIL, hsize), PImage.ANTIALIAS)       #PImage.open(imfn_thumb)
         try:
-            im2 = im.resize((WIDTH_THUMBNAIL, hsize), PImage.ANTIALIAS)       #PImage.open(imfn_thumb)
-            im2.save(imfn)
+            im2.save(imfn, "JPEG")
         except IOError as e:
-            log(e)
+            print "Error: %s" %e
 
 CHOICES = (
         (None, "Like?"),

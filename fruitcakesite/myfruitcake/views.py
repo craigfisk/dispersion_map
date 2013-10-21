@@ -338,12 +338,12 @@ def upload_file(request):
 
                 # .save() methiod on the model saves 2 processed versions of the image in pics and thumbnails
                 pic.save()
-                    
+                return HttpResponseRedirect('/myfruitcake/')   
                 # return HttpResponseRedirect('/myfruitcake/success/')
             else:
-                #return HttpResponse('Oops! You already uploaded this file. Please try a different one. Thanks!')
+                return HttpResponse('Oops! You already uploaded this file. Please try a different one. Thanks!')
                 #return HttpResponse("Testing! (previously_uploaded: %s, prior uploads for request.user %s for request.FILES['filename'].name %s were %s)" % (previously_uploaded, request.user,request.FILES['pic'].name, len(prior_fruitcake) ) )
-                HttpResponseRedirect('/myfruitcake/duplicate/')
+                #HttpResponseRedirect('/myfruitcake/duplicate/')
 
     else:
         form = UploadFruitcakeForm()
