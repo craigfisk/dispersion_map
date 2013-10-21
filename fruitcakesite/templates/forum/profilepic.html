@@ -24,24 +24,28 @@
 
         <p>
         <form enctype="multipart/form-data" action="" method="POST"> {% csrf_token %}
-
             <table>
-                {{ pf.as_table }}
+                {{ form.as_p }}
             </table>
-            <input type="submit" value="update">
+            <table>
+                {% if img %} 
+                    <tr><td><img border="0" alt="Profile Pic" src="{{ img }}" /></td></tr> 
+                {% endif %} 
+                <tr><td><input type="submit" value="update"></td></tr>
+            </table>
+            {# <input type="submit" value="update"> #}
 
-
-            {{ form.as_p }}
+            {# {{ form.as_p }} #}
 
             {% comment %}
             <P>username: <input type="text" name="username" value="{{ profile.user.username }}" id="id_username" /></P>
             <P>email: <input type="text" name="email" value="{{ profile.user.email }}" id="id_email" /></P>
             {% endcomment %}
 
-            {% if img %} <p><img border="0" alt="Profile Pic" src="{{ img }}" /></p> {% endif %} 
+            {# {% if img %} <p><img border="0" alt="Profile Pic" src="{{ img }}" /></p> {% endif %} #}
 
             {% comment %}
-            Profile Pic: {{ pf.avatar|cut:"images/" }}<br />
+            Profile Pic: {{ form.avatar|cut:"images/" }}<br />
             <P>    
             <input type="submit" value="Update profile" id="submit" />
             {% endcomment %}

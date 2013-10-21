@@ -90,9 +90,9 @@ def profilepic(request, pk):
     img = None
 
     if request.method == "POST":
-        pf = ProfileForm(request.POST, request.FILES, instance=profile)
-        if pf.is_valid():
-            pf.save()
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
             # resize and save image under same filename
             imfn = pjoin(MEDIA_ROOT, profile.avatar.name)
             #CF20121023 adding try/except framework, per PIL-handbook p. 3
@@ -114,11 +114,11 @@ def profilepic(request, pk):
                 print "Cannot create thumbnail for %s, error: %s" % (imfn, e)
             
     else:
-        pf = ProfileForm(instance=profile)
+        form = ProfileForm(instance=profile)
     if profile.avatar:
         img = MEDIA_URL + profile.avatar.name
     #uf = UserForm(request.POST, instance=profile.user)
-    return render_to_response("forum/profilepic.html", add_csrf(request, profile=profile, pf=pf, img=img), context_instance=RequestContext(request))
+    return render_to_response("forum/profilepic.html", add_csrf(request, profile=profile, form=form, img=img), context_instance=RequestContext(request))
     #return render_to_response("forum/userinfo.html", add_csrf(request, uf=uf, u=profile.user, img=img), context_instance=RequestContext(request))
     #return HttpResponseRedirect(reverse("forum.views.userinfo", args=[pk]))
 
