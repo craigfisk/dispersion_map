@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 from django.db import models
 from django.contrib.auth.models import User
 #from django.db.models.signals import post_save
@@ -13,6 +16,11 @@ geoip = GeoIP()
 
 from fruitcakesite.custom import MyFileStorage
 mfs = MyFileStorage()
+
+def testloggingmodels():
+    logger.debug("Testlogging in myfruitcake.models")
+
+
 
 class FruitcakeException(Exception):
     pass
@@ -54,18 +62,21 @@ class Fruitcake(models.Model):
         """
         Saves STANDARD and THUMBNAIL versions of uploaded image
         """
+        logger.debug("Entering fruitcake.save()")
+    
         super(Fruitcake, self).save(*args, **kwargs)
         
         # WIDTH_STANDARD:
         
         # Use self.pic.name <-- not self.name; else error: ImageFieldFile has no attribute 'startswith'
         imfn = pjoin(MEDIA_ROOT, self.pic.name)
-        wpercent = (WIDTH_STANDARD/float(im.size[0]))
-        hsize = int((float(im.size[1])*float(wpercent)))
-
+        
         try:
             im = PImage.open(imfn)
-            # Replace the image with a STANDARD-sized version of itself.
+        
+            wpercent = (WIDTH_STANDARD/float(im.size[0]))
+            hsize = int((float(im.size[1])*float(wpercent)))
+# Replace the image with a STANDARD-sized version of itself.
             im = im.resize((WIDTH_STANDARD, hsize), PImage.ANTIALIAS)
             # According to www.pythonware.com/library/pil/handbook/image.htm, if save() fails, "usually"  
             # IOError exception and you are responsible for removing any file(s) that may have been created.

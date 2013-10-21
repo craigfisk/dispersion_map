@@ -1,5 +1,5 @@
 import logging
-log = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 #from string import join
 #from PIL import Image as PImage
@@ -43,12 +43,11 @@ import re
 
 g = GeoIP()
 
-
+def testloggingviews():
+    logger.debug("Testlogging in myfruitcake.views")
 
 def testmap(request):
     return render_to_response("myfruitcake/map.html", add_csrf(request), context_instance=RequestContext(request))
-
-
 
 def about(request):
     return render_to_response("myfruitcake/about.html", add_csrf(request), context_instance=RequestContext(request))
@@ -312,6 +311,8 @@ class LikeForm(ModelForm):
 
 @login_required
 def upload_file(request):
+
+    logger.debug("Entering upload_file()")
 
     if request.method == "POST":
 
