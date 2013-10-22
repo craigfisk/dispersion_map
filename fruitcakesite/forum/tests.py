@@ -1,11 +1,12 @@
 from django.test import TestCase
-from django.test.client import Client
+#from django.test.client import Client
 from django.test import Client
 
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 
 from forum.models import Forum, Thread, Post, UserProfile
+from forum.views import UserForm, ProfileForm
 
 from django.core.urlresolvers import reverse
 import time
@@ -16,51 +17,52 @@ from fruitcakesite.settings import MEDIA_ROOT
 class ForumPostsTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='ak', password='pwd', email='ak@justfruitcake.com')
-        self.user2 = User.objects.create_user(username='craig', password='pwd', email='craig@justfruitcake.com')
+        #self.user2 = User.objects.create_user(username='craig', password='pwd', email='craig@justfruitcake.com')
         self.forum = Forum.objects.create(title='Raspberry pie')
         self.thread = Thread.objects.create(title='About raspberry pie', creator=self.user, forum=self.forum)
         self.post = Post.objects.create(title='Re: About raspberry pie', body='Yes (maybe not).', creator=self.user, thread=self.thread)
         
     def content_test(self, url, values):
         #Get content of url and test that each of items in `values` list is present.
-        r = self.c.get(url)
+        r = self.client.get(url)
         self.assertEquals(r.status_code, 200) 
         for v in values:
             self.assertTrue(v in r.content)
 
     def redirect_test(self, url, values):
         #Get content of url and test that each of items in `values` list is present.
-        r = self.c.get(url, follow=True)
+        r = self.client.get(url, follow=True)
         self.assertEquals(r.status_code, 200) 
         for v in values:
             self.assertTrue(v in r.content)
 
     def test_post_new_reply_and_reply_and_upload_avatar(self):
-        self.c = Client()
-        loggedin = self.c.login(username='ak', password='pwd')
+        #self.client = Client()
+        loggedin = self.client.login(username='ak', password='pwd')
         f = Forum.objects.get(pk=1)
        
         # Check that our test forum exists
-        r1 = self.c.get('/forum/')
+        r1 = self.client.get('/forum/')
         self.assertTrue('Raspberry pie' in r1.content)
 
         # Create a new thread on that forum
-        r2 = self.c.get('/forum/post/new_thread/1')
+        r2 = self.client.get('/forum/post/new_thread/1')
         self.assertEqual(r2.status_code, 200)
-        r3 = self.c.post('/forum/post/new_thread/1', {'subject': 'About raspberry pie', 'body': 'Could raspberry pie be considered fruitcake?'}, follow=True)
+        r3 = self.client.post('/forum/post/new_thread/1', {'subject': 'About raspberry pie', 'body': 'Could raspberry pie be considered fruitcake?'}, follow=True)
         self.content_test('/forum/', ['About raspberry pie',])
-        #self.c.get('/forum/forum/1')
+        #self.client.get('/forum/forum/1')
         self.content_test('/forum/forum/1', ['About raspberry pie',])
 
         # Reply to a thread (first create the thread)
         t = self.thread
-        r4 = self.c.post('/forum/post/reply/1/', {'subject': 'About raspberry pie', 'body': 'Yes (maybe not).'})
+        r4 = self.client.post('/forum/post/reply/1/', {'subject': 'About raspberry pie', 'body': 'Yes (maybe not).'})
         self.content_test('/forum/thread/1/?page=last', ['Yes (maybe not)',])
 
+
         # upload avatar
-        testavatarpath = 'testavatar.jpg'
-        imfn = pjoin(MEDIA_ROOT, testavatarpath)
-        r = self.c.get('/forum/upload/', follow=True)
+        #3testavatarpath = 'testavatar.jpg'
+        ##imfn = pjoin(MEDIA_ROOT, testavatarpath)
+        ##r = self.client.get('/forum/upload/', follow=True)
 
         # test the various unicode methods
         self.assertEqual(self.forum.title, self.forum.__unicode__() )
@@ -68,22 +70,27 @@ class ForumPostsTestCase(TestCase):
         self.assertEqual(self.thread.num_replies(), (self.thread.post_set.count() - 1)  )
         self.assertEqual(self.post.__unicode__(), (str(self.post.creator) + ' - ' + str(self.post.thread) + ' - ' + self.post.title) )
 
-    def test_userinfo(self):
-        self.c = Client()
-        loggedin = self.c.login(username='craig', password='pwd')
+    #def test_userinfo(self):
+        #self.client = Client()
+        #loggedin = self.client.login(username='craig', password='pwd')
                 #u = User.objects.get(pk=1)
-        #r = self.c.get('/forum/userinfo/', {'pk': self.user.userprofile.user_id})
-        r = self.c.get('/forum/userinfo/' + unicode(self.user2.userprofile.user_id) )
+        #r = self.client.get('/forum/userinfo/', {'pk': self.user.userprofile.user_id})
+        #r = self.client.get('/forum/userinfo/' + unicode(self.user2.userprofile.user_id) )
+        self.userprofile = UserProfile(avatar='images/testavatar.jpg', posts=0, shipments=0, user_id=self.user.id)
+        r = self.client.get('/forum/userinfo/' + unicode(self.userprofile.user_id))
         #self.assertEqual(r.status_code, 200)
         #r.content
         print r.status_code
+        self.assertEqual(self.userprofile.__unicode__(), unicode(self.user.__unicode__()))
         #print r.redirect_chain
-        # r = self.c.get('/forum/profilepic/', {'pk': self.user.userprofile.user_id})
+        # r = self.client.get('/forum/profilepic/', {'pk': self.user.userprofile.user_id})
         #self.assertEqual(r.status_code, 200)
         #r.content
         #print r.status_code
         #print r.content
-        
+         
+        r5 = self.client.post('/forum/userinfo/'+ unicode(self.userprofile.user_id), {'username':'ak', 'email':'wcraigfisk@gmail.com'} )
+        print r5.status_code
 
 """
 from selenium import webdriver
@@ -95,19 +102,19 @@ from selenium.webdriver.firefox.webdriver import WebDriver
 
 class ForumTest(TestCase):
     def test_main(self):
-        self.c = Client()
-        self.c.login(username='ak', password='pwd')
-        resp = self.c.get('/forum/', {'username': 'ak', 'password': 'pwd'})
+        self.client = Client()
+        self.client.login(username='ak', password='pwd')
+        resp = self.client.get('/forum/', {'username': 'ak', 'password': 'pwd'})
         print "After getting forum, resp is: %s" % (resp)
         #self.assertRedirects(resp, '/forum/.*')
 
     def test_post(self):
-        self.c = Client()
-        self.c.login(username='ak', password='pwd')
-        resp = self.c.get('/forum/post/new_thread/', {'ptype': 'new_thread', 'pk': '10' } )
+        self.client = Client()
+        self.client.login(username='ak', password='pwd')
+        resp = self.client.get('/forum/post/new_thread/', {'ptype': 'new_thread', 'pk': '10' } )
         print "After getting post, resp is: %s" % (resp)
  
-        resp = self.c.post('/forum/post/new_thread/10/', {'subject': 'Kumquat Cake', 'body': 'Is there such a thing?'})
+        resp = self.client.post('/forum/post/new_thread/10/', {'subject': 'Kumquat Cake', 'body': 'Is there such a thing?'})
         print "After posting to post, resp is: %s" % (resp)
         self.assertRedirects(resp, '/registration/login/?next=/forum/post/new_thread/10/')
 
