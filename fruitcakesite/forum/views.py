@@ -135,9 +135,9 @@ def userinfo(request, pk):
     else:
         uf = UserForm(instance=u)
 
-    if u.userprofile.avatar.name:
-        img = MEDIA_URL + u.userprofile.avatar.name
-    return render_to_response("forum/userinfo.html", add_csrf(request, uf=uf, u=u, img=img), context_instance=RequestContext(request))
+    #if u.userprofile.avatar.name:
+    #    img = MEDIA_URL + u.userprofile.avatar.name
+    return render_to_response("forum/userinfo.html", add_csrf(request, uf=uf, u=u), context_instance=RequestContext(request))
 
 
 

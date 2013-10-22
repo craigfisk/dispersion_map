@@ -5,7 +5,7 @@ from django.test import Client
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 
-from forum.models import Forum, Thread, Post
+from forum.models import Forum, Thread, Post, UserProfile
 
 from django.core.urlresolvers import reverse
 import time
@@ -16,10 +16,11 @@ from fruitcakesite.settings import MEDIA_ROOT
 class ForumPostsTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='ak', password='pwd', email='ak@justfruitcake.com')
+        self.user2 = User.objects.create_user(username='craig', password='pwd', email='craig@justfruitcake.com')
         self.forum = Forum.objects.create(title='Raspberry pie')
         self.thread = Thread.objects.create(title='About raspberry pie', creator=self.user, forum=self.forum)
         self.post = Post.objects.create(title='Re: About raspberry pie', body='Yes (maybe not).', creator=self.user, thread=self.thread)
-
+        
     def content_test(self, url, values):
         #Get content of url and test that each of items in `values` list is present.
         r = self.c.get(url)
@@ -66,6 +67,23 @@ class ForumPostsTestCase(TestCase):
         self.assertEqual(self.thread.__unicode__(), (str(self.user) + " - " + self.thread.title) )
         self.assertEqual(self.thread.num_replies(), (self.thread.post_set.count() - 1)  )
         self.assertEqual(self.post.__unicode__(), (str(self.post.creator) + ' - ' + str(self.post.thread) + ' - ' + self.post.title) )
+
+    def test_userinfo(self):
+        self.c = Client()
+        loggedin = self.c.login(username='craig', password='pwd')
+                #u = User.objects.get(pk=1)
+        #r = self.c.get('/forum/userinfo/', {'pk': self.user.userprofile.user_id})
+        r = self.c.get('/forum/userinfo/' + unicode(self.user2.userprofile.user_id) )
+        #self.assertEqual(r.status_code, 200)
+        #r.content
+        print r.status_code
+        #print r.redirect_chain
+        # r = self.c.get('/forum/profilepic/', {'pk': self.user.userprofile.user_id})
+        #self.assertEqual(r.status_code, 200)
+        #r.content
+        #print r.status_code
+        #print r.content
+        
 
 """
 from selenium import webdriver
