@@ -97,6 +97,7 @@ class ForumPostsTestCase(TestCase):
         # Following line gives "don't mix *args and **kwargs in call to reverse".  
         # OK, but how do you pass positional and named arguments at the same time?
         #response = self.client.post( reverse('forum_userinfo', args=(self.userprofile.user.id,), kwargs={'username': self.user, 'email':self.user.email}), follow=True)
+        #https://docs.djangoproject.com/en/1.5/ref/urlresolvers/#https://docs.djangoproject.com/en/1.5/ref/urlresolvers/
         response = self.client.post('/forum/userinfo/1/', {'username': self.user, 'email': self.user.email})
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Edit My Profile')
