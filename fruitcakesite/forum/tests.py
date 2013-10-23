@@ -7,8 +7,9 @@ from django.contrib.sites.models import Site
 
 from forum.models import Forum, Thread, Post, UserProfile
 from forum.views import UserForm, ProfileForm
+from forum.urls import *
 
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, resolve
 import time
 from os.path import join as pjoin
 from fruitcakesite.settings import MEDIA_ROOT
@@ -46,17 +47,27 @@ class ForumPostsTestCase(TestCase):
         self.assertTrue('Raspberry pie' in r1.content)
 
         # Create a new thread on that forum
-        r2 = self.client.get('/forum/post/new_thread/1')
+        r2 = self.client.get('/forum/post/new_thread/1/')
         self.assertEqual(r2.status_code, 200)
-        r3 = self.client.post('/forum/post/new_thread/1', {'subject': 'About raspberry pie', 'body': 'Could raspberry pie be considered fruitcake?'}, follow=True)
+        self.content_test('/forum/post/new_thread/1/', ['Start New Topic', ])
+        
+        #r3 = self.client.post( reverse('forum_post', args=['new_thread', '1']), dict(subject='More desert', body='Yes, please!'))
+        self.userprofile = UserProfile(avatar='images/testavatar.jpg', posts=0, shipments=0, user_id=self.user.id)
+        self.baduserprofile = UserProfile(avatar='images/phoneyjpg.jpg', posts=0, shipments=0, user_id=self.user.id)
+ 
+ 
+        r3 = self.client.post('/forum/new_thread/1', {'subject': 'About raspberry pie', 'body': 'Could raspberry pie be considered fruitcake?'}, follow=True)
         self.content_test('/forum/', ['About raspberry pie',])
         #self.client.get('/forum/forum/1')
         self.content_test('/forum/forum/1', ['About raspberry pie',])
-
+        
+        m = self.client.post('/forum/post/new_thread/1/', {'subject': 'Some topic', 'body': 'This is the body'} )
+        
+        n = self.client.post('/forum/new_thread/1/', {'subject': 'Some topic', 'body': 'This is the body'} )
         # Reply to a thread (first create the thread)
         t = self.thread
-        r4 = self.client.post('/forum/post/reply/1/', {'subject': 'About raspberry pie', 'body': 'Yes (maybe not).'})
-        self.content_test('/forum/thread/1/?page=last', ['Yes (maybe not)',])
+        ##r4 = self.client.post('/forum/post/reply/1/', {'subject': 'About raspberry pie', 'body': 'Yes (maybe not).'})
+        ##self.content_test('/forum/thread/1/?page=last', ['Yes (maybe not)',])
 
 
         # upload avatar
@@ -76,7 +87,7 @@ class ForumPostsTestCase(TestCase):
                 #u = User.objects.get(pk=1)
         #r = self.client.get('/forum/userinfo/', {'pk': self.user.userprofile.user_id})
         #r = self.client.get('/forum/userinfo/' + unicode(self.user2.userprofile.user_id) )
-        self.userprofile = UserProfile(avatar='images/testavatar.jpg', posts=0, shipments=0, user_id=self.user.id)
+        
         r = self.client.get('/forum/userinfo/' + unicode(self.userprofile.user_id))
         #self.assertEqual(r.status_code, 200)
         #r.content
@@ -93,15 +104,26 @@ class ForumPostsTestCase(TestCase):
         #print r5.status_code
        
         #----------- 
-        response = self.client.get( reverse('forum_userinfo', args=(self.userprofile.user.id, )), follow=True)
+        response = self.client.get( reverse('forum_userinfo', args=(self.user.id,)))
+        #response = self.client.get( reverse('forum_userinfo', args=(1,)))
+        self.assertContains(response, 'ak!')
         # Following line gives "don't mix *args and **kwargs in call to reverse".  
         # OK, but how do you pass positional and named arguments at the same time?
         #response = self.client.post( reverse('forum_userinfo', args=(self.userprofile.user.id,), kwargs={'username': self.user, 'email':self.user.email}), follow=True)
-        #https://docs.djangoproject.com/en/1.5/ref/urlresolvers/#https://docs.djangoproject.com/en/1.5/ref/urlresolvers/
-        response = self.client.post('/forum/userinfo/1/', {'username': self.user, 'email': self.user.email})
+        #See https://docs.djangoproject.com/en/1.5/ref/urlresolvers/#https://docs.djangoproject.com/en/1.5/ref/urlresolvers/
+        response = self.client.post(reverse('forum_userinfo', args=(self.user.id,)), dict(username=self.user, email= self.userprofile.user.email) )
+        #Or: b = self.client.post(reverse('forum_userinfo', args=(1,)), {'username':self.user, 'email':self.userprofile.user.email} )
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Edit My Profile')
-        
+       
+        response = self.client.get( reverse('forum_profilepic', args=(self.user.id,)))
+        self.assertContains(response, 'ak')
+        response = self.client.post( reverse('forum_profilepic', args=(self.user.id,)), dict(avatar=self.userprofile.avatar) )
+        # Non-existing file to throw exception
+        response = self.client.post( reverse('forum_profilepic', args=(self.user.id,)), dict(avatar=self.baduserprofile.avatar) )
+
+        print 'hi there!'
+
 """
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
