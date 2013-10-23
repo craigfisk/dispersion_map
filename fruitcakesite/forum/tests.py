@@ -68,8 +68,12 @@ class ForumPostsTestCase(TestCase):
         t = self.thread
         ##r4 = self.client.post('/forum/post/reply/1/', {'subject': 'About raspberry pie', 'body': 'Yes (maybe not).'})
         ##self.content_test('/forum/thread/1/?page=last', ['Yes (maybe not)',])
-
-
+        p = self.client.post('/forum/post/reply/1/', {'subject': 'Some topic', 'body': 'We agree'} )
+        
+        q = self.client.post('/forum/reply/1/', {'subject': 'Some topic', 'body': 'We do not agree'} )
+ 
+        f = self.client.get('/forum/forum/1/')
+        h = self.client.get('/forum/thread/1/')
         # upload avatar
         #3testavatarpath = 'testavatar.jpg'
         ##imfn = pjoin(MEDIA_ROOT, testavatarpath)
