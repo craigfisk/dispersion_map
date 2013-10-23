@@ -89,9 +89,18 @@ class ForumPostsTestCase(TestCase):
         #print r.status_code
         #print r.content
          
-        r5 = self.client.post('/forum/userinfo/'+ unicode(self.userprofile.user_id), {'username':'ak', 'email':'wcraigfisk@gmail.com'} )
-        print r5.status_code
-
+        #r5 = self.client.get('/forum/userinfo/'+ unicode(self.userprofile.user_id), {'username':'ak', 'email':'wcraigfisk@gmail.com'} )
+        #print r5.status_code
+       
+        #----------- 
+        response = self.client.get( reverse('forum_userinfo', args=(self.userprofile.user.id, )), follow=True)
+        # Following line gives "don't mix *args and **kwargs in call to reverse".  
+        # OK, but how do you pass positional and named arguments at the same time?
+        #response = self.client.post( reverse('forum_userinfo', args=(self.userprofile.user.id,), kwargs={'username': self.user, 'email':self.user.email}), follow=True)
+        response = self.client.post('/forum/userinfo/1/', {'username': self.user, 'email': self.user.email})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Edit My Profile')
+        
 """
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
