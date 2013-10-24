@@ -92,8 +92,20 @@ class MyfruitcakeTestCase(TestCase):
             f = Fruitcake.objects.get(pk=1)
             r = self.c.get(('/myfruitcake/'+ str(f.id) + '/shipment/'))
             #Note: sending from test user to test user
-            r = self.c.post(('/myfruitcake/' + str(f.id) + '/shipment/'), {'email': self.user.email, 'message':'Hi there!'}, follow=True)
+            email_string = self.user.email
+            r = self.c.post(('/myfruitcake/' + str(f.id) + '/shipment/'), {'email': email_string, 'message':'Hi there!'}, follow=True)
             self.assertTrue('Sent!' in r.content)
+
+            # Send it to the same person twice (should hit 1 on to:, 1 in bcc:)
+            email_string = self.user.email + ' ' + 'wcraigfisk@gmail.com'
+            r = self.c.post(('/myfruitcake/' + str(f.id) + '/shipment/'), {'email': email_string, 'message':'Hi there!'}, follow=True)
+            self.assertTrue('Sent!' in r.content)
+
+            # Do something wrong with the email string, like put a semicolon between
+            email_string = self.user.email + ' / ' + 'wcraigfisk@gmail.com'
+            r = self.c.post(('/myfruitcake/' + str(f.id) + '/shipment/'), {'email': email_string, 'message':'Hi there!'}, follow=True)
+            self.assertTrue('Sent!' not in r.content)
+
 
             self.s = Shipment.objects.get(pk=1)
             shipment_list = self.s.get_shipment_list()

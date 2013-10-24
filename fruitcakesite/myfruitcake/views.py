@@ -1,6 +1,6 @@
 import logging
 logger = logging.getLogger(__name__)
-
+from django.core.exceptions import ValidationError
 #from string import join
 #from PIL import Image as PImage
 from os.path import join as pjoin
@@ -133,6 +133,11 @@ class MultiEmailField(forms.Field):
         if not value:
             return []
 
+            #else: 
+             #   new_value.append(email)
+            
+            #value = new_value
+            #return value
         # First remove whitespace from before and after the string before splitting it.
         # then return a list that is split on [;: ,] as valid separators of email addresses
         #value = re.split('[;\: \,]+', value)
@@ -143,10 +148,14 @@ class MultiEmailField(forms.Field):
     # See https://docs.djangoproject.com/en/dev/ref/forms/validation/#form-field-default-cleaning
     def validate(self, value):
         super(MultiEmailField, self).validate(value)
-       
+        new_value = []
         for email in value:
-            validate_email(email)
-        
+            try:
+                validate_email(email)
+            except ValidationError as e:
+                logger.debug("Email validation error: %s" % e)
+            
+                
 class EmailContactForm(forms.Form):
     # see class MultiEmailField above
     email = MultiEmailField(help_text="(Please provide one or more email addresses.)", widget=forms.TextInput(attrs={'size':'32'}) )
