@@ -45,7 +45,10 @@ class MyfruitcakeTestCase(TestCase):
             for m in f_re.finditer(name):
                 if m: os.unlink( pjoin(somedir, m.group()) )
         
-
+    def test_list_all_fruitcake(self):
+        r = self.client.get( reverse('fruitcakelistview'))
+        self.assertEqual(r.status_code, 200)
+    
     def test_get_upload_fruitcake_and_ship_it(self):
         self.c = Client()
         loggedin = self.c.login(username='cf', password='pwd')
