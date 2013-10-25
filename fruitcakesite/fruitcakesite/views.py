@@ -26,9 +26,9 @@ class FruitcakeListView(ListView):
 
 
 
-def home_page(request):
+##def home_page(request):
 #    context['thumbnail_path'] = settings.THUMBNAIL_PATH
-    return render_to_response('myfruitcake/fruitcake_list.html', context_instance=RequestContext(request))
+##    return render_to_response('myfruitcake/fruitcake_list.html', context_instance=RequestContext(request))
 #   return render_to_response('index.html', context_instance=RequestContext(request))
     """
     if not request.user.is_authenticated():
@@ -40,10 +40,10 @@ def home_page(request):
 #    render_to_response('forum.html', context_instance=RequestContext(request))
    """
 
-def logout_page(request):
+#def logout_page(request):
     """
     Log user out and redirect to main page.
     """
-    logout(request)
-    return HttpResponseRedirect('/')
+#    logout(request)
+#    return HttpResponseRedirect('/')
 

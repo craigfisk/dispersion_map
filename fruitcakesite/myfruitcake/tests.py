@@ -32,6 +32,7 @@ class MyfruitcakeTestCase(TestCase):
     def setUp(self):
         self.admin = User.objects.create_superuser(username='admin', password='pwd', email='admin@justfruitcake.com')
         self.user = User.objects.create_user(username='cf', password='pwd', email='support@justfruitcake.com')
+        self.otheruser = User.objects.create_user(username='fred', password='pwd', email='fred@justfruitcake.com')
       
     def content_test(self, url, values):
         """Get content of url and test that each of items in `values` list is present."""
@@ -54,7 +55,17 @@ class MyfruitcakeTestCase(TestCase):
     
     def test_get_upload_fruitcake_and_ship_it(self):
         self.c = Client()
+
+        # Anonymous visit to home should return "sign-in"
+        r = self.c.get('/')
+        self.assertTrue('sign-in' in r.content)
+
         loggedin = self.c.login(username='cf', password='pwd')
+
+        # Logged-in visit to home should return "sign-out"
+        r = self.c.get('/')
+        self.assertTrue('sign-out' in r.content)
+
 
         r = self.c.get('/myfruitcake/')
         self.assertTrue("Upload a fruitcake" in r.content)
@@ -76,13 +87,11 @@ class MyfruitcakeTestCase(TestCase):
 
             # Test upload
 
-            # Are we prevented from uploading a non-JPEG fruitcake
-            """
-            imfn = pjoin(MEDIA_ROOT, testnonjpegpath)
+            # Are we prevented from uploading the same file again from this user?
+            imfn = pjoin(MEDIA_ROOT, testfruitcakepath)
             with open(imfn) as fp:
-                r = self.c.post('/myfruitcake/upload/?next=/myfruitcake/', {'pic': fp, 'popup': 'Wrong kind!'}, follow=True)
-            self.assertNotEqual(r.status_code, 200)
-            """
+                r = self.c.post('/myfruitcake/upload/?next=/myfruitcake/', {'pic': fp, 'popup': 'Tasty!'}, follow=True)
+            self.assertTrue('already uploaded' in r.content)
             
             # Has the fruitcake been uploaded to the correct locations? 
             picpath = pjoin(MEDIA_ROOT, ('pics/' + testfruitcakepath) )
@@ -115,11 +124,26 @@ class MyfruitcakeTestCase(TestCase):
             r = self.c.post(('/myfruitcake/' + str(f.id) + '/shipment/'), {'email': email_string, 'message':'Hi there!'}, follow=True)
             self.assertTrue('Sent!' not in r.content)
 
-
+            # check shipment list from the data
             self.s = Shipment.objects.get(pk=1)
             shipment_list = self.s.get_shipment_list()
             self.assertEqual(len(shipment_list), 1)
            
+            # check shipment list from the web
+            r = self.c.get('/myfruitcake/myshipments/')
+            self.assertTrue('Listing of fruitcake' in r.content)
+
+            # Access the shipment and send it on again
+            r = self.c.post('/myfruitcake/2/shipment/', {'email': 'support@justfruitcake.com', 'message': 'Here it goes again!'})
+            self.assertTrue(r.status_code, 200)
+            self.assertTrue('Click to continue' in r.content) # Note: This may change
+
+            # Access the shipment and send it on a third time
+            r = self.c.post('/myfruitcake/2/shipment/', {'email': 'support@justfruitcake.com', 'message': 'Here it goes a third time!'})
+            self.assertTrue(r.status_code, 200)
+            self.assertTrue('Click to continue' in r.content) # Note: This may change
+
+
             # Test __unicode__() responses for various objects
             # class Upload
             u = Upload.objects.create(dt=datetime.utcnow(), fruitcake=f, uploader = self.user)
@@ -132,7 +156,7 @@ class MyfruitcakeTestCase(TestCase):
             self.assertEqual(e.__unicode__(), self.user.email)
             
            
-            ## Note: 3 methods of Shipment are commented out and not used
+            ## Note: 3 methods of Shipment are commented out and not used in view.py
             ##latest_shipments = self.s.latest_shipment()
             ##self.assertEqual(len(latest_shipments), 1)
             ##parent_list = self.s.get_parent_list()
@@ -184,7 +208,7 @@ class MyfruitcakeTestCase(TestCase):
             # Can we upload a fruitcake using it?
             imfn = pjoin(MEDIA_ROOT, testfruitcakepath)
             with open(imfn) as fp:
-                r = self.c.post('/myfruitcake/upload/?next=/myfruitcake/', {'pic': fp, 'popup': 'Tasty!'}, follow=True)
+                r = self.c.post('/myfruitcake/upload/?next=/myfruitcake/', {'pic': fp, 'popup': 'Tasty as can be!'}, follow=True)
             self.assertEqual(r.status_code, 200)
 
             # Has the fruitcake been uploaded to the correct locations? 
@@ -210,16 +234,23 @@ class MyfruitcakeTestCase(TestCase):
                 os.unlink(thumbpath)
             self.assertEqual(os.path.exists(picpath), False)
             self.assertEqual(os.path.exists(picpath), False)
-        
-        r = self.c.get('/myfruitcake/search/', {'q':'Pick me'})
+       
+        # Normal search with one search term
+        r = self.c.get('/myfruitcake/search/', {'q':'Tasty'})
         self.assertEqual(r.status_code, 200)
-        ##self.assertTrue('Pick me' in r.content)
+        b = self.assertTrue('Tasty' in r.content)
         
+        # Search term is not going to be found
+        r = self.c.get('/myfruitcake/search/', {'q':'Rabbits'})
+        self.assertEqual(r.status_code, 200)
+        #b = self.assertTrue('Tasty' in r.content)
+ 
         # Try a blank
         r = self.c.get('/myfruitcake/search/', {'q':''})
         self.assertEqual(r.status_code, 200)
         self.assertTrue('Please enter a search term' in r.content)
 
+        # Search term is too long
         r = self.c.get('/myfruitcake/search/', {'q':'This is a very long and rambling search term'})
         self.assertEqual(r.status_code, 200)
         self.assertTrue('Please enter at most 20 characters' in r.content)

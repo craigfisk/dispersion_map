@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from myfruitcake.models import Fruitcake, Shipment
 from forum.models import UserProfile, Forum, Thread, Post
-from fruitcakesite.views import home_page, logout_page
+#from fruitcakesite.views import logout_page  #home_page
 from myfruitcake.views import email_fruitcake
 from django.contrib import admin
 
@@ -17,7 +17,9 @@ urlpatterns = patterns('',
 #    url(r'^home/$', home),
 ##    url(r'^$', main),
     url(r'^login/$', 'django.contrib.auth.views.login'),
-    url(r'^logout/$', logout_page),
+    url(r'^logout/$', 'django.contrib.auth.views.logout'),
+
+    #    url(r'^logout/$', logout_page),
     url(r'^admin/', include(admin.site.urls)),
 #    url(r'^polls/', include('polls.urls', name='polls')),
     url(r'forum/', include('forum.urls')),

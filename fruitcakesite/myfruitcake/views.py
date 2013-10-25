@@ -62,6 +62,7 @@ class ProfileForm(ModelForm):
         model = UserProfile
 #        exclude = ["posts", "user"]
 
+"""
 def activity(request, pk):
     #Listing of posts in a thread.
     shipments = Shipment.objects.all().order_by("dt")
@@ -69,6 +70,7 @@ def activity(request, pk):
     #CF20130413 added:
     #context['thumbnail_path'] = settings.THUMBNAIL_PATH
     return render_to_response("myfruitcake/activity.html", add_csrf(request, shipments=shipments, media_url=MEDIA_URL), context_instance=RequestContext(request))
+"""
 
 class MyFruitcakeListView(ListView):
 #    @method_decorator(login_required)
@@ -148,10 +150,11 @@ class EmailContactForm(forms.Form):
     # see class MultiEmailField above
     email = MultiEmailField(help_text="(Please provide one or more email addresses.)", widget=forms.TextInput(attrs={'size':'32'}) )
     message = forms.CharField(max_length='256', widget=forms.Textarea(attrs={'size':'32'}) )
-    
+    """ 
     def check_addresses(self):
         for email in self.cleaned_data.get('emails'):
             email.validate(email)
+    """
 
 from django.core.mail import get_connection
 from django.forms.models import inlineformset_factory
@@ -361,11 +364,13 @@ def upload_file(request):
 
     return render_to_response('myfruitcake/fruitcake_upload.html', add_csrf(request, form=form), context_instance=RequestContext(request)) 
 
+"""
 def success(request):
     return HttpResponse("Success!")
 
 def duplicate(request):
     return HttpResponse("Duplicate; please try again!")
+"""
 
 def add_csrf(request, **kwargs):
     d = dict(user=request.user, **kwargs)
@@ -390,9 +395,11 @@ def meta(request):
         html.append('<tr><td>%s</td></tr><tr><td>%s</td></tr>' % (k, v))
     return HttpResponse('<table>%s</table>' % '\n'.join(html))
 
+"""
 @staff_member_required
 def search_form(request):
     return render_to_response('myfruitcake/search_form.html', {'user': request.user} , context_instance=RequestContext(request))
+"""
 
 @staff_member_required
 def search(request):
