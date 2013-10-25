@@ -20,6 +20,8 @@ from django.contrib.auth.models import User #, UserManager
 #from django.contrib.sites.models import Site
 
 from myfruitcake.models import Fruitcake, IPAddress, Shipment, Upload, EmailContact #, Like
+from django.core.exceptions import ValidationError
+from django.core import mail
 
 from django.contrib.gis.geoip import GeoIP
 geoip = GeoIP()
@@ -28,8 +30,9 @@ class MyfruitcakeTestCase(TestCase):
     #fixtures = ['contenttypes.json', 'auth.json', 'registration.json', 'myfruitcake.json',]
     
     def setUp(self):
+        self.admin = User.objects.create_superuser(username='admin', password='pwd', email='admin@justfruitcake.com')
         self.user = User.objects.create_user(username='cf', password='pwd', email='support@justfruitcake.com')
-
+      
     def content_test(self, url, values):
         """Get content of url and test that each of items in `values` list is present."""
         r = self.c.get(url)
@@ -89,20 +92,26 @@ class MyfruitcakeTestCase(TestCase):
             self.assertEqual(os.path.exists(picpath), True)
 
             # Send the new fruitcake (should be only the 1 that we just uploaded; uploader_id=f.id=1)
-            f = Fruitcake.objects.get(pk=1)
+            f = Fruitcake.objects.get(uploader_id=self.user.id)
             r = self.c.get(('/myfruitcake/'+ str(f.id) + '/shipment/'))
-            #Note: sending from test user to test user
+
+            #Note: sending from test user to 1 address (actually, to the test user)
             email_string = self.user.email
             r = self.c.post(('/myfruitcake/' + str(f.id) + '/shipment/'), {'email': email_string, 'message':'Hi there!'}, follow=True)
             self.assertTrue('Sent!' in r.content)
 
-            # Send it to the same person twice (should hit 1 on to:, 1 in bcc:)
+            # Send it to 2 addresses (should hit 1 on to:, 1 in bcc:)
             email_string = self.user.email + ' ' + 'wcraigfisk@gmail.com'
             r = self.c.post(('/myfruitcake/' + str(f.id) + '/shipment/'), {'email': email_string, 'message':'Hi there!'}, follow=True)
             self.assertTrue('Sent!' in r.content)
 
             # Do something wrong with the email string, like put a semicolon between
             email_string = self.user.email + ' / ' + 'wcraigfisk@gmail.com'
+            #with self.assertRaises(ValidationError):
+            self.c.post(('/myfruitcake/' + str(f.id) + '/shipment/'), {'email': email_string, 'message':'Hi there!'}, follow=True)
+           
+            # Send to a blank email address
+            email_string = ''
             r = self.c.post(('/myfruitcake/' + str(f.id) + '/shipment/'), {'email': email_string, 'message':'Hi there!'}, follow=True)
             self.assertTrue('Sent!' not in r.content)
 
@@ -145,10 +154,78 @@ class MyfruitcakeTestCase(TestCase):
             self.assertEqual(os.path.exists(picpath), False)
             self.assertEqual(os.path.exists(picpath), False)
 
-            self.assertEqual(f.__unicode__(), pjoin('pics', testfruitcakepath) )
+            #self.assertEqual(f.__unicode__(), pjoin('pics', testfruitcakepath) )
 
+            self.c.logout()
 
+    def test_admin_login(self):
+        self.c = Client()
+        loggedin = self.c.login(username='admin', password='pwd')
+        r = self.c.get('/admin/')
+        r.status_code
+        self.assertEqual(r.status_code, 200)
+        
+        r = self.c.get('/myfruitcake/path/')
+        self.assertEqual(r.status_code, 200)
+        r = self.c.get('/myfruitcake/meta/')
+        self.assertEqual(r.status_code, 200)
+        r = self.c.get('/myfruitcake/search/')
+        self.assertEqual(r.status_code, 200)
+        # Upload a fruitcake for the admin
+        testfruitcakepath = 'testfruitcake.jpg'
+        ##testnonjpegpath = 'testnonjpeg.png'
+        self.remove_test_files("pics", r"testfruitcake_?\d*\..*$")
+        self.remove_test_files("thumbnails", r"testfruitcake_?\d*\..*$")
 
+        try:
+            # Can we get the upload form page?
+            r = self.c.get('/myfruitcake/upload/', follow=True)
+            self.assertEqual(r.status_code, 200)
+            # Can we upload a fruitcake using it?
+            imfn = pjoin(MEDIA_ROOT, testfruitcakepath)
+            with open(imfn) as fp:
+                r = self.c.post('/myfruitcake/upload/?next=/myfruitcake/', {'pic': fp, 'popup': 'Tasty!'}, follow=True)
+            self.assertEqual(r.status_code, 200)
+
+            # Has the fruitcake been uploaded to the correct locations? 
+            picpath = pjoin(MEDIA_ROOT, ('pics/' + testfruitcakepath) )
+            thumbpath = pjoin(MEDIA_ROOT, ('thumbnails/' + testfruitcakepath) )
+            
+            self.assertEqual(os.path.exists(picpath), True)
+            self.assertEqual(os.path.exists(picpath), True)
+
+            # Send the new fruitcake (should be only the 1 that we just uploaded; uploader_id=f.id=1)
+            f = Fruitcake.objects.get(uploader_id=self.admin.id)
+ 
+        except IOError as e:
+            print "Unable to open file: %s" % e
+        
+        finally:
+            print "\nCleaning up\n"
+
+            # Can we get rid of the test fruitcake?
+            if os.path.exists(picpath):
+                os.unlink(picpath)
+            if os.path.exists(thumbpath):
+                os.unlink(thumbpath)
+            self.assertEqual(os.path.exists(picpath), False)
+            self.assertEqual(os.path.exists(picpath), False)
+        
+        r = self.c.get('/myfruitcake/search/', {'q':'Pick me'})
+        self.assertEqual(r.status_code, 200)
+        ##self.assertTrue('Pick me' in r.content)
+        
+        # Try a blank
+        r = self.c.get('/myfruitcake/search/', {'q':''})
+        self.assertEqual(r.status_code, 200)
+        self.assertTrue('Please enter a search term' in r.content)
+
+        r = self.c.get('/myfruitcake/search/', {'q':'This is a very long and rambling search term'})
+        self.assertEqual(r.status_code, 200)
+        self.assertTrue('Please enter at most 20 characters' in r.content)
+
+        self.c.logout()
+        
 class IPAddresMethodTests(TestCase):
     def setUp(self):
         ip = IPAddress(ipaddress='184.76.1.84')

@@ -1,7 +1,7 @@
 import logging
 logger = logging.getLogger(__name__)
 from django.core.exceptions import ValidationError
-#from string import join
+from django.core.validators import validate_email#from string import join
 #from PIL import Image as PImage
 from os.path import join as pjoin
 
@@ -121,45 +121,37 @@ class ShipmentForm(ModelForm):
         self.fields['sender'].widget = forms.TextInput()
         self.fields['receiver'].widget = forms.TextInput()
         
-from django.core.validators import validate_email
-
 class MultiEmailField(forms.Field):
     def to_python(self, value):
-        # remove whitespace from the string
-        ##pattern = re.compile('\s')
-        ##value = pattern.sub('', value)
- 
-        # normalize to list of strings; return empty list if no input
+        """Normalize to list of strings; return empty list if no input.
+        """
         if not value:
             return []
-
-            #else: 
-             #   new_value.append(email)
-            
-            #value = new_value
-            #return value
-        # First remove whitespace from before and after the string before splitting it.
-        # then return a list that is split on [;: ,] as valid separators of email addresses
-        #value = re.split('[;\: \,]+', value)
+        # Create a list on any of pattern, strip white space, lowercase.
         pattern = '[;: ,]+'
-        return re.split(pattern, value.strip())
-
-
+        r = re.split(pattern, value.strip())
+        return r
     # See https://docs.djangoproject.com/en/dev/ref/forms/validation/#form-field-default-cleaning
     def validate(self, value):
+        """Check for valid email addresses
+        """
         super(MultiEmailField, self).validate(value)
-        new_value = []
+      
         for email in value:
             try:
                 validate_email(email)
             except ValidationError as e:
-                logger.debug("Email validation error: %s" % e)
-            
+                logger.debug("Email validation error on address %s: %s" % (email, e))
+                raise
                 
 class EmailContactForm(forms.Form):
     # see class MultiEmailField above
     email = MultiEmailField(help_text="(Please provide one or more email addresses.)", widget=forms.TextInput(attrs={'size':'32'}) )
     message = forms.CharField(max_length='256', widget=forms.Textarea(attrs={'size':'32'}) )
+    
+    def check_addresses(self):
+        for email in self.cleaned_data.get('emails'):
+            email.validate(email)
 
 from django.core.mail import get_connection
 from django.forms.models import inlineformset_factory
@@ -176,14 +168,24 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
     list, and then save all that,(see docs.djangoproject.com "Related Objects Reference") 3) email using
     EmailMultiAlternatives.
 
+    The form used here is an instance of class EmailContactForm, which subclasses forms.Form and adds a 
+    MultiEmailField for the email address[es] field  and puts a CharField Textarea form widget on the message field.
+
+    Note: the form first applies is_valid() and then cleaned_data() to the form data.
+    - form.is_valid() [from BaseForm] means not bool(self.errors) [and that binds the data to the form]
     """
     sender_message = None
     #if request.method == 'POST':
     if request.method == 'POST' and request.user.is_authenticated():
-        form = EmailContactForm(request.POST)
+        try:
+            form = EmailContactForm(request.POST)
+        except ValidationError as e:
+            print e
+            raise
+            
         #formset = EmailContactFormset(request.POST, instance=shipment)
         if form.is_valid():
-            cd = form.cleaned_data # cd['email'] is list of email addresses to send to
+            cd = form.cleaned_data # cd['email'] will now be the list of email addresses to send to
             #subject = 'Fruitcake for you'
             message = cd['message']
             fruitcake = Fruitcake.objects.get(id=fruitcake_id)
