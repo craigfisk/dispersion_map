@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
  #from django import forms
 #from registration.models import RegistrationProfile
 import os
@@ -117,10 +119,26 @@ class MyfruitcakeTestCase(TestCase):
             # Do something wrong with the email string, like put a semicolon between
             email_string = self.user.email + ' / ' + 'wcraigfisk@gmail.com'
             #with self.assertRaises(ValidationError):
-            self.c.post(('/myfruitcake/' + str(f.id) + '/shipment/'), {'email': email_string, 'message':'Hi there!'}, follow=True)
+            r = self.c.post(('/myfruitcake/' + str(f.id) + '/shipment/'), {'email': email_string, 'message':'Hi there!'}, follow=True)
            
             # Send to a blank email address
             email_string = ''
+            r = self.c.post(('/myfruitcake/' + str(f.id) + '/shipment/'), {'email': email_string, 'message':'Hi there!'}, follow=True)
+            self.assertTrue('Sent!' not in r.content)
+
+            # bad email address 
+            email_string = '1@67'
+            r = self.c.post(('/myfruitcake/' + str(f.id) + '/shipment/'), {'email': email_string, 'message':'Hi there!'}, follow=True)
+            self.assertTrue('Sent!' not in r.content)
+
+            # The following 2 will fail currently but later may not fail
+            # 1) international email address - see Wikipedia on "email address"
+            email_string = 'Pelé@example.com'
+            r = self.c.post(('/myfruitcake/' + str(f.id) + '/shipment/'), {'email': email_string, 'message':'Hi there!'}, follow=True)
+            self.assertTrue('Sent!' not in r.content)
+
+            # 2) international email address - see Wikipedia on "email address"
+            email_string = '甲斐@黒川.日本'
             r = self.c.post(('/myfruitcake/' + str(f.id) + '/shipment/'), {'email': email_string, 'message':'Hi there!'}, follow=True)
             self.assertTrue('Sent!' not in r.content)
 

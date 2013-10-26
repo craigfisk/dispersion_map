@@ -1,5 +1,7 @@
 import logging
 logger = logging.getLogger(__name__)
+
+from smtplib import SMTPException
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email#from string import join
 #from PIL import Image as PImage
@@ -8,7 +10,6 @@ from os.path import join as pjoin
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 #from django.utils.decorators import method_decorator
-
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response #get_object_or_404, 
 from django.core.context_processors import csrf
@@ -143,7 +144,7 @@ class MultiEmailField(forms.Field):
             try:
                 validate_email(email)
             except ValidationError as e:
-                logger.debug("Email validation error on address %s: %s" % (email, e))
+                logger.debug("Email validation error on address '%s': %s" % (email, e))
                 raise
                 
 class EmailContactForm(forms.Form):
@@ -183,11 +184,13 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
         try:
             form = EmailContactForm(request.POST)
         except ValidationError as e:
-            print e
+            logger.debug("Email validation error on form: %s" % (e))
             raise
-            
+
         #formset = EmailContactFormset(request.POST, instance=shipment)
-        if form.is_valid():
+        try:
+            form.is_valid()
+        #if form.is_valid():
             cd = form.cleaned_data # cd['email'] will now be the list of email addresses to send to
             #subject = 'Fruitcake for you'
             message = cd['message']
@@ -269,9 +272,14 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
                     # possible exceptions, all of which are subclasses of SMTPException.
                     # see https://docs.djangoproject.com/en/1.4/topics/email/#email-backends
                     msg.send(fail_silently=False)
-                except Exception, e:
-                    return HttpResponse(e)
+                except SMTPException as e:
+                    logger.debug("SMTPException: %s, on shipment to: %s with bcc: %s, with message: %s" % (e, to, bcc, msg))
+                    raise
+                
 
+                
+                
+                
             if not this_shipment.origin:
                 this_shipment_origin = 0
             else:
@@ -287,8 +295,14 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             ##return HttpResponseRedirect('/myfruitcake/success/')
             #return HttpResponseRedirect("/myfruitcake/%(id)s/?err=success" % {"id":shipment_id})
 
-        else:
-            return HttpResponse('Sorry, something invalid in your email addresses. Should be a comma-separated list of email addresses.')
+        #else:
+        #    return HttpResponse('Sorry, something invalid in your email addresses. Should be a comma-separated list of email addresses.')
+        except Exception as e:
+            logger.debug("Sorry, while trying to ship, got Exception: %s" % (e))
+            raise
+ 
+
+
 
     #CF20121217 to require login for sending if not is_authenticated
     elif request.method == 'POST':

@@ -80,7 +80,8 @@ class Fruitcake(models.Model):
         try:
             im.save(imfn, "JPEG")
         except IOError as e:
-            print "Error: %s" % e
+            logger.debug("Error saving pic. IOError: %s" % (e))
+            raise
 
         # WIDTH_THUMBNAIL:
 
@@ -94,7 +95,8 @@ class Fruitcake(models.Model):
         try:
             im2.save(imfn, "JPEG")
         except IOError as e:
-            print "Error: %s" %e
+            logger.debug("Error saving thumbnail. IOError: %s" % (e))
+            raise
 
 CHOICES = (
         (None, "Like?"),

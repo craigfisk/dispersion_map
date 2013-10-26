@@ -187,3 +187,33 @@
 [2013-10-24 23:41:56,399] DEBUG [myfruitcake.models:65] Entering fruitcake.save()
 [2013-10-24 23:41:56,854] DEBUG [myfruitcake.views:146] Email validation error on address /: [u'Enter a valid email address.']
 [2013-10-24 23:42:01,426] DEBUG [myfruitcake.models:65] Entering fruitcake.save()
+[2013-10-25 16:24:09,721] DEBUG [myfruitcake.views:329] Entering upload_file()
+[2013-10-25 16:24:09,840] DEBUG [myfruitcake.views:329] Entering upload_file()
+[2013-10-25 16:24:09,862] DEBUG [myfruitcake.models:65] Entering fruitcake.save()
+[2013-10-25 16:24:12,049] DEBUG [myfruitcake.views:329] Entering upload_file()
+[2013-10-25 16:24:12,152] DEBUG [myfruitcake.views:329] Entering upload_file()
+[2013-10-25 16:24:12,167] DEBUG [myfruitcake.models:65] Entering fruitcake.save()
+[2013-10-25 16:24:12,310] DEBUG [myfruitcake.views:329] Entering upload_file()
+[2013-10-25 16:24:30,495] DEBUG [myfruitcake.models:65] Entering fruitcake.save()
+[2013-10-25 16:24:54,222] DEBUG [myfruitcake.models:65] Entering fruitcake.save()
+[2013-10-25 16:25:36,222] DEBUG [myfruitcake.views:146] Email validation error on address /: [u'Enter a valid email address.']
+[2013-10-25 16:27:10,586] DEBUG [myfruitcake.views:146] Email validation error on address 1@67: [u'Enter a valid email address.']
+[2013-10-25 16:27:50,614] DEBUG [myfruitcake.views:146] Email validation error on address Pelé@example.com: [u'Enter a valid email address.']
+[2013-10-25 16:28:21,235] DEBUG [myfruitcake.views:146] Email validation error on address 甲斐@黒川.日本: [u'Enter a valid email address.']
+[2013-10-25 16:28:30,075] DEBUG [myfruitcake.models:65] Entering fruitcake.save()
+[2013-10-25 16:28:31,769] DEBUG [myfruitcake.models:65] Entering fruitcake.save()
+[2013-10-25 17:04:25,343] DEBUG [myfruitcake.views:335] Entering upload_file()
+[2013-10-25 17:04:25,423] DEBUG [myfruitcake.views:335] Entering upload_file()
+[2013-10-25 17:04:25,437] DEBUG [myfruitcake.models:65] Entering fruitcake.save()
+[2013-10-25 17:04:27,346] DEBUG [myfruitcake.views:335] Entering upload_file()
+[2013-10-25 17:04:27,415] DEBUG [myfruitcake.views:335] Entering upload_file()
+[2013-10-25 17:04:27,425] DEBUG [myfruitcake.models:65] Entering fruitcake.save()
+[2013-10-25 17:04:27,551] DEBUG [myfruitcake.views:335] Entering upload_file()
+[2013-10-25 17:04:35,015] DEBUG [myfruitcake.models:65] Entering fruitcake.save()
+[2013-10-25 17:04:35,297] DEBUG [myfruitcake.models:65] Entering fruitcake.save()
+[2013-10-25 17:04:37,932] DEBUG [myfruitcake.views:147] Email validation error on address /: [u'Enter a valid email address.']
+[2013-10-25 17:04:40,742] DEBUG [myfruitcake.views:147] Email validation error on address 1@67: [u'Enter a valid email address.']
+[2013-10-25 17:04:41,652] DEBUG [myfruitcake.views:147] Email validation error on address Pelé@example.com: [u'Enter a valid email address.']
+[2013-10-25 17:04:42,537] DEBUG [myfruitcake.views:147] Email validation error on address 甲斐@黒川.日本: [u'Enter a valid email address.']
+[2013-10-25 17:04:43,617] DEBUG [myfruitcake.models:65] Entering fruitcake.save()
+[2013-10-25 17:04:43,795] DEBUG [myfruitcake.models:65] Entering fruitcake.save()
