@@ -1,5 +1,6 @@
 import logging
 logger = logging.getLogger(__name__)
+from fruitcakesite.settings import FUNCTION_LOGGING
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -16,11 +17,6 @@ geoip = GeoIP()
 
 from fruitcakesite.custom import MyFileStorage
 mfs = MyFileStorage()
-
-def testloggingmodels():
-    logger.debug("Testlogging in myfruitcake.models")
-
-
 
 class FruitcakeException(Exception):
     pass
@@ -62,7 +58,7 @@ class Fruitcake(models.Model):
         """
         Saves STANDARD and THUMBNAIL versions of uploaded image
         """
-        logger.debug("Entering fruitcake.save()")
+        if FUNCTION_LOGGING: logger.debug("Entering fruitcake.save()")
     
         super(Fruitcake, self).save(*args, **kwargs)
         
@@ -153,6 +149,8 @@ class IPAddress(models.Model):
         app_label = 'myfruitcake'
 
     def get_city(self):
+        if FUNCTION_LOGGING: logger.debug("Entering get_city()")
+ 
         # Returns a dict with area_code, city, country_code, country_name, 
         # country_code3 (abbrev), region, postal_code, latitude, longitude, and dma_code
         return geoip.city(self.ipaddress)

@@ -1,5 +1,6 @@
 import logging
 logger = logging.getLogger(__name__)
+from fruitcakesite.settings import FUNCTION_LOGGING
 
 from smtplib import SMTPException
 from django.core.exceptions import ValidationError
@@ -44,15 +45,15 @@ import re
 
 g = GeoIP()
 
+"""
 def testloggingviews():
     logger.debug("Testlogging in myfruitcake.views")
-
+"""
 def testmap(request):
     return render_to_response("myfruitcake/map.html", add_csrf(request), context_instance=RequestContext(request))
 
 def about(request):
     return render_to_response("myfruitcake/about.html", add_csrf(request), context_instance=RequestContext(request))
-
 """
 def about_sample(request):
     return render_to_response("myfruitcake/about_sample.html", add_csrf(request), context_instance=RequestContext(request))
@@ -92,8 +93,7 @@ class MyFruitcakeListView(ListView):
             return Fruitcake.objects.all().order_by('-dt')[:8]
 
 class ShipmentListView(ListView):       
-    """
-    Template is shipment_list.html
+    """Template is shipment_list.html
     """
 
     def get_context_data(self, **kwargs):
@@ -138,6 +138,7 @@ class MultiEmailField(forms.Field):
     def validate(self, value):
         """Check for valid email addresses
         """
+        if FUNCTION_LOGGING: logger.debug("Entering validate()")
         super(MultiEmailField, self).validate(value)
       
         for email in value:
@@ -178,6 +179,8 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
     Note: the form first applies is_valid() and then cleaned_data() to the form data.
     - form.is_valid() [from BaseForm] means not bool(self.errors) [and that binds the data to the form]
     """
+    if FUNCTION_LOGGING: logger.debug("Entering validate()")
+ 
     sender_message = None
     #if request.method == 'POST':
     if request.method == 'POST' and request.user.is_authenticated():
@@ -300,9 +303,6 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
         except Exception as e:
             logger.debug("Sorry, while trying to ship, got Exception: %s" % (e))
             raise
- 
-
-
 
     #CF20121217 to require login for sending if not is_authenticated
     elif request.method == 'POST':
@@ -340,7 +340,7 @@ class LikeForm(ModelForm):
 @login_required
 def upload_file(request):
 
-    logger.debug("Entering upload_file()")
+    if FUNCTION_LOGGING: logger.debug("Entering upload_file()")
 
     if request.method == "POST":
 

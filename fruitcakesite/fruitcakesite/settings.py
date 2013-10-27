@@ -8,6 +8,8 @@ if socket.gethostname() == 'zazen':
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 else:
     DEBUG = True
+    #CF20131026 added to test operating paths
+    FUNCTION_LOGGING=True
     #NOTE: switch to following IF DEBUGGING LOCALLY -- writes to console (or to file)
     # On Django email backends, see https://docs.djangoproject.com/en/1.5/topics/email/
     #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -31,6 +33,9 @@ IGNORABLE_404_URLS = (
 
 #CF20130914 temporary
 DEBUG=True
+
+#CF20131126 termporary
+FUNCTION_LOGGING=True
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -143,7 +148,8 @@ MEDIA_URL = '/static/media/'
 #MEDIA_URL = ''
 
 ##
-LOGIN_URL = '/login/'
+#CF20131026 commented out; defined below
+#LOGIN_URL = '/login/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -266,11 +272,79 @@ INSTALLED_APPS = (
 AUTH_PROFILE_MODULE = 'forum.UserProfile'
 ##'accounts.UserProfile'
 
+import logging, sys
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s"
+            #, 'datefmt' : "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+#            'format': '%(levelname)s %(message)s'
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'console':{
+            'level': 'INFO', #'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+            'stream': sys.stderr,
+        },
+        'null': {
+            'level': 'DEBUG',
+            'class': 'django.utils.log.NullHandler',
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'fruitcake.log',
+            'formatter': 'verbose'
+        },
+
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'myfruitcake': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            #'filters': ['special']
+        },
+        'forum': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            #'filters': ['special']
+        },
+        '': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+        },
+
+    }
+}
+
 """
 LOGGING = {
     'version': 1,
@@ -363,9 +437,7 @@ LOGGING = {
         }
     }
 }
-"""
 
-"""
 LOGGING = {
  'version': 1,
  'disable_existing_loggers': True,
@@ -414,70 +486,4 @@ LOGGING = {
 }
 """
 
-import logging, sys
 
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error when DEBUG=False.
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s"
-            #, 'datefmt' : "%d/%b/%Y %H:%M:%S"
-        },
-        'simple': {
-#            'format': '%(levelname)s %(message)s'
-            'format': '%(levelname)s %(message)s'
-        },
-    },
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        },
-        'console':{
-            'level': 'INFO', #'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
-            'stream': sys.stderr,
-        },
-        'null': {
-            'level': 'DEBUG',
-            'class': 'django.utils.log.NullHandler',
-        },
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': 'fruitcakesite.log',
-            'formatter': 'verbose'
-        },
-
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-        'myfruitcake': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG',
-            #'filters': ['special']
-        },
-        '': {
-            'handlers': ['console'],
-            'level': 'WARNING',
-        },
-
-    }
-}

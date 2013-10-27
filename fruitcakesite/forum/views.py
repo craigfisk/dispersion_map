@@ -1,3 +1,7 @@
+import logging
+logger = logging.getLogger(__name__)
+from fruitcakesite.settings import FUNCTION_LOGGING
+
 #from string import join
 from PIL import Image as PImage
 from os.path import join as pjoin
@@ -86,6 +90,8 @@ def thread(request, pk):
 
 @login_required
 def profilepic(request, pk):
+    if FUNCTION_LOGGING:  logger.debug("Entering profilepic()")
+
     profile = UserProfile.objects.get(user=pk)
     img = None
 
@@ -125,6 +131,7 @@ def profilepic(request, pk):
 
 @login_required
 def userinfo(request, pk):
+    if FUNCTION_LOGGING:  logger.debug("Entering userinfo()")
     u = User.objects.get(pk=pk)
 
     if request.method == "POST":
@@ -143,6 +150,8 @@ def userinfo(request, pk):
 
 @login_required
 def post(request, ptype, pk):
+    if FUNCTION_LOGGING:  logger.debug("Entering post()")
+  
     action = reverse("forum.views.%s" % ptype, args=[pk])
     if ptype == "new_thread":
         title = "Start New Topic"
@@ -162,6 +171,8 @@ def increment_post_counter(request):
 
 @login_required
 def new_thread(request, pk):
+    if FUNCTION_LOGGING:  logger.debug("Entering new_thread()")
+ 
     p = request.POST
     if p["subject"] and p["body"]:
         forum = Forum.objects.get(pk=pk)
@@ -172,6 +183,8 @@ def new_thread(request, pk):
 
 @login_required
 def reply(request, pk):
+    if FUNCTION_LOGGING:  logger.debug("Entering reply()")
+ 
     p = request.POST
     if p["body"]:
         thread = Thread.objects.get(pk=pk)
