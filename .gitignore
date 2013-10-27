@@ -22,6 +22,7 @@ distribute*
 *.swp
 *.log
 .settings
+.pydevproject
 #CF20130329 changed to not exclude registration tree, since I'm using patched version of Django 1.5
 #lib/
 # Want instead:
