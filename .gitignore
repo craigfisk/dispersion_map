@@ -1,52 +1,32 @@
-fruitcakesite/static/media/pics
-fruitcakesite/static/media/thumbnails
-fruitcakesite/static/media/images
-fruitcakesite/static/media
-#pics/
-#thumbnails/
-#images/
-#
-bin/
-glyphish200/
-include/
-local/
-src/
-#
-#CF20130914 added:
-build
-distribute*
-#
-#
 *~
 *.py[cod]
 *.swp
 *.log
-.settings
-.pydevproject
+#
+bin/
+build
+.coverage
+distribute*
+fruitcakesite/fruitcake.log
+fruitcakesite/static/media/pics
+fruitcakesite/static/media/thumbnails
+fruitcakesite/static/media/images
+fruitcakesite/static/media
+glyphish200/
+htmlcov
+include/
 #CF20130329 changed to not exclude registration tree, since I'm using patched version of Django 1.5
-#lib/
-# Want instead:
-#lib/!*lib/python2.7/site-packages/registration/
-
-#--> To do this, unignore every parent directory of anything you want to unignore, so in pairs: 
-#ignore everything in a directory, but not some certain subdirectory, as follows:
-
-#!lib/
-#lib/*
-#!lib/python2.7/
-#lib/python2.7/*
-#!lib/python2.7/site-packages/
-#lib/python2.7/site-packages/*
-#!lib/python2.7/site-packages/registration/
-
-#ignore all /lib/ stuff
+# To do this, unignore every parent directory of anything you want to unignore, so in pairs: 
+# ignore everything in a directory, but not some certain subdirectory, as follows:
 lib/*
 #except do not ignore registration directory
 !lib/python2.7/site-packages/registration/
 !lib/python2.7/site-packages/registration/*
 #also subdirectories of registration
 !lib/python2.7/site-packages/registration/**/*
-
-htmlcov
-.coverage
+local/
+misc/
+.pydevproject
+src/
+.settings
 
