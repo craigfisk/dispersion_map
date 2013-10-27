@@ -165,6 +165,7 @@ from django.template import RequestContext
 
 #@login_required # switched to is_authenticated on POST only so GET displays; user can see but not send.
 
+@login_required
 def email_fruitcake(request, fruitcake_id, shipment_id=None):
     """Create instance of Shipment and associated Addressees and send it as email. 
     1) obtain the fruitcake id from passed in value of pk, the sender from request.user, fill in the message
