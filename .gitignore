@@ -26,7 +26,7 @@ lib/*
 !lib/python2.7/site-packages/registration/**/*
 local/
 misc/
+.project
 .pydevproject
-src/
 .settings
-
+src/
