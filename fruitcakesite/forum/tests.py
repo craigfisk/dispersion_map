@@ -14,6 +14,8 @@ import time
 from os.path import join as pjoin
 from fruitcakesite.settings import MEDIA_ROOT
 
+testavatar = 'images/3949266199_540cce70e5.jpg'
+badavatar = 'images/badavatar.jpg'
 
 class ForumPostsTestCase(TestCase):
     def setUp(self):
@@ -52,9 +54,8 @@ class ForumPostsTestCase(TestCase):
         self.content_test('/forum/post/new_thread/1/', ['Start New Topic', ])
         
         #r3 = self.client.post( reverse('forum_post', args=['new_thread', '1']), dict(subject='More desert', body='Yes, please!'))
-        self.userprofile = UserProfile(avatar='images/testavatar.jpg', posts=0, shipments=0, user_id=self.user.id)
-        self.baduserprofile = UserProfile(avatar='images/phoneyjpg.jpg', posts=0, shipments=0, user_id=self.user.id)
- 
+        self.userprofile = UserProfile(avatar=testavatar, posts=0, shipments=0, user_id=self.user.id)
+        self.baduserprofile = UserProfile(avatar=badavatar, posts=0, shipments=0, user_id=self.user.id)
  
         r3 = self.client.post('/forum/new_thread/1', {'subject': 'About raspberry pie', 'body': 'Could raspberry pie be considered fruitcake?'}, follow=True)
         self.content_test('/forum/', ['About raspberry pie',])
