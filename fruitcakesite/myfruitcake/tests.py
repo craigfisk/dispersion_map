@@ -221,7 +221,7 @@ class MyfruitcakeTestCase(TestCase):
         r = self.c.get('/myfruitcake/search/')
         self.assertEqual(r.status_code, 200)
         # Upload a fruitcake for the admin
-        testfruitcakepath = 'testfruitcake.jpg'
+        #testfruitcakepath = 'testfruitcake.jpg'
         ##testnonjpegpath = 'testnonjpeg.png'
         self.remove_test_files("pics", r"testfruitcake_?\d*\..*$")
         self.remove_test_files("thumbnails", r"testfruitcake_?\d*\..*$")

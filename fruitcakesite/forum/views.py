@@ -97,10 +97,12 @@ def profilepic(request, pk):
 
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES, instance=profile)
+        #form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             # resize and save image under same filename
-            imfn = pjoin(MEDIA_ROOT, profile.avatar.name)
+            imfn = pjoin(MEDIA_ROOT, request.POST['avatar'])
+            #imfn = pjoin(MEDIA_ROOT, profile.avatar.name)
             #CF20121023 adding try/except framework, per PIL-handbook p. 3
             """
             im = PImage.open(imfn)
@@ -121,6 +123,7 @@ def profilepic(request, pk):
             
     else:
         form = ProfileForm(instance=profile)
+        #form = ProfileForm()
     if profile.avatar:
         img = MEDIA_URL + profile.avatar.name
     #uf = UserForm(request.POST, instance=profile.user)
