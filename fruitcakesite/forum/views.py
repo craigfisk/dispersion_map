@@ -36,11 +36,13 @@ class UserProfile(models.Model):
 
 class ProfileForm(ModelForm):
     class Meta:
+        if FUNCTION_LOGGING:  logger.debug("Entering class ProfileForm")
         model = UserProfile
         exclude = ["user", "posts", "shipments"]
 
 class UserForm(ModelForm):
     class Meta:
+        if FUNCTION_LOGGING:  logger.debug("Entering class UserForm")
         model = User
         exclude = ["first_name","last_name","password","is_staff","is_active","is_superuser","last_login","date_joined","groups","user_permissions"]
 
@@ -101,7 +103,8 @@ def profilepic(request, pk):
         if form.is_valid():
             form.save()
             # resize and save image under same filename
-            imfn = pjoin(MEDIA_ROOT, request.POST['avatar'])
+            ##imfn = pjoin(MEDIA_ROOT, request.FILES['avatar'])
+            imfn = pjoin(MEDIA_ROOT, profile.avatar.name)
             #imfn = pjoin(MEDIA_ROOT, profile.avatar.name)
             #CF20121023 adding try/except framework, per PIL-handbook p. 3
             """
