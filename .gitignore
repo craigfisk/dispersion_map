@@ -11,7 +11,9 @@ fruitcakesite/fruitcake.log
 fruitcakesite/static/media/pics
 fruitcakesite/static/media/thumbnails
 fruitcakesite/static/media/images
-fruitcakesite/static/media
+fruitcakesite/static/media/*
+!fruitcakesite/static/media/tests/
+!fruitcakesite/static/media/tests/*
 glyphish200/
 htmlcov
 include/
