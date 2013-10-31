@@ -39,15 +39,15 @@ lib/*
 
 
 # To enable git add lib/python2.7/site-packages/django/contrib/gis/geoip/base.py
-lib/*
-!lib/python2.7/
-!lib/python2.7/site-packages/
-!lib/python2.7/site-packages/django/
-!lib/python2.7/site-packages/django/contrib/
-!lib/python2.7/site-packages/django/contrib/gis/
+#lib/*
+#!lib/python2.7/
+#!lib/python2.7/site-packages/
+#!lib/python2.7/site-packages/django/
+#!lib/python2.7/site-packages/django/contrib/
+#!lib/python2.7/site-packages/django/contrib/gis/
 # Similarly for geoip, ignore everything 
-!lib/python2.7/site-packages/django/contrib/gis/geoip/
+#!lib/python2.7/site-packages/django/contrib/gis/geoip/
 # except do not ignore the modified file (use git ls-files to confirm it is tracked).
-!lib/python2.7/site-packages/django/contrib/gis/geoip/*
+!lib/python2.7/site-packages/django/contrib/gis/geoip/base.py
 #!lib/python2.7/site-packages/django/contrib/gis/geoip/
 
