@@ -80,39 +80,33 @@ def forum(request, pk):
 
 @login_required
 def thread(request, pk):
-    """Listing of posts in a thread."""
+    """Listing of posts in a thread.
+    """
     posts = Post.objects.filter(thread=pk).order_by("created")
     posts = mk_paginator(request, posts, 15)
     #title = Thread.objects.get(pk=pk).title
     t = Thread.objects.get(pk=pk)
     return render_to_response("forum/thread.html", add_csrf(request, posts=posts, pk=pk, title=t.title,
         forum_pk=t.forum.pk, media_url=MEDIA_URL), context_instance=RequestContext(request))
-    # forum_pk=t.forum.pk
-
+    
 
 @login_required
-def profilepic(request, pk):
+def profilepic(request):
+    """Displaying or updating profile photo (avatar)
+    """
     if FUNCTION_LOGGING:  logger.debug("Entering profilepic()")
 
-    profile = UserProfile.objects.get(user=pk)
+    userprofile = UserProfile.objects.get(user=request.user)
+    
     img = None
 
     if request.method == "POST":
-        form = ProfileForm(request.POST, request.FILES, instance=profile)
-        #form = ProfileForm(request.POST, request.FILES)
+        form = ProfileForm(request.POST, request.FILES, instance=userprofile)
         if form.is_valid():
             form.save()
             # resize and save image under same filename
-            ##imfn = pjoin(MEDIA_ROOT, request.FILES['avatar'])
-            imfn = pjoin(MEDIA_ROOT, profile.avatar.name)
-            #imfn = pjoin(MEDIA_ROOT, profile.avatar.name)
-            #CF20121023 adding try/except framework, per PIL-handbook p. 3
-            """
-            im = PImage.open(imfn)
-            # 160, 160 --> 120,120 CF20121023:
-            im.thumbnail((120,120), PImage.ANTIALIAS)
-            im.save(imfn, "JPEG")
-            """
+            imfn = pjoin(MEDIA_ROOT, userprofile.avatar.name)
+            #CF20121023 added try/except framework, per PIL-handbook p. 3
             try:
                 im = PImage.open(imfn)
                 # 160, 160 --> 120,120 CF20121023:
@@ -124,16 +118,17 @@ def profilepic(request, pk):
             except IOError as e:
                 print "Cannot create thumbnail for %s, error: %s" % (imfn, e)
             
+            uf = UserForm(instance=request.user) 
+            return render_to_response("forum/userinfo.html", add_csrf(request, uf=uf, u=request.user), context_instance=RequestContext(request))
+                
     else:
-        form = ProfileForm(instance=profile)
-        #form = ProfileForm()
-    if profile.avatar:
-        img = MEDIA_URL + profile.avatar.name
-    #uf = UserForm(request.POST, instance=profile.user)
-    return render_to_response("forum/profilepic.html", add_csrf(request, profile=profile, form=form, img=img), context_instance=RequestContext(request))
-    #return render_to_response("forum/userinfo.html", add_csrf(request, uf=uf, u=profile.user, img=img), context_instance=RequestContext(request))
-    #return HttpResponseRedirect(reverse("forum.views.userinfo", args=[pk]))
-
+        form = ProfileForm(instance=userprofile)
+        
+    if userprofile.avatar:
+        img = MEDIA_URL + userprofile.avatar.name
+    
+    return render_to_response("forum/profilepic.html", add_csrf(request, profile=userprofile, form=form, img=img), context_instance=RequestContext(request))
+    
 
 @login_required
 def userinfo(request, pk):
@@ -148,8 +143,6 @@ def userinfo(request, pk):
     else:
         uf = UserForm(instance=u)
 
-    #if u.userprofile.avatar.name:
-    #    img = MEDIA_URL + u.userprofile.avatar.name
     return render_to_response("forum/userinfo.html", add_csrf(request, uf=uf, u=u), context_instance=RequestContext(request))
 
 

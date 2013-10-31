@@ -1,3 +1,7 @@
+import logging
+logger = logging.getLogger(__name__)
+from fruitcakesite.settings import FUNCTION_LOGGING
+
 from django.test import TestCase
 #from django.test.client import Client
 from django.test import Client
@@ -17,7 +21,8 @@ import os, re
 
 class ForumPostsTestCase(TestCase):
     def setUp(self):
-        print 'Starting setup'
+        if FUNCTION_LOGGING: logger.debug('Entering setUp')
+
         self.remove_test_files('images', r'3949266199_540cce70e5_.*$')
         self.testavatarsource = 'tests/3949266199_540cce70e5.jpg'
         self.testavatar = 'images/3949266199_540cce70e5.jpg'
@@ -25,7 +30,7 @@ class ForumPostsTestCase(TestCase):
 
         self.user = User.objects.create_user(username='cf', password='pwd', email='cf@justfruitcake.com')
 
-        self.userprofile = UserProfile(avatar=pjoin(MEDIA_ROOT, self.testavatar), posts=0, shipments=0, user=self.user)
+        self.userprofile = UserProfile(avatar=self.testavatar, posts=0, shipments=0, user=self.user)
 
         #self.user2 = User.objects.create_user(username='craig', password='pwd', email='craig@justfruitcake.com')
         self.forum = Forum.objects.create(title='Raspberry pie')
@@ -36,13 +41,19 @@ class ForumPostsTestCase(TestCase):
         self.loggedin = self.client.login(username='cf', password='pwd')
         #self.f = Forum.objects.get(pk=1)
  
-        print 'Finished setup'
+        if FUNCTION_LOGGING: logger.debug("Exiting setUp: self.user.id: %s" % self.user.id)
+
+       #print 'Exiting setUp'
 
         #self.baduserprofile = UserProfile(avatar=self.badavatar, posts=0, shipments=0, user_id=self.user.id)
 
     def tearDown(self):
+        if FUNCTION_LOGGING: logger.debug("Entering tearDown: self.user.id: %s" % self.user.id)
+        #print 'Entering tearDown'
         self.user.delete()
-        print 'All done.'
+        #print 'Exiting tearDown'
+        #if FUNCTION_LOGGING: logger.debug(i"Exiting tearDown: self.user.id: %s" % self.user.id)
+
 
     def remove_test_files(self, subdirectory, pattern):
         somedir = pjoin(MEDIA_ROOT, subdirectory)
@@ -52,9 +63,6 @@ class ForumPostsTestCase(TestCase):
             for m in f_re.finditer(name):
                 if m: os.unlink( pjoin(somedir, m.group()) )
     
-    #def teardown(self):
-    #    self.remove_test_files('images', r'3949266199_540cce70e5.*$')
-
     def content_test(self, url, values):
         #Get content of url and test that each of items in `values` list is present.
         r = self.client.get(url)
@@ -70,12 +78,10 @@ class ForumPostsTestCase(TestCase):
             self.assertTrue(v in r.content)
 
     def test_post_new_reply_and_reply_and_upload_avatar(self):
-        #self.client = Client()
-      
         # Check that our test forum exists
         r1 = self.client.get('/forum/')
         self.assertTrue('Raspberry pie' in r1.content)
-
+    
     def test_get_new_thread(self):
         # Create a new thread on that forum
         r2 = self.client.get('/forum/post/new_thread/1/')
@@ -87,18 +93,14 @@ class ForumPostsTestCase(TestCase):
     def test_create_new_thread(self):
         r3 = self.client.post('/forum/new_thread/1', {'subject': 'About raspberry pie', 'body': 'Could raspberry pie be considered fruitcake?'}, follow=True)
         self.content_test('/forum/', ['About raspberry pie',])
-        #self.client.get('/forum/forum/1')
         self.content_test('/forum/forum/1', ['About raspberry pie',])
         
         #WHICH OF THESE IS RIGHT?
         m = self.client.post('/forum/post/new_thread/1/', {'subject': 'Some topic', 'body': 'This is the body'} )
         n = self.client.post('/forum/new_thread/1/', {'subject': 'Some topic', 'body': 'This is the body'} )
-        
+
     def test_reply_to_a_thread(self):
         # Reply to a thread (first create the thread)
-        #t = self.thread
-        ##r4 = self.client.post('/forum/post/reply/1/', {'subject': 'About raspberry pie', 'body': 'Yes (maybe not).'})
-        ##self.content_test('/forum/thread/1/?page=last', ['Yes (maybe not)',])
         
         # AGAIN, WHICH IS RICHT?   'subject': 'Re: About raspberry pie', 
         subject = "Re: " + self.thread.title
@@ -106,7 +108,7 @@ class ForumPostsTestCase(TestCase):
         #response = self.client.post('/forum/post/reply/1/', {'subject': subject, 'body': 'Yes (maybe not).'} )
         response = self.client.post( reverse('forum_post', args=('reply',unicode(self.post.id))) , {'subject':subject, 'body':'Yes (maybe not).'} )
         #response = self.client.post( reverse('forum_post', args=('reply', '7')), {'subject':subject, 'body':'Yes (maybe not).'} )##q = self.client.post('/forum/reply/1/', {'subject': 'Some topic', 'body': 'We do not agree'} )
-        print response.status_code
+        if response.status_code: print response.status_code
         
         response = self.client.get('/forum/thread/' + unicode(thread_id) + '/?=page=last')
         self.assertTrue('Yes (maybe not)' in response.content)
@@ -124,19 +126,12 @@ class ForumPostsTestCase(TestCase):
         self.assertEqual(self.post.__unicode__(), (str(self.post.creator) + ' - ' + str(self.post.thread) + ' - ' + self.post.title) )
 
     def test_userinfo(self):
-        r = self.client.get('/forum/userinfo/' + unicode(self.userprofile.user_id))
-        #self.assertEqual(r.status_code, 200)
-        #r.content
-        print r.status_code
+        response = self.client.get('/forum/userinfo/' + unicode(self.userprofile.user_id))
+        print response.status_code
         self.assertEqual(self.userprofile.__unicode__(), unicode(self.user.__unicode__()))
-         
-        #r5 = self.client.get('/forum/userinfo/'+ unicode(self.userprofile.user_id), {'username':'cf', 'email':'wcraigfisk@gmail.com'} )
-        #print r5.status_code
-       
+
     def test_userinfo_via_reverse(self):     
-        #----------- 
         response = self.client.get( reverse('forum_userinfo', args=(self.user.id,)))
-        #response = self.client.get( reverse('forum_userinfo', args=(1,)))
         self.assertContains(response, 'cf!')
 
     def test_userinfo_via_reverse_with_args_kwargs(self):
@@ -145,25 +140,23 @@ class ForumPostsTestCase(TestCase):
         #response = self.client.post( reverse('forum_userinfo', args=(self.userprofile.user.id,), kwargs={'username': self.user, 'email':self.user.email}), follow=True)
         #See https://docs.djangoproject.com/en/1.5/ref/urlresolvers/#https://docs.djangoproject.com/en/1.5/ref/urlresolvers/
         response = self.client.post(reverse('forum_userinfo', args=(self.user.id,)), dict(username=self.user, email= self.userprofile.user.email) )
-        #Or: b = self.client.post(reverse('forum_userinfo', args=(1,)), {'username':self.user, 'email':self.userprofile.user.email} )
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Edit My Profile')
        
     def test_profilepic_with_reverse(self):
         response = self.client.get( reverse('forum_profilepic', args=(self.user.id,)))
         self.assertTrue('cf' in response.content)
-        print 'hi'
-        
+    
     def test_profilepic_with_reverse_and_avatar(self):
-        response = self.client.post( reverse('forum_profilepic', args=(unicode(self.user.id),)), dict(avatar=self.userprofile.avatar.name) )
-        print response.status_code
-        self.assertContains(response, self.userprofile.avatar.name)
-        print 'howdy'
-        
+        response = self.client.post( reverse('forum_profilepic', args=(self.user.id, )) )
+        if response.status_code: print response.status_code
+        ##self.assertContains(response, self.userprofile.avatar.name)
+        ##print 'howdy'
+    
     """
     def test_profilepic_with_reverse_on_badavatar(self):
         response = self.client.post( reverse('forum_profilepic', args=((self.user.id),)), dict(avatar=self.baduserprofile.avatar) )
-        print response.status_code
+        if response.status_code: print response.status_code
         print 'hi there'
         self.assertContains(response, self.userprofile.avatar.name)
         self.assertEqual(response.status_code, 200)
