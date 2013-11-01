@@ -24,30 +24,19 @@ misc/
 .pydevproject
 .settings
 src/
-
-# To enable git add lib/python2.7/site-packages/registration/tests/default_backend.py 
-#[lib]
-# Since I'm using patched version of django-registration tests/default_backend.py,
+#------------------------
+# I'm using patched version of django-registration tests/default_backend.py,
 # so unignore every parent directory of anything you want to unignore, so in pairs: 
 # ignore everything in a directory, but not some certain subdirectory, as follows:
+
+# To enable "git add lib/python2.7/site-packages/registration/tests/default_backend.py"
 lib/*
-#except do not ignore registration directory
+# unignore "registration" directory and its children
 !lib/python2.7/site-packages/registration/
 !lib/python2.7/site-packages/registration/*
-#also subdirectories of registration
 !lib/python2.7/site-packages/registration/**/*
 
-
-# To enable git add lib/python2.7/site-packages/django/contrib/gis/geoip/base.py
-#lib/*
-#!lib/python2.7/
-#!lib/python2.7/site-packages/
-#!lib/python2.7/site-packages/django/
-#!lib/python2.7/site-packages/django/contrib/
-#!lib/python2.7/site-packages/django/contrib/gis/
-# Similarly for geoip, ignore everything 
-#!lib/python2.7/site-packages/django/contrib/gis/geoip/
-# except do not ignore the modified file (use git ls-files to confirm it is tracked).
+# To enable "git add lib/python2.7/site-packages/django/contrib/gis/geoip/base.py"
+# Unignore modified geoip file: (use git ls-files to confirm it is tracked).
 !lib/python2.7/site-packages/django/contrib/gis/geoip/base.py
-#!lib/python2.7/site-packages/django/contrib/gis/geoip/
 
