@@ -7,7 +7,7 @@ from PIL import Image as PImage
 from os.path import join as pjoin
 
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect #, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response #get_object_or_404, 
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
@@ -99,13 +99,15 @@ def profilepic(request):
     userprofile = UserProfile.objects.get(user=request.user)
     
     img = None
-
+            
     if request.method == "POST":
-        form = ProfileForm(request.POST, request.FILES, instance=userprofile)
+        #form = ProfileForm(request.POST, request.FILES, instance=userprofile)
+        form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             # resize and save image under same filename
-            imfn = pjoin(MEDIA_ROOT, userprofile.avatar.name)
+            #imfn = pjoin(MEDIA_ROOT, userprofile.avatar.name)
+            imfn = pjoin(MEDIA_ROOT, request.FILES['avatar'].name)
             #CF20121023 added try/except framework, per PIL-handbook p. 3
             try:
                 im = PImage.open(imfn)
@@ -116,24 +118,27 @@ def profilepic(request):
                 im = im.resize((WIDTH_AVATAR, hsize), PImage.ANTIALIAS)
                 im.save(imfn, "JPEG")
             except IOError as e:
-                print "Cannot create thumbnail for %s, error: %s" % (imfn, e)
-            
-            uf = UserForm(instance=request.user) 
-            return render_to_response("forum/userinfo.html", add_csrf(request, uf=uf, u=request.user), context_instance=RequestContext(request))
+                logger.debug("Cannot create thumbnail for %s, error: %s" % (imfn, e))
+                return HttpResponse("Sorry, could not upload that file. Error: %s" % e)
+
+            return render_to_response("forum/userinfo.html", add_csrf(request, u=request.user), context_instance=RequestContext(request))
+
                 
     else:
-        form = ProfileForm(instance=userprofile)
+        form = ProfileForm()
         
     if userprofile.avatar:
         img = MEDIA_URL + userprofile.avatar.name
+    #if userprofile.avatar:
+    #   img = MEDIA_URL + userprofile.avatar.name
     
-    return render_to_response("forum/profilepic.html", add_csrf(request, profile=userprofile, form=form, img=img), context_instance=RequestContext(request))
+    return render_to_response("forum/profilepic.html", add_csrf(request, img=img, u=userprofile.user), context_instance=RequestContext(request))
     
 
 @login_required
-def userinfo(request, pk):
+def userinfo(request):
     if FUNCTION_LOGGING:  logger.debug("Entering userinfo()")
-    u = User.objects.get(pk=pk)
+    u = User.objects.get(pk=request.user.id)
 
     if request.method == "POST":
         uf = UserForm(request.POST, instance=u)

@@ -11,7 +11,7 @@ urlpatterns = patterns('forum.views',
     url(r'^post/(new_thread|reply)/(\d+)/$', 'post', name='forum_post'),
     url(r'^reply/(\d+)/$', 'reply', name='forum_reply'),
     url(r'^profilepic/$', 'profilepic', name='forum_profilepic'),
-    url(r'^userinfo/(\d+)/$', 'userinfo', name='forum_userinfo'),
+    url(r'^userinfo/$', 'userinfo', name='forum_userinfo'),
     url(r'^new_thread/(\d+)/$', 'new_thread', name='forum_new_thread'),
     url(r'', 'main', name="forum_main"),
 )
