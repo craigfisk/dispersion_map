@@ -144,21 +144,38 @@ class ForumPostsTestCase(TestCase):
         self.assertContains(response, 'Edit My Profile')
        
     def test_profilepic_with_reverse(self):
-        response = self.client.get( reverse('forum_profilepic'))
+        response = self.client.get( reverse('forum_profilepic', args=(self.user.id,)))
         self.assertTrue('cf' in response.content)
     
-    def test_profilepic_with_reverse_and_avatar(self):
-        response = self.client.get(reverse('forum_profilepic'))
-        if response.status_code: print response.status_code
+    def test_profile_form_valid(self):
+        ##response = self.client.get(reverse('forum_profilepic'))
+        #3if response.status_code: print response.status_code
         
         testfile = 'goodavatar.jpg'
         mypath = 'tests/goodavatar.jpg'
-        response = self.client.post( reverse('forum_profilepic'), dict(avatar=mypath) )
+        data = dict(avatar=testfile)
+        #profile = UserProfile.objects.get(user=self.user.id)
+        print profile.avatar.name
+        form = ProfileForm(data=data, instance=profile)
+        self.assertTrue(form.is_valid())
+        print form.is_valid()
+        
+        ###response = self.client.post( reverse('forum_profilepic', args=(self.user.id,)), dict(avatar=mypath) )
         # this should be the page we look at after the POST
-        response = self.client.get('/forum/userinfo/' + unicode(self.userprofile.user_id))
+        ##response = self.client.get('/forum/userinfo/' + unicode(self.userprofile.user_id))
         ##self.assertContains(response, self.userprofile.avatar.name)
-        self.assertTrue(testfile in response.content)
-        if response.status_code: print response.status_code
+        ###self.assertTrue(testfile in response.content)
+        ##if response.status_code: print response.status_code
+    
+    def test_profile_form_invalid(self):
+        testfile = 'goodavatar.jpg'
+        data = dict(avatar='123')
+        #profile = UserProfile.objects.get(user=self.user.id)
+        print profile.avatar.name
+        form = ProfileForm(data=data, instance=profile)
+        self.assertFalse(form.is_valid())
+        print form.is_valid()
+        
     
     """
     def test_profilepic_with_reverse_on_badavatar(self):
