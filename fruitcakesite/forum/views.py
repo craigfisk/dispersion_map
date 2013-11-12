@@ -91,10 +91,12 @@ def thread(request, pk):
 
 
 @login_required
-def profilepic(request, pk):
+#def profilepic(request, pk):
+def profilepic(request):
     if FUNCTION_LOGGING:  logger.debug("Entering profilepic()")
 
-    profile = UserProfile.objects.get(user=pk)
+    #profile = UserProfile.objects.get(user=pk)
+    profile = UserProfile.objects.get(user=request.user)
     img = None
 
     if request.method == "POST":
