@@ -138,9 +138,11 @@ def profilepic(request):
 
 
 @login_required
-def userinfo(request, pk):
+#def userinfo(request, pk):
+def userinfo(request):
     if FUNCTION_LOGGING:  logger.debug("Entering userinfo()")
-    u = User.objects.get(pk=pk)
+    #u = User.objects.get(pk=pk)
+    u = User.objects.get(pk=int(request.user.id))
 
     if request.method == "POST":
         uf = UserForm(request.POST, instance=u)

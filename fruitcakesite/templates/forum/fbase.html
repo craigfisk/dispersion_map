@@ -19,7 +19,8 @@
                 {% if user.is_staff %} <a href="{% url 'myfruitcake.views.search' %}">Search</a> {% endif %}
 
                 {% if user.is_authenticated %}
-                    <h3><a href="{% url 'forum.views.userinfo' user.pk %}">MyProfile</a></h3> {% endif %}
+                    {# <h3><a href="{% url 'forum.views.userinfo' user.pk %}">MyProfile</a></h3> {% endif %} #}
+                    <h3><a href="{% url 'forum.views.userinfo' %}">MyProfile</a></h3> {% endif %}
 
                 {% if not user.is_authenticated %}<h3><a href="/registration/login/?next=/myfruitcake/">sign-in</a> | <a href="/registration/register/">register</a></h3>{% endif %}
 
