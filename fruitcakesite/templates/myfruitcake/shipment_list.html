@@ -6,6 +6,10 @@
 
 
 {# (shipment_list.html) #}
+
+{% load tz %} 
+
+
 {% block page-content %}
     <div class="main">
         <div id="rtitle">Upload a fruitcake photo? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>
@@ -40,7 +44,7 @@
                     <a href="{{ shipment.fruitcake.id }}/shipment/" title="{{ shipment.fruitcake.popup }}">
                         <img src="{{ MEDIA_URL }}{{ shipment.fruitcake.thumbnail }}"/>
                     </a>
-                    <figcaption>uploaded: {{ shipment.fruitcake.dt }}<br />by: {{ shipment.fruitcake.uploader.username }} (sent {{shipment.fruitcake.times_shipped}}x)</figcaption>
+                    <figcaption>uploaded: {{ shipment.fruitcake.dt|localtime }}<br />by: {{ shipment.fruitcake.uploader.username }} (sent {{shipment.fruitcake.times_shipped}}x)</figcaption>
                 </figure>
                 </td>
 
@@ -66,7 +70,7 @@
                     <ol class="history_area" reversed >
                     {% for leg in shipment.get_shipment_list %}
                     <li class="history_item">
-                    - Shipment {{ leg.id }}, {{ leg.dt }} sent by <b>{{ leg.sender }}
+                    - Shipment {{ leg.id }}, {{ leg.dt|localtime }} sent by <b>{{ leg.sender }}
                         {% for ip in leg.ipaddresses.all %}
                         ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }} - {{ ip.ipaddress }}) 
                         {% endfor %}</b>

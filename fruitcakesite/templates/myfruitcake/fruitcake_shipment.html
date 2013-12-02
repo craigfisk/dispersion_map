@@ -4,6 +4,8 @@
 
 {% block sidebar %} - email<style type="text/css"> </style> {% endblock %}
 
+{% load tz %}
+
 {% block page-content %}
 
 {% if fruitcake %}
@@ -14,7 +16,7 @@
                 <li>
                 <figure>
                     <img src="{{ MEDIA_URL }}{{ fruitcake.thumbnail }}" title="{{ fruitcake.popup }}" />
-                    <figcaption>uploaded: {{ fruitcake.dt }}<br />by: {{ fruitcake.uploader.username }}</figcaption>
+                    <figcaption>uploaded: {{ fruitcake.dt|localtime }}<br />by: {{ fruitcake.uploader.username }}</figcaption>
                 </figure>
                 </li>
         </ul>
@@ -28,7 +30,7 @@
         <u>Latest</u>
         <ul>
             {% for leg in shipment.get_parent_list %}
-            <li>Shipment {{ leg.id }}, {{ leg.dt }} sent by <b>{{ leg.sender }}
+            <li>Shipment {{ leg.id }}, {{ leg.dt|localtime }} sent by <b>{{ leg.sender }}
                 {% for ip in leg.ipaddresses.all %}
                 ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }})
                 {% endfor %}</b> 

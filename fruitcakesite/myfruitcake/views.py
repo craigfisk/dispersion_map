@@ -36,7 +36,8 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
 
-from datetime import datetime
+#from datetime import datetime
+from django.utils import timezone
 from django.contrib.gis.geoip import GeoIP
 import re
 
@@ -238,7 +239,7 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             message = cd['message']
             fruitcake = Fruitcake.objects.get(id=fruitcake_id)
             
-            this_shipment = Shipment(dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=message)
+            this_shipment = Shipment(dt=timezone.now(),fruitcake=fruitcake,sender=request.user, message=message)
             
             this_shipment.save()
 

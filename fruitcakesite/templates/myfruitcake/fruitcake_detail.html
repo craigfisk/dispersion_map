@@ -4,6 +4,8 @@
 
 {% block sidebar %} - my fruitcake{% endblock %}
 
+{% load tz %}
+
 {% block page-content %}
 
     <div class="main">
@@ -25,7 +27,7 @@
                 <a href="{{ fruitcake.id }}/shipment/" title="{{ fruitcake.popup }}">
                     <img src="{{ MEDIA_URL }}{{ fruitcake.thumbnail }}"/>
                 </a>
-                <figcaption>uploaded: {{ fruitcake.dt }}<br />by: {{ fruitcake.uploader.username }} (sent {{fruitcake.times_shipped }}x)</figcaption>
+                <figcaption>uploaded: {{ fruitcake.dt|localtime }}<br />by: {{ fruitcake.uploader.username }} (sent {{fruitcake.times_shipped }}x)</figcaption>
             </figure>
             </li>
         </ul>
