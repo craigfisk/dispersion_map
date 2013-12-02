@@ -24,7 +24,7 @@ from myfruitcake.models import Fruitcake, Shipment, Like, IPAddress, FruitcakeEx
 from forum.models import UserProfile
 from forum.views import mk_paginator #, profilepic  #userinfo
 
-from django.views.generic import ListView #, TemplateView, FormView  #DetailView
+from django.views.generic import ListView, DetailView #, TemplateView, FormView  #DetailView
 
 from django import forms
 
@@ -104,7 +104,31 @@ class MyFruitcakeListView(ListView):
             return Fruitcake.objects.filter(uploader=self.request.user).order_by('-dt')
             # or: popup__startswith='Pick me'
         else:
-            return Fruitcake.objects.all().order_by('-dt')[:8]
+            return Fruitcake.objects.all().order_by('-dt')
+
+
+class MyFruitcakeDetailView(DetailView):
+
+    model = Fruitcake
+
+    #@method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(MyFruitcakeDetailView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(MyFruitcakeDetailView, self).get_context_data(**kwargs)
+        context['user'] = self.request.user
+        context['uploader'] = self.request.user
+        return context
+    
+    """
+    def get_queryset(self):
+        if self.request.user.id:   # should be is_authenticated not id
+            return Fruitcake.objects.filter(uploader=self.request.user).order_by('-dt')
+            # or: popup__startswith='Pick me'
+        else:
+            return Fruitcake.objects.all().order_by('-dt')
+    """
 
 class ShipmentListView(ListView):       
     """Template is shipment_list.html
