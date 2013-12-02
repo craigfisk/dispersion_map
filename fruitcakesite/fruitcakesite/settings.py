@@ -13,8 +13,8 @@ else:
     #NOTE: switch to following IF DEBUGGING LOCALLY -- writes to console (or to file)
     # On Django email backends, see https://docs.djangoproject.com/en/1.5/topics/email/
     #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    #EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-    EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+    EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+    #EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
     #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     EMAIL_FILE_PATH = '/tmp/fruitcake_shipments'
 
@@ -107,7 +107,7 @@ ALLOWED_HOSTS = ['.justfruitcake.com', '127.0.0.1:8000', 'localhost:8081']
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Los_Angeles'
+TIME_ZONE = 'UTC' #'America/Los_Angeles'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
