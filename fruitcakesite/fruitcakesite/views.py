@@ -11,21 +11,6 @@ from django.views.generic import ListView
 
 from django.conf import settings
 
-class FruitcakeListView(ListView):
-#    @method_decorator(login_required)
-#    def dispatch(self, *args, **kwargs):
-#        return super(FruitcakeListView, self).dispatch(*args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(FruitcakeListView, self).get_context_data(**kwargs)
-        context['user'] = self.request.user
-        return context
-
-    def get_queryset(self):
-        return Fruitcake.objects.all().order_by('-times_shipped')[:16]
-
-
-
 ##def home_page(request):
 #    context['thumbnail_path'] = settings.THUMBNAIL_PATH
 ##    return render_to_response('myfruitcake/fruitcake_list.html', context_instance=RequestContext(request))

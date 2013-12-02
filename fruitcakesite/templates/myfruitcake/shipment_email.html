@@ -6,10 +6,12 @@
 {% block nav-global %}{% endblock %}
 {% block signin %}{% endblock %}
 
+{% load tz %}
+
 {% block page-content %}
 
 <div id="shipment_{{ shipment.id }}">
-<P>Special fruitcake email {{ shipment.dt }}:</P>
+<P>Special fruitcake email {{ shipment.dt|localtime }}:</P>
 
             <P>I am sending you this fruitcake from <a
                 href="http://www.justfruitcake.com">http://www.justfruitcake.com</a>.  
@@ -30,7 +32,7 @@
                     <!-- <a href="http://www.justfruitcake.com/shipment/{{ shipment.id }}"> //-->
                     <img src="http://www.justfruitcake.com/static/media/{{ fruitcake.thumbnail }}" title="{{ fruitcake.popup }}" />
                         <!-- </a> //-->
-                        <br />uploaded: {{ fruitcake.dt }}<br />by: {{ fruitcake.uploader.username }}
+                        <br />uploaded: {{ fruitcake.dt|localtime }}<br />by: {{ fruitcake.uploader.username }}
             {% comment %}
                 </figure>
                 </li>

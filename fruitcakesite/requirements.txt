@@ -1,0 +1,16 @@
+## The following requirements were added by pip --freeze:
+Django==1.5.5
+Markdown==2.3.1
+Pillow==2.2.1
+Pygments==1.6
+argparse==1.2.1
+coverage==3.7
+django-filter==0.7
+django-paypal==0.1.2
+django-registration==1.0
+djangorestframework==2.3.9
+psycopg2==2.5.1
+pytz==2013.8
+selenium==2.37.2
+wsgiref==0.1.2
+yolk==0.4.3

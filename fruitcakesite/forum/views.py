@@ -36,11 +36,13 @@ class UserProfile(models.Model):
 
 class ProfileForm(ModelForm):
     class Meta:
+        if FUNCTION_LOGGING:  logger.debug("Entering class ProfileForm")
         model = UserProfile
         exclude = ["user", "posts", "shipments"]
 
 class UserForm(ModelForm):
     class Meta:
+        if FUNCTION_LOGGING:  logger.debug("Entering class UserForm")
         model = User
         exclude = ["first_name","last_name","password","is_staff","is_active","is_superuser","last_login","date_joined","groups","user_permissions"]
 
@@ -89,18 +91,23 @@ def thread(request, pk):
 
 
 @login_required
-def profilepic(request, pk):
+#def profilepic(request, pk):
+def profilepic(request):
     if FUNCTION_LOGGING:  logger.debug("Entering profilepic()")
 
-    profile = UserProfile.objects.get(user=pk)
+    #profile = UserProfile.objects.get(user=pk)
+    profile = UserProfile.objects.get(user=request.user)
     img = None
 
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES, instance=profile)
+        #form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             # resize and save image under same filename
+            ##imfn = pjoin(MEDIA_ROOT, request.FILES['avatar'])
             imfn = pjoin(MEDIA_ROOT, profile.avatar.name)
+            #imfn = pjoin(MEDIA_ROOT, profile.avatar.name)
             #CF20121023 adding try/except framework, per PIL-handbook p. 3
             """
             im = PImage.open(imfn)
@@ -121,6 +128,7 @@ def profilepic(request, pk):
             
     else:
         form = ProfileForm(instance=profile)
+        #form = ProfileForm()
     if profile.avatar:
         img = MEDIA_URL + profile.avatar.name
     #uf = UserForm(request.POST, instance=profile.user)
@@ -130,9 +138,11 @@ def profilepic(request, pk):
 
 
 @login_required
-def userinfo(request, pk):
+#def userinfo(request, pk):
+def userinfo(request):
     if FUNCTION_LOGGING:  logger.debug("Entering userinfo()")
-    u = User.objects.get(pk=pk)
+    #u = User.objects.get(pk=pk)
+    u = User.objects.get(pk=int(request.user.id))
 
     if request.method == "POST":
         uf = UserForm(request.POST, instance=u)

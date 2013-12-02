@@ -11,22 +11,32 @@ fruitcakesite/fruitcake.log
 fruitcakesite/static/media/pics
 fruitcakesite/static/media/thumbnails
 fruitcakesite/static/media/images
-fruitcakesite/static/media
+fruitcakesite/static/media/*
+!fruitcakesite/static/media/tests/
+!fruitcakesite/static/media/tests/*
 glyphish200/
 htmlcov
 include/
-#CF20130329 changed to not exclude registration tree, since I'm using patched version of Django 1.5
-# To do this, unignore every parent directory of anything you want to unignore, so in pairs: 
-# ignore everything in a directory, but not some certain subdirectory, as follows:
-lib/*
-#except do not ignore registration directory
-!lib/python2.7/site-packages/registration/
-!lib/python2.7/site-packages/registration/*
-#also subdirectories of registration
-!lib/python2.7/site-packages/registration/**/*
+#lib [see below]
 local/
 misc/
+.project
 .pydevproject
-src/
 .settings
+src/
+#------------------------
+# I'm using patched version of django-registration tests/default_backend.py,
+# so unignore every parent directory of anything you want to unignore, so in pairs: 
+# ignore everything in a directory, but not some certain subdirectory, as follows:
+
+# To enable "git add lib/python2.7/site-packages/registration/tests/default_backend.py"
+lib/*
+# unignore "registration" directory and its children
+!lib/python2.7/site-packages/registration/
+!lib/python2.7/site-packages/registration/*
+!lib/python2.7/site-packages/registration/**/*
+
+# To enable "git add lib/python2.7/site-packages/django/contrib/gis/geoip/base.py"
+# Unignore modified geoip file: (use git ls-files to confirm it is tracked).
+!lib/python2.7/site-packages/django/contrib/gis/geoip/base.py
 

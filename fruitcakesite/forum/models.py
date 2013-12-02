@@ -1,3 +1,7 @@
+import logging
+logger = logging.getLogger(__name__)
+from fruitcakesite.settings import FUNCTION_LOGGING
+
 from django.db import models
 from django.contrib.auth.models import User
 #from django.contrib import admin
@@ -70,6 +74,7 @@ class UserProfile(models.Model):
     # was upload_to="images/" in Django by Example but ReadTheDocs "How do I use image and file fields" says MEDIA_ROOT
     # See http://readthedocs.org/docs/django/en/latest/faq/usage.html#how-do-i-use-image-and-file-fields
     # See also forum/views.py
+    if FUNCTION_LOGGING:  logger.debug("Entering class UserProfile")
     avatar = models.ImageField("Profile Pic", upload_to='images', blank=True, null=True)
     posts = models.IntegerField(default=0)
     shipments = models.IntegerField(default=0)
@@ -91,6 +96,8 @@ def create_user_profile(sender, **kwargs):
         UserProfile(user=u).save()
 """
 def create_user_profile(sender, instance, created, **kwargs):
+    if FUNCTION_LOGGING:  logger.debug("Entering create_user_profile()")
+        
     if created:
         UserProfile.objects.create(user=instance)
 

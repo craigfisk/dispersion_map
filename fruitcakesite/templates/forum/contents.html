@@ -22,13 +22,13 @@
             {% for forum in forums %}
             <tr>
                 <td {% if forloop.last %}class="last"{% endif %}>
-                <div class="title"> <a href="{% url 'forum.views.forum' forum.pk %}">{{ forum.title }}</a>
+                <div class="title"> <a href="{% url 'forum:forum_content' forum.pk %}">{{ forum.title }}</a>
                     </div></td>
                 <td {% if forloop.last %}class="last"{% endif %}>{{ forum.num_posts }}</td>
                 <td {% if forloop.last %}class="last"{% endif %}>
                     {{ forum.last_post.short|linebreaksbr }}</td>
                 <td {% if forloop.last %}class="last"{% endif %}>
-                    <a class="button" href="{% url 'forum.views.forum' forum.pk %}">VIEW</a>
+                    <a class="button" href="{% url 'forum:forum_content' forum.pk %}">VIEW</a>
                 </td>
             </tr>
 

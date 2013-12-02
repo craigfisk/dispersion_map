@@ -28,6 +28,7 @@ from django.core import mail
 from django.contrib.gis.geoip import GeoIP
 geoip = GeoIP()
 
+
 class MyfruitcakeTestCase(TestCase):
     #fixtures = ['contenttypes.json', 'auth.json', 'registration.json', 'myfruitcake.json',]
     
@@ -35,7 +36,8 @@ class MyfruitcakeTestCase(TestCase):
         self.admin = User.objects.create_superuser(username='admin', password='pwd', email='admin@justfruitcake.com')
         self.user = User.objects.create_user(username='cf', password='pwd', email='support@justfruitcake.com')
         self.otheruser = User.objects.create_user(username='fred', password='pwd', email='fred@justfruitcake.com')
-      
+
+     
     def content_test(self, url, values):
         """Get content of url and test that each of items in `values` list is present."""
         r = self.c.get(url)
@@ -68,11 +70,14 @@ class MyfruitcakeTestCase(TestCase):
         r = self.c.get('/')
         self.assertTrue('sign-out' in r.content)
 
+        testfruitcakepath = 'images/380277419_d6a8864724.jpg'
+        picpath = pjoin(MEDIA_ROOT, ('pics/' + testfruitcakepath) )
+        thumbpath = pjoin(MEDIA_ROOT, ('thumbnails/' + testfruitcakepath) )
+
 
         r = self.c.get('/myfruitcake/')
         self.assertTrue("Upload a fruitcake" in r.content)
 
-        testfruitcakepath = 'testfruitcake.jpg'
         ##testnonjpegpath = 'testnonjpeg.png'
         self.remove_test_files("pics", r"testfruitcake_?\d*\..*$")
         self.remove_test_files("thumbnails", r"testfruitcake_?\d*\..*$")
@@ -96,9 +101,7 @@ class MyfruitcakeTestCase(TestCase):
             self.assertTrue('already uploaded' in r.content)
             
             # Has the fruitcake been uploaded to the correct locations? 
-            picpath = pjoin(MEDIA_ROOT, ('pics/' + testfruitcakepath) )
-            thumbpath = pjoin(MEDIA_ROOT, ('thumbnails/' + testfruitcakepath) )
-            
+           
             self.assertEqual(os.path.exists(picpath), True)
             self.assertEqual(os.path.exists(picpath), True)
 
@@ -207,6 +210,10 @@ class MyfruitcakeTestCase(TestCase):
         r.status_code
         self.assertEqual(r.status_code, 200)
         
+        testfruitcakepath = 'images/380277419_d6a8864724.jpg'
+        picpath = pjoin(MEDIA_ROOT, ('pics/' + testfruitcakepath) )
+        thumbpath = pjoin(MEDIA_ROOT, ('thumbnails/' + testfruitcakepath) )
+
         r = self.c.get('/myfruitcake/path/')
         self.assertEqual(r.status_code, 200)
         r = self.c.get('/myfruitcake/meta/')
@@ -214,7 +221,7 @@ class MyfruitcakeTestCase(TestCase):
         r = self.c.get('/myfruitcake/search/')
         self.assertEqual(r.status_code, 200)
         # Upload a fruitcake for the admin
-        testfruitcakepath = 'testfruitcake.jpg'
+        #testfruitcakepath = 'testfruitcake.jpg'
         ##testnonjpegpath = 'testnonjpeg.png'
         self.remove_test_files("pics", r"testfruitcake_?\d*\..*$")
         self.remove_test_files("thumbnails", r"testfruitcake_?\d*\..*$")
