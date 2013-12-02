@@ -1,5 +1,5 @@
 from myfruitcake.models import Fruitcake, Shipment 
-from myfruitcake.views import MyFruitcakeListView, ShipmentListView
+from myfruitcake.views import MyFruitcakeListView, ShipmentListView #, email_fruitcake
 from django.conf.urls import patterns, url  #include
 from django.contrib.auth.decorators import login_required
 
@@ -8,6 +8,9 @@ urlpatterns = patterns('myfruitcake.views',
     #url(r'^$', MyFruitcakeListView.as_view(model=Fruitcake), name='myfruitcakelistview',
     url(r'^myshipments', login_required(ShipmentListView.as_view(model=Shipment)), name='myfruitcake_shipments'),
     url(r'^upload/$', 'upload_file', name='myfruitcake_upload'),
+
+#    url(r'^(?P<fruitcake_id>\d+)/shipment/$', 'email_fruitcake'),
+
     url(r'^about/$', 'about', name='myfruitcake_about'),
 #    url(r'^about_sample/$', 'about_sample'),
 #    url(r'^success/$', 'success', name='myfruitcake_success'),
