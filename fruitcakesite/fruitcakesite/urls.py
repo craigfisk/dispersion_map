@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from myfruitcake.models import Fruitcake, Shipment
 from forum.models import UserProfile, Forum, Thread, Post
 from django.contrib import admin
+from fruitcakesite.views import index
 
 import warnings
 warnings.simplefilter('error', DeprecationWarning)
@@ -9,6 +10,7 @@ warnings.simplefilter('error', DeprecationWarning)
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^$', index, name='index'),
     url(r'admin/', include(admin.site.urls)),
     url(r'forum/', include('forum.urls', namespace='forum')),
     url(r'myfruitcake/', include('myfruitcake.urls', namespace='fruitcake')),
