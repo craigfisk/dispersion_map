@@ -24,7 +24,7 @@ from myfruitcake.models import Fruitcake, Shipment, Like, IPAddress, FruitcakeEx
 from forum.models import UserProfile
 from forum.views import mk_paginator #, profilepic  #userinfo
 
-from django.views.generic import ListView #, TemplateView, FormView  #DetailView
+from django.views.generic import ListView, DetailView #, TemplateView, FormView  #DetailView
 
 from django import forms
 
@@ -36,7 +36,8 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
 
-from datetime import datetime
+#from datetime import datetime
+from django.utils import timezone
 from django.contrib.gis.geoip import GeoIP
 import re
 
@@ -74,6 +75,20 @@ def activity(request, pk):
     return render_to_response("myfruitcake/activity.html", add_csrf(request, shipments=shipments, media_url=MEDIA_URL), context_instance=RequestContext(request))
 """
 
+class FruitcakeListView(ListView):
+#    @method_decorator(login_required)
+#    def dispatch(self, *args, **kwargs):
+#        return super(FruitcakeListView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(FruitcakeListView, self).get_context_data(**kwargs)
+        #context['user'] = self.request.user
+        return context
+
+    def get_queryset(self):
+        return Fruitcake.objects.all().order_by('-times_shipped')[:16]
+
+
 class MyFruitcakeListView(ListView):
 #    @method_decorator(login_required)
 #    def dispatch(self, *args, **kwargs):
@@ -90,7 +105,31 @@ class MyFruitcakeListView(ListView):
             return Fruitcake.objects.filter(uploader=self.request.user).order_by('-dt')
             # or: popup__startswith='Pick me'
         else:
-            return Fruitcake.objects.all().order_by('-dt')[:8]
+            return Fruitcake.objects.all().order_by('-dt')
+
+
+class MyFruitcakeDetailView(DetailView):
+
+    model = Fruitcake
+
+    #@method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(MyFruitcakeDetailView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(MyFruitcakeDetailView, self).get_context_data(**kwargs)
+        context['user'] = self.request.user
+        context['uploader'] = self.request.user
+        return context
+    
+    """
+    def get_queryset(self):
+        if self.request.user.id:   # should be is_authenticated not id
+            return Fruitcake.objects.filter(uploader=self.request.user).order_by('-dt')
+            # or: popup__startswith='Pick me'
+        else:
+            return Fruitcake.objects.all().order_by('-dt')
+    """
 
 class ShipmentListView(ListView):       
     """Template is shipment_list.html
@@ -200,7 +239,7 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             message = cd['message']
             fruitcake = Fruitcake.objects.get(id=fruitcake_id)
             
-            this_shipment = Shipment(dt=datetime.now(),fruitcake=fruitcake,sender=request.user, message=message)
+            this_shipment = Shipment(dt=timezone.now(),fruitcake=fruitcake,sender=request.user, message=message)
             
             this_shipment.save()
 

@@ -13,8 +13,8 @@ else:
     #NOTE: switch to following IF DEBUGGING LOCALLY -- writes to console (or to file)
     # On Django email backends, see https://docs.djangoproject.com/en/1.5/topics/email/
     #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    #EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-    EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+    EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+    #EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
     #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     EMAIL_FILE_PATH = '/tmp/fruitcake_shipments'
 
@@ -122,6 +122,7 @@ USE_I18N = True
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
 USE_L10N = True
+#LANGUAGE_CODE = 'de'
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True

@@ -1,0 +1,46 @@
+{% extends "forum/fbase.html" %}        
+
+{% block title %}Myfruitcake{% endblock %}
+
+{% block sidebar %} - my fruitcake{% endblock %}
+
+{% load tz %}
+
+{% block page-content %}
+
+    <div class="main">
+        <div id="rtitle">Upload a fruitcake photo? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>
+    </div>
+
+{% block myfruitcakelist %}{% endblock myfruitcakelist %}        
+
+    {% if user.is_authenticated %}
+
+        {% if fruitcake %}
+        <br />
+        <P class="main">Fruitcake Detail (<b>click photo to send</b>):</P>
+
+        <div id="gallery_tape">
+        <ul class="gallery tape">
+            <li>
+            <figure>
+                <a href="{{ fruitcake.id }}/shipment/" title="{{ fruitcake.popup }}">
+                    <img src="{{ MEDIA_URL }}{{ fruitcake.thumbnail }}"/>
+                </a>
+                <figcaption>uploaded: {{ fruitcake.dt|localtime }}<br />by: {{ fruitcake.uploader.username }} (sent {{fruitcake.times_shipped }}x)</figcaption>
+            </figure>
+            </li>
+        </ul>
+
+        {% comment %}
+ <br />by: {{ fruitcake.uploader.username }}
+        {% endcomment %}
+        {% else %}
+            (Sorry, something went wrong.)
+        {% endif %}
+        </div>
+
+
+    {% endif %}
+
+{% endblock %}

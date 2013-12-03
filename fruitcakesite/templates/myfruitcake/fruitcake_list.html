@@ -4,6 +4,8 @@
 
 {% block sidebar %} - my fruitcake{% endblock %}
 
+{% load tz %}
+
 {% block page-content %}
 {% comment %}
 <P>fruitcake_list.html</P>
@@ -29,7 +31,7 @@
                     <a href="{{ item.id }}/shipment/" title="{{ item.popup }}">
                         <img src="{{ MEDIA_URL }}{{ item.thumbnail }}"/>
                     </a>
-                    <figcaption>uploaded: {{ item.dt }}<br />by: {{ item.uploader.username }} (sent {{item.times_shipped }}x)</figcaption>
+                    <figcaption>uploaded: {{ item.dt|localtime }}<br />by: {{ item.uploader.username }} (sent {{item.times_shipped }}x)</figcaption>
                 </figure>
                 </li>
             {% endfor %}
@@ -63,7 +65,7 @@
                         <a href="{{ item.id }}/shipment/" title="{{ item.popup }}">
                             <img src="{{ MEDIA_URL }}{{ item.thumbnail }}"/>
                         </a>
-                        <figcaption>uploaded: {{ item.dt }}<br />by: {{ item.uploader.username }} (sent {{item.times_shipped}}x )</figcaption>
+                        <figcaption>uploaded: {{ item.dt|localtime }}<br />by: {{ item.uploader.username }} (sent {{item.times_shipped}}x )</figcaption>
                     </figure>
                     </li>
                 {% endfor %}

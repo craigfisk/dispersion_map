@@ -10,24 +10,24 @@
             {% block nav-global %}
 
                 <!-- MENU -->
-                <h3><a href="{% url 'fruitcakelistview' %}">Home</a></h3>
-                <h3><a href="{% url 'myfruitcake_listview' %}">MyFruitcake</a></h3>
-                <h3><a href="{% url 'myfruitcake_shipments' %}">MyShipments</a></h3>
-                <h3><a name='forum' href="{% url 'forum.views.main' %}">Forum</a></h3>
+                <h3><a href="{% url 'fruitcake:toplistview' %}">Home</a></h3>
+                <h3><a href="{% url 'fruitcake:listview' %}">MyFruitcake</a></h3>
+                <h3><a href="{% url 'fruitcake:shipments' %}">MyShipments</a></h3>
+                <h3><a name='forum' href="{% url 'forum:forum_main' %}">Forum</a></h3>
 
                 {% if user.is_staff %} <a href="{% url 'admin:index' %}">Admin</a> {% endif %}
-                {% if user.is_staff %} <a href="{% url 'myfruitcake.views.search' %}">Search</a> {% endif %}
+                {% if user.is_staff %} <a href="{% url 'fruitcake:search' %}">Search</a> {% endif %}
 
                 {% if user.is_authenticated %}
-                    {# <h3><a href="{% url 'forum.views.userinfo' user.pk %}">MyProfile</a></h3> {% endif %} #}
-                    <h3><a href="{% url 'forum.views.userinfo' %}">MyProfile</a></h3> {% endif %}
+                    {# <h3><a href="{% url 'forum:userinfo' user.pk %}">MyProfile</a></h3> {% endif %} #}
+                    <h3><a href="{% url 'forum:userinfo' %}">MyProfile</a></h3> {% endif %}
 
                 {% if not user.is_authenticated %}<h3><a href="/registration/login/?next=/myfruitcake/">sign-in</a> | <a href="/registration/register/">register</a></h3>{% endif %}
 
                 {% if user.is_authenticated %}<h3><a href="/registration/logout/?next=/myfruitcake/">sign-out</a></h3>
                     {% endif %}
 
-                <h3><a href="{% url 'myfruitcake.views.about' %}">About</a></h3>
+                <h3><a href="{% url 'fruitcake:about' %}">About</a></h3>
 
 
             {% endblock %}

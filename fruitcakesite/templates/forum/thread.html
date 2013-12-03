@@ -11,7 +11,7 @@
 
         <div class="ttitle">{{ title }}</div>
             <div id="back">
-                <a href="{% url 'forum.views.forum' forum_pk %}">&lt;&lt; back to list of discussions</a>
+                <a href="{% url 'forum:forum_content' forum_pk %}">&lt;&lt; back to list of discussions</a>
             </div>
         <div id="list">
 
@@ -63,7 +63,7 @@
         {% endif %}
 
         <br />
-        <a class="button" href="{% url 'forum.views.post' 'reply' pk %}">Reply</a>
+        <a class="button" href="{% url 'forum:forum_post' 'reply' pk %}">Reply</a>
 
     </div>
 
