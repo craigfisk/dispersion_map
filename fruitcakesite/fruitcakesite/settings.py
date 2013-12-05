@@ -6,7 +6,7 @@ import socket
 if socket.gethostname() == 'zazen':
     DEBUG = False
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    FUNCTION_LOGGIN=False
+    FUNCTION_LOGGING=False
 else:
     DEBUG = True
     #CF20131026 added to test operating paths
@@ -32,7 +32,7 @@ IGNORABLE_404_URLS = (
         re.compile(r'^/robots\.txt$'),
         )
 
-#CF20130914 temporary
+CF20130914 temporary
 ##DEBUG=True
 
 #CF20131126 termporary
