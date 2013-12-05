@@ -63,7 +63,8 @@
         {% endif %}
 
         <br />
-        <a class="button" href="{% url 'forum:forum_reply' pk %}">Reply</a>
+        <a class="button" href="{% url 'forum:combo' ptype='add_post' post_id=pk %}">Reply</a>
+        
 
     </div>
 

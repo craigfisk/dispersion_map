@@ -156,21 +156,42 @@ def userinfo(request):
     #    img = MEDIA_URL + u.userprofile.avatar.name
     return render_to_response("forum/userinfo.html", add_csrf(request, uf=uf, u=u), context_instance=RequestContext(request))
 
-
+"""
+@login_required
+def new_thread(request, pk):
+    if FUNCTION_LOGGING:  logger.debug("Entering new_thread()")
+    action = reverse('forum:forum_new_thread', args=(pk,))
+    title = "Start New Topic"
+    subject = ''
+    return render_to_response("forum/post.html", add_csrf(request, subject=subject, action=action, title=title), context_instance=RequestContext(request))
 
 @login_required
-def post(request, ptype, pk):
-    if FUNCTION_LOGGING:  logger.debug("Entering post()")
-  
-    action = reverse("forum.views.%s" % ptype, args=[pk])
-    if ptype == "new_thread":
+def reply(request, pk):
+    if FUNCTION_LOGGING:  logger.debug("Entering reply()")
+    action = reverse('forum:forum_reply', args=(pk,))
+    title = "Reply"
+    subject = "Re: " + Thread.objects.get(pk=pk).title
+    return render_to_response("forum/post.html", add_csrf(request, subject=subject, action=action, title=title), context_instance=RequestContext(request))
+"""
+
+@login_required
+def combo(request, ptype, post_id):
+#def post(request, ptype, pk):
+    #if FUNCTION_LOGGING:  logger.debug("Entering post()")
+    #action = reverse("forum:forum_post" "%s" % ptype, args=[pk])
+    action_path = "forum:forum_%s" % ptype
+    action = reverse(action_path, args=(post_id,) )
+
+    if ptype == "add_thread":
         title = "Start New Topic"
         subject = ''
-    elif ptype == "reply":
+
+    elif ptype == "add_post":
         title = "Reply"
-        subject = "Re: " + Thread.objects.get(pk=pk).title
+        subject = "re: " + Thread.objects.get(pk=post_id).title
 
     return render_to_response("forum/post.html", add_csrf(request, subject=subject, action=action, title=title), context_instance=RequestContext(request))
+
 
 def increment_post_counter(request):
     #CF20121105 changed to match user.userprofile structure
@@ -180,27 +201,26 @@ def increment_post_counter(request):
     profile.save()
 
 @login_required
-def new_thread(request, pk):
-    if FUNCTION_LOGGING:  logger.debug("Entering new_thread()")
- 
+def add_thread(request, pk):
+    if FUNCTION_LOGGING:  logger.debug("Entering add_thread()")
     p = request.POST
     if p["subject"] and p["body"]:
         forum = Forum.objects.get(pk=pk)
         thread = Thread.objects.create(forum=forum, title=p["subject"], creator=request.user)
         Post.objects.create(thread=thread, title=p["subject"], body=p["body"], creator=request.user)
         increment_post_counter(request)
-    return HttpResponseRedirect(reverse("forum.views.forum", args=[pk]))
+    return HttpResponseRedirect(reverse('forum:forum_content', args=(pk,)) )
 
 @login_required
-def reply(request, pk):
-    if FUNCTION_LOGGING:  logger.debug("Entering reply()")
- 
+def add_post(request, pk):
+    if FUNCTION_LOGGING:  logger.debug("Entering add_post()")
     p = request.POST
     if p["body"]:
         thread = Thread.objects.get(pk=pk)
         post = Post.objects.create(thread=thread, title=p["subject"], body=p["body"], creator=request.user)
         increment_post_counter(request)
-    return HttpResponseRedirect(reverse("forum.views.thread", args=[pk]) + "?page=last")
+    #return HttpResponseRedirect(reverse("forum.views.thread", args=[pk]) + "?page=last")
+    return HttpResponseRedirect(reverse("forum:forum_thread", args=(pk,)) + "?page=last")
 
 def add_csrf(request, **kwargs):
     d = dict(user=request.user, **kwargs)

@@ -75,6 +75,7 @@ h3 { margin-right: 30px; display: inline; }
 .title { margin-top: 10px; padding-left: 0px; }
 .title a { text-decoration: none;}
 .button { background: #999; color: white; padding: 6px; text-decoration: none; float: right; }
+.button-left { background: #999; color: white; padding: 6px; text-decoration: none; float: left; }
 .date { padding-left: 5px; font-size: 0.8em; } 
 .ppic { float: right; }
 .clear { clear: both; }
