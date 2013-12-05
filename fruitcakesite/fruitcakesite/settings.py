@@ -32,7 +32,7 @@ IGNORABLE_404_URLS = (
         re.compile(r'^/robots\.txt$'),
         )
 
-CF20130914 temporary
+#CF20130914 temporary
 ##DEBUG=True
 
 #CF20131126 termporary
