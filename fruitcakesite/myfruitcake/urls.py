@@ -10,7 +10,7 @@ urlpatterns = patterns('myfruitcake.views',
     url(r'^myfruitcake/(?P<pk>\d+)/$', MyFruitcakeDetailView.as_view(), name='detailview'),
     url(r'^myshipments', login_required(ShipmentListView.as_view()), name='shipments'),
     url(r'^upload/$', 'upload_file', name='myfruitcake_upload'),
-    url(r'(?P<fruitcake_id>\d+)/shipment/$', 'email_fruitcake', name='send_fruitcake'),
+    url(r'^myfruitcake/(?P<fruitcake_id>\d+)/shipment/$', 'email_fruitcake', name='send_fruitcake'),
 
     url(r'^about/$', 'about', name='about'),
 #    url(r'^success/$', 'success', name='myfruitcake_success'),

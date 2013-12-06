@@ -18,6 +18,7 @@
 {% block myfruitcakelist %}{% endblock myfruitcakelist %}        
 
     {% if user.is_authenticated %}
+        {# <P>-----AUTHENTICATED------</P> #}
 
         {% if fruitcake_list %}
         <br />
@@ -28,7 +29,7 @@
             {% for item in fruitcake_list %}
                 <li>
                 <figure>
-                    <a href="{{ item.id }}/shipment/" title="{{ item.popup }}">
+                    <a href="/myfruitcake/myfruitcake/{{ item.id }}/shipment/" title="{{ item.popup }}">
                         <img src="{{ MEDIA_URL }}{{ item.thumbnail }}"/>
                     </a>
                     <figcaption>uploaded: {{ item.dt|localtime }}<br />by: {{ item.uploader.username }} (sent {{item.times_shipped }}x)</figcaption>
@@ -46,7 +47,7 @@
         </div>
 
     {% else %}
-        
+        {# <P>-----NOT AUTHENTICATED------</P> #}
         {% comment %}
         Context[uploader] is in MyFruitcakeListView and not FruitcakeListView, so this is one way to tell how we got here
         {% endcomment %}
@@ -62,7 +63,7 @@
                 {% for item in fruitcake_list %}
                     <li>
                     <figure>
-                        <a href="{{ item.id }}/shipment/" title="{{ item.popup }}">
+                        <a href="/myfruitcake/myfruitcake/{{ item.id }}/shipment/" title="{{ item.popup }}">
                             <img src="{{ MEDIA_URL }}{{ item.thumbnail }}"/>
                         </a>
                         <figcaption>uploaded: {{ item.dt|localtime }}<br />by: {{ item.uploader.username }} (sent {{item.times_shipped}}x )</figcaption>

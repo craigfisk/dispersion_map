@@ -231,17 +231,12 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             logger.debug("Email validation error on form: %s" % (e))
             raise
 
-        #formset = EmailContactFormset(request.POST, instance=shipment)
         try:
             form.is_valid()
-        #if form.is_valid():
             cd = form.cleaned_data # cd['email'] will now be the list of email addresses to send to
-            #subject = 'Fruitcake for you'
             message = cd['message']
             fruitcake = Fruitcake.objects.get(id=fruitcake_id)
-            
             this_shipment = Shipment(dt=timezone.now(),fruitcake=fruitcake,sender=request.user, message=message)
-            
             this_shipment.save()
 
             if not shipment_id:
@@ -261,11 +256,12 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             u.shipments += 1
             u.save()
 
-            # Using get_or_create() to only add unique ipaddressses. ip is the object; created is a boolean.
             addr=request.META['REMOTE_ADDR']
             if addr == '127.0.0.1':
                 addr = CF_HOME_IP
             city=g.city(addr)
+
+            # Using get_or_create() to only add unique ipaddressses. ip is the object; created is a boolean.
             ip, created = IPAddress.objects.get_or_create(ipaddress=addr,city=city['city'],region=city['region'],country_name=city['country_name'],country_code=city['country_code'])
             this_shipment.ipaddresses.add(ip)
            

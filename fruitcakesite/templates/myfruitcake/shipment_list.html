@@ -71,7 +71,7 @@
                     <li class="history_item">
                     - Shipment {{ leg.id }}, {{ leg.dt|localtime }} sent by <b>{{ leg.sender }}
                         {% for ip in leg.ipaddresses.all %}
-                        ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }} - {{ ip.ipaddress }}) 
+                        ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }}{# - {{ ip.ipaddress }}#}) 
                         {% endfor %}</b>
                         with message &quot;{{ leg.message }}&quot;
                         <br />
