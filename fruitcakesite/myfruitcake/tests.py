@@ -5,7 +5,7 @@
 import os
 import re
 from os.path import join as pjoin
-from fruitcakesite.settings import MEDIA_ROOT
+from fruitcakesite.settings import MEDIA_ROOT, CF_HOME_IP
 
 from datetime import datetime
 from django.utils import timezone
@@ -284,19 +284,19 @@ class MyfruitcakeTestCase(TestCase):
         
 class IPAddresMethodTests(TestCase):
     def setUp(self):
-        ip = IPAddress(ipaddress='184.76.1.84')
+        ip = IPAddress(ipaddress=CF_HOME_IP)
 
     def test_get_city_from_geoIP(self):
         """
-        get_city() should return 'Portland' for ipaddress 184.76.1.84
+        get_city() should return 'Portland' for ipaddress CF_HOME_IP
         """
-        addr = '184.76.1.84'
+        addr = CF_HOME_IP
         city = geoip.city(addr)['city']
         self.assertEqual(city==u'Portland', True)
 
     def test_IPAddress__unicode__(self):
-        test = IPAddress(ipaddress='184.76.1.84')
-        self.assertEqual(test.__unicode__(), '184.76.1.84')
+        test = IPAddress(ipaddress=CF_HOME_IP)
+        self.assertEqual(test.__unicode__(), CF_HOME_IP)
         self.assertEqual(test.get_city()['city'], u'Portland')
 
 

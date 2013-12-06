@@ -2,6 +2,8 @@ import logging
 logger = logging.getLogger(__name__)
 from fruitcakesite.settings import FUNCTION_LOGGING
 
+from django.core.urlresolvers import reverse
+
 from smtplib import SMTPException
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email#from string import join
@@ -17,8 +19,7 @@ from django.core.context_processors import csrf
 #from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.forms import ModelForm
 #from django.contrib.auth.models import User
-#from django.core.urlresolvers import reverse
-from fruitcakesite.settings import MEDIA_URL  #MEDIA_ROOT, WIDTH_AVATAR, WIDTH_THUMBNAIL
+from fruitcakesite.settings import MEDIA_URL, CF_HOME_IP  #MEDIA_ROOT, WIDTH_AVATAR, WIDTH_THUMBNAIL
 
 from myfruitcake.models import Fruitcake, Shipment, Like, IPAddress, FruitcakeException #Upload
 from forum.models import UserProfile
@@ -207,7 +208,7 @@ from django.template import RequestContext
 @login_required
 def email_fruitcake(request, fruitcake_id, shipment_id=None):
     """Create instance of Shipment and associated Addressees and send it as email. 
-    1) obtain the fruitcake id from passed in value of pk, the sender from request.user, fill in the message
+    1) obtain the fruitcake id passed in parameter, the sender from request.user, fill in the message
     (later we'll get it, too, from the form, adding to initial={'message': 'Fruitcake for you! etc.), and a list of 
     email addressees from the form.  2) create an instance of Shipment with m2m create of email addresses using the
     list, and then save all that,(see docs.djangoproject.com "Related Objects Reference") 3) email using
@@ -263,7 +264,7 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             # Using get_or_create() to only add unique ipaddressses. ip is the object; created is a boolean.
             addr=request.META['REMOTE_ADDR']
             if addr == '127.0.0.1':
-                addr = '184.76.1.84'
+                addr = CF_HOME_IP
             city=g.city(addr)
             ip, created = IPAddress.objects.get_or_create(ipaddress=addr,city=city['city'],region=city['region'],country_name=city['country_name'],country_code=city['country_code'])
             this_shipment.ipaddresses.add(ip)
@@ -319,10 +320,6 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
                     logger.debug("SMTPException: %s, on shipment to: %s with bcc: %s, with message: %s" % (e, to, bcc, msg))
                     raise
                 
-
-                
-                
-                
             if not this_shipment.origin:
                 this_shipment_origin = 0
             else:
@@ -332,10 +329,10 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             else:
                 this_shipment_parent = this_shipment.parent
 
+            return HttpResponseRedirect(reverse('fruitcake:shipments') )
             #return HttpResponse("Sent!")
-            return render_to_response("myfruitcake/shipment_sent.html", add_csrf(request, media_url=MEDIA_URL), context_instance=RequestContext(request))
+            #return render_to_response("myfruitcake/shipment_sent.html", add_csrf(request, media_url=MEDIA_URL), context_instance=RequestContext(request))
             #return HttpResponse("Sent with following values: shipment_id: %s, this_shipment_origin: %s, this_shipment_parent: %s" % (shipment_id, this_shipment_origin, this_shipment_parent) )
-            ##return HttpResponseRedirect('/myfruitcake/success/')
             #return HttpResponseRedirect("/myfruitcake/%(id)s/?err=success" % {"id":shipment_id})
 
         #else:
@@ -404,9 +401,11 @@ def upload_file(request):
                 pic.pic.name = pjoin('pics/', file_to_upload)
                 pic.thumbnail.name = pjoin('thumbnails/', file_to_upload)
 
-                # .save() methiod on the model saves 2 processed versions of the image in pics and thumbnails
+                # .save() method on the model saves 2 processed versions of the image in pics and thumbnails
                 pic.save()
-                return HttpResponseRedirect('/myfruitcake/')   
+                return HttpResponseRedirect(reverse('fruitcake:listview') )  
+                #return HttpResponseRedirect('/myfruitcake/myfruitcake/')   
+                #return HttpResponseRedirect('/myfruitcake/')   
                 # return HttpResponseRedirect('/myfruitcake/success/')
             else:
                 return HttpResponse('Oops! You already uploaded this file. Please try a different one. Thanks!')

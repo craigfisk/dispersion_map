@@ -32,6 +32,7 @@ IGNORABLE_404_URLS = (
         re.compile(r'^/robots\.txt$'),
         )
 
+CF_HOME_IP = '76.105.194.64'
 #CF20130914 temporary
 ##DEBUG=True
 
