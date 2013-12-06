@@ -2,9 +2,6 @@
 <head>
     <title>Justfruitcake {% block title %}{% endblock %}</title>
     <!-- <meta http-equiv="refresh" content="2">  //-->
-    {% comment %}
-    <link rel="stylesheet" href="http://www.justfruitcake.com/static/fbasestyles.css" type="text/css" media="screen" charset="utf-8" />
-    {% endcomment %}
     <link rel="stylesheet" href="{{ STATIC_URL }}fbasestyles.css" type="text/css" media="screen" charset="utf-8" />
 
     <script type="text/javascript">
@@ -47,8 +44,7 @@
     </script>
 
     {# Panoramio section, see http://www.panoramio.com/api/widget/api.html #}
-    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}fbasestyles.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ STATIC_URL }}favicon.ico" />
     <!--
     <script type="text/javascript" src="http://www.panoramio.com/wapi/wapi.js?v=1&amp;hl=fr"></script>
     //-->

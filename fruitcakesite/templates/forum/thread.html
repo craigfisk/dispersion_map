@@ -3,7 +3,7 @@
 
 {% block title %}{{ block.super }} Thread Discussion{% endblock %}
 
-{% block sidebar %} - discussion <style type="text/css"> </style> {% endblock %}
+{% block sidebar %} - discussion{% endblock %}
 
 {% block page-content %}
 
@@ -63,7 +63,8 @@
         {% endif %}
 
         <br />
-        <a class="button" href="{% url 'forum:forum_post' 'reply' pk %}">Reply</a>
+        <a class="button" href="{% url 'forum:combo' ptype='add_post' post_id=pk %}">Reply</a>
+        
 
     </div>
 

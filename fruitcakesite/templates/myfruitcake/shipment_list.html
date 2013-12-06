@@ -33,7 +33,6 @@
 
 
         {% if shipment_list %}
-
             {% for shipment in shipment_list %}
 
                 <table><tr>
@@ -41,7 +40,7 @@
                 <td valign="top">
 
                 <figure>
-                    <a href="{{ shipment.fruitcake.id }}/shipment/" title="{{ shipment.fruitcake.popup }}">
+                    <a href="/myfruitcake/myfruitcake/{{ shipment.fruitcake.id }}/shipment/" title="{{ shipment.fruitcake.popup }}">
                         <img src="{{ MEDIA_URL }}{{ shipment.fruitcake.thumbnail }}"/>
                     </a>
                     <figcaption>uploaded: {{ shipment.fruitcake.dt|localtime }}<br />by: {{ shipment.fruitcake.uploader.username }} (sent {{shipment.fruitcake.times_shipped}}x)</figcaption>
@@ -50,19 +49,19 @@
 
                 <td border="1" valign="top" width="100%" height="100%">
 
-                {# comment #}
+                {% comment %}
+                
                 <b>Map: {{ shipment.get_shipment_list | length }}, iteration: {{ forloop.counter0 }}</b>
 
                 {% if forloop.counter0 == 0 %}
                     <P>counter0 here</P>
                     <div id="map-canvas">Map</div>
+
                 {% else %}
                 {% endif %}
 
-                {# endcomment #}
+                {% endcomment %}
 
-                {# comment #}
- 
                 {% if shipment.get_shipment_list %}
 
                 <BR />
@@ -72,7 +71,7 @@
                     <li class="history_item">
                     - Shipment {{ leg.id }}, {{ leg.dt|localtime }} sent by <b>{{ leg.sender }}
                         {% for ip in leg.ipaddresses.all %}
-                        ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }} - {{ ip.ipaddress }}) 
+                        ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }}{# - {{ ip.ipaddress }}#}) 
                         {% endfor %}</b>
                         with message &quot;{{ leg.message }}&quot;
                         <br />

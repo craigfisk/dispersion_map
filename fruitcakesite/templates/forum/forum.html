@@ -10,11 +10,14 @@
     <div class="main">
 
       <div class="ttitle">Forum: {{ title }}</div>
+       <div style="margin-left:0px; bgcolor: orange">
         <div id="back">
-            <a href="{% url 'forum:forum_main' %}">&lt;&lt; back to list of forums</a>
+            <a class="button-left" href="{% url 'forum:forum_main' %}">&lt;&lt; back to list of forums</a>
         </div>
-
-      &nbsp;<a id="new_topic" class="buttont" href="{% url 'forum:forum_post' 'new_thread' pk %}">&gt;&gt; start new discussion</a>
+        <div id="new_topic">
+            <a id="new_topic" class="button-left" href="{% url 'forum:combo' ptype='add_thread' post_id=pk %}">&gt;&gt; start new discussion</a>
+        </div>
+       </div>
         <br />
         <br />
 

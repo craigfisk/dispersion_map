@@ -6,10 +6,11 @@ import socket
 if socket.gethostname() == 'zazen':
     DEBUG = False
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    FUNCTION_LOGGING=False
 else:
     DEBUG = True
     #CF20131026 added to test operating paths
-    FUNCTION_LOGGING=True
+    FUNCTION_LOGGING=False #True
     #NOTE: switch to following IF DEBUGGING LOCALLY -- writes to console (or to file)
     # On Django email backends, see https://docs.djangoproject.com/en/1.5/topics/email/
     #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -31,11 +32,12 @@ IGNORABLE_404_URLS = (
         re.compile(r'^/robots\.txt$'),
         )
 
+CF_HOME_IP = '76.105.194.64'
 #CF20130914 temporary
-DEBUG=True
+##DEBUG=True
 
 #CF20131126 termporary
-FUNCTION_LOGGING=True
+#FUNCTION_LOGGING=True
 
 TEMPLATE_DEBUG = DEBUG
 
