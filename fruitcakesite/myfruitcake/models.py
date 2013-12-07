@@ -54,6 +54,7 @@ class Fruitcake(models.Model):
         setattrself, self.thumbnail.name, thumbname)
     """
 
+
     def save(self, *args, **kwargs):
         """
         Saves STANDARD and THUMBNAIL versions of uploaded image
@@ -198,4 +199,13 @@ class Shipment(models.Model):
         parent_list = Shipment.objects.filter(pk__in=mylist).order_by('-dt')
         return parent_list
     """
+    
+
+from django.db.models.signals import pre_save
+from django.dispatch.dispatcher import receiver
+
+@receiver(pre_save, sender=Shipment, dispatch_uid="shipment_pre_save")
+def increment_times_shipped_on_save(sender, instance, **kwargs):
+    instance.fruitcake.times_shipped += 1
+    instance.fruitcake.save()
     

@@ -219,6 +219,12 @@ from django.forms.models import inlineformset_factory
 from myfruitcake.models import EmailContact
 from django.template import RequestContext
 
+
+def increment_times_shipped(fruitcake_id):
+    fruitcake = get_object_or_404(Fruitcake, pk=fruitcake_id)
+    fruitcake.times_shipped += 1
+    fruitcake.save()
+        
 #@login_required # switched to is_authenticated on POST only so GET displays; user can see but not send.
 
 @login_required
@@ -253,7 +259,7 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             message = cd['message']
             fruitcake = Fruitcake.objects.get(id=fruitcake_id)
             this_shipment = Shipment(dt=timezone.now(),fruitcake=fruitcake,sender=request.user, message=message)
-            this_shipment.save()
+            #this_shipment.save()
 
             if not shipment_id:
                 this_shipment.origin = this_shipment
@@ -265,8 +271,8 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             
             this_shipment.save()
 
-            fruitcake.times_shipped += 1
-            fruitcake.save()
+            #increment_times_shipped(fruitcake.id)
+            #fruitcake.save()
 
             u = UserProfile.objects.get(pk=request.user.id)
             u.shipments += 1
