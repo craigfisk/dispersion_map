@@ -51,7 +51,7 @@ class Fruitcake(models.Model):
     def __init__(self, *args, **kwargs):
         p = getattr(self, pic)
         thumbname = re.sub('^pics\/', 'thumbnails/', p.name)
-        setattr(self, self.thumbnail.name, thumbname)
+        setattrself, self.thumbnail.name, thumbname)
     """
 
     def save(self, *args, **kwargs):

@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 #from django.utils.decorators import method_decorator
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render_to_response #get_object_or_404, 
+from django.shortcuts import render_to_response, get_object_or_404
 from django.core.context_processors import csrf
 #from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.forms import ModelForm
@@ -143,9 +143,27 @@ class ShipmentListView(ListView):
 
     def get_queryset(self):
         # chain = Shipment.objects.filter(id__in=mylist)
-        if self.request.user:   # should be is_authenticated not id
+        if self.request.user:
             return Shipment.objects.filter(sender=self.request.user).order_by('-dt')
+            
+            #return Shipment.objects.filter(sender=self.request.user).filter(shipment_id=self.shipment_id).order_by('-dt')
+        
 
+class ShipmentDetailView(DetailView):       
+    """Template is shipment_detail.html
+    """
+    model = Shipment
+    template_name = 'myfruitcake/shipment_detail.html'
+     
+    def get_context_data(self, **kwargs):
+        context = super(ShipmentDetailView, self).get_context_data(**kwargs)
+        context['user'] = self.request.user
+        return context
+
+    def get_queryset(self):
+        self.shipment = get_object_or_404(Shipment, id=self.kwargs['pk'])  #self.kwargs['pk']
+        shipment = Shipment.objects.filter(origin_id=self.shipment.origin_id).order_by('-dt')
+        return shipment
 
      
 # https://docs.djangoproject.com/en/1.4/topics/forms/modelforms/   
@@ -166,8 +184,7 @@ class ShipmentForm(ModelForm):
         
 class MultiEmailField(forms.Field):
     def to_python(self, value):
-        """Normalize to list of strings; return empty list if no input.
-        """
+        #Normalize to list of strings; return empty list if no input.
         if not value:
             return []
         # Create a list on any of pattern, strip white space, lowercase.
@@ -176,8 +193,7 @@ class MultiEmailField(forms.Field):
         return r
     # See https://docs.djangoproject.com/en/dev/ref/forms/validation/#form-field-default-cleaning
     def validate(self, value):
-        """Check for valid email addresses
-        """
+        #Check for valid email addresses
         if FUNCTION_LOGGING: logger.debug("Entering validate()")
         super(MultiEmailField, self).validate(value)
       
@@ -192,11 +208,11 @@ class EmailContactForm(forms.Form):
     # see class MultiEmailField above
     email = MultiEmailField(help_text="(Please provide one or more email addresses.)", widget=forms.TextInput(attrs={'size':'32'}) )
     message = forms.CharField(max_length='256', widget=forms.Textarea(attrs={'size':'32'}) )
-    """ 
-    def check_addresses(self):
-        for email in self.cleaned_data.get('emails'):
-            email.validate(email)
-    """
+     
+    #def check_addresses(self):
+    #    for email in self.cleaned_data.get('emails'):
+    #        email.validate(email)
+    
 
 from django.core.mail import get_connection
 from django.forms.models import inlineformset_factory
