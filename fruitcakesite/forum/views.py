@@ -7,7 +7,7 @@ from PIL import Image as PImage
 from os.path import join as pjoin
 
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect #, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response #get_object_or_404, 
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
@@ -204,7 +204,10 @@ def increment_post_counter(request):
 def add_thread(request, pk):
     if FUNCTION_LOGGING:  logger.debug("Entering add_thread()")
     p = request.POST
+    
     if p["subject"] and p["body"]:
+        if len(p["subject"]) > 60: return HttpResponse("Sorry, subject limited to 60 characters in length")
+        if len(p["body"]) > 1024: return  HttpResponse("Sorry, limited to 1024 characters in length")
         forum = Forum.objects.get(pk=pk)
         thread = Thread.objects.create(forum=forum, title=p["subject"], creator=request.user)
         Post.objects.create(thread=thread, title=p["subject"], body=p["body"], creator=request.user)
@@ -216,6 +219,8 @@ def add_post(request, pk):
     if FUNCTION_LOGGING:  logger.debug("Entering add_post()")
     p = request.POST
     if p["body"]:
+        if p["subject"] and len(p["subject"]) > 60: return HttpResponse("Sorry, subject is limited to 60 characters in length")
+        if len(p["body"]) > 1024: return  HttpResponse("Sorry, limited to 1024 characters in length")
         thread = Thread.objects.get(pk=pk)
         post = Post.objects.create(thread=thread, title=p["subject"], body=p["body"], creator=request.user)
         increment_post_counter(request)
