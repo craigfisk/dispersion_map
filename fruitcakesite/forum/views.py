@@ -219,8 +219,10 @@ def add_post(request, pk):
     if FUNCTION_LOGGING:  logger.debug("Entering add_post()")
     p = request.POST
     if p["body"]:
-        if p["subject"] and len(p["subject"]) > 60: return HttpResponse("Sorry, subject is limited to 60 characters in length")
-        if len(p["body"]) > 1024: return  HttpResponse("Sorry, limited to 1024 characters in length")
+        if p["subject"] and len(p["subject"]) > 60: 
+                return HttpResponse("Sorry, subject is limited to 60 characters in length")
+        if len(p["body"]) > 1024: 
+                return  HttpResponse("Sorry, limited to 1024 characters in length")
         thread = Thread.objects.get(pk=pk)
         post = Post.objects.create(thread=thread, title=p["subject"], body=p["body"], creator=request.user)
         increment_post_counter(request)
