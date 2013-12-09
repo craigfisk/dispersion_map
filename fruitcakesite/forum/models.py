@@ -85,6 +85,8 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return unicode(self.user)
 
+    def date_joined(self):
+        return self.user.date_joined
 
 ####CF20121105 replacing following function (and UserProfile.user def above) on model of 1.4 django docs
 # see https://docs.djangoproject.com/en/1.4/topics/auth/#storing-additional-information-about-users
