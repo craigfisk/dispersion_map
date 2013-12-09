@@ -69,7 +69,7 @@
                     <ol class="history_area" reversed >
                     {% for leg in shipment.get_shipment_list %}
                     <li class="history_item">
-                    - origin_id: {{leg.origin_id}} parent_id: {{leg.parent_id}} Shipment {{ leg.id }}, {{ leg.dt|localtime }} sent by <b>{{ leg.sender }}
+                    - {# origin_id: {{leg.origin_id}} parent_id: {{leg.parent_id}} #} Shipment {{ leg.id }}, {{ leg.dt|localtime }} sent by <b>{{ leg.sender }}
                         {% for ip in leg.ipaddresses.all %}
                         ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }}{# - {{ ip.ipaddress }}#}) 
                         {% endfor %}</b>
