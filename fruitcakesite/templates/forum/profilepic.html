@@ -26,6 +26,7 @@
         <form enctype="multipart/form-data" action="" method="POST"> {% csrf_token %}
             <table>
                 {{ form.as_table }}
+                <P>(Only handles .JPG photo files</P>
             </table>
             <table>
                 {% if img %} 

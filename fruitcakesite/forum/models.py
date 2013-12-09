@@ -77,7 +77,7 @@ class UserProfile(models.Model):
     # See http://readthedocs.org/docs/django/en/latest/faq/usage.html#how-do-i-use-image-and-file-fields
     # See also forum/views.py
     if FUNCTION_LOGGING:  logger.debug("Entering class UserProfile")
-    avatar = models.ImageField("Profile Pic", upload_to='images', blank=True, null=True)
+    avatar = models.ImageField("Profile photo", upload_to='images', blank=True, null=True)
     posts = models.IntegerField(default=0)
     shipments = models.IntegerField(default=0)
     user = models.OneToOneField(User)
