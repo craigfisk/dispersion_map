@@ -5,6 +5,8 @@
 
 {% block sidebar %} - discussion{% endblock %}
 
+{% load tz %}
+
 {% block page-content %}
 
     <div class="main">
@@ -29,12 +31,12 @@
                             {% endif %}
                         {{ post.creator }}<br />
                         Posts: {{ pdata.0 }}<br />
-                        Joined: {{ post.creator.date_joined|date:"M d Y" }}
+                        Joined: {{ post.creator.date_joined|localtime }}  {# date:"M d Y"  #}
                         {% endwith %}
                     </div>
 
                     <span class="title">{{ post.title }}</span><br />
-                    by {{ post.creator }} | <span class="date">{{ post.created }}</span> <br /><br />
+                    by {{ post.creator }} | <span class="date">{{ post.created|localtime }}</span> <br /><br />
 
                     {{ post.body|linebreaksbr }} <br />
 

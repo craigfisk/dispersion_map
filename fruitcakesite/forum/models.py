@@ -6,7 +6,8 @@ from django.db import models
 from django.contrib.auth.models import User
 #from django.contrib import admin
 from django.db.models.signals import post_save
-
+from django.utils.timezone import localtime
+from django.utils.formats import localize
 
 class Forum(models.Model):
     title = models.CharField(max_length=60)
@@ -59,7 +60,8 @@ class Post(models.Model):
         return u"%s - %s - %s" % (self.creator, self.thread, self.title)
 
     def short(self):
-        return u"%s - %s\n%s" % (self.creator, self.title, self.created.strftime("%b %d, %I:%M %p"))
+        #return u"%s - %s\n%s" % (self.creator, self.title, self.created.strftime("%b %d, %I:%M %p"))
+        return u"%s - %s\n%s" % (self.creator, self.title, localize(localtime(self.created)) )
     short.allow_tags = True
 
     def profile_data(self):
