@@ -35,7 +35,7 @@ class Fruitcake(models.Model):
     likes = models.ManyToManyField('Like', related_name='likes', verbose_name='likes', blank=True, null=True)
     times_shipped = models.IntegerField(default=0)
     def __unicode__(self):
-        return unicode(self.pic)
+        return unicode(self.id)
     
     class Meta:
         app_label = 'myfruitcake'
