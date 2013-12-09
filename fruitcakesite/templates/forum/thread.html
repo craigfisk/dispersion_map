@@ -9,7 +9,7 @@
 
 {% block page-content %}
 
-    <div class="main">
+<div class="main"> 
 
         <div class="ttitle">{{ title }}</div>
             <div id="back">
@@ -61,12 +61,17 @@
                     <a href="?page={{ threads.next_page_number }}"> &gt;&gt; next</a>
                 {% endif %}
             </span>
+
+
+
         </div>
+
+
         {% endif %}
 
         <br />
-        <a class="button" href="{% url 'forum:combo' ptype='add_post' post_id=pk %}">Reply</a>
         
+        <a class="button" href="{% url 'forum:combo' ptype='add_post' post_id=pk %}">Reply</a>
 
     </div>
 

@@ -71,7 +71,7 @@ h3 { margin-right: 30px; display: inline; }
 /* from thread.html */
 
 .pagination { margin-top: 20px; margin-left: -20px; }
-.main { margin-left: 5px; margin-top: 10px; margin-bottom: 0px; padding-bottom: 0px; width: 910px; }
+.main { margin-left: 5px; margin-top: 10px; margin-bottom: 0px; padding-bottom: 0px; width: 640px; } #width: 910px;
 .title { margin-top: 10px; padding-left: 0px; }
 .title a { text-decoration: none;}
 .button { background: #999; color: white; padding: 6px; text-decoration: none; float: right; }
