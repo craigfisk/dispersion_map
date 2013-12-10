@@ -4,8 +4,8 @@ from myfruitcake.models import Fruitcake, Shipment
 ### Admin
 
 class FruitcakeAdmin(admin.ModelAdmin):
-    list_display = ['id','dt', 'uploader', 'popup', 'pic']
-    search_fields = ['id','dt','uploader','popup', 'pic']
+    list_display = ['id','dt', 'uploader', 'popup', 'thumbnail']
+    search_fields = ['id','dt','uploader','popup', 'thumbnail']
     exclude = ('shipments', 'uploads')
     list_filter = ['dt', 'uploader']
     date_hierarchy = 'dt'

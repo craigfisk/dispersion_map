@@ -4,7 +4,8 @@ from forum.models import UserProfile, Forum, Thread, Post
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ["id", "user", "shipments", "posts", "avatar"]
+    list_display = ["id", "user", "date_joined", "shipments", "posts", "avatar"]
+    list_filter = ('shipments', 'posts',)
 
 class ForumAdmin(admin.ModelAdmin):
     list_display = ["title"]

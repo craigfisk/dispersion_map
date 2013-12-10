@@ -35,7 +35,7 @@ class Fruitcake(models.Model):
     likes = models.ManyToManyField('Like', related_name='likes', verbose_name='likes', blank=True, null=True)
     times_shipped = models.IntegerField(default=0)
     def __unicode__(self):
-        return unicode(self.pic)
+        return unicode(self.id)
     
     class Meta:
         app_label = 'myfruitcake'
@@ -51,8 +51,9 @@ class Fruitcake(models.Model):
     def __init__(self, *args, **kwargs):
         p = getattr(self, pic)
         thumbname = re.sub('^pics\/', 'thumbnails/', p.name)
-        setattr(self, self.thumbnail.name, thumbname)
+        setattrself, self.thumbnail.name, thumbname)
     """
+
 
     def save(self, *args, **kwargs):
         """
@@ -198,4 +199,13 @@ class Shipment(models.Model):
         parent_list = Shipment.objects.filter(pk__in=mylist).order_by('-dt')
         return parent_list
     """
+    
+
+from django.db.models.signals import pre_save
+from django.dispatch.dispatcher import receiver
+
+@receiver(pre_save, sender=Shipment, dispatch_uid="shipment_pre_save")
+def increment_times_shipped_on_save(sender, instance, **kwargs):
+    instance.fruitcake.times_shipped += 1
+    instance.fruitcake.save()
     
