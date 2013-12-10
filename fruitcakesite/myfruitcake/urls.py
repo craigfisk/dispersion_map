@@ -24,7 +24,7 @@ urlpatterns = patterns('myfruitcake.views',
     url(r'^meta/.*$', 'meta', name='meta'),
 #    url(r'^search-form/$', 'search_form', name='myfruitcake_search_form'),
     url(r'^search/$', 'search', name='search'),
-    url(r'^map/$', 'testmap', name='testmap'),
+    #url(r'^map/$', 'testmap', name='testmap'),
 #    url(r'^duplicate/$', 'duplicate', name='myfruitcake_duplicate'),
 ) 
 

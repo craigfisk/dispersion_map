@@ -1,0 +1,11 @@
+<style>
+body { background: blue; } 
+.main { background: yellow; font-family: courier; }  
+
+@media screen {
+.sidebar { color: red; font-size: 24px; }
+}
+
+
+</style>
+
