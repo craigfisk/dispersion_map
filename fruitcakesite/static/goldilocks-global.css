@@ -180,7 +180,9 @@ maxii
     font-size: 0.9em; 
 }
 
-#menu { background: brown; }
+#menu { 
+/*background: brown; */
+}
 
 /*
 .menu a {
