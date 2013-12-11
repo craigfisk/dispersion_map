@@ -53,7 +53,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
   }
   
-  
+/* 1.5 JUSTFRUITCAKE
+----------------------------------------------------------------------------------------
+font-family guaranteed to exist in all browsers: serif , sans-serif , monospace , cursive and fantasy
+*/
+
+
+
 /* 2. ROOT
 ----------------------------------------------------------------------------------------*/
 html { 
@@ -71,7 +77,8 @@ img, embed, object, video { max-width: 100%; }
 /* 3. CORE TYPOGRAPHY
 ----------------------------------------------------------------------------------------*/
 body {
-  font-family: Georgia, "Times New Roman", serif;
+  /* font-family: Georgia, "Times New Roman", serif; */
+  font-family: Arial, Helvetica, Gill Sans, Lucida, sans-serif;
   font-size: 1em;
   line-height: 1.618em;
   color: #333;
@@ -130,7 +137,7 @@ a:active, a:focus { outline: none; }
 
 
 @media screen and (min-width: 23em) and (max-width: 62.00em) {
-#container { background: yellow; max-width: 30em; padding: 1em; margin:auto;}
+#container { background: white; max-width: 30em; padding: 1em; margin:auto;}
 }
 
 /* 6. CUSTOM LAYOUT & TYPOGRAPHY (Baby bear)
@@ -152,4 +159,47 @@ aside { width: 100%; }
 .cf:before, .cf:after { content: ""; display: block; }
 .cf:after { clear: both; }
 .ie6 .cf { zoom: 1 }
-maxi
+maxii
+
+/* 8. JUSTFRUITCAKE  margin-bottom: 20px; border-bottom: 1px solid #ccc;
+----------------------------------------------------------------------------------------*/
+
+.toptitle { font-size: 2.6em; color: purple; }
+
+#toptitle { font-size: 1.6em; color: red; margin-bottom: 20px; border-bottom: 1px solid #ccc; }
+
+/* #menu and .menu probably can be combined */
+#menu a {
+    text-decoration: none;
+    background: #eee;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-right: 2px solid #fff;
+    padding-right: 3px;
+    padding-left: 3px;
+    font-size: 0.9em; 
+}
+
+#menu { background: brown; }
+
+/*
+.menu a {
+    text-decoration: none;
+    background: #eee;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-right: 2px solid #fff;
+    padding-right: 3px;
+    padding-left: 3px;
+    font-size: 0.9em; 
+}
+*/
+a:hover {
+    background: #eeebeb;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    color: #555; 
+}
+
+
+
