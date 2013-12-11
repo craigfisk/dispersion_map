@@ -2,7 +2,7 @@
 <head>
     <title>Justfruitcake {% block title %}{% endblock %}</title>
     <!-- <meta http-equiv="refresh" content="2">  //-->
-    <link rel="stylesheet" href="{{ STATIC_URL }}fruitcake.css" type="text/css" media="screen" charset="utf-8" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}goldilocks-global.css" type="text/css" media="screen" charset="utf-8" />
 
     <script type="text/javascript">
         window.onload = function() {
@@ -56,11 +56,13 @@
 </head>
 
 <body>
-    <div class="sidebar">Justfruitcake
-        {% block sidebar %} - website base{% endblock %}
-    </div>
-
     <div id="container">
+
+        <div class="sidebar">Justfruitcake
+            {% block sidebar %} - website base{% endblock %}
+        </div>
+
+
         <div id="menu">
             {% block nav-global %}
 
