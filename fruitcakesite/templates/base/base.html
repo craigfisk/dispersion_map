@@ -1,9 +1,22 @@
 <!DOCTYPE html>
+<html>
 <head>
     <title>Justfruitcake {% block title %}{% endblock %}</title>
     <!-- <meta http-equiv="refresh" content="2">  //-->
-    <link rel="stylesheet" href="{{ STATIC_URL }}goldilocks-global.css" type="text/css" media="screen" charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, height=device-height" />
 
+    <link rel="stylesheet" href="{{ STATIC_URL }}goldilocks-global.css" type="text/css" media="screen" charset="utf-8" />
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#id_username").focus();
+            $("#id_email").focus();
+            $("#body").focus();
+        });
+    </script>
+    <!--
     <script type="text/javascript">
         window.onload = function() {
             document.getElementById("id_username").focus();
@@ -16,6 +29,7 @@
         });
 
     </script>
+    //-->
 
     {# Below is all from Google maps sample code: https://developers.google.com/maps/documentation/javascript/tutorial#api_key #}
 
@@ -59,7 +73,9 @@
     <div id="container">
 
         <div class="sidebar">Justfruitcake
+
             {% block sidebar %} - website base{% endblock %}
+
         </div>
 
 

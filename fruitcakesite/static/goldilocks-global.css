@@ -59,6 +59,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 html { 
   overflow-y: scroll;
   background: #FFF;
+  /* CF20131210 */
+  height: 100%;
   }
 
 /* /ht Ethan Marcotte - http://front.ie/l8rJaA */
@@ -73,6 +75,10 @@ body {
   font-size: 1em;
   line-height: 1.618em;
   color: #333;
+  /* CF20131210 */
+  height: 100%; 
+  margin: 0;
+  padding: 0;
   }
 
 h1, h2, h3, h4, h5, h6 {
@@ -102,19 +108,41 @@ a, a:visited { outline: none; color: #439BBD; text-decoration: underline; }
 a:hover { outline: none; text-decoration:none; }  
 a:active, a:focus { outline: none; }
 
+/* CF20131210 the media queries are customized.
+/* 5. GLOBAL LAYOUT & GLOBAL CUSTOM TYPOGRAPHY 61
+----------------------------------------------------------------------------------------*/
+@media screen and (min-width: 62.01em) {
+#container {
+        background: green;
+        padding: 1.618em;
+        margin: 0 auto; 
+        max-width: 60em;
+        }
+}
 
-/* 5. GLOBAL LAYOUT & GLOBAL CUSTOM TYPOGRAPHY
+/* 9. CUSTOM LAYOUT & TYPOGRAPHY (Mummy bear)
 ----------------------------------------------------------------------------------------*/
 
+@media screen and (orientation: landscape) {
+#container { background: orange; max-width: 50em; padding: 1em; margin:auto;}
+        
+}
 
+
+@media screen and (min-width: 23em) and (max-width: 62.00em) {
+#container { background: yellow; max-width: 30em; padding: 1em; margin:auto;}
+}
 
 /* 6. CUSTOM LAYOUT & TYPOGRAPHY (Baby bear)
 ----------------------------------------------------------------------------------------*/
+@media screen and (max-width: 23em) {
 #container {
-    padding: 0.809em;
+    background: red;
+    padding: 0.809em;     
     max-width: 30em;
     margin: auto;
   }
+}
 
 aside { width: 100%; }
 
@@ -124,4 +152,4 @@ aside { width: 100%; }
 .cf:before, .cf:after { content: ""; display: block; }
 .cf:after { clear: both; }
 .ie6 .cf { zoom: 1 }
-
+maxi
