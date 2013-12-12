@@ -22,7 +22,7 @@
                 <td valign="top">
 
                 <figure>
-                    <a href="/myfruitcake/myfruitcake/{{ shipment.fruitcake.id }}/shipment/" title="{{ shipment.fruitcake.popup }}">
+                    <a href="/myfruitcake/myfruitcake/{{ shipment.fruitcake.id }}/shipment/{{ shipment.id }}/" title="{{ shipment.fruitcake.popup }}">
                         <img src="{{ MEDIA_URL }}{{ shipment.fruitcake.thumbnail }}"/>
                     </a>
                     <figcaption>uploaded: {{ shipment.fruitcake.dt|localtime }}<br />by: {{ shipment.fruitcake.uploader.username }} (sent {{shipment.fruitcake.times_shipped}}x)</figcaption>
@@ -49,17 +49,17 @@
                 <BR />
                 <u>Latest</u>
                     <ol class="history_area" reversed >
-                    {% for leg in shipment.get_shipment_list %}
+                    {% for shipment in shipment.get_shipment_list %}
                     <li class="history_item">
-                    - {# origin_id: {{leg.origin_id}} parent_id: {{leg.parent_id}}#} Shipment {{ leg.id }}, {{ leg.dt|localtime }} sent by <b>{{ leg.sender }}
-                        {% for ip in leg.ipaddresses.all %}
+                    - origin_id: {{shipment.origin_id}} parent_id: {{shipment.parent_id}} Shipment {{ shipment.id }}, {{ shipment.dt|localtime }} sent by <b>{{ shipment.sender }}
+                        {% for ip in shipment.ipaddresses.all %}
                         ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }}{# - {{ ip.ipaddress }}#}) 
                         {% endfor %}</b>
-                        with message &quot;{{ leg.message }}&quot;
+                        with message &quot;{{ shipment.message }}&quot;
                         <br />
-                        {% if leg.sender = user %}
+                        {% if shipment.sender = user %}
                         --> sent to: 
-                            {% for email in leg.emailcontacts.all %} 
+                            {% for email in shipment.emailcontacts.all %} 
                                 {{email }}{% if not forloop.last %}, {% endif %} 
                             {% endfor %} 
                         {% endif %}
