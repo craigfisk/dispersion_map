@@ -234,7 +234,7 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
     """Create instance of Shipment and associated Addressees and send it as email. 
     1) obtain the fruitcake id passed in parameter, the sender from request.user, fill in the message
     (later we'll get it, too, from the form, adding to initial={'message': 'Fruitcake for you! etc.), and a list of 
-    email addressees from the form.  2) create an instance of Shipment with m2m create of email addresses using the
+    email addressees from tthishe form.  2) create an instance of Shipment with m2m create of email addresses using the
     list, and then save all that,(see docs.djangoproject.com "Related Objects Reference") 3) email using
     EmailMultiAlternatives.
 
@@ -261,7 +261,7 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             message = cd['message']
             fruitcake = Fruitcake.objects.get(id=fruitcake_id)
             this_shipment = Shipment(dt=timezone.now(),fruitcake=fruitcake,sender=request.user, message=message)
-            #this_shipment.save()
+            this_shipment.save()
 
             if not shipment_id:
                 this_shipment.origin = this_shipment

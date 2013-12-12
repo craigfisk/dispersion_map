@@ -7,7 +7,8 @@ urlpatterns = patterns('myfruitcake.views',
 
     url(r'^$', FruitcakeListView.as_view(), name='toplistview'),
     url(r'^myfruitcake/$', login_required(MyFruitcakeListView.as_view()), name='listview'),
-    url(r'^myfruitcake/(?P<pk>\d+)/$', MyFruitcakeDetailView.as_view(), name='detailview'),
+    #url(r'^myfruitcake/(?P<pk>\d+)/$', MyFruitcakeDetailView.as_view(), name='detailview'),
+    url(r'^myfruitcake/myshipments/(?P<pk>\d+)/$', MyFruitcakeDetailView.as_view(), name='detailview'),
     url(r'^myfruitcake/(?P<fruitcake_id>\d+)/shipment/$', 'email_fruitcake', name='send_fruitcake'),
     
     url(r'^myshipments/$', login_required(ShipmentListView.as_view()), name='shipments'),
