@@ -26,20 +26,20 @@
 
         <div id="gallery_tape">
         <ul class="gallery tape">
-            {% for item in fruitcake_list %}
+            {% for fruitcake in fruitcake_list %}
                 <li>
                 <figure>
-                    <a href="/myfruitcake/myfruitcake/{{ item.id }}/shipment/" title="{{ item.popup }}">
-                        <img src="{{ MEDIA_URL }}{{ item.thumbnail }}"/>
+                    <a href="/myfruitcake/myfruitcake/{{ fruitcake.id }}/send/" title="{{ fruitcake.popup }}">
+                        <img src="{{ MEDIA_URL }}{{ fruitcake.thumbnail }}"/>
                     </a>
-                    <figcaption>uploaded: {{ item.dt|localtime }}<br />by: {{ item.uploader.username }} (sent {{item.times_shipped }}x)</figcaption>
+                    <figcaption>uploaded: {{ fruitcake.dt|localtime }}<br />by: {{ fruitcake.uploader.username }} (sent {{fruitcake.times_shipped }}x)</figcaption>
                 </figure>
                 </li>
             {% endfor %}
         </ul>
 
         {% comment %}
- <br />by: {{ item.uploader.username }}
+ <br />by: {{ fruitcake.uploader.username }}
         {% endcomment %}
         {% else %}
             (Sorry, looks like you have not uploaded any fruitcake, yet.)
@@ -60,13 +60,13 @@
 
             <div id="gallery_tape">
             <ul class="gallery tape">
-                {% for item in fruitcake_list %}
+                {% for fruitcake in fruitcake_list %}
                     <li>
                     <figure>
-                        <a href="/myfruitcake/myfruitcake/{{ item.id }}/shipment/" title="{{ item.popup }}">
-                            <img src="{{ MEDIA_URL }}{{ item.thumbnail }}"/>
+                        <a href="/myfruitcake/myfruitcake/{{ fruitcake.id }}/shipment/" title="{{ fruitcake.popup }}">
+                            <img src="{{ MEDIA_URL }}{{ fruitcake.thumbnail }}"/>
                         </a>
-                        <figcaption>uploaded: {{ item.dt|localtime }}<br />by: {{ item.uploader.username }} (sent {{item.times_shipped}}x )</figcaption>
+                        <figcaption>uploaded: {{ fruitcake.dt|localtime }}<br />by: {{ fruitcake.uploader.username }} (sent {{fruitcake.times_shipped}}x )</figcaption>
                     </figure>
                     </li>
                 {% endfor %}

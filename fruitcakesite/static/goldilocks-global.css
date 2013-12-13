@@ -203,5 +203,5 @@ a:hover {
     color: #555; 
 }
 
-
-
+.highlight { color: red; }
+.otherhighlight { color: green; }

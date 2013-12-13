@@ -223,10 +223,12 @@ def increment_times_shipped(fruitcake_id):
     fruitcake.times_shipped += 1
     fruitcake.save()
         
+class ShipmentError(Exception): pass
+
 #@login_required # switched to is_authenticated on POST only so GET displays; user can see but not send.
 
 @login_required
-def email_fruitcake(request, fruitcake_id, shipment_id=None):
+def email_fruitcake(request, fruitcake_id=None, shipment_id=None):
     """Create instance of Shipment and associated Addressees and send it as email. 
     1) obtain the fruitcake id passed in parameter, the sender from request.user, fill in the message
     (later we'll get it, too, from the form, adding to initial={'message': 'Fruitcake for you! etc.), and a list of 
@@ -255,9 +257,17 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             form.is_valid()
             cd = form.cleaned_data # cd['email'] will now be the list of email addresses to send to
             message = cd['message']
-            fruitcake = Fruitcake.objects.get(id=fruitcake_id)
+            if (not fruitcake_id) and shipment_id: 
+                s = get_object_or_404(Shipment, pk=shipment_id)
+                fruitcake = Fruitcake.objects.get(pk=s.fruitcake_id)
+            elif (not fruitcake_id):
+                raise ShipmentError("Null values for both shipment_id and fruitcake_id.")
+            else:
+                fruitcake = Fruitcake.objects.get(pk=fruitcake_id)
+                
             this_shipment = Shipment(dt=timezone.now(),fruitcake=fruitcake,sender=request.user, message=message)
             this_shipment.save()
+
 
             if not shipment_id:
                 this_shipment.origin = this_shipment
@@ -347,16 +357,10 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
                 this_shipment_parent = this_shipment.parent
 
             return HttpResponseRedirect(reverse('fruitcake:shipments') )
-            #return HttpResponse("Sent!")
-            #return render_to_response("myfruitcake/shipment_sent.html", add_csrf(request, media_url=MEDIA_URL), context_instance=RequestContext(request))
-            #return HttpResponse("Sent with following values: shipment_id: %s, this_shipment_origin: %s, this_shipment_parent: %s" % (shipment_id, this_shipment_origin, this_shipment_parent) )
-            #return HttpResponseRedirect("/myfruitcake/%(id)s/?err=success" % {"id":shipment_id})
-
-        #else:
-        #    return HttpResponse('Sorry, something invalid in your email addresses. Should be a comma-separated list of email addresses.')
+        
         except Exception as e:
             logger.debug("Sorry, while trying to ship, got Exception: %s" % (e))
-            raise
+            #raise
 
     #CF20121217 to require login for sending if not is_authenticated
     elif request.method == 'POST':

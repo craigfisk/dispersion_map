@@ -20,7 +20,7 @@
 
     {# and user.is_authenticated #}
 
-    <P>Shipment_list.html</P>
+    {# <P>Shipment_list.html for {{ user.id }}</P> #}
 
     {% if shipment_list %}
 
@@ -38,12 +38,15 @@
         {% if shipment_list %}
             {% for shipment in shipment_list %}
 
+              {# shipment_list is dt desc of origin_id, parent_id, id, etc. and we want just the max id for each origin_id, so... #}
+              {% ifchanged shipment.origin_id %}
+
                 <table><tr>
                         {# <li> #}
                 <td valign="top">
 
                 <figure>
-                    <a href="/myfruitcake/myfruitcake/{{ shipment.fruitcake.id }}/shipment/" title="{{ shipment.fruitcake.popup }}">
+                    <a href="/myfruitcake/myfruitcake/myshipments{{ shipment.id }}/send/" title="{{ shipment.fruitcake.popup }}">
                         <img src="{{ MEDIA_URL }}{{ shipment.fruitcake.thumbnail }}"/>
                     </a>
                     <figcaption>uploaded: {{ shipment.fruitcake.dt|localtime }}<br />by: {{ shipment.fruitcake.uploader.username }} (sent {{shipment.fruitcake.times_shipped}}x)</figcaption>
@@ -72,7 +75,18 @@
                     <ol class="history_area" reversed >
                     {% for leg in shipment.get_shipment_list %}
                     <li class="history_item">
-                    - {# origin_id: {{leg.origin_id}} parent_id: {{leg.parent_id}} #} Shipment {{ leg.id }}, {{ leg.dt|localtime }} sent by <b>{{ leg.sender }}
+                    - <i>({{leg.origin_id}}, {{leg.parent_id}}, {{ leg.id }})</i> {{ leg.dt|localtime }} 
+                    {#sent by <b><span {% if leg.sender_id == user.id %}style="color: red;">{% endif %}{{ leg.sender }}</span>#}
+                        sent by 
+                        <b><span 
+                                {% if leg.sender_id == user.id %}
+                                    class='highlight'
+                                {% else %}
+                                    class='otherhighlight'
+                                {% endif %}
+                                >{{ leg.sender }}
+                        </span>
+
                         {% for ip in leg.ipaddresses.all %}
                         ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }}{# - {{ ip.ipaddress }}#}) 
                         {% endfor %}</b>
@@ -100,7 +114,9 @@
                 </td>
                 {# </li> #}
                 </tr></table>
-            
+           
+              {% endifchanged %}
+
             {% endfor %}
 
         {% else %}

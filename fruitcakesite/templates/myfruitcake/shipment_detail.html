@@ -16,14 +16,14 @@
 
 {# {% if user.is_authenticated %} #}
                 
-<P>Shipment_detail.html</P>
+{#<P>Shipment_detail.html</P>#}
 
                 <table><tr>
                         {# <li> #}
                 <td valign="top">
 
                 <figure>
-                    <a href="/myfruitcake/myfruitcake/{{ shipment.fruitcake.id }}/shipment/{{ shipment.id }}/" title="{{ shipment.fruitcake.popup }}">
+                    <a href="/myfruitcake/myfruitcake/myshipments/{{ shipment.id }}/send/" title="{{ shipment.fruitcake.popup }}">
                         <img src="{{ MEDIA_URL }}{{ shipment.fruitcake.thumbnail }}"/>
                     </a>
                     <figcaption>uploaded: {{ shipment.fruitcake.dt|localtime }}<br />by: {{ shipment.fruitcake.uploader.username }} (sent {{shipment.fruitcake.times_shipped}}x)</figcaption>
@@ -52,7 +52,10 @@
                     <ol class="history_area" reversed >
                     {% for shipment in shipment.get_shipment_list %}
                     <li class="history_item">
-                    - origin_id: {{shipment.origin_id}} parent_id: {{shipment.parent_id}} Shipment {{ shipment.id }}, {{ shipment.dt|localtime }} sent by <b>{{ shipment.sender }}
+                    - <i>({{shipment.origin_id}}, {{shipment.parent_id}}, {{ shipment.id }})</i> {{ shipment.dt|localtime }} 
+                    {#sent by <b>{{ shipment.sender }}#}
+                    sent by <b><span {% if shipment.sender_id == user.id %}class="highlight">{% endif %}{{ shipment.sender }}</span>
+
                         {% for ip in shipment.ipaddresses.all %}
                         ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }}{# - {{ ip.ipaddress }}#}) 
                         {% endfor %}</b>
