@@ -24,7 +24,7 @@
         <ul class="gallery tape">
             <li>
             <figure>
-                <a href="/myfruitcake/myfruitcake/{{ fruitcake.id }}/send/" title="{{ fruitcake.popup }}">
+                <a href="/myfruitcake/{{ fruitcake.id }}/send/" title="{{ fruitcake.popup }}">
                     <img src="{{ MEDIA_URL }}{{ fruitcake.thumbnail }}"/>
                 </a>
                 <figcaption>uploaded: {{ fruitcake.dt|localtime }}<br />by: {{ fruitcake.uploader.username }} (sent {{fruitcake.times_shipped }}x)</figcaption>

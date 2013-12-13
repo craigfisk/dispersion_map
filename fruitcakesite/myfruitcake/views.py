@@ -425,13 +425,8 @@ def upload_file(request):
                 # .save() method on the model saves 2 processed versions of the image in pics and thumbnails
                 pic.save()
                 return HttpResponseRedirect(reverse('fruitcake:listview') )  
-                #return HttpResponseRedirect('/myfruitcake/myfruitcake/')   
-                #return HttpResponseRedirect('/myfruitcake/')   
-                # return HttpResponseRedirect('/myfruitcake/success/')
             else:
                 return HttpResponse('Oops! You already uploaded this file. Please try a different one. Thanks!')
-                #return HttpResponse("Testing! (previously_uploaded: %s, prior uploads for request.user %s for request.FILES['filename'].name %s were %s)" % (previously_uploaded, request.user,request.FILES['pic'].name, len(prior_fruitcake) ) )
-                #HttpResponseRedirect('/myfruitcake/duplicate/')
 
     else:
         form = UploadFruitcakeForm()
@@ -439,9 +434,6 @@ def upload_file(request):
     return render_to_response('myfruitcake/fruitcake_upload.html', add_csrf(request, form=form), context_instance=RequestContext(request)) 
 
 """
-def success(request):
-    return HttpResponse("Success!")
-
 def duplicate(request):
     return HttpResponse("Duplicate; please try again!")
 """

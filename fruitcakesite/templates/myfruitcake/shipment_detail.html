@@ -11,6 +11,7 @@
     <div class="main">
         <div id="rtitle">Upload a fruitcake photo? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>
     </div>
+         (<b>click photo to send</b>):</P>
 
 {% block myfruitcakelist %}{% endblock myfruitcakelist %}        
 
@@ -23,7 +24,7 @@
                 <td valign="top">
 
                 <figure>
-                    <a href="/myfruitcake/myfruitcake/myshipments/{{ shipment.id }}/send/" title="{{ shipment.fruitcake.popup }}">
+                    <a href="/myfruitcake/myshipments/{{ shipment.id }}/send/" title="{{ shipment.fruitcake.popup }}">
                         <img src="{{ MEDIA_URL }}{{ shipment.fruitcake.thumbnail }}"/>
                     </a>
                     <figcaption>uploaded: {{ shipment.fruitcake.dt|localtime }}<br />by: {{ shipment.fruitcake.uploader.username }} (sent {{shipment.fruitcake.times_shipped}}x)</figcaption>
@@ -48,22 +49,21 @@
                 {% if shipment.get_shipment_list %}
 
                 <BR />
-                <u>Latest</u>
                     <ol class="history_area" reversed >
-                    {% for shipment in shipment.get_shipment_list %}
+                    {% for leg in shipment.get_shipment_list %}
                     <li class="history_item">
-                    - <i>({{shipment.origin_id}}, {{shipment.parent_id}}, {{ shipment.id }})</i> {{ shipment.dt|localtime }} 
-                    {#sent by <b>{{ shipment.sender }}#}
-                    sent by <b><span {% if shipment.sender_id == user.id %}class="highlight">{% endif %}{{ shipment.sender }}</span>
+                    <i>( {{leg.origin_id}} {{leg.parent_id}},{{ leg.id }} )</i> 
+                    {{ leg.dt|localtime }} 
+                    sent by <b><span {% if leg.sender_id == user.id %}class="highlight"{% else %}class="otherhighlight"{% endif %}>{{leg.sender}}</span>
 
-                        {% for ip in shipment.ipaddresses.all %}
+                        {% for ip in leg.ipaddresses.all %}
                         ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }}{# - {{ ip.ipaddress }}#}) 
                         {% endfor %}</b>
-                        with message &quot;{{ shipment.message }}&quot;
+                        with message &quot;{{ leg.message }}&quot;
                         <br />
-                        {% if shipment.sender = user %}
+                        {% if leg.sender = user %}
                         --> sent to: 
-                            {% for email in shipment.emailcontacts.all %} 
+                            {% for email in leg.emailcontacts.all %} 
                                 {{email }}{% if not forloop.last %}, {% endif %} 
                             {% endfor %} 
                         {% endif %}
@@ -71,7 +71,6 @@
                     {% endfor %}
                     </ol>
 
-                    <u>Start</u>
 
                 {% else %}
                     <b>no list</b>
