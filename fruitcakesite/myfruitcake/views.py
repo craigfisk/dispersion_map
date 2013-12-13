@@ -124,16 +124,13 @@ class MyFruitcakeDetailView(DetailView):
         context['user'] = self.request.user
         context['uploader'] = self.request.user
         return context
-    
     """
     def get_queryset(self):
-        if self.request.user.id:   # should be is_authenticated not id
-            return Fruitcake.objects.filter(uploader=self.request.user).order_by('-dt')
-            # or: popup__startswith='Pick me'
-        else:
-            return Fruitcake.objects.all().order_by('-dt')
+        self.fruitcake = get_object_or_404(Shipment, id=self.kwargs['pk'])  #self.kwargs['pk']
+        #shipment = Shipment.objects.filter(origin_id=self.shipment.origin_id).order_by('-dt')
+        return self.fruitcake
     """
-
+  
 class ShipmentListView(ListView):       
     """Template is shipment_list.html
     """
@@ -147,7 +144,6 @@ class ShipmentListView(ListView):
         # chain = Shipment.objects.filter(id__in=mylist)
         if self.request.user:
             return Shipment.objects.filter(sender=self.request.user).order_by('-dt')
-            
             #return Shipment.objects.filter(sender=self.request.user).filter(shipment_id=self.shipment_id).order_by('-dt')
         
 
@@ -286,10 +282,10 @@ def email_fruitcake(request, fruitcake_id, shipment_id=None):
             city=g.city(addr)
 
             # Using get_or_create() to only add unique ipaddressses. ip is the object; created is a boolean; true if new address, false if already created.
-            # 
+
             ip, created = IPAddress.objects.get_or_create(ipaddress=addr,city=city['city'],region=city['region'],country_name=city['country_name'],country_code=city['country_code'])
             this_shipment.ipaddresses.add(ip)
-           
+
             for email in cd['email']:
                 # Using get_or_create() to only add unique email addresses to EmailContact that are not already there.
                 # See https://docs.djangoproject.com/en/dev/ref/models/querysets/#django.db.models.query.QuerySet.get_or_create
