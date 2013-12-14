@@ -7,29 +7,26 @@
 {% load tz %}
 
 {% block page-content %}
-{% comment %}
-<P>fruitcake_list.html</P>
-{% endcomment %}
-{# (fruitcake_list.html) #}
+
             <div class="main">
+
                 <div id="rtitle">Upload a fruitcake photo? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>
             </div>
 
 {% block myfruitcakelist %}{% endblock myfruitcakelist %}        
 
     {% if user.is_authenticated %}
-        {# <P>-----AUTHENTICATED------</P> #}
 
         {% if fruitcake_list %}
         <br />
         <P class="main">Most shipped fruitcake (<b>click photo to send</b>):</P>
 
         <div id="gallery_tape">
-        <ul class="gallery tape">
+        <ul class="plain">
             {% for fruitcake in fruitcake_list %}
-                <li>
+                <li class="plain">
                 <figure>
-                    <a href="/myfruitcake/{{ fruitcake.id }}/send/" title="{{ fruitcake.popup }}">
+                    <a href="/myfruitcake/myfruitcake/{{ fruitcake.id }}/send/" title="{{ fruitcake.popup }}">
                         <img src="{{ MEDIA_URL }}{{ fruitcake.thumbnail }}"/>
                     </a>
                     <figcaption>uploaded: {{ fruitcake.dt|localtime }}<br />by: {{ fruitcake.uploader.username }} (sent {{fruitcake.times_shipped }}x)</figcaption>
@@ -38,49 +35,10 @@
             {% endfor %}
         </ul>
 
-        {% comment %}
- <br />by: {{ fruitcake.uploader.username }}
-        {% endcomment %}
         {% else %}
             (Sorry, looks like you have not uploaded any fruitcake, yet.)
         {% endif %}
         </div>
-
-    {% else %}
-        {# <P>-----NOT AUTHENTICATED------</P> #}
-        {% comment %}
-        Context[uploader] is in MyFruitcakeListView and not FruitcakeListView, so this is one way to tell how we got here
-        {% endcomment %}
-
-        {% if not uploader %} 
-
-            {% if fruitcake_list %}
-            <br />
-            <P class="main">Most shipped fruitcake (<b>click photo to send</b>):</P>
-
-            <div id="gallery_tape">
-            <ul class="gallery tape">
-                {% for fruitcake in fruitcake_list %}
-                    <li>
-                    <figure>
-                        <a href="/myfruitcake/myfruitcake/{{ fruitcake.id }}/shipment/" title="{{ fruitcake.popup }}">
-                            <img src="{{ MEDIA_URL }}{{ fruitcake.thumbnail }}"/>
-                        </a>
-                        <figcaption>uploaded: {{ fruitcake.dt|localtime }}<br />by: {{ fruitcake.uploader.username }} (sent {{fruitcake.times_shipped}}x )</figcaption>
-                    </figure>
-                    </li>
-                {% endfor %}
-            </ul>
-            {% else %}
-                (Sorry, no fruitcake.)
-            {% endif %}
-
-        {% else %}
-        
-            <P>(When you register, if you upload some fruitcake photos, they will be displayed here and you can then
-            click to send them.  Or you can just click to send fruitcake photos on the &quot;Home&quot; page.)</P> 
-
-        {% endif %}
 
     {% endif %}
 

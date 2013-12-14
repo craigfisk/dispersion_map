@@ -21,25 +21,21 @@
         <P class="main">Fruitcake Detail (<b>click photo to send</b>):</P>
 
         <div id="gallery_tape">
-        <ul class="gallery tape">
-            <li>
+        <ul class="plain">
+            <li class="plain">
             <figure>
                 <a href="/myfruitcake/{{ fruitcake.id }}/send/" title="{{ fruitcake.popup }}">
                     <img src="{{ MEDIA_URL }}{{ fruitcake.thumbnail }}"/>
                 </a>
-                <figcaption>uploaded: {{ fruitcake.dt|localtime }}<br />by: {{ fruitcake.uploader.username }} (sent {{fruitcake.times_shipped }}x)</figcaption>
+                <figcaption>uploaded: {{ fruitcake.dt|localtime }} by: {{ fruitcake.uploader.username }} (sent {{fruitcake.times_shipped }}x)</figcaption>
             </figure>
             </li>
         </ul>
 
-        {% comment %}
- <br />by: {{ fruitcake.uploader.username }}
-        {% endcomment %}
         {% else %}
             (Sorry, something went wrong.)
         {% endif %}
         </div>
-
 
     {% endif %}
 

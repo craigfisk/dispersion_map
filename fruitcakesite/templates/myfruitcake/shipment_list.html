@@ -4,23 +4,14 @@
 
 {% block sidebar %} - my shipments{% endblock %} 
 
-
-{# (shipment_list.html) #}
-
 {% load tz %} 
-
 
 {% block page-content %}
     <div class="main">
         <div id="rtitle">Upload a fruitcake photo? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>
     </div>
 
-
     {% block myfruitcakelist %}{% endblock myfruitcakelist %}        
-
-    {# and user.is_authenticated #}
-
-    {# <P>Shipment_list.html for {{ user.id }}</P> #}
 
     {% if shipment_list %}
 
@@ -32,13 +23,12 @@
          (<b>click photo to send</b>):</P>
 
         <div id="gallery_tape">
-        <ul class="gallery tape">
 
+        <ul class="gallery tape">
 
         {% if shipment_list %}
             {% for shipment in shipment_list %}
-
-              {# shipment_list is dt desc of origin_id, parent_id, id, etc. and we want just the max id for each origin_id, so... #}
+              {# shipment_list dt desc of origin_id, parent_id, id, etc. Want just max id for each origin_id, so... #}
               {% ifchanged shipment.origin_id %}
 
                 <table><tr>
@@ -49,28 +39,14 @@
                     <a href="/myfruitcake/myshipments/{{ shipment.id }}/send/" title="{{ shipment.fruitcake.popup }}">
                         <img src="{{ MEDIA_URL }}{{ shipment.fruitcake.thumbnail }}"/>
                     </a>
-                    <figcaption>uploaded: {{ shipment.fruitcake.dt|localtime }}<br />by: {{ shipment.fruitcake.uploader.username }} (sent {{shipment.fruitcake.times_shipped}}x)</figcaption>
+                    <figcaption>uploaded: {{ shipment.fruitcake.dt|localtime }} by: {{ shipment.fruitcake.uploader.username }} (sent {{shipment.fruitcake.times_shipped}}x)</figcaption>
                 </figure>
                 </td>
 
                 <td border="1" valign="top" width="100%" height="100%">
 
-                {% comment %}
-                
-                <b>Map: {{ shipment.get_shipment_list | length }}, iteration: {{ forloop.counter0 }}</b>
-
-                {% if forloop.counter0 == 0 %}
-                    <P>counter0 here</P>
-                    <div id="map-canvas">Map</div>
-
-                {% else %}
-                {% endif %}
-
-                {% endcomment %}
-
                 {% if shipment.get_shipment_list %}
 
-                <BR />
                     <ol class="history_area" reversed >
                     {% for leg in shipment.get_shipment_list %}
                     <li class="history_item">
@@ -93,13 +69,9 @@
                     {% endfor %}
                     </ol>
 
-
                 {% else %}
                     <b>no list</b>
                 {% endif %}
-
-                {# endcomment #}
-
 
                 </td>
                 {# </li> #}
@@ -115,12 +87,9 @@
     
         {% endif %}
 
-
         </ul>
         </div>
-        {#  <br />by: {{ shipment.uploader.username }} #}
      {% else %}
-        {# <div id="map-canvas">Map</div> #}
 
         (Sorry, looks like you have not shipped any fruitcake, yet.)
      {% endif %}
@@ -130,8 +99,8 @@
 
 
 {% comment %}
-{% block page-content %}
 
+{% block page-content %}
 
 {% endblock %}
 

@@ -206,4 +206,7 @@ a:hover {
 .highlight { font-style: italic; color: red; }
 .otherhighlight {font-style: italic; }
 /*  color: #ff7777;   border-bottom: 1px solid red; */
+figcaption {font-size: smaller; font-weight: bold; line-height: 1.1em; margin-bottom: 1.25em; }
+.plain ul, li { list-style-type: none; padding: 0; margin: 0; }
+
 
