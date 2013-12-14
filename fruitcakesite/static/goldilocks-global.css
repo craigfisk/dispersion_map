@@ -203,5 +203,7 @@ a:hover {
     color: #555; 
 }
 
-.highlight { color: red; }
-.otherhighlight { color: green; }
+.highlight { font-style: italic; color: red; }
+.otherhighlight {font-style: italic; }
+/*  color: #ff7777;   border-bottom: 1px solid red; */
+

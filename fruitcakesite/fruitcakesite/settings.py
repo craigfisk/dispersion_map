@@ -45,12 +45,25 @@ WIDTH_AVATAR = 120
 WIDTH_STANDARD = 384
 WIDTH_THUMBNAIL = 192
 
+#CF20131213 
+#----------------
+# Configuration below requires user to log in every time, unless the user checks "remember me"
+# at login, in which case the login lasts SESSION_COOKIE_AGE seconds
+# See http://avivgr.blogspot.com/2009/05/how-to-add-remember-me-checkbox-to.html and https://docs.djangoproject.com/en/1.5/topics/http/sessions/#browser-length-sessions-vs-persistent-sessions
+SESSION_COOKIE_AGE = 2419200            # 1 month in seconds
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # False by default
+# Default is 1209600 2 weeks in seconds
+# See https://docs.djangoproject.com/en/1.6/ref/settings/
+# Note: Running Django 1.5.5, so for Django < 1.6 and >= 1.5.3, probably want to use
+# JSON serialization only if using session cookies.  See
+# https://docs.djangoproject.com/en/1.6/topics/http/sessions/#session-serializationi
+#----------------
+
 ADMINS = (
     ('Craig Fisk', 'craigfisk@justfruitcake.com'),
 )
 
 MANAGERS = ADMINS
-
 
 GEOIP_PATH = '/home/fisk/virt/geoip_data'
 
@@ -150,7 +163,6 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static/media/')
 MEDIA_URL = '/static/media/'
 #MEDIA_URL = ''
 
-##
 #CF20131026 commented out; defined below
 #LOGIN_URL = '/login/'
 
@@ -235,8 +247,6 @@ LOGOUT_URL = '/registration/logout/'
 ##LOGIN_REDIRECT_URL = '/registration/profile/'
 LOGIN_REDIRECT_URL = '/myfruitcake/'
 
-
-
 ROOT_URLCONF = 'fruitcakesite.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
@@ -263,7 +273,6 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 #    'polls',
-##    'world',
     'registration',
     'myfruitcake',
     'forum',
@@ -273,7 +282,6 @@ INSTALLED_APPS = (
 
 # See https://docs.djangoproject.com/en/1.4/topics/auth/#storing-additional-information-about-users
 AUTH_PROFILE_MODULE = 'forum.UserProfile'
-##'accounts.UserProfile'
 
 import logging, sys
 
@@ -347,6 +355,8 @@ LOGGING = {
 
     }
 }
+
+
 
 """
 LOGGING = {

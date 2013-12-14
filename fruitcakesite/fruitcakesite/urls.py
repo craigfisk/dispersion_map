@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'admin/', include(admin.site.urls)),
     url(r'forum/', include('forum.urls', namespace='forum')),
     url(r'myfruitcake/', include('myfruitcake.urls', namespace='fruitcake')),
+    url(r'^registration/login/$', 'fruitcakesite.views.login'),
     url(r'^registration/', include('registration.backends.default.urls')),
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'static'} )
 )
