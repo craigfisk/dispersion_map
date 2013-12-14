@@ -8,14 +8,13 @@
 
 {% block page-content %}
 
-            <div class="main">
-
-                <div id="rtitle">Upload a fruitcake photo? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>
-            </div>
-
 {% block myfruitcakelist %}{% endblock myfruitcakelist %}        
 
     {% if user.is_authenticated %}
+
+        <div class="main">
+             <div id="rtitle">Upload a fruitcake photo? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>
+        </div>
 
         {% if fruitcake_list %}
         <br />
@@ -47,6 +46,11 @@
         {% comment %}
         Context[uploader] is in MyFruitcakeListView and not FruitcakeListView, so this is one way to tell how we got here
         {% endcomment %}
+        <div class="main">
+            <div id="rtitle"><B>Why register?</B> If you register (define a <I>username</I> and <I>password</I>) and then login, you can send fruitcake messages to friends and family, see where they send them on
+                 to, upload fruitcake photos, and even participate in the fruitcake forum, if you want..<span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>
+        </div>
+
 
         {% if not uploader %} 
 

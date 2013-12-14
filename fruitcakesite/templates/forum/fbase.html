@@ -56,11 +56,13 @@
                     </div>
                     <div id="col2">
  
-                        <h2>My activity: </h2>
                             {% comment %}
                             my_shipments is defined in myfruitcake/context_processors.py and settings
                             {% endcomment %}
                             {% if user.is_authenticated %}
+
+                            <h2>My activity: </h2>
+
                             <ul>
                                 {% if my_shipments %}
                                 <li>Shipments: {{ my_shipments|length }}</li>
@@ -85,7 +87,7 @@
                                 {% endif %}
                             </ul>
                             {% else %}
-                            <P>(Not available for anonymous user)
+                            {# <P>(Not available for anonymous user) #}
                             {% endif %}
 
                         </div>
