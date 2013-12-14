@@ -7,7 +7,7 @@
 {% load tz %}
 
 {% block page-content %}
-
+<P>Template: fruitcake_detail.html</P>
     <div class="main">
         <div id="rtitle">Upload a fruitcake photo? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>
     </div>
@@ -24,7 +24,7 @@
         <ul class="plain">
             <li class="plain">
             <figure>
-                <a href="/myfruitcake/{{ fruitcake.id }}/send/" title="{{ fruitcake.popup }}">
+                <a href="/myfruitcake/myfruitcake/{{ fruitcake.id }}/send/" title="{{ fruitcake.popup }}">
                     <img src="{{ MEDIA_URL }}{{ fruitcake.thumbnail }}"/>
                 </a>
                 <figcaption>uploaded: {{ fruitcake.dt|localtime }} by: {{ fruitcake.uploader.username }} (sent {{fruitcake.times_shipped }}x)</figcaption>
