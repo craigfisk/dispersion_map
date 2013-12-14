@@ -63,7 +63,7 @@
                 {% for fruitcake in fruitcake_list %}
                     <li>
                     <figure>
-                        <a href="/myfruitcake/myfruitcake/{{ fruitcake.id }}/shipment/" title="{{ fruitcake.popup }}">
+                        <a href="/myfruitcake/myfruitcake/{{ fruitcake.id }}/send/" title="{{ fruitcake.popup }}">
                             <img src="{{ MEDIA_URL }}{{ fruitcake.thumbnail }}"/>
                         </a>
                         <figcaption>uploaded: {{ fruitcake.dt|localtime }}<br />by: {{ fruitcake.uploader.username }} (sent {{fruitcake.times_shipped}}x )</figcaption>
