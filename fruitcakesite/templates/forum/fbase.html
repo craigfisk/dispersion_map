@@ -125,17 +125,18 @@
                                 {% else %}
                                 <li>No shipments</li>
                                 {% endif %}
-                                
+                               
+                                {% comment %}
+
                                 {% if my_posts %}
                                 <li>Posts: {{ my_posts|length }}</li>
-                                {% comment %}
-                                {% if my_latest_post %}
-                                <li>Latest: <a href="/forum/thread/{{ my_latest_post.thread.id}}/">{{my_latest_post.created}}</a></li>
-                                {% endif %}
-                                {% endcomment %}
+                                {# {% if my_latest_post %}<li>Latest: <a href="/forum/thread/{{ my_latest_post.thread.id}}/">{{my_latest_post.created}}</a></li>{% endif %} #}
                                 {% else %}
                                 <li>No posts</li>
                                 {% endif %}
+
+                                {% endcomment %}
+
                             </ul>
                             {% else %}
                             {# <P>(Not available for anonymous user) #}
