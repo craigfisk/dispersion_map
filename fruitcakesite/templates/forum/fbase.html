@@ -75,6 +75,7 @@
 
                     </div>
 
+                    {% if user.is_authenticated %}
 
                     <div class="wrapper">
                     <div class="one">
@@ -138,8 +139,15 @@
                             {% endif %}
 
                     </div>
+                    
+   
                     </div>
-               
+                    {% else %}
+                        {#<P>Test</P>#}
+                    {% endif %}
+              
+
+
                  </div>
 
             </div>
