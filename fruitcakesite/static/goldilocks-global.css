@@ -218,5 +218,6 @@ figcaption {font-size: smaller; font-weight: bold; line-height: 1.1em; margin-bo
 
 .greeting { line-height: 1.0em; } 
 
+/* .aboutnumbered ol, li { list-style-type: decimal; margin-left: 1.618em; } */
 
-
+.aboutbullet ul, li { list-style-type: disc; margin-left: 0em; }

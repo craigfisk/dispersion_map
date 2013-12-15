@@ -4,22 +4,27 @@
 
 {% block title %}About{% endblock %}
 
-{% block sidebar %} - about{% endblock %}
+{% block sidebar %} - About{% endblock %}
 
 {% block page-content %}
 
-<P>Justfruitcake has the simple purpose of providing a platform for tracking the travels of virtual
-fruitcake. It is one of those side projects that started from a fun and whimsical notion, but took on a
+<P>Justfruitcake is for tracking the travels of virtual fruitcake. 
+It is one of those side projects that started from a fun and whimsical notion, and took on a
 life of its own at a certain point.
 <P>Overview:
-<ul>
-    <li><b>Home</b> - The most popular fruitcake photos (by how often they've been sent).
-    <li><b>MyFruitcake</b> - Photos you have uploaded.
-    <li><b>MyShipments</b> - Messages you've sent using fruitcakes.
-    <li><b>Forum</b> - Discussion area with topics.
-    <li><b>MyProfile</b> - Username, email, photo.
-    <li><b>Sign-in/Sign-out</b>
-    <li><b>About</b>
+<ul class="aboutbullet">
+    <li class="aboutbullet"><b>Home</b> - The most popular fruitcake pics by how often they've been sent.</li>
+    <li class="aboutbullet"><b>My Fruitcake</b> - Fruitcake pics you have uploaded.</li>
+
+    <li class="aboutbullet"><b>My Shipments</b> - Messages you sent using fruitcakes pics.</li>
+
+    <li class="aboutbullet"><b>My Profile</b> - Your account username, email, profile pic.</li>
+
+    
+    <li class="aboutbullet"><b>About</b></li>
+
+    <li class="aboutbullet"><b>Forum</b> - Discussion on fruitcake topics and feedback.</li>
+    <li class="aboutbullet"><b>Log In/Log Out</b></li>
 </ul>
 {% comment %}
 <P>Click <a href="{% url myfruitcake.views.about_sample %}">here</a> for a screenshot. Without having created a sign-in, you can
@@ -28,12 +33,11 @@ send it on or to send other Justfruitcake messsages, you just need to create a s
 {% endcomment %}
 
 <P>FAQ:
-<ol>
-    <li>I sent a fruitcake so why doesn't it show up in MyShipments? Answer: try hitting F5 to refresh the browser.
-    <li>I received a fruitcake message in an email but when I click the link, why do I need to register/sign in?
-    Answer: well, it was intended to not be needed, but there hasn't been time to work up the software for that,
-    yet.
-</ol>
+<ul class="aboutbullet">
+    <li class="aboutbullet">I sent a fruitcake pic message, so why doesn't it show up in My Shipments? Answer: try hitting F5 to refresh the browser.</li>
+    <li class="aboutbullet">I received a fruitcake message in an email. When I click the linkto see it, do I need to create an account and log in?
+    Answer: Not for the first few.</li>
+</ul>
 
 
 {% endblock %}
