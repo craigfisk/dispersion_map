@@ -123,6 +123,7 @@ def profilepic(request):
                 hsize = int((float(im.size[1])*float(wpercent)))
                 im = im.resize((WIDTH_AVATAR, hsize), PImage.ANTIALIAS)
                 im.save(imfn, "JPEG")
+                return HttpResponseRedirect(reverse('fruitcake:listview') ) 
             except IOError as e:
                 print "Cannot create thumbnail for %s, error: %s" % (imfn, e)
             
@@ -131,6 +132,9 @@ def profilepic(request):
         #form = ProfileForm()
     if profile.avatar:
         img = MEDIA_URL + profile.avatar.name
+        
+        # 
+        
     #uf = UserForm(request.POST, instance=profile.user)
     return render_to_response("forum/profilepic.html", add_csrf(request, profile=profile, form=form, img=img), context_instance=RequestContext(request))
     #return render_to_response("forum/userinfo.html", add_csrf(request, uf=uf, u=profile.user, img=img), context_instance=RequestContext(request))

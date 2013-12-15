@@ -24,11 +24,10 @@
     <div class="main">
         {#<div id="rtitle">Edit Profile</div><br />#}
 
-        <p>
         <form enctype="multipart/form-data" action="" method="POST"> {% csrf_token %}
             <table>
                 {{ form.as_table }}
-                <P>(Only handles .jpg pics)</P>
+                <P>Upload a profile picture (jpg).</P>
             </table>
             <table>
                 {% if img %} 
@@ -53,7 +52,6 @@
             <input type="submit" value="Update profile" id="submit" />
             {% endcomment %}
             </form>
-          </p>
     </div>
 
 {% endblock %}

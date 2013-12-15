@@ -83,10 +83,13 @@
                          <div id="avatarinfo">
                             {% if user.username and user.get_profile.avatar %} 
                                 <div class="avatar">
-                                        <img src="http://www.justfruitcake.com/static/media/{{ user.get_profile.avatar }}">
+                                    <img src="{{ MEDIA_URL }}{{ user.get_profile.avatar }}"/>
                                 </div>
                             {% elif user.username and not user.get_profile.avatar %}
-                                No photo? It would be nice if you would go to your profile and upload your picture.
+                                <div class="noavatar">
+                                    <P>No photo? Maybe want to go <img style="float: right" src="{{ MEDIA_URL }}/images/343958592_0c391c5963_b.jpg"/> to your <a href="{% url 'forum:userinfo' %}">profile</a> and upload your picture.</P>
+
+                                </div>
                             {% else %}
                                 
                             {% endif %}
