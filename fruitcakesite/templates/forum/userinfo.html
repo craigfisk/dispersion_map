@@ -5,14 +5,16 @@
 
 {% block sidebar %} - My Profile{% endblock %}
 
+{% block signin %}{% endblock %}
+
 {% block page-content %}
     <style type="text/css">
-        .main { margin-left: 25px; margin-top: 30px; }
+        .main { margin-left: 0px; margin-top: 30px; }
 
         #rtitle {
             /* background: #eee; */
             font-size: 1.3em; padding: 3px; margin-top: 40px;
-            padding-left: 20px; margin-bottom: -10px;
+            padding-left: 0px; margin-bottom: -10px;
         }
         #submit { float: left; }
 
@@ -20,7 +22,7 @@
     </style>
 
     <div class="main">
-        <div id="rtitle">Edit My Profile</div><br />
+        <div>Edit your account information:</div>
 
         <p>
         <form enctype="multipart/form-data" action="" method="POST"> {% csrf_token %}
@@ -31,14 +33,14 @@
             <input type="submit" value="update">
 
 
-            {{ form.as_p }} 
+            {# {{ form.as_p }} #}
 
             {% comment %}
             <P>username: <input type="text" name="username" value="{{ profile.user.username }}" id="id_username" /></P>
             <P>email: <input type="text" name="email" value="{{ profile.user.email }}" id="id_email" /></P>
             {% endcomment %}
 
-            {% if u.userprofile.avatar %} <p><img border="0" alt="Profile Pic" src="/static/media/{{ u.userprofile.avatar.name }}" /></p> {% endif %} 
+            {#{% if u.userprofile.avatar %} <p><img border="0" alt="Profile Pic" src="/static/media/{{ u.userprofile.avatar.name }}" /></p> {% endif %}#}
 
             {% comment %}
             Profile Pic: {{ pf.avatar|cut:"images/" }}<br />

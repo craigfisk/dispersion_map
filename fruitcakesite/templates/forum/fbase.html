@@ -74,7 +74,34 @@
 
 
                     </div>
-                    <div id="col2">
+
+
+                    <div class="wrapper">
+                    <div class="one">
+
+                         <div id="avatarinfo">
+                            {% if user.username and user.get_profile.avatar %} 
+                                <div class="avatar">
+                                        <img src="http://www.justfruitcake.com/static/media/{{ user.get_profile.avatar }}">
+                                </div>
+                            {% elif user.username and not user.get_profile.avatar %}
+                                No photo? It would be nice if you would go to your profile and upload your picture.
+                            {% else %}
+                                
+                            {% endif %}
+                        </div>
+                
+                        {% comment %}
+                        <h2>My forum posts:</h2>
+                        <ul>
+                            <li>Posts: {{ my_posts|length }} </li>
+                        </ul>
+                        {% endcomment %}
+ 
+                    </div>
+
+
+                    <div class="two">
  
                             {% comment %}
                             my_shipments is defined in myfruitcake/context_processors.py and settings
@@ -110,30 +137,11 @@
                             {# <P>(Not available for anonymous user) #}
                             {% endif %}
 
-                        </div>
-                    <div id="col3">
-
-                         <div id="avatarinfo">
-                            {% if user.username and user.get_profile.avatar %} 
-                                <div class="avatar">
-                                        <img src="http://www.justfruitcake.com/static/media/{{ user.get_profile.avatar }}">
-                                </div>
-                            {% elif user.username and not user.get_profile.avatar %}
-                                No photo? It would be nice if you would go to your profile and upload your picture.
-                            {% else %}
-                                
-                            {% endif %}
-                        </div>
-                
-                        {% comment %}
-                        <h2>My forum posts:</h2>
-                        <ul>
-                            <li>Posts: {{ my_posts|length }} </li>
-                        </ul>
-                        {% endcomment %}
- 
                     </div>
-                </div>
+                    </div>
+               
+                 </div>
+
             </div>
         </div>
 

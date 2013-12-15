@@ -221,3 +221,48 @@ figcaption {font-size: smaller; font-weight: bold; line-height: 1.1em; margin-bo
 /* .aboutnumbered ol, li { list-style-type: decimal; margin-left: 1.618em; } */
 
 .aboutbullet ul, li { list-style-type: disc; margin-left: 0em; }
+
+
+img { max-width: 100%; }
+
+.wrapper { 
+  /*border : 2px solid #000; */
+  overflow:hidden;
+}
+.wrapper div {
+   /* min-height: 192px; */
+   padding: 0px;
+}
+.one {
+  /*background-color: gray; */
+  float:left;
+  margin-left: 0px; 
+  /* margin-right:20px; */
+  /*min-width:50%; */
+  /*border-right:2px solid #000;*/
+  /* max-height: 180px; */
+  min-height: 90px;
+  margin-right: 10px;  
+}
+.two { 
+  /*background-color: #ff7777; */
+  overflow:hidden;
+  /* margin:10px; */
+  /*border:2px dashed #ccc; */
+  min-height:90px; 
+  /*min-width:50%; */
+}
+
+/* @media screen and (max-width: 50em) { */
+
+/*
+@media screen and (max-width: 400px) {
+   .one { 
+    float: none;
+    margin-right:0;
+    width:auto;
+    border:0;
+  }
+}
+*/
+

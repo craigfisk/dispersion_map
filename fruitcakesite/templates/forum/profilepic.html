@@ -5,9 +5,11 @@
 
 {% block sidebar %} - Profile{% endblock %}
 
+{% block signin %}{% endblock %}
+
 {% block page-content %}
     <style type="text/css">
-        .main { margin-left: 25px; margin-top: 30px; }
+        .main { margin-left: 0px; margin-top: 30px; }
 
         #rtitle {
             /* background: #eee; */
@@ -20,13 +22,13 @@
     </style>
 
     <div class="main">
-        <div id="rtitle">Edit Profile</div><br />
+        {#<div id="rtitle">Edit Profile</div><br />#}
 
         <p>
         <form enctype="multipart/form-data" action="" method="POST"> {% csrf_token %}
             <table>
                 {{ form.as_table }}
-                <P>(Only handles .JPG photo files</P>
+                <P>(Only handles .jpg pics)</P>
             </table>
             <table>
                 {% if img %} 
