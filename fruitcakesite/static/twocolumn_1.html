@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+/* fits screen, double-tap to zoom/unzoom works; rotate works */
+
+img { max-width: 100%; }
+
+.wrapper { 
+  /*border : 2px solid #000; */
+  overflow:hidden;
+}
+.wrapper div {
+   /* min-height: 192px; */
+   padding: 0px;
+}
+.one {
+  background-color: gray;
+  float:left; 
+  /* margin-right:20px; */
+  min-width:50%; 
+  /*border-right:2px solid #000;*/
+  /* max-height: 180px; */
+  min-height: 192px; 
+}
+.two { 
+  background-color: #ff7777;
+  overflow:hidden;
+  /* margin:10px; */
+  /*border:2px dashed #ccc; */
+  min-height:192px; 
+  min-width:50%; 
+}
+
+/* @media screen and (max-width: 50em) { */
+@media screen and (max-width: 400px) {
+   .one { 
+    float: none;
+    margin-right:0;
+    width:auto;
+    border:0;
+    /* border-bottom:2px solid #000;  */
+  }
+}
+
+</style>
+
+</head>
+<body>
+
+
+<div class="wrapper">
+    <div class="one">
+    <!-- <img width="192" src="/static/media/thumbnails/60446819968146915_mwJLqLyW_b_1.jpg"/> //-->
+    one</div>
+    <div class="two">
+    <!-- <img width="192" src="/static/media/thumbnails/241435229994408022_DoszNqwg_b_1.jpg"/> //-->
+    two</div>
+</div>
+<!-- <img src="/static/media/thumbnails/60446819968146915_mwJLqLyW_b_1.jpg"/> //-->
+
+
+<!--  
+/* --------------------------------------*/
+#thumbs{
+    max-width:100%;
+}
+#thumbs li {
+    width: 50%;
+    float: left;
+}
+#thumbs li img {
+    width: 100%;
+}
+
+<ul id="thumbs">
+    <li><img src="http://goo.gl/155sO"/></li>
+    <li><img src="http://goo.gl/155sO"/></li>
+    <li><img src="http://goo.gl/155sO"/></li>
+    <li><img src="http://goo.gl/155sO"/></li>
+    <li><img src="http://goo.gl/155sO"/></li>
+    <li><img src="http://goo.gl/155sO"/></li>
+</ul>
+//-->
+
+</body>
+</html>
+

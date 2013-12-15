@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+/* figure and figcaptions, but can't get img size to fill divs */
+
+.wrapper { 
+  /*border : 2px solid #000; */
+  overflow:hidden;
+}
+.wrapper div {
+   /* min-height: 192px; */
+   padding: 0px;
+}
+.one {
+  background-color: gray;
+  float:left; 
+  /* margin-right:20px; */
+  min-width:50%; 
+  /*border-right:2px solid #000;*/
+  /* max-height: 180px; */
+  /* min-height: 384px; */
+}
+.two { 
+  background-color: #ff7777;
+  overflow:hidden;
+  /* margin:10px; */
+  /*border:2px dashed #ccc; */
+  /* min-height: 384px; */
+  min-width:50%; 
+  margin-bottom: 0px;
+}
+
+/* @media screen and (max-width: 50em) { */
+@media screen and (max-width: 400px) {
+   .one { 
+     float: none;
+     margin-right:0;
+     width: 100%;
+     /* width:auto; */
+     border:0;
+     /* border-bottom:2px solid #000;  */
+    }
+    figure {
+      display: table;
+    }
+    img, figcaption {
+      display: table-cell;
+      vertical-align: bottom;
+    }
+    figcaption {
+      padding-left: 4px;
+    }
+  
+}
+
+/* img { max-width: 100%; } */
+img { width: 100%; } 
+figure { display: table; vertical-align: bottom; width: 1px; } /* any width < width of any image */
+img, figcaption { display: table-row; vertical-align: bottom;}
+
+</style>
+
+</head>
+<body>
+
+
+<div class="wrapper">
+    <div class="one">
+    <figure id="fig_1">
+<img src="/static/media/thumbnails/60446819968146915_mwJLqLyW_b_1.jpg"/> 
+<figcaption>This is a fruitcake that was uploaded by somebody on Dec. 14, 2013</figcaption>
+</figure>
+    </div>
+    <div class="two">
+    <figure id="fig_1">
+<img src="/static/media/thumbnails/241435229994408022_DoszNqwg_b_1.jpg"/> 
+<figcaption>This is a fruitcake that was uploaded by somebody on Dec. 14, 2013</figcaption>
+</figure>
+    </div>
+</div>
+
+<figure id="fig_1">
+<img src="/static/media/thumbnails/60446819968146915_mwJLqLyW_b_1.jpg"/> 
+<figcaption>This is a fruitcake that was uploaded by somebody on Dec. 14, 2013</figcaption>
+</figure>
+
+<!--  
+/* --------------------------------------*/
+#thumbs{
+    max-width:100%;
+}
+#thumbs li {
+    width: 50%;
+    float: left;
+}
+#thumbs li img {
+    width: 100%;
+}
+
+<ul id="thumbs">
+    <li><img src="http://goo.gl/155sO"/></li>
+    <li><img src="http://goo.gl/155sO"/></li>
+    <li><img src="http://goo.gl/155sO"/></li>
+    <li><img src="http://goo.gl/155sO"/></li>
+    <li><img src="http://goo.gl/155sO"/></li>
+    <li><img src="http://goo.gl/155sO"/></li>
+</ul>
+//-->
+
+</body>
+</html>
+
