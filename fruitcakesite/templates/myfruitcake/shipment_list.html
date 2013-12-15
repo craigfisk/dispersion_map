@@ -2,7 +2,7 @@
 
 {% block title %}Myfruitcake{% endblock %}
 
-{% block sidebar %} - my shipments{% endblock %} 
+{% block sidebar %} - My Shipments{% endblock %} 
 
 {% load tz %} 
 
@@ -10,7 +10,7 @@
 {#<P>Template: shipment_list.html</P>#}
 
     <div class="main">
-        <div id="rtitle">Upload a fruitcake photo? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>
+        <div id="rtitle">Upload a fruitcake pic? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>
     </div>
 
     {% block myfruitcakelist %}{% endblock myfruitcakelist %}        
@@ -18,7 +18,7 @@
     {% if shipment_list %}
 
         <br />
-        <P class="main">Listing of shipment(s) 
+        <P class="main">Listing of shipments 
         {% if sender  %}
          Sent by <i><u>{{ sender }}</u></i>
          {% endif %}
@@ -93,7 +93,7 @@
         </div>
      {% else %}
 
-        (Sorry, looks like you have not shipped any fruitcake, yet.)
+        (Looks like you have not shipped any fruitcake pics, yet.)
      {% endif %}
 
 

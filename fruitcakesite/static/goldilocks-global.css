@@ -213,7 +213,7 @@ figcaption {font-size: smaller; font-weight: bold; line-height: 1.1em; margin-bo
 .footer1 { width:320px; margin-left: auto; margin-right: auto; }
 .footer2 { width:200px; margin-left: auto; margin-right: auto; }
 .menu1 { width:320px; margin-left: auto; margin-right: auto; }
-.menu2 { position:absolute; width:160px; right: 0px; }
+.menu2 { position:absolute; width:180px; right: 0px; }
 .menu3 { position:absolute: width:220px; right: 0px; }
 
 .greeting { line-height: 1.0em; } 

@@ -7,7 +7,7 @@
 
     <div id="container">
 
-        {% block sidebar %} - home{% endblock %} 
+        {% block sidebar %} - Home{% endblock %} 
 
         <div id="menu">
             {% block nav-global %}
@@ -17,10 +17,10 @@
             <section class="menu1" style="display: table;">
 
                 <div style="display: table-cell;"><h3><a href="{% url 'fruitcake:toplistview' %}">Home</a></h3></div>
-                <div style="display: table-cell;"><h3><a href="{% url 'fruitcake:listview' %}">MyFruitcake</a></h3></div>
-                <div style="display: table-cell;"><h3><a href="{% url 'fruitcake:shipments' %}">MyShipments</a></h3></div>
+                <div style="display: table-cell;"><h3><a href="{% url 'fruitcake:listview' %}">My Fruitcake</a></h3></div>
+                <div style="display: table-cell;"><h3><a href="{% url 'fruitcake:shipments' %}">My Shipments</a></h3></div>
                 {% if user.is_authenticated %}
-                    <div style="display: table-cell;"><h3><a href="{% url 'forum:userinfo' %}">MyProfile</a></h3></div> 
+                    <div style="display: table-cell;"><h3><a href="{% url 'forum:userinfo' %}">My Profile</a></h3></div> 
                 {% endif %}
                 {# --Note: moved forum, about, signout to footer block #}
                
@@ -28,9 +28,9 @@
 
             <section class="menu2" style="display: table;">
 
-                {# --Note: sign-in is a second row #}
+                {# --Note: Log In is a second row #}
                 {% if not user.is_authenticated %}
-                    <div style="display: table-cell;"><h3><a href="/registration/login/?next=/myfruitcake/">sign-in</a> | <a href="/registration/register/">register</a></h3>
+                    <div style="display: table-cell;"><h3><a href="/registration/login/?next=/myfruitcake/">Log In</a> | <a href="/registration/register/">Create Account</a></h3>
                 {% endif %}
                 
                 {# --Note: signout moved to footer block #}
@@ -157,7 +157,7 @@
                 <div style="display: table-cell;"><h3><a href="{% url 'fruitcake:about' %}">About</a></h3></div>
                 <div style="display: table-cell;"><h3><a name='forum' href="{% url 'forum:forum_main' %}">Forum</a></h3></div>
                 {% if user.is_authenticated %}
-                    <div style="display: table-cell;"><h3><a href="/registration/logout/?next=/myfruitcake/">sign-out</a></h3></div>
+                    <div style="display: table-cell;"><h3><a href="/registration/logout/?next=/myfruitcake/">Log Out</a></h3></div>
                 {% endif %}
 
             </section>
