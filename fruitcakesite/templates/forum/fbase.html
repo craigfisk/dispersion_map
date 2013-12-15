@@ -12,25 +12,45 @@
         <div id="menu">
             {% block nav-global %}
 
-                <!-- MENU -->
-                <h3><a href="{% url 'fruitcake:toplistview' %}">Home</a></h3>
-                <h3><a href="{% url 'fruitcake:listview' %}">MyFruitcake</a></h3>
-                <h3><a href="{% url 'fruitcake:shipments' %}">MyShipments</a></h3>
-                <h3><a name='forum' href="{% url 'forum:forum_main' %}">Forum</a></h3>
+            <!-- MENU -->
 
-                {% if user.is_staff %} <a href="{% url 'admin:index' %}">Admin</a> {% endif %}
-                {% if user.is_staff %} <a href="{% url 'fruitcake:search' %}">Search</a> {% endif %}
+            <section class="menu1" style="display: table;">
 
+                <div style="display: table-cell;"><h3><a href="{% url 'fruitcake:toplistview' %}">Home</a></h3></div>
+                <div style="display: table-cell;"><h3><a href="{% url 'fruitcake:listview' %}">MyFruitcake</a></h3></div>
+                <div style="display: table-cell;"><h3><a href="{% url 'fruitcake:shipments' %}">MyShipments</a></h3></div>
                 {% if user.is_authenticated %}
-                    {# <h3><a href="{% url 'forum:userinfo' user.pk %}">MyProfile</a></h3> {% endif %} #}
-                    <h3><a href="{% url 'forum:userinfo' %}">MyProfile</a></h3> {% endif %}
+                    <div style="display: table-cell;"><h3><a href="{% url 'forum:userinfo' %}">MyProfile</a></h3></div> 
+                {% endif %}
+                {# --Note: moved forum, about, signout to footer block #}
+               
+            </section>
 
-                {% if not user.is_authenticated %}<h3><a href="/registration/login/?next=/myfruitcake/">sign-in</a> | <a href="/registration/register/">register</a></h3>{% endif %}
+            <section class="menu2" style="display: table;">
 
-                {% if user.is_authenticated %}<h3><a href="/registration/logout/?next=/myfruitcake/">sign-out</a></h3>
-                    {% endif %}
+                {# --Note: sign-in is a second row #}
+                {% if not user.is_authenticated %}
+                    <div style="display: table-cell;"><h3><a href="/registration/login/?next=/myfruitcake/">sign-in</a> | <a href="/registration/register/">register</a></h3>
+                {% endif %}
+                
+                {# --Note: signout moved to footer block #}
 
-                <h3><a href="{% url 'fruitcake:about' %}">About</a></h3>
+                {#<h3><a href="{% url 'fruitcake:about' %}">About</a></h3>#}
+
+            </section>
+
+            <section class="menu3" style="display: table;">
+
+                {# --Note: Admin only section; creates a new row #}
+
+                {% if user.is_staff %} 
+                    <div style="display: table-cell;"><a href="{% url 'admin:index' %}">Admin</a></div> 
+                {% endif %}
+                {% if user.is_staff %} 
+                    <div style="display: table-cell;"><a href="{% url 'fruitcake:search' %}">Search</a></div>
+                {% endif %}
+
+            </section>
 
 
             {% endblock %}
@@ -41,15 +61,15 @@
             <div id="container2">
                 <div id="container1">
                     <div id="col1">
-                        <br /><h2>
+                        <br /><h2 class="greeting">
                         {% if user.username and user.get_profile.avatar %} 
-                            Hi <i>{{ user.username }}</i>!
+                        Hi <i><span class="highlight">{{ user.username }}</span></i>!
                         {% elif user.username and not user.get_profile.avatar %}
-                            Hi <i>{{ user.username }}!</i>.
+                            Hi <i><span class="highlight">{{ user.username }}!</span></i>.
                         {% else %}
-                        Hi, <i>anonymous</i>! 
+                            Hi, <i><span class="highlight">anonymous</i>!</span>
                         {% endif %}
-                    </h2><br />
+                    </h2>
                         <P><b>Justfruitcake.com</b> is TOTALLY FREE (until it's not; and then it will be very, very inexpensive, plus maybe have some nice surprises!)</P>
 
 
@@ -125,7 +145,30 @@
         <div id="content">
             {% block page-content %}{% endblock %}
         </div>
+
+        {% block footer %}
+            <br />
+
+            <div class="footer1">
+                &copy; Copyright 2013 Picocosmos Corporation</div>
+
+            <section class="footer2" style="display: table;">
+                
+                <div style="display: table-cell;"><h3><a href="{% url 'fruitcake:about' %}">About</a></h3></div>
+                <div style="display: table-cell;"><h3><a name='forum' href="{% url 'forum:forum_main' %}">Forum</a></h3></div>
+                {% if user.is_authenticated %}
+                    <div style="display: table-cell;"><h3><a href="/registration/logout/?next=/myfruitcake/">sign-out</a></h3></div>
+                {% endif %}
+
+            </section>
+
+        {% endblock %}
+
+
+
+
     </div>
+
 
 </body>
 </html>
