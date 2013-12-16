@@ -1,6 +1,7 @@
 {% extends "base/base.html" %}
 
 {# {% load tz %} #}
+{% load humanize %}
 
 {% block title %}{{ block.super }} Forum {% endblock %}
 
@@ -116,7 +117,7 @@
 
                             <ul>
                                 {% if my_shipments %}
-                                <li>Shipments: {{ my_shipments|length }}</li>
+                                <li>Shipments: {{ my_shipments|length|intcomma }}</li>
                                 {% comment %}
                                 {% if my_latest_shipment %}
                                 <li>Latest: <a href="/myfruitcake/myshipments/{{ my_latest_shipment.id }}/">{{ my_latest_shipment.dt|localtime }}</a></li>

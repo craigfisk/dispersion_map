@@ -5,12 +5,13 @@
 {% block sidebar %} - My Fruitcake{% endblock %} 
 
 {% load tz %}
+{% load humanize %}
 
 {% block page-content %}
 {#<P>Template: fruitcake_list.html</P>#}
 
 {% block myfruitcakelist %}{% endblock myfruitcakelist %}        
-
+    
     {% if user.is_authenticated %}
 
         <div class="main">
@@ -22,16 +23,19 @@
         <P class="main">Most shipped fruitcakes (<b>click pic to send</b>):</P>
 
         <div id="gallery_tape">
+
         <ul class="plain">
             {% for fruitcake in fruitcake_list %}
+
                 <li class="plain">
                 <figure>
                     <a href="/myfruitcake/myfruitcake/{{ fruitcake.id }}/send/" title="{{ fruitcake.popup }}">
                         <img src="{{ MEDIA_URL }}{{ fruitcake.thumbnail }}"/>
                     </a>
-                    <figcaption>uploaded: {{ fruitcake.dt|localtime }}<br />by: {{ fruitcake.uploader.username }} (sent {{fruitcake.times_shipped }}x)</figcaption>
+                    <figcaption>uploaded: {{ fruitcake.dt|localtime }}<br />by: {{ fruitcake.uploader.username }} (sent {{fruitcake.times_shipped|intcomma }}x)</figcaption>
                 </figure>
                 </li>
+
             {% endfor %}
         </ul>
 

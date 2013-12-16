@@ -270,6 +270,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+    # CF20131215 added for load humanize in template and then |intcomma; see
+    # https://docs.djangoproject.com/en/1.5/ref/contrib/humanize/
+    'django.contrib.humanize',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 #    'polls',
