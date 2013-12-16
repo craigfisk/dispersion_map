@@ -8,9 +8,9 @@
 {% load humanize %}
 
 {% block page-content %}
-{#<P>Template: fruitcake_detail.html</P>#}
+<P>Template: fruitcake_detail.html</P>
     <div class="main">
-        <div id="rtitle">Upload a fruitcake pic? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>
+        {#<div id="rtitle">Upload a fruitcake pic? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>#}
     </div>
 
 {% block myfruitcakelist %}{% endblock myfruitcakelist %}        
@@ -19,7 +19,7 @@
 
         {% if fruitcake %}
         <br />
-        <P class="main">Fruitcake Detail (<b>click pic to send</b>):</P>
+        <P class="main">Fruitcake Detail (<b>tap pic to send</b>):</P>
 
         <div id="gallery_tape">
         <ul class="plain">

@@ -90,7 +90,7 @@ class FruitcakeListView(ListView):
         return context
 
     def get_queryset(self):
-        return Fruitcake.objects.all().order_by('-times_shipped')[:16]
+        return Fruitcake.objects.all().order_by('-times_shipped')[:8]
 
 
 class MyFruitcakeListView(ListView):
@@ -102,6 +102,14 @@ class MyFruitcakeListView(ListView):
         context = super(MyFruitcakeListView, self).get_context_data(**kwargs)
         context['user'] = self.request.user
         context['uploader'] = self.request.user
+        
+        context['upload'] = False
+        path = self.request.get_full_path()
+        pattern = '/myfruitcake/myfruitcake/$'
+        m = re.match(pattern, path)
+        if m: 
+            context['upload'] = True
+        
         return context
 
     def get_queryset(self):

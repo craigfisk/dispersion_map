@@ -2,7 +2,7 @@
 
 {% block title %}Myfruitcake{% endblock %}
 
-{% block sidebar %} - My Shipments{% endblock %} 
+{% block sidebar %} - My Messages{% endblock %} 
 
 {% load tz %} 
 {% load humanize %}
@@ -11,7 +11,7 @@
 {#<P>Template: shipment_list.html</P>#}
     
     <div class="main">
-        <div id="rtitle">Upload a fruitcake pic? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>
+        {#<div id="rtitle">Upload a fruitcake pic? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>#}
     </div>
 
     {% block myfruitcakelist %}{% endblock myfruitcakelist %}        
@@ -19,11 +19,11 @@
     {% if shipment_list %}
 
         <br />
-        <P class="main">Listing of shipments 
+        <P class="main">Listing of messages 
         {% if sender  %}
          Sent by <i><u>{{ sender }}</u></i>
          {% endif %}
-         (<b>click pic to send</b>):</P>
+         (<b>tap pic to send</b>):</P>
 
         <div id="gallery_tape">
 

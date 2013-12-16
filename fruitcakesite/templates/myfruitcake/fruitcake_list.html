@@ -13,14 +13,15 @@
 {% block myfruitcakelist %}{% endblock myfruitcakelist %}        
     
     {% if user.is_authenticated %}
-
+        {% if upload %}
         <div class="main">
-             <div id="rtitle">Upload a fruitcake pic? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>
+            <div id="rtitle">Upload a fruitcake pic? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>
         </div>
+        {% endif %}
 
         {% if fruitcake_list %}
         <br />
-        <P class="main">Most shipped fruitcakes (<b>click pic to send</b>):</P>
+        <P class="main">Top fruitcakes used for messages (<b>tap pic to send</b>):</P>
 
         <div id="gallery_tape">
 
@@ -52,8 +53,8 @@
         Context[uploader] is in MyFruitcakeListView and not FruitcakeListView, so this is one way to tell how we got here
         {% endcomment %}
         <div class="main">
-            <div id="rtitle"><B>Why create an account?</B> With a <I>username</I> and <I>password</I>, you can log in to send fruitcake messages to friends and family, watch them
-                send them on, upload fruitcake pics, and post in the forum.<BR />-->Upload a fruitcake photo? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>
+            <div id="rtitle"><B>Why create an account?</B> When you make a <i>free</i> account, you get a <I>username</I> and <I>password</I> to log in for sending fruitcake
+                messages, so your username is associated with messages, and also can upload fruitcake pics.<BR />-->Upload a fruitcake photo? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>
         </div>
 
 
@@ -61,7 +62,7 @@
 
             {% if fruitcake_list %}
             <br />
-            <P class="main">Most shipped fruitcakes (<b>click pic to send</b>):</P>
+            <P class="main">Top fruitcakes for messages (<b>tap pic to send</b>):</P>
 
             <div id="gallery_tape">
             <ul class="plain">
@@ -82,8 +83,8 @@
 
         {% else %}
         
-            <P>(When you register, if you upload some fruitcake photos, they will be displayed here and you can then
-            click to send them.  Or you can just click to send fruitcake photos on the &quot;Home&quot; page.)</P> 
+            <P>(If you have an account, when you upload fruitcake pics, they will be displayed here and you can then
+            tap to send them.  Or you can just send messages using fruitcake pics on the &quot;Home&quot; page.)</P> 
 
         {% endif %}
 

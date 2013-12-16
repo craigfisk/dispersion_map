@@ -18,8 +18,8 @@
             <section class="menu1" style="display: table;">
 
                 <div style="display: table-cell;"><h3><a href="{% url 'fruitcake:toplistview' %}">Home</a></h3></div>
+                <div style="display: table-cell;"><h3><a href="{% url 'fruitcake:shipments' %}">My Messages</a></h3></div>
                 <div style="display: table-cell;"><h3><a href="{% url 'fruitcake:listview' %}">My Fruitcake</a></h3></div>
-                <div style="display: table-cell;"><h3><a href="{% url 'fruitcake:shipments' %}">My Shipments</a></h3></div>
                 {% if user.is_authenticated %}
                     <div style="display: table-cell;"><h3><a href="{% url 'forum:userinfo' %}">My Profile</a></h3></div> 
                 {% endif %}
@@ -68,10 +68,10 @@
                         {% elif user.username and not user.get_profile.avatar %}
                             Hi <i><span class="highlight">{{ user.username }}!</span></i>.
                         {% else %}
-                            Hi, <i><span class="highlight">anonymous</i>!</span>
+                        Hi!{#<i><span class="highlight">anonymous</i>!</span>#}
                         {% endif %}
                     </h2>
-                        <P><b>Justfruitcake.com</b> is TOTALLY FREE (until it's not; and then it will be very, very inexpensive, plus maybe have some nice surprises!)</P>
+                        <P><b>Justfruitcake.com</b> is a TOTALLY FREE (well, ok, there may be an inexpensive advanced level later), fun way to send messages to friends and family. Plus there may be some nice surprises!</P>
 
 
                     </div>
@@ -117,18 +117,24 @@
 
                             <ul>
                                 {% if my_shipments %}
-                                <li>Shipments: {{ my_shipments|length|intcomma }}</li>
+                                <li>Messages sent: {{ my_shipments|length|intcomma }}</li>
                                 {% comment %}
                                 {% if my_latest_shipment %}
                                 <li>Latest: <a href="/myfruitcake/myshipments/{{ my_latest_shipment.id }}/">{{ my_latest_shipment.dt|localtime }}</a></li>
                                 {% endif %}
                                 {% endcomment %}
                                 {% else %}
-                                <li>No shipments</li>
+                                <li>No messages sent.</li>
                                 {% endif %}
                                
-                                {% comment %}
 
+                                {% if my_downstream %}
+                                <li>Messages re-sent by others: {{my_downstream|length|intcomma }}</li>
+                                {% else %}
+                                <li>None of your messages have been re-sent.</li>
+                                {% endif %}
+
+                                {% comment %}
                                 {% if my_posts %}
                                 <li>Posts: {{ my_posts|length }}</li>
                                 {# {% if my_latest_post %}<li>Latest: <a href="/forum/thread/{{ my_latest_post.thread.id}}/">{{my_latest_post.created}}</a></li>{% endif %} #}
