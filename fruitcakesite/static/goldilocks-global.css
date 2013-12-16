@@ -120,7 +120,7 @@ a:active, a:focus { outline: none; }
 ----------------------------------------------------------------------------------------*/
 @media screen and (min-width: 62.01em) {
 #container {
-        background: green;
+        /* background: green; */
         padding: 1.618em;
         margin: 0 auto; 
         max-width: 60em;
@@ -131,20 +131,20 @@ a:active, a:focus { outline: none; }
 ----------------------------------------------------------------------------------------*/
 
 @media screen and (orientation: landscape) {
-#container { background: orange; max-width: 50em; padding: 1em; margin:auto;}
+#container { max-width: 50em; padding: 1em; margin:auto;}
         
 }
 
 
 @media screen and (min-width: 23em) and (max-width: 62.00em) {
-#container { background: white; max-width: 30em; padding: 1em; margin:auto;}
+#container { max-width: 30em; padding: 1em; margin:auto;}
 }
 
 /* 6. CUSTOM LAYOUT & TYPOGRAPHY (Baby bear)
 ----------------------------------------------------------------------------------------*/
 @media screen and (max-width: 23em) {
 #container {
-    background: red;
+    /* background: red; */
     padding: 0.809em;     
     max-width: 30em;
     margin: auto;
