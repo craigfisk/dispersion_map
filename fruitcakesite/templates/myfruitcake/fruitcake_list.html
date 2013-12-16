@@ -64,9 +64,9 @@
             <P class="main">Most shipped fruitcakes (<b>click pic to send</b>):</P>
 
             <div id="gallery_tape">
-            <ul class="gallery tape">
+            <ul class="plain">
                 {% for fruitcake in fruitcake_list %}
-                    <li>
+                    <li class="plain">
                     <figure>
                         <a href="/myfruitcake/myfruitcake/{{ fruitcake.id }}/send/" title="{{ fruitcake.popup }}">
                             <img src="{{ MEDIA_URL }}{{ fruitcake.thumbnail }}"/>
