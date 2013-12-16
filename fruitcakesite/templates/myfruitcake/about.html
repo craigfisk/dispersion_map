@@ -13,7 +13,7 @@ It is one of those side projects that started from a fun and whimsical notion, a
 life of its own at a certain point.
 <P>Overview:
 <ul class="aboutbullet">
-    <li class="aboutbullet"><b>Home</b> - The most popular fruitcake pics by how often they've been sent.</li>
+    <li class="aboutbullet"><b>Home</b> - The top fruitcake pics.</li>
     <li class="aboutbullet"><b>My Fruitcake</b> - Fruitcake pics you have uploaded.</li>
 
     <li class="aboutbullet"><b>My Shipments</b> - Messages you sent using fruitcakes pics.</li>
@@ -21,23 +21,23 @@ life of its own at a certain point.
     <li class="aboutbullet"><b>My Profile</b> - Your account username, email, profile pic.</li>
 
     
-    <li class="aboutbullet"><b>About</b></li>
+    {#<li class="aboutbullet"><b>About</b></li>#}
 
-    <li class="aboutbullet"><b>Forum</b> - Discussion on fruitcake topics and feedback.</li>
-    <li class="aboutbullet"><b>Log In/Log Out</b></li>
+    {#<li class="aboutbullet"><b>Forum</b> - Discussion on fruitcake topics and feedback.</li>#}
+    {#<li class="aboutbullet"><b>Log In/Log Out</b></li>#}
 </ul>
-{% comment %}
-<P>Click <a href="{% url myfruitcake.views.about_sample %}">here</a> for a screenshot. Without having created a sign-in, you can
-click on the Justfruitcake message link in an email to open it in Justfruitcake.com and see the fruitcake's travels, but to
-send it on or to send other Justfruitcake messsages, you just need to create a sign-in with a verified email address.
-{% endcomment %}
 
+<P><B>Credits:</B> Thanks to the <a href="http://www.djangoproject.com">Django</a> framework, the <a
+    href="https://github.com/designbyfront/The-Goldilocks-Approach/blob/master/css/global.css">&quot;Goldilocks&quot;</a> CSS project for responsive styling, 
+and to the paperclip, used as a favicon here, from the free icon set by <a href="http://glyphicons.com">glyphicons.com</a>.
+
+{% comment %}
 <P>FAQ:
 <ul class="aboutbullet">
     <li class="aboutbullet">I sent a fruitcake pic message, so why doesn't it show up in My Shipments? Answer: try hitting F5 to refresh the browser.</li>
     <li class="aboutbullet">I received a fruitcake message in an email. When I click the linkto see it, do I need to create an account and log in?
     Answer: Not for the first few.</li>
 </ul>
-
+{% endcomment %}
 
 {% endblock %}

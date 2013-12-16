@@ -123,7 +123,7 @@ def profilepic(request):
                 hsize = int((float(im.size[1])*float(wpercent)))
                 im = im.resize((WIDTH_AVATAR, hsize), PImage.ANTIALIAS)
                 im.save(imfn, "JPEG")
-                return HttpResponseRedirect(reverse('fruitcake:listview') ) 
+                return HttpResponseRedirect(reverse('fruitcake:toplistview') ) 
             except IOError as e:
                 print "Cannot create thumbnail for %s, error: %s" % (imfn, e)
             
