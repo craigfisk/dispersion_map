@@ -58,10 +58,11 @@ def testmap(request):
 
 def about(request):
     return render_to_response("myfruitcake/about.html", add_csrf(request), context_instance=RequestContext(request))
-"""
-def about_sample(request):
-    return render_to_response("myfruitcake/about_sample.html", add_csrf(request), context_instance=RequestContext(request))
-"""
+
+
+def termsofservice(request):
+    return render_to_response("myfruitcake/termsofservice.html", add_csrf(request), context_instance=RequestContext(request))
+
 
 class ProfileForm(ModelForm):
     class Meta:
