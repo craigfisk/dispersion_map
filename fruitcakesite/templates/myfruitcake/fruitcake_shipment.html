@@ -12,8 +12,8 @@
 {% if fruitcake %}
 
         <div id="gallery_tape">
-        <ul class="gallery tape">
-                <li>
+        <ul class="plain" class="gallery tape">
+                <li class="plain">
                 <figure>
                     <img src="{{ MEDIA_URL }}{{ fruitcake.thumbnail }}" title="{{ fruitcake.popup }}" />
                     <figcaption>uploaded: {{ fruitcake.dt|localtime }}<br />by: {{ fruitcake.uploader.username }}</figcaption>
@@ -26,7 +26,7 @@
 
 
 
-<P><b>Send it off?</b></P>
+<P><b>Send a message?</b></P>
 
 {% if form.errors %}
     Sorry, please fix the error:
