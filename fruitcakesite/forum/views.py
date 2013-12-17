@@ -19,6 +19,8 @@ from django.template import RequestContext
 from django import forms
 from forum.models import Forum, Thread, Post, UserProfile
 from django.db import models
+from lazysignup.decorators import allow_lazy_user   # replaces login_required() below
+
 
 #CF20131021 hmm, looks like this is superceded by class UserProfile (avatar, user, posts, shipments) in forum.models
 """
@@ -63,12 +65,12 @@ def mk_paginator(request, items, num_items):
         items = paginator.page(paginator.num_pages)
     return items
 
-@login_required
+@allow_lazy_user
 def main(request):
     forums = Forum.objects.all()
     return render_to_response("forum/contents.html", dict(forums=forums, user=request.user), context_instance=RequestContext(request))
 
-@login_required
+@allow_lazy_user
 def forum(request, pk):
     """Listing of threads in a forum."""
     threads = Thread.objects.filter(forum=pk).order_by("-created")
@@ -78,7 +80,7 @@ def forum(request, pk):
     title = Forum.objects.get(pk=pk) 
     return render_to_response("forum/forum.html", add_csrf(request, threads=threads, pk=pk, title=title), context_instance=RequestContext(request))
 
-@login_required
+@allow_lazy_user
 def thread(request, pk):
     """Listing of posts in a thread."""
     posts = Post.objects.filter(thread=pk).order_by("created")
@@ -90,7 +92,7 @@ def thread(request, pk):
     # forum_pk=t.forum.pk
 
 
-@login_required
+@allow_lazy_user
 #def profilepic(request, pk):
 def profilepic(request):
     if FUNCTION_LOGGING:  logger.debug("Entering profilepic()")
@@ -141,7 +143,7 @@ def profilepic(request):
     #return HttpResponseRedirect(reverse("forum.views.userinfo", args=[pk]))
 
 
-@login_required
+@allow_lazy_user
 #def userinfo(request, pk):
 def userinfo(request):
     if FUNCTION_LOGGING:  logger.debug("Entering userinfo()")
@@ -161,7 +163,7 @@ def userinfo(request):
     return render_to_response("forum/userinfo.html", add_csrf(request, uf=uf, u=u), context_instance=RequestContext(request))
 
 """
-@login_required
+@allow_lazy_user
 def new_thread(request, pk):
     if FUNCTION_LOGGING:  logger.debug("Entering new_thread()")
     action = reverse('forum:forum_new_thread', args=(pk,))
@@ -169,7 +171,7 @@ def new_thread(request, pk):
     subject = ''
     return render_to_response("forum/post.html", add_csrf(request, subject=subject, action=action, title=title), context_instance=RequestContext(request))
 
-@login_required
+@allow_lazy_user
 def reply(request, pk):
     if FUNCTION_LOGGING:  logger.debug("Entering reply()")
     action = reverse('forum:forum_reply', args=(pk,))
@@ -178,7 +180,7 @@ def reply(request, pk):
     return render_to_response("forum/post.html", add_csrf(request, subject=subject, action=action, title=title), context_instance=RequestContext(request))
 """
 
-@login_required
+@allow_lazy_user
 def combo(request, ptype, post_id):
 #def post(request, ptype, pk):
     #if FUNCTION_LOGGING:  logger.debug("Entering post()")
@@ -204,7 +206,7 @@ def increment_post_counter(request):
     profile.posts += 1
     profile.save()
 
-@login_required
+@allow_lazy_user
 def add_thread(request, pk):
     if FUNCTION_LOGGING:  logger.debug("Entering add_thread()")
     p = request.POST
@@ -218,7 +220,7 @@ def add_thread(request, pk):
         increment_post_counter(request)
     return HttpResponseRedirect(reverse('forum:forum_content', args=(pk,)) )
 
-@login_required
+@allow_lazy_user
 def add_post(request, pk):
     if FUNCTION_LOGGING:  logger.debug("Entering add_post()")
     p = request.POST

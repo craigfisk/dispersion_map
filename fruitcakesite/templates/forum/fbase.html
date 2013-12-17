@@ -1,7 +1,6 @@
 {% extends "base/base.html" %}
 
-{# {% load tz %} #}
-{% load humanize %}
+{% load tz humanize i18n lazysignup_tags %}
 
 {% block title %}{{ block.super }} Forum {% endblock %}
 
@@ -183,9 +182,27 @@
                 
                 <div style="display: table-cell;"><h3><a href="{% url 'fruitcake:about' %}">About</a></h3></div>
                 {#<div style="display: table-cell;"><h3><a name='forum' href="{% url 'forum:forum_main' %}">Forum</a></h3></div>#}
-                {% if user.is_authenticated %}
-                    <div style="display: table-cell;"><h3><a href="/registration/logout/?next=/myfruitcake/">Log Out</a></h3></div>
-                {% endif %}
+                <div style="display: table-cell;">
+                
+                    {% if user.is_authenticated %}
+                    User: {{user }}
+                    is_anonymous: {{ user.is_anonymous}} <br/>
+                    is_authenticated: {{user.is_authenticated}}<br/> 
+                    is_lazy_user: {{user|is_lazy_user}} 
+                    <h3><a href="/registration/logout/?next=/myfruitcake/">Log Out</a></h3>
+                    {% endif %}
+
+                    <ul>
+                    {% if not user|is_lazy_user %}
+                        <li><a href="#">{% trans "Account" %}</a></li>
+                        <li><a href="/registration/logout/?next=/myfruitcake/">{% trans "Log out" %}</a></li>
+                        {# {% url 'auth_logout' %} #}
+                    {% else %}
+                        <li><a href="{% url 'lazysignup_convert' %}">{% trans "Save your data" %}</a> {% trans "by setting a username and password" %}</li>
+                    {% endif %}
+                    </ul>
+
+                </div>
 
             </section>
 

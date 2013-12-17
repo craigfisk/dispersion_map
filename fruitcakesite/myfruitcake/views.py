@@ -41,6 +41,7 @@ from django.template import Context
 from django.utils import timezone
 from django.contrib.gis.geoip import GeoIP
 import re
+from lazysignup.decorators import allow_lazy_user   # replaces login_required() below and in myfruitcake.urls
 
 #CF20130413 next line to enable THUMBNAIL_PATH etc to be a constant in templates. Leaving here as example.
 #from django.conf import settings    # also needs render_to_response imported above
@@ -90,7 +91,7 @@ class FruitcakeListView(ListView):
         return context
 
     def get_queryset(self):
-        return Fruitcake.objects.all().order_by('-times_shipped')[:8]
+        return Fruitcake.objects.all().order_by('-times_shipped')[:3]
 
 
 class MyFruitcakeListView(ListView):
@@ -124,7 +125,6 @@ class MyFruitcakeDetailView(DetailView):
 
     model = Fruitcake
 
-    #@method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(MyFruitcakeDetailView, self).dispatch(*args, **kwargs)
 
@@ -234,9 +234,8 @@ def increment_times_shipped(fruitcake_id):
         
 class ShipmentError(Exception): pass
 
-#@login_required # switched to is_authenticated on POST only so GET displays; user can see but not send.
 
-@login_required
+@allow_lazy_user
 def email_fruitcake(request, fruitcake_id=None, shipment_id=None):
     """Create instance of Shipment and associated Addressees and send it as email. 
     1) obtain the fruitcake id passed in parameter, the sender from request.user, fill in the message
@@ -404,7 +403,7 @@ class LikeForm(ModelForm):
         model = Like
         exclude = ['dt', 'fruitcake', 'user'] 
 
-@login_required
+@allow_lazy_user
 def upload_file(request):
 
     if FUNCTION_LOGGING: logger.debug("Entering upload_file()")

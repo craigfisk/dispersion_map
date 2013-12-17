@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'myfruitcake/', include('myfruitcake.urls', namespace='fruitcake')),
     url(r'^registration/login/$', 'fruitcakesite.views.login'),
     url(r'^registration/', include('registration.backends.default.urls')),
+    url(r'^convert/', include('lazysignup.urls')),
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'static'} )
 )
 

@@ -235,6 +235,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.locale.LocaleMiddleware',    #CF20131216 added for i18n, see https://docs.djangoproject.com/en/1.5/topics/i18n/translation/
     #CF20121107 next setting is new in 1.4, see http://deathofagremmie.com/category/django/
     # Uncomment the next line for simple clickjacking protection:
 ###    'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -273,6 +274,7 @@ INSTALLED_APPS = (
     # CF20131215 added for load humanize in template and then |intcomma; see
     # https://docs.djangoproject.com/en/1.5/ref/contrib/humanize/
     'django.contrib.humanize',
+    'lazysignup',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 #    'polls',
@@ -282,6 +284,11 @@ INSTALLED_APPS = (
 ###    'south',
 )
 
+#CF20131216 added for django-lazysignup:
+AUTHENTICATION_BACKENDS = (
+        'django.contrib.auth.backends.ModelBackend',
+        'lazysignup.backends.LazySignupBackend',
+        )
 
 # See https://docs.djangoproject.com/en/1.4/topics/auth/#storing-additional-information-about-users
 AUTH_PROFILE_MODULE = 'forum.UserProfile'

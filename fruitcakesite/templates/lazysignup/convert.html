@@ -1,0 +1,23 @@
+{% extends "registration/registration_base.html" %}
+
+
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}Convert{% endblock %}
+
+{% block sidebar %} - convert{% endblock %}
+
+{% block page-content %}
+<P>Convert your temporary history to a regular user account.</P>
+
+    <form method="post" action="{% url 'lazysignup_convert' %}">
+      {{ form.as_p }}
+      {% csrf_token %}
+      {#<input type="hidden" name="redirect_to" value="{{ redirect_to }}">#}
+      <input type="hidden" name="redirect_to" value="/myfruitcake/myshipments/">
+      <input type="submit" value="{% trans "Submit" %}" />
+    </form>
+    
+{% endblock %}
+
