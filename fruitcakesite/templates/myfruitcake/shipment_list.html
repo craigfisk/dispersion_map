@@ -8,8 +8,7 @@
 {# make signin block not show, to avoid vertical blank space #}
 {# {% block signin %}{% endblock %} #}
 
-{% load tz %} 
-{% load humanize %}
+{% load tz humanize i18n lazysignup_tags %} 
 
 {% block page-content %}
 {#<P>Template: shipment_list.html</P>#}
@@ -24,10 +23,10 @@
 
         <br />
         <P class="main">Listing of messages 
-        {% if sender  %}
-         Sent by <i><u>{{ sender }}</u></i>
-         {% endif %}
-         (<b>tap pic to send</b>):</P>
+        {% if sender %}
+        Sent by <i><u>{{ sender }}</u></i>
+        {% endif %}
+        (<b>tap pic to send</b>):</P>
 
         <div id="gallery_tape">
 
@@ -60,19 +59,29 @@
                     {% for leg in shipment.get_shipment_list %}
                     <li class="plain" class="history_item">
                     <i>{#{{leg.origin_id}} {{leg.parent_id}}#}<b>#{{ leg.id|intcomma }}</b></i> 
-                    {{ leg.dt|localtime }} 
-                    sent by <b><span {% if leg.sender_id == user.id %}class="highlight"{% else %}class="otherhighlight"{% endif %}>{{leg.sender}}</span>
-
+                    {{ leg.dt|localtime }}
+                    
+                    {% if not user|is_lazy_user %} 
+                    sent by <b><span {% if leg.sender_id == user.id %}class="highlight"{% else %}class="otherhighlight"{% endif %}>{{leg.sender}}</span></b>
+                    {% endif %}
+                    
                         {% for ip in leg.ipaddresses.all %}
-                        ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }}{# - {{ ip.ipaddress }}#}) 
-                        {% endfor %}</b>
+                            <b> ({{ ip.city }}, {{ ip.region }}, {{ ip.country_name }}{# - {{ ip.ipaddress }}#})</b>
+                        {% endfor %}
                         with message &quot;{{ leg.message }}&quot;
                         <br />
-                        {% if leg.sender = user %}
-                        --> sent to: 
+                        {% if not user|is_lazy_user or leg.sender == user %}
+                        --> to: 
                             {% for email in leg.emailcontacts.all %} 
                                 {{email }}{% if not forloop.last %}, {% endif %} 
                             {% endfor %} 
+                        {% elif user|is_lazy_user and leg.sender == user %}
+                        --> an: 
+                            {% for email in leg.emailcontacts.all %} 
+                                {{email }}{% if not forloop.last %}, {% endif %} 
+                            {% endfor %} 
+                        {% else %}
+                        --> to: <b>me</b>
                         {% endif %}
                     </li>
                     {% endfor %}

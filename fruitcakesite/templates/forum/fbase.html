@@ -62,18 +62,20 @@
                 <div id="container1">
                     <div id="col1">
                         <br /><h2 class="greeting"><b>
-                        {% if user.username and user.get_profile.avatar %} 
+                        {% if user.username and user.get_profile.avatar and not user|is_lazy_user %} 
                         Hi <i><span class="highlight">{{ user.username }}</span></i>!
-                        {% elif user.username and not user.get_profile.avatar %}
+                        {% elif user.username and not user.get_profile.avatar and not user|is_lazy_user %}
                             Hi <i><span class="highlight">{{ user.username }}!</span></i>
                         {% else %}
                         Hi!{#<i><span class="highlight">anonymous</i>!</span>#}
                         {% endif %}
+                        {% comment %}
                         {% if user|is_lazy_user %}
                             (temporary id)
                         {% endif %}
+                        {% endcomment %}
                         </b></h2>
-                        <P><b>Justfruitcake.com</b> is a fun, free, distinctive way to send seasonal messages to friends and family!</P>
+                        <P><b>Justfruitcake</b> is a fun, free, distinctive way to send seasonal messages to friends and family!</P>
 
 
                     </div>

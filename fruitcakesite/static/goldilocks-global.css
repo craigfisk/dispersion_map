@@ -159,7 +159,7 @@ aside { width: 100%; }
 .cf:before, .cf:after { content: ""; display: block; }
 .cf:after { clear: both; }
 .ie6 .cf { zoom: 1 }
-maxii
+/* maxii = random typing in vim? */
 
 /* 8. JUSTFRUITCAKE  margin-bottom: 20px; border-bottom: 1px solid #ccc;
 ----------------------------------------------------------------------------------------*/
@@ -210,6 +210,11 @@ figcaption {font-size: smaller; font-weight: bold; line-height: 1.1em; margin-bo
 
 .plain { list-style: none; padding: 0; margin: 0; } 
 .nobullet { list-style: none; }
+/* .history_item { color: red; } */
+/*    line-height: 1.618em; */
+/*    margin-bottom: 1.618em; */
+
+/* .history_area { color: red; } */
 
 /* class="footer" on a div with width will center it horizontally */
 .footer1 { width:320px; margin-left: auto; margin-right: auto; }
