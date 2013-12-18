@@ -91,7 +91,7 @@ class FruitcakeListView(ListView):
         return context
 
     def get_queryset(self):
-        return Fruitcake.objects.all().order_by('-times_shipped')[:3]
+        return Fruitcake.objects.all().order_by('-times_shipped')[:10]
 
 
 class MyFruitcakeListView(ListView):
