@@ -7,7 +7,7 @@ def my_shipments_context_processor(request):
        'my_shipments' : Shipment.objects.filter(sender_id=request.user.id).order_by('-dt')
        }
 
-"""    
+"""
 def my_latest_shipment_context_processor(request):
     if request.user.is_authenticated():
         return { 'my_latest_shipment' : Shipment.objects.filter(sender_id=request.user.id).order_by('-dt')[0]  }

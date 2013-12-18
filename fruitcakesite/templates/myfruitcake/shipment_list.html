@@ -61,8 +61,13 @@
                     <i>{#{{leg.origin_id}} {{leg.parent_id}}#}<b>#{{ leg.id|intcomma }}</b></i> 
                     {{ leg.dt|localtime }}
                     
-                    {% if not user|is_lazy_user %} 
-                    sent by <b><span {% if leg.sender_id == user.id %}class="highlight"{% else %}class="otherhighlight"{% endif %}>{{leg.sender}}</span></b>
+                    {% if user.is_authenticated and user|is_lazy_user and not user.is_anonymous %}  
+                        sent by a <b>new user</b>
+                    {% elif user.is_authenticated %}                                               
+                        <u>sent</u> by <b><span {% if leg.sender_id == user.id %}class="highlight"{% else %}class="otherhighlight"{% endif %}>{{leg.sender}}</span></b>
+                    {% else %}
+                        (unknown)
+                        {#<i>sent</i> by <b><span {% if leg.sender_id == user.id %}class="highlight"{% else %}class="otherhighlight"{% endif %}>{{leg.sender}}</span></b>#}
                     {% endif %}
                     
                         {% for ip in leg.ipaddresses.all %}

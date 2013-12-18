@@ -19,7 +19,7 @@
                 <div style="display: table-cell;"><h3><a href="{% url 'fruitcake:toplistview' %}">Home</a></h3></div>
                 <div style="display: table-cell;"><h3><a href="{% url 'fruitcake:shipments' %}">My Messages</a></h3></div>
                 <div style="display: table-cell;"><h3><a href="{% url 'fruitcake:listview' %}">My Fruitcake</a></h3></div>
-                {% if user.is_authenticated %}
+                {% if user.is_authenticated and not user|is_lazy_user %}
                     <div style="display: table-cell;"><h3><a href="{% url 'forum:userinfo' %}">My Profile</a></h3></div> 
                 {% endif %}
                 {# --Note: moved forum, about, signout to footer block #}
@@ -30,7 +30,10 @@
 
                 {# --Note: Log In is a second row #}
                 {% if not user.is_authenticated %}
-                    <div style="display: table-cell;"><h3><a href="/registration/login/?next=/myfruitcake/">Log In</a> | <a href="/registration/register/">Create Account</a></h3>
+                    <div style="display: table-cell;"><h3><a href="/registration/login/?next=/myfruitcake/">Log In</a> 
+                {% endif %}
+                {% if user|is_lazy_user and not user.is_authenticated %}
+                    | <a href="/registration/register/">Create Account</a></h3>
                 {% endif %}
                 
                 {# --Note: signout moved to footer block #}
@@ -61,11 +64,11 @@
             <div id="container2">
                 <div id="container1">
                     <div id="col1">
-                        <br /><h2 class="greeting"><b>
+                        <br /><b><h2 class="greeting">
                         {% if user.username and user.get_profile.avatar and not user|is_lazy_user %} 
-                        Hi <i><span class="highlight">{{ user.username }}</span></i>!
+                        Hi <i><span class="highlight">{{ user.username }}</span></i>
                         {% elif user.username and not user.get_profile.avatar and not user|is_lazy_user %}
-                            Hi <i><span class="highlight">{{ user.username }}!</span></i>
+                            Hi <i><span class="highlight">{{ user.username }}</span></i>
                         {% else %}
                         Hi!{#<i><span class="highlight">anonymous</i>!</span>#}
                         {% endif %}
@@ -74,7 +77,7 @@
                             (temporary id)
                         {% endif %}
                         {% endcomment %}
-                        </b></h2>
+                        </h2></b>
                         <P><b>Justfruitcake</b> is a fun, free, distinctive way to send seasonal messages to friends and family!</P>
 
 
@@ -92,7 +95,8 @@
                                         </div>
                                     {% elif user.username and not user.get_profile.avatar %}
                                         <div class="noavatar">
-                                            <P>No photo? Maybe want to go <img style="float: right" src="{{ MEDIA_URL }}/images/343958592_0c391c5963_b.jpg"/> to your <a href="{% url 'forum:userinfo' %}">profile</a> and upload your picture.</P>
+                                            <P>No photo? If you want to, you can <img style="float: right" src="{{ MEDIA_URL }}/images/343958592_0c391c5963_b.jpg"/> <a
+                                                href="{% url 'forum:userinfo' %}">upload</a> a profile pic to show here.</P>
 
                                         </div>
                                     {% else %}
@@ -134,7 +138,7 @@
                                         {% if my_downstream %}
                                         <li>Messages re-sent by others: {{my_downstream|length|intcomma }}</li>
                                         {% else %}
-                                        <li>None of your messages have been re-sent.</li>
+                                        <li>No messages re-sent downstream.</li>
                                         {% endif %}
 
                                         {% comment %}
@@ -201,7 +205,9 @@
                     {% endcomment %}
 
                     <ul>
-                    {% if not user|is_lazy_user %}
+                    {% if not user|is_lazy_user and user.is_anonymous %}
+                        {#<b>anon</b>#}
+                    {% elif not user|is_lazy_user %}
                         {#<li class="nobullet"><a href="#">{% trans "Account" %}</a></li>#}
                         <li class="nobullet"><a href="/registration/logout/?next=/myfruitcake/">{% trans "Log out" %}</a></li>
                         {# {% url 'auth_logout' %} #}
