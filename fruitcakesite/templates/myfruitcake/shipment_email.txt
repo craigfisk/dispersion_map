@@ -1,9 +1,9 @@
 Special fruitcake email {{ shipment.dt }}:
 
-I am sending you this fruitcake from http://www.justfruitcake.com. If you would like to see more about it, such as where it has travelled, just go to its very own shipment
-information page at http://www.justfruitcake.com/myfruitcake/myshipments/{{ shipment.id }}/.
+I am sending you this fruitcake from http://www.justfruitcake.com. If you would like to see more about it, such as where it has travelled, just go to its very own shipment information page at http://www.justfruitcake.com/myfruitcake/myshipments/{{ shipment.id }}/.
 
 Tap (or click) on the fruitcake to send a message back, or on to other friends or family.  
+
 Also, you can come back to check where your fruitcake messages go.
 
 Happy fruitcake!

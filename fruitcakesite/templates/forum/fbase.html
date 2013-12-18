@@ -29,9 +29,14 @@
             <section class="menu2" style="display: table;">
 
                 {# --Note: Log In is a second row #}
-                {% if not user.is_authenticated %}
+                {% if user|is_lazy_user and not user.is_anonymous and user.is_authenticated %}
+                
+                {% elif user.is_authenticated %}
+
+                {% else %}
                     <div style="display: table-cell;"><h3><a href="/registration/login/?next=/myfruitcake/">Log In</a> 
                 {% endif %}
+
                 {% if user|is_lazy_user and not user.is_authenticated %}
                     | <a href="/registration/register/">Create Account</a></h3>
                 {% endif %}
