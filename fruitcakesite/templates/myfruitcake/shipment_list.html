@@ -4,16 +4,20 @@
 
 {% block sidebar %} - My Messages{% endblock %} 
 
+{# between sidebar and page-content are: nav-global, signin, page-content-frame #}
+{# make signin block not show, to avoid vertical blank space #}
+{# {% block signin %}{% endblock %} #}
+
 {% load tz %} 
 {% load humanize %}
 
 {% block page-content %}
 {#<P>Template: shipment_list.html</P>#}
-    
+    {#<P>shipment_list.html at start of block page-content but before main div</P> #}
     <div class="main">
         {#<div id="rtitle">Upload a fruitcake pic? <span class="menu"><a href="/myfruitcake/upload/">Upload</a></span></div>#}
     </div>
-
+    {#<P>shipment_list.html</P>#}{# after main div nothing else yet in block page-content</P>#}
     {% block myfruitcakelist %}{% endblock myfruitcakelist %}        
 
     {% if shipment_list %}
@@ -96,7 +100,7 @@
         </div>
      {% else %}
 
-        (Looks like you have not shipped any fruitcake pics, yet.)
+        Looks like you have not sent any messages, yet.
      {% endif %}
 
 

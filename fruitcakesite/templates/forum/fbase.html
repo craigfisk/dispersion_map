@@ -61,15 +61,18 @@
             <div id="container2">
                 <div id="container1">
                     <div id="col1">
-                        <br /><h2 class="greeting">
+                        <br /><h2 class="greeting"><b>
                         {% if user.username and user.get_profile.avatar %} 
                         Hi <i><span class="highlight">{{ user.username }}</span></i>!
                         {% elif user.username and not user.get_profile.avatar %}
-                            Hi <i><span class="highlight">{{ user.username }}!</span></i>.
+                            Hi <i><span class="highlight">{{ user.username }}!</span></i>
                         {% else %}
                         Hi!{#<i><span class="highlight">anonymous</i>!</span>#}
                         {% endif %}
-                    </h2>
+                        {% if user|is_lazy_user %}
+                            (temporary id)
+                        {% endif %}
+                        </b></h2>
                         <P><b>Justfruitcake.com</b> is a TOTALLY FREE (well, ok, there may be an inexpensive advanced level later), fun way to send messages to friends and family. Plus there may be some nice surprises!</P>
 
 
@@ -77,88 +80,87 @@
 
                     {% if user.is_authenticated %}
 
-                    <div class="wrapper">
-                    <div class="one">
+                        <div class="wrapper">
+                            <div class="one">
 
-                         <div id="avatarinfo">
-                            {% if user.username and user.get_profile.avatar %} 
-                                <div class="avatar">
-                                    <img src="{{ MEDIA_URL }}{{ user.get_profile.avatar }}"/>
+                                 <div id="avatarinfo">
+                                    {% if user.username and user.get_profile.avatar %} 
+                                        <div class="avatar">
+                                            <img src="{{ MEDIA_URL }}{{ user.get_profile.avatar }}"/>
+                                        </div>
+                                    {% elif user.username and not user.get_profile.avatar %}
+                                        <div class="noavatar">
+                                            <P>No photo? Maybe want to go <img style="float: right" src="{{ MEDIA_URL }}/images/343958592_0c391c5963_b.jpg"/> to your <a href="{% url 'forum:userinfo' %}">profile</a> and upload your picture.</P>
+
+                                        </div>
+                                    {% else %}
+                                        
+                                    {% endif %}
                                 </div>
-                            {% elif user.username and not user.get_profile.avatar %}
-                                <div class="noavatar">
-                                    <P>No photo? Maybe want to go <img style="float: right" src="{{ MEDIA_URL }}/images/343958592_0c391c5963_b.jpg"/> to your <a href="{% url 'forum:userinfo' %}">profile</a> and upload your picture.</P>
-
-                                </div>
-                            {% else %}
-                                
-                            {% endif %}
-                        </div>
-                
-                        {% comment %}
-                        <h2>My forum posts:</h2>
-                        <ul>
-                            <li>Posts: {{ my_posts|length }} </li>
-                        </ul>
-                        {% endcomment %}
- 
-                    </div>
-
-
-                    <div class="two">
- 
-                            {% comment %}
-                            my_shipments is defined in myfruitcake/context_processors.py and settings
-                            {% endcomment %}
-                            {% if user.is_authenticated %}
-
-                            <h2>My activity: </h2>
-
-                            <ul>
-                                {% if my_shipments %}
-                                <li>Messages sent: {{ my_shipments|length|intcomma }}</li>
+                        
                                 {% comment %}
-                                {% if my_latest_shipment %}
-                                <li>Latest: <a href="/myfruitcake/myshipments/{{ my_latest_shipment.id }}/">{{ my_latest_shipment.dt|localtime }}</a></li>
-                                {% endif %}
+                                <h2>My forum posts:</h2>
+                                <ul>
+                                    <li>Posts: {{ my_posts|length }} </li>
+                                </ul>
                                 {% endcomment %}
-                                {% else %}
-                                <li>No messages sent.</li>
-                                {% endif %}
-                               
+         
+                            </div>
 
-                                {% if my_downstream %}
-                                <li>Messages re-sent by others: {{my_downstream|length|intcomma }}</li>
-                                {% else %}
-                                <li>None of your messages have been re-sent.</li>
-                                {% endif %}
+                            <div class="two">
+         
+                                    {% comment %}
+                                    my_shipments is defined in myfruitcake/context_processors.py and settings
+                                    {% endcomment %}
+                                    {% if user.is_authenticated %}
 
-                                {% comment %}
-                                {% if my_posts %}
-                                <li>Posts: {{ my_posts|length }}</li>
-                                {# {% if my_latest_post %}<li>Latest: <a href="/forum/thread/{{ my_latest_post.thread.id}}/">{{my_latest_post.created}}</a></li>{% endif %} #}
-                                {% else %}
-                                <li>No posts</li>
-                                {% endif %}
+                                    <h2>My activity: </h2>
 
-                                {% endcomment %}
+                                    <ul>
+                                        {% if my_shipments %}
+                                        <li>Messages sent: {{ my_shipments|length|intcomma }}</li>
+                                        {% comment %}
+                                        {% if my_latest_shipment %}
+                                        <li>Latest: <a href="/myfruitcake/myshipments/{{ my_latest_shipment.id }}/">{{ my_latest_shipment.dt|localtime }}</a></li>
+                                        {% endif %}
+                                        {% endcomment %}
+                                        {% else %}
+                                        <li>No messages sent.</li>
+                                        {% endif %}
+                                       
 
-                            </ul>
-                            {% else %}
-                            {# <P>(Not available for anonymous user) #}
-                            {% endif %}
+                                        {% if my_downstream %}
+                                        <li>Messages re-sent by others: {{my_downstream|length|intcomma }}</li>
+                                        {% else %}
+                                        <li>None of your messages have been re-sent.</li>
+                                        {% endif %}
 
-                    </div>
-                    
-   
-                    </div>
-                    {% else %}
+                                        {% comment %}
+                                        {% if my_posts %}
+                                        <li>Posts: {{ my_posts|length }}</li>
+                                        {# {% if my_latest_post %}<li>Latest: <a href="/forum/thread/{{ my_latest_post.thread.id}}/">{{my_latest_post.created}}</a></li>{% endif %} #}
+                                        {% else %}
+                                        <li>No posts</li>
+                                        {% endif %}
+
+                                        {% endcomment %}
+
+                                    </ul>
+                                    {% else %}
+                                    {# <P>(Not available for anonymous user) #}
+                                    {% endif %}
+
+                            </div>  {# end of two #}
+           
+                        </div>  {# end of wrapper #}
+                        
+                    {% else %} {# end of if user.is_authenticated #}
+
                         {#<P>Test</P>#}
+                    
                     {% endif %}
-              
 
-
-                 </div>
+                </div> {# end of container1 #}
 
             </div>
         </div>
@@ -184,6 +186,8 @@
                 {#<div style="display: table-cell;"><h3><a name='forum' href="{% url 'forum:forum_main' %}">Forum</a></h3></div>#}
                 <div style="display: table-cell;">
                 
+                    {% comment %}
+
                     {% if user.is_authenticated %}
                     User: {{user }}
                     is_anonymous: {{ user.is_anonymous}} <br/>
@@ -192,13 +196,15 @@
                     <h3><a href="/registration/logout/?next=/myfruitcake/">Log Out</a></h3>
                     {% endif %}
 
+                    {% endcomment %}
+
                     <ul>
                     {% if not user|is_lazy_user %}
-                        <li><a href="#">{% trans "Account" %}</a></li>
-                        <li><a href="/registration/logout/?next=/myfruitcake/">{% trans "Log out" %}</a></li>
+                        {#<li class="nobullet"><a href="#">{% trans "Account" %}</a></li>#}
+                        <li class="nobullet"><a href="/registration/logout/?next=/myfruitcake/">{% trans "Log out" %}</a></li>
                         {# {% url 'auth_logout' %} #}
                     {% else %}
-                        <li><a href="{% url 'lazysignup_convert' %}">{% trans "Save your data" %}</a> {% trans "by setting a username and password" %}</li>
+                    <li class="nobullet"><a href="{% url 'lazysignup_convert' %}">{% trans "Save your data" %}</a> {#{% trans "by setting a username and password" %}#}</li>
                     {% endif %}
                     </ul>
 

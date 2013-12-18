@@ -209,6 +209,7 @@ a:hover {
 figcaption {font-size: smaller; font-weight: bold; line-height: 1.1em; margin-bottom: 1.25em; }
 
 .plain { list-style: none; padding: 0; margin: 0; } 
+.nobullet { list-style: none; }
 
 /* class="footer" on a div with width will center it horizontally */
 .footer1 { width:320px; margin-left: auto; margin-right: auto; }
@@ -228,15 +229,20 @@ img { max-width: 100%; }
 
 .wrapper { 
   /*border : 2px solid #000; */
+  /* margin: 0px; border: 0; */
   overflow:hidden;
   /* background: yellow; */
+  /*max-height: 90px; */
 }
 .wrapper div {
    /* min-height: 192px; */
    padding: 0px;
+
+  max-height: 90px;
+   /* background: green; */
 }
 .one {
-  /*background-color: gray; */
+  /* background-color: gray; */
   float:left;
   margin-left: 0px; 
   /* margin-right:20px; */
@@ -247,7 +253,7 @@ img { max-width: 100%; }
   margin-right: 10px;  
 }
 .two { 
-  /*background-color: #ff7777; */
+  /* background-color: #ff7777; */
   overflow:hidden;
   /* margin:10px; */
   /*border:2px dashed #ccc; */

@@ -20,7 +20,12 @@
 
         {% if fruitcake_list %}
         <br />
-        <P class="main">Top fruitcakes used for messages (<b>tap pic to send</b>):</P>
+        <P class="main">
+            {% if not upload %}
+                Top fruitcakes used for messages 
+            {% endif %}
+            (<b>tap pic to send</b>):
+        </P>
 
         <div id="gallery_tape">
 
