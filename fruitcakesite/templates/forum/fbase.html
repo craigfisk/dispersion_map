@@ -140,12 +140,13 @@
                                         <li>No messages sent.</li>
                                         {% endif %}
                                        
-
+                                        {% comment %}
                                         {% if my_downstream %}
                                         <li>Downstream: {{my_downstream|length|intcomma }}</li>
                                         {% else %}
                                         <li>None downstream.</li>
                                         {% endif %}
+                                        {% endcomment %}
 
                                         {% comment %}
                                         {% if my_posts %}
