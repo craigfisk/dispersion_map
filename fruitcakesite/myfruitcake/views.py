@@ -242,14 +242,16 @@ class ShipmentError(Exception): pass
 @allow_lazy_user
 def email_fruitcake(request, fruitcake_id=None, shipment_id=None):
     """Create instance of Shipment and associated Addressees and send it as email. 
-    1) obtain the fruitcake id passed in parameter, the sender from request.user, fill in the message
-    (later we'll get it, too, from the form, adding to initial={'message': 'Fruitcake for you! etc.), and a list of 
-    email addressees from tthishe form.  2) create an instance of Shipment with m2m create of email addresses using the
-    list, and then save all that,(see docs.djangoproject.com "Related Objects Reference") 3) email using
-    EmailMultiAlternatives.
+    Called with either a fruitcake_id or a shipment_id.
+    Sender from request.user, plus a list of email addressees from the form.  
+    Notes: 
+    1) if fruitcake_id
+    2) if shipment_id, create an instance of Shipment with m2m create of email addresses using the
+    list, and then save all that,(see docs.djangoproject.com "Related Objects Reference") 
+    3) email using EmailMultiAlternatives.
 
-    The form used here is an instance of class EmailContactForm, which subclasses forms.Form and adds a 
-    MultiEmailField for the email address[es] field  and puts a CharField Textarea form widget on the message field.
+    The form is class EmailContactForm, which subclasses forms.Form and adds a MultiEmailField for the email 
+    address[es] field  and puts a CharField Textarea form widget on the message field.
 
     Note: the form first applies is_valid() and then cleaned_data() to the form data.
     - form.is_valid() [from BaseForm] means not bool(self.errors) [and that binds the data to the form]
@@ -269,6 +271,7 @@ def email_fruitcake(request, fruitcake_id=None, shipment_id=None):
             form.is_valid()
             cd = form.cleaned_data # cd['email'] will now be the list of email addresses to send to
             message = cd['message']
+            
             if (not fruitcake_id) and shipment_id: 
                 s = get_object_or_404(Shipment, pk=shipment_id)
                 fruitcake = Fruitcake.objects.get(pk=s.fruitcake_id)
@@ -280,7 +283,6 @@ def email_fruitcake(request, fruitcake_id=None, shipment_id=None):
             this_shipment = Shipment(dt=timezone.now(),fruitcake=fruitcake,sender=request.user, message=message)
             this_shipment.save()
 
-
             if not shipment_id:
                 this_shipment.origin = this_shipment
                 this_shipment.parent = this_shipment
@@ -289,13 +291,8 @@ def email_fruitcake(request, fruitcake_id=None, shipment_id=None):
                 this_shipment.origin = prior_shipment.origin
                 this_shipment.parent = prior_shipment
             
-            this_shipment.save()
-
-            #increment_times_shipped(fruitcake.id)
-            #fruitcake.save()
-
             u = UserProfile.objects.get(pk=request.user.id)
-            u.shipments += 1
+            u.shipments += 1  #+= len(cd['email']) to increment number shipped to
             u.save()
 
             addr=request.META['REMOTE_ADDR']
@@ -303,13 +300,14 @@ def email_fruitcake(request, fruitcake_id=None, shipment_id=None):
                 addr = CF_HOME_IP
             city=g.city(addr)
 
-            # Using get_or_create() to only add unique ipaddressses. ip is the object; created is a boolean; true if new address, false if already created.
+            # get_or_create() to only add unique ipaddressses. 
+            # ip is the object; created is a boolean; true if new address, false if already created.
 
             ip, created = IPAddress.objects.get_or_create(ipaddress=addr,city=city['city'],region=city['region'],country_name=city['country_name'],country_code=city['country_code'])
             this_shipment.ipaddresses.add(ip)
 
             for email in cd['email']:
-                # Using get_or_create() to only add unique email addresses to EmailContact that are not already there.
+                # get_or_create() to only add unique email addresses to EmailContact that are not already there.
                 # See https://docs.djangoproject.com/en/dev/ref/models/querysets/#django.db.models.query.QuerySet.get_or_create
                 emailcontact, created = EmailContact.objects.get_or_create(email=email)
                 this_shipment.emailcontacts.add(emailcontact)
@@ -359,14 +357,14 @@ def email_fruitcake(request, fruitcake_id=None, shipment_id=None):
                     logger.debug("SMTPException: %s, on shipment to: %s with bcc: %s, with message: %s" % (e, to, bcc, msg))
                     raise
                 
-            if not this_shipment.origin:
-                this_shipment_origin = 0
-            else:
-                this_shipment_origin = this_shipment.origin
-            if not this_shipment.parent:
-                this_shipment_parent = 0
-            else:
-                this_shipment_parent = this_shipment.parent
+            #if not this_shipment.origin:
+            #    this_shipment_origin = 0
+            #else:
+            #    this_shipment_origin = this_shipment.origin
+            #if not this_shipment.parent:
+            #    this_shipment_parent = 0
+            #else:
+            #    this_shipment_parent = this_shipment.parent
 
             return HttpResponseRedirect(reverse('fruitcake:shipments') )
         
