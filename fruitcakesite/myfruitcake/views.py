@@ -173,7 +173,9 @@ class ShipmentDetailView(DetailView):
 
     def get_queryset(self):
         self.shipment = get_object_or_404(Shipment, id=self.kwargs['pk'])  #self.kwargs['pk']
-        shipment = Shipment.objects.filter(origin_id=self.shipment.origin_id).order_by('-dt')
+        #shipment = Shipment.objects.filter(origin_id=self.shipment.origin_id).order_by('-dt')
+        shipment = Shipment.objects.filter(send=self.request.user).filter(origin_id=self.shipment.origin_id).order_by('-dt')
+
         return shipment
 
      
