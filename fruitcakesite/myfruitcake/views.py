@@ -81,6 +81,8 @@ def activity(request, pk):
 """
 
 class FruitcakeListView(ListView):
+    """For home page 
+    """
 #    @method_decorator(login_required)
 #    def dispatch(self, *args, **kwargs):
 #        return super(FruitcakeListView, self).dispatch(*args, **kwargs)
@@ -95,6 +97,8 @@ class FruitcakeListView(ListView):
 
 
 class MyFruitcakeListView(ListView):
+    """For MyFruitcake / fruitcake_list.html
+    """
 #    @method_decorator(login_required)
 #    def dispatch(self, *args, **kwargs):
 #        return super(MyFruitcakeListView, self).dispatch(*args, **kwargs)
@@ -110,7 +114,7 @@ class MyFruitcakeListView(ListView):
         m = re.match(pattern, path)
         if m: 
             context['upload'] = True
-        
+
         return context
 
     def get_queryset(self):

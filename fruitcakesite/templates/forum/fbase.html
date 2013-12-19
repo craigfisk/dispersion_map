@@ -37,6 +37,7 @@
                     <div style="display: table-cell;"><h3><a href="/registration/login/?next=/myfruitcake/">Log In</a> 
                 {% endif %}
 
+                {# Note: looks like we'll never hit the following #}
                 {% if user|is_lazy_user and not user.is_authenticated %}
                     | <a href="/registration/register/">Create Account</a></h3>
                 {% endif %}
@@ -141,9 +142,9 @@
                                        
 
                                         {% if my_downstream %}
-                                        <li>Messages re-sent by others: {{my_downstream|length|intcomma }}</li>
+                                        <li>Downstream: {{my_downstream|length|intcomma }}</li>
                                         {% else %}
-                                        <li>No messages re-sent downstream.</li>
+                                        <li>None downstream.</li>
                                         {% endif %}
 
                                         {% comment %}
