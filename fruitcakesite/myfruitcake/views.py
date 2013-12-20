@@ -156,8 +156,8 @@ class ShipmentListView(ListView):
     def get_queryset(self):
         # chain = Shipment.objects.filter(id__in=mylist)
         if self.request.user:
-            return Shipment.objects.filter(sender=self.request.user).order_by('-dt')
-            #return Shipment.objects.filter(sender=self.request.user).filter(shipment_id=self.shipment_id).order_by('-dt')
+            s = Shipment.objects.filter(sender=self.request.user).order_by('-dt')
+            return s
         
 
 class ShipmentDetailView(DetailView):       
@@ -174,6 +174,8 @@ class ShipmentDetailView(DetailView):
     def get_queryset(self):
         self.shipment = get_object_or_404(Shipment, id=self.kwargs['pk'])  #self.kwargs['pk']
         shipment = Shipment.objects.filter(origin_id=self.shipment.origin_id).order_by('-dt')
+        #shipment = Shipment.objects.filter(sender=self.request.user).filter(origin_id=self.shipment.origin_id).order_by('-dt')
+
         return shipment
 
      
