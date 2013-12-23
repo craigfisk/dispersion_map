@@ -1,6 +1,8 @@
 import logging
 logger = logging.getLogger(__name__)
 from fruitcakesite.settings import FUNCTION_LOGGING
+from django.contrib.auth.models import User
+from lazysignup.templatetags.lazysignup_tags import is_lazy_user
 
 from django.core.urlresolvers import reverse
 
@@ -156,7 +158,7 @@ class ShipmentListView(ListView):
     def get_queryset(self):
         # chain = Shipment.objects.filter(id__in=mylist)
         if self.request.user:
-            s = Shipment.objects.filter(sender=self.request.user).order_by('-dt')
+            s = Shipment.objects.filter(sender_id=self.request.user.id).order_by('-dt')
             return s
         
 
@@ -281,9 +283,16 @@ def email_fruitcake(request, fruitcake_id=None, shipment_id=None):
                 raise ShipmentError("Null values for both shipment_id and fruitcake_id.")
             else:
                 fruitcake = Fruitcake.objects.get(pk=fruitcake_id)
-                
-            this_shipment = Shipment(dt=timezone.now(),fruitcake=fruitcake,sender=request.user, message=message)
-            this_shipment.save()
+           
+            lazy = is_lazy_user(request.user)
+            if hasattr(request.user, '_wrapped') and hasattr(request.user, '_setup'):
+                if request.user._wrapped.__class__ == object:
+                    request.user._setup()
+                request.user = request.user._wrapped
+           
+            this_shipment, created = Shipment.objects.get_or_create(dt=timezone.now(),fruitcake=fruitcake,sender=request.user,message=message)
+            #this_shipment = Shipment(dt=timezone.now(),fruitcake=fruitcake,sender=request.user, message=message)
+            #this_shipment.save()
 
             if not shipment_id:
                 this_shipment.origin = this_shipment
@@ -293,10 +302,12 @@ def email_fruitcake(request, fruitcake_id=None, shipment_id=None):
                 this_shipment.origin = prior_shipment.origin
                 this_shipment.parent = prior_shipment
             
-            u = UserProfile.objects.get(pk=request.user.id)
-            u.shipments += 1  #+= len(cd['email']) to increment number shipped to
-            u.save()
-
+            #this_shipment.save()
+            
+            userprofile = UserProfile.objects.get(pk=request.user.id)
+            userprofile.shipments += 1  #+= len(cd['email']) to increment number shipped to
+            userprofile.save()
+                  
             addr=request.META['REMOTE_ADDR']
             if (addr == '127.0.0.1' or addr == '192.168.1.100'):
                 addr = CF_HOME_IP
@@ -367,7 +378,7 @@ def email_fruitcake(request, fruitcake_id=None, shipment_id=None):
             #    this_shipment_parent = 0
             #else:
             #    this_shipment_parent = this_shipment.parent
-
+            this_shipment.save()
             return HttpResponseRedirect(reverse('fruitcake:shipments') )
         
         except Exception as e:

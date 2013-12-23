@@ -22,7 +22,7 @@ admin.site.register(EmailContact)
 """
 
 class ShipmentAdmin(admin.ModelAdmin):
-    list_display = ['dt', 'fruitcake', 'sender', 'message']
+    list_display = ['id', 'dt', 'fruitcake', 'sender', 'message']
     search_fields = ['message']
 #    inlines = [EmailContactInline]
     list_filter = ['dt']
