@@ -33,8 +33,22 @@
                 
                 {% elif user.is_authenticated %}
 
+                {% elif user.is_authenticated and not user.is_anonymous %}
+                <div style="display: table-cell;"><h3><a href="/registration/login/?next=/myfruitcake/">Log In</a>              
+                    {% comment %} 
+                    {% if user|is_lazy_user %} <P>is_lazy_user</P>{% endif %}
+                    {% if user.is_anonymous %} <P>is_anonymous</P>{% endif %}
+                    {% if user.is_authenticated %} <P>is_authenticated</P>{% endif %}
+                    {% endcomment %}
+
                 {% else %}
-                    <div style="display: table-cell;"><h3><a href="/registration/login/?next=/myfruitcake/">Log In</a> 
+    
+                    {% comment %}
+                    {% if user|is_lazy_user %} <P>is_lazy_user</P>{% endif %}
+                    {% if user.is_anonymous %} <P>is_anonymous</P>{% endif %}
+                    {% if user.is_authenticated %} <P>is_authenticated</P>{% endif %}
+                    {% endcomment %}
+
                 {% endif %}
 
                 {# Note: looks like we'll never hit the following #}

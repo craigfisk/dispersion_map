@@ -16,7 +16,8 @@
     {% endif %}
     {# div id="container4" #}
     <div>
-    <form method="post" action="{% url 'django.contrib.auth.views.login' %}">{% csrf_token %}
+        {#<a href="{% url 'registration_register' %}?next=/registration/registration_complete/">#}
+            <form method="post" action="{% url 'django.contrib.auth.views.login' %}?next=/myfruitcake/myshipments/">{% csrf_token %}
     <table>
     <tr>
         <td>{{ form.username.label_tag }}</td>
