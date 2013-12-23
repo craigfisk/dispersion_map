@@ -33,7 +33,7 @@
                 
                 {% elif user.is_authenticated %}
 
-                {% elif user.is_authenticated and not user.is_anonymous %}
+                {% else %}
                 <div style="display: table-cell;"><h3><a href="/registration/login/?next=/myfruitcake/">Log In</a>              
                     {% comment %} 
                     {% if user|is_lazy_user %} <P>is_lazy_user</P>{% endif %}
@@ -41,7 +41,7 @@
                     {% if user.is_authenticated %} <P>is_authenticated</P>{% endif %}
                     {% endcomment %}
 
-                {% else %}
+                    {#{% else %}#}
     
                     {% comment %}
                     {% if user|is_lazy_user %} <P>is_lazy_user</P>{% endif %}
