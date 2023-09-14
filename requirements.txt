@@ -9,5 +9,5 @@ psycopg2==2.7
 pygeocoder==1.2.1.1
 requests==2.0.1
 selenium==2.37.2
-wsgiref==0.1.2
+## wsgiref==0.1.2
 yolk==0.4.3
